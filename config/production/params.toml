@@ -1,0 +1,3 @@
+MyDefLastUrlEle = "/tools"
+# Enable Algolia DocSearch
+algolia_docsearch = false
