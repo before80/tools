@@ -19,9 +19,9 @@ draft = false
 
 > **这不是nvm！**
 >
-> ​	*原始的[nvm](https://github.com/nvm-sh/nvm)是一个仅适用于Mac/Linux的完全独立项目。*这个项目采用了完全不同的理念，不仅仅是nvm的克隆。详情请参阅[为什么需要另一个版本管理器？](#-为什么需要另一个版本管理器)和[有什么重大区别？](#-有什么重大区别)。
+> ​	*原始的[nvm](https://github.com/nvm-sh/nvm)是一个仅适用于Mac/Linux的完全独立项目。* 这个项目采用了完全不同的理念，不仅仅是nvm的克隆。详情请参阅[为什么需要另一个版本管理器？](#-为什么需要另一个版本管理器)和[有什么重大区别？](#-有什么重大区别)。
 
-**遇到问题了吗？**请查看[常见 issues wiki](https://github.com/coreybutler/nvm-windows/wiki/Common-Issues)。
+**遇到问题了吗？** 请查看[常见 issues wiki](https://github.com/coreybutler/nvm-windows/wiki/Common-Issues)。
 
 寻求反馈：我们正在开发NVM for Windows的后继版本[Runtime (rt)](https://github.com/coreybutler/nvm-windows/wiki/Runtime)。请花一分钟时间填写[此表单](https://t.co/oGqQCM9FPx)来做出贡献。谢谢！
 
