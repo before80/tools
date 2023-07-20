@@ -5795,7 +5795,7 @@ The contents of the directory stack are also visible as the value of the `DIRSTA
 
 
 
-#### 6.8.1 Directory Stack Builtins
+#### 6.8.1 目录栈内建命令
 
 - `dirs`
 
@@ -5804,6 +5804,8 @@ The contents of the directory stack are also visible as the value of the `DIRSTA
   ```
 
   Display the list of currently remembered directories. Directories are added to the list with the `pushd` command; the `popd` command removes directories from the list. The current directory is always the first directory in the stack.
+
+  显示当前记忆的目录列表。使用`pushd`命令将目录添加到列表中，`popd`命令从列表中移除目录。当前目录始终是栈中的第一个目录。
 
   - `-c`: Clears the directory stack by deleting all of the elements.
 
@@ -5817,151 +5819,297 @@ The contents of the directory stack are also visible as the value of the `DIRSTA
 
   - `-N`: Displays the Nth directory (counting from the right of the list printed by `dirs` when invoked without options), starting with zero.
 
+  - `-c`：清除目录栈，删除所有元素。
+
+  - `-l`：以完整路径名的形式产生列表；默认的列表格式使用波浪符号表示家目录。
+  - `-p`：使`dirs`按每行一个条目的格式打印目录栈。
+  - `-v`：使`dirs`按每行一个条目的格式打印目录栈，并在每个条目前加上其在栈中的索引。
+  - `+N`：显示第N个目录（从`dirs`打印的列表的左侧开始计数，从零开始）。
+  - `-N`：显示第N个目录（从`dirs`打印的列表的右侧开始计数，从零开始）。
+
 - `popd`
 
   ```
   popd [-n] [+N | -N]
   ```
 
-  Removes elements from the directory stack. The elements are numbered from 0 starting at the first directory listed by `dirs`; that is, `popd` is equivalent to `popd +0`.When no arguments are given, `popd` removes the top directory from the stack and changes to the new top directory.Arguments, if supplied, have the following meanings:`-n`Suppresses the normal change of directory when removing directories from the stack, so that only the stack is manipulated.`+N`Removes the Nth directory (counting from the left of the list printed by `dirs`), starting with zero, from the stack.`-N`Removes the Nth directory (counting from the right of the list printed by `dirs`), starting with zero, from the stack.If the top element of the directory stack is modified, and the -n option was not supplied, `popd` uses the `cd` builtin to change to the directory at the top of the stack. If the `cd` fails, `popd` returns a non-zero value.Otherwise, `popd` returns an unsuccessful status if an invalid option is encountered, the directory stack is empty, or a non-existent directory stack entry is specified.If the `popd` command is successful, Bash runs `dirs` to show the final contents of the directory stack, and the return status is 0.
+  Removes elements from the directory stack. The elements are numbered from 0 starting at the first directory listed by `dirs`; that is, `popd` is equivalent to `popd +0`.When no arguments are given, `popd` removes the top directory from the stack and changes to the new top directory.
+
+  从目录栈中移除元素。元素从0开始编号，从`dirs`列出的第一个目录开始计数；也就是说，`popd`等同于`popd +0`。当没有给出参数时，`popd`将从栈中移除顶部目录，并切换到新的顶部目录。
+
+  Arguments, if supplied, have the following meanings:
+
+  如果提供了参数，则参数的含义如下：
+
+  - `-n`: Suppresses the normal change of directory when removing directories from the stack, so that only the stack is manipulated.
+
+  - `+N`: Removes the Nth directory (counting from the left of the list printed by `dirs`), starting with zero, from the stack.
+
+  - `-N`: Removes the Nth directory (counting from the right of the list printed by `dirs`), starting with zero, from the stack.
+
+  - `-n`：在从栈中移除目录时，禁止正常的目录更改，只对栈进行操作。
+
+    `+N`：从栈中移除第N个目录（从`dirs`打印的列表的左侧开始计数，从零开始）。
+
+    `-N`：从栈中移除第N个目录（从`dirs`打印的列表的右侧开始计数，从零开始）。
+
+  
+
+  If the top element of the directory stack is modified, and the -n option was not supplied, `popd` uses the `cd` builtin to change to the directory at the top of the stack. If the `cd` fails, `popd` returns a non-zero value.
+
+  如果目录栈的顶部元素被修改，并且未提供`-n`选项，`popd`会使用`cd`内建命令切换到栈顶的目录。如果`cd`失败，`popd`将返回一个非零值。
+
+  Otherwise, `popd` returns an unsuccessful status if an invalid option is encountered, the directory stack is empty, or a non-existent directory stack entry is specified.
+
+  否则，如果遇到无效选项、目录栈为空或指定了不存在的目录栈条目，则`popd`返回一个失败状态。
+
+  If the `popd` command is successful, Bash runs `dirs` to show the final contents of the directory stack, and the return status is 0.
+
+  如果`popd`命令成功，Bash会运行`dirs`以显示目录栈的最终内容，并且返回状态为0。
 
 - `pushd`
 
-  `pushd [-n] [+N | -N | dir] `Adds a directory to the top of the directory stack, or rotates the stack, making the new top of the stack the current working directory. With no arguments, `pushd` exchanges the top two elements of the directory stack.Arguments, if supplied, have the following meanings:`-n`Suppresses the normal change of directory when rotating or adding directories to the stack, so that only the stack is manipulated.`+N`Brings the Nth directory (counting from the left of the list printed by `dirs`, starting with zero) to the top of the list by rotating the stack.`-N`Brings the Nth directory (counting from the right of the list printed by `dirs`, starting with zero) to the top of the list by rotating the stack.`dir`Makes dir be the top of the stack.After the stack has been modified, if the -n option was not supplied, `pushd` uses the `cd` builtin to change to the directory at the top of the stack. If the `cd` fails, `pushd` returns a non-zero value.Otherwise, if no arguments are supplied, `pushd` returns 0 unless the directory stack is empty. When rotating the directory stack, `pushd` returns 0 unless the directory stack is empty or a non-existent directory stack element is specified.If the `pushd` command is successful, Bash runs `dirs` to show the final contents of the directory stack.
+  ```
+  pushd [-n] [+N | -N | dir]
+  ```
+  
+  Adds a directory to the top of the directory stack, or rotates the stack, making the new top of the stack the current working directory. With no arguments, `pushd` exchanges the top two elements of the directory stack.
+  
+  将一个目录添加到目录栈的顶部，或者旋转栈，使得新的栈顶成为当前工作目录。如果没有提供参数，`pushd`交换目录栈的前两个元素。
+  
+  Arguments, if supplied, have the following meanings:
+  
+  如果提供了参数，参数的含义如下：
+  
+  - `-n`Suppresses the normal change of directory when rotating or adding directories to the stack, so that only the stack is manipulated.
+  
+  - `+N`Brings the Nth directory (counting from the left of the list printed by `dirs`, starting with zero) to the top of the list by rotating the stack.
+  
+  - `-N`Brings the Nth directory (counting from the right of the list printed by `dirs`, starting with zero) to the top of the list by rotating the stack.
+  
+  - `dir`Makes dir be the top of the stack.
+  
+  - `-n`：在旋转或添加目录到栈中时，禁止正常的目录更改，只对栈进行操作。
+  
+    `+N`：将第N个目录（从`dirs`打印的列表的左侧开始计数，从零开始）旋转到列表的顶部。
+  
+    `-N`：将第N个目录（从`dirs`打印的列表的右侧开始计数，从零开始）旋转到列表的顶部。
+  
+    `dir`：使dir成为栈的顶部。
+  
+  
+  
+  After the stack has been modified, if the -n option was not supplied, `pushd` uses the `cd` builtin to change to the directory at the top of the stack. If the `cd` fails, `pushd` returns a non-zero value.
+  
+  修改栈后，如果未提供`-n`选项，`pushd`将使用`cd`内建命令切换到栈顶的目录。如果`cd`失败，`pushd`将返回一个非零值。
+  
+  Otherwise, if no arguments are supplied, `pushd` returns 0 unless the directory stack is empty. When rotating the directory stack, `pushd` returns 0 unless the directory stack is empty or a non-existent directory stack element is specified.
+  
+  否则，如果没有提供参数，`pushd`除非目录栈为空，否则将返回0。在旋转目录栈时，`pushd`除非目录栈为空或指定了不存在的目录栈元素，否则将返回0。
+  
+  If the `pushd` command is successful, Bash runs `dirs` to show the final contents of the directory stack.
+  
+  如果`pushd`命令成功，Bash会运行`dirs`以显示目录栈的最终内容。
 
 
 
 
 
-### 6.9 Controlling the Prompt
+### 6.9 控制提示符
 
 
 
 Bash examines the value of the array variable `PROMPT_COMMAND` just before printing each primary prompt. If any elements in `PROMPT_COMMAND` are set and non-null, Bash executes each value, in numeric order, just as if it had been typed on the command line.
 
+​	Bash在打印每个主提示符之前检查数组变量`PROMPT_COMMAND`的值。如果`PROMPT_COMMAND`中的任何元素被设置且非空，Bash会按照数字顺序执行每个值，就像它们在命令行上被输入一样。
+
 In addition, the following table describes the special characters which can appear in the prompt variables `PS0`, `PS1`, `PS2`, and `PS4`:
+
+​	此外，以下表格描述了可以出现在提示变量`PS0`、`PS1`、`PS2`和`PS4`中的特殊字符：
 
 - `\a`
 
   A bell character.
 
+  响铃字符。
+
 - `\d`
 
   The date, in "Weekday Month Date" format (e.g., "Tue May 26").
+
+  日期，以“星期 月份 日期”格式显示（例如，“Tue May 26”）。
 
 - `\D{format}`
 
   The format is passed to `strftime`(3) and the result is inserted into the prompt string; an empty format results in a locale-specific time representation. The braces are required.
 
+  `format`参数会传递给`strftime`(3)，并将结果插入到提示字符串中；如果`format`为空，则会显示地区特定的时间表示。大括号是必需的。
+
 - `\e`
 
   An escape character.
+
+  转义字符。
 
 - `\h`
 
   The hostname, up to the first `.`.
 
+  主机名，截取第一个`.`之前的部分。
+
 - `\H`
 
   The hostname.
+
+  主机名。
 
 - `\j`
 
   The number of jobs currently managed by the shell.
 
+  shell当前管理的作业数。
+
 - `\l`
 
   The basename of the shell's terminal device name.
+
+  shell的终端设备名的基本名称。
 
 - `\n`
 
   A newline.
 
+  换行符。
+
 - `\r`
 
   A carriage return.
+
+  回车符
 
 - `\s`
 
   The name of the shell, the basename of `$0` (the portion following the final slash).
 
+  shell的名称，即`$0`（最后一个斜杠之后的部分）的基本名称。
+
 - `\t`
 
   The time, in 24-hour HH:MM:SS format.
+
+  时间，以24小时HH:MM:SS格式显示。
 
 - `\T`
 
   The time, in 12-hour HH:MM:SS format.
 
+  时间，以12小时HH:MM:SS格式显示。
+
 - `\@`
 
   The time, in 12-hour am/pm format.
+
+  时间，以12小时am/pm格式显示。
 
 - `\A`
 
   The time, in 24-hour HH:MM format.
 
+  时间，以24小时HH:MM格式显示。
+
 - `\u`
 
   The username of the current user.
+
+  当前用户的用户名。
 
 - `\v`
 
   The version of Bash (e.g., 2.00)
 
+  Bash的版本（例如，2.00）。
+
 - `\V`
 
   The release of Bash, version + patchlevel (e.g., 2.00.0)
+
+  Bash的版本和修订号（例如，2.00.0）。
 
 - `\w`
 
   The value of the `PWD` shell variable (`$PWD`), with `$HOME` abbreviated with a tilde (uses the `$PROMPT_DIRTRIM` variable).
 
+  `PWD` shell变量（`$PWD`）的值，如果在`$HOME`前缩写，则使用波浪符号（使用`$PROMPT_DIRTRIM`变量）。
+
 - `\W`
 
   The basename of `$PWD`, with `$HOME` abbreviated with a tilde.
+
+  `$PWD`的基本名称，如果在`$HOME`前缩写，则使用波浪符号。
 
 - `\!`
 
   The history number of this command.
 
+  当前命令的历史记录编号。
+
 - `\#`
 
   The command number of this command.
+
+  当前命令的命令编号。
 
 - `\$`
 
   If the effective uid is 0, `#`, otherwise `$`.
 
+  如果有效的用户ID是0，则显示`#`，否则显示`$`。
+
 - `\nnn`
 
   The character whose ASCII code is the octal value nnn.
+
+  八进制值为nnn的ASCII码字符。
 
 - `\\`
 
   A backslash.
 
+  反斜杠。
+
 - `\[`
 
   Begin a sequence of non-printing characters. This could be used to embed a terminal control sequence into the prompt.
 
+  开始一个非打印字符序列。这可用于将终端控制序列嵌入到提示符中。
+
 - `\]`
 
   End a sequence of non-printing characters.
+  
+  结束一个非打印字符序列。
 
 The command number and the history number are usually different: the history number of a command is its position in the history list, which may include commands restored from the history file (see [Bash History Facilities](https://www.gnu.org/software/bash/manual/bash.html#Bash-History-Facilities)), while the command number is the position in the sequence of commands executed during the current shell session.
 
+​	命令编号和历史记录编号通常是不同的：命令的历史记录编号是它在历史记录列表中的位置，可能包括从历史记录文件中恢复的命令（参见[Bash历史记录功能](https://www.gnu.org/software/bash/manual/bash.html#Bash-History-Facilities)），而命令编号是在当前shell会话期间执行的命令序列中的位置。
+
 After the string is decoded, it is expanded via parameter expansion, command substitution, arithmetic expansion, and quote removal, subject to the value of the `promptvars` shell option (see [The Shopt Builtin](https://www.gnu.org/software/bash/manual/bash.html#The-Shopt-Builtin)). This can have unwanted side effects if escaped portions of the string appear within command substitution or contain characters special to word expansion.
 
+​	在解码字符串后，它通过参数扩展、命令替换、算术扩展和引号移除进行展开，这取决于`promptvars` shell选项的值（参见[内建命令Shopt](https://www.gnu.org/software/bash/manual/bash.html#The-Shopt-Builtin)）。如果转义的字符串部分出现在命令替换中或包含对单词扩展特殊的字符，这可能会产生意外的副作用。
 
 
 
 
-### 6.10 The Restricted Shell
+
+### 6.10 受限制的Shell
 
 
 
 If Bash is started with the name `rbash`, or the --restricted or -r option is supplied at invocation, the shell becomes restricted. A restricted shell is used to set up an environment more controlled than the standard shell. A restricted shell behaves identically to `bash` with the exception that the following are disallowed or not performed:
+
+​	如果Bash以名称`rbash`启动，或在启动时提供`--restricted`或`-r`选项，那么Shell将变为受限制的。受限制的Shell用于建立比标准Shell更受控制的环境。受限制的Shell的行为与`bash`完全相同，除了以下操作被禁止或不执行：
+
+ 
 
 - Changing directories with the `cd` builtin.
 - Setting or unsetting the values of the `SHELL`, `PATH`, `HISTFILE`, `ENV`, or `BASH_ENV` variables.
@@ -5977,97 +6125,192 @@ If Bash is started with the name `rbash`, or the --restricted or -r option is su
 - Using the `enable` builtin command to enable disabled shell builtins.
 - Specifying the -p option to the `command` builtin.
 - Turning off restricted mode with `set +r` or `shopt -u restricted_shell`.
+- 使用`cd`内建命令更改目录。
+- 设置或取消设置`SHELL`、`PATH`、`HISTFILE`、`ENV`或`BASH_ENV`变量的值。
+- 指定包含斜杠的命令名称。
+- 将包含斜杠的文件名作为`.`内建命令的参数。
+- 将包含斜杠的文件名作为`history`内建命令的参数。
+- 将包含斜杠的文件名作为`hash`内建命令的`-p`选项的参数。
+- 在启动时从Shell环境导入函数定义。
+- 在启动时从Shell环境解析`SHELLOPTS`的值。
+- 使用`>`, `>|`, `<>`, `>&`, `&>`, 和 `>>` 重定向操作符进行输出重定向。
+- 使用`exec`内建命令用另一个命令替换Shell。
+- 使用`enable`内建命令的`-f`和`-d`选项来添加或删除内建命令。
+- 使用`enable`内建命令使禁用的Shell内建命令重新启用。
+- 使用`command`内建命令的`-p`选项。
+- 使用`set +r`或`shopt -u restricted_shell`取消受限制模式。
 
 These restrictions are enforced after any startup files are read.
 
+​	这些限制在读取任何启动文件后执行。
+
 When a command that is found to be a shell script is executed (see [Shell Scripts](https://www.gnu.org/software/bash/manual/bash.html#Shell-Scripts)), `rbash` turns off any restrictions in the shell spawned to execute the script.
+
+​	当执行被发现是Shell脚本的命令（参见[Shell脚本](https://www.gnu.org/software/bash/manual/bash.html#Shell-Scripts)），`rbash`会关闭在执行脚本的Shell中的任何限制。
 
 The restricted shell mode is only one component of a useful restricted environment. It should be accompanied by setting `PATH` to a value that allows execution of only a few verified commands (commands that allow shell escapes are particularly vulnerable), changing the current directory to a non-writable directory other than `$HOME` after login, not allowing the restricted shell to execute shell scripts, and cleaning the environment of variables that cause some commands to modify their behavior (e.g., `VISUAL` or `PAGER`).
 
+​	受限制的Shell模式只是有用的受限制环境的一个组成部分。它应该配合将`PATH`设置为允许执行仅有几个经过验证的命令（允许Shell转义的命令特别容易受到攻击），在登录后将当前目录更改为非可写目录（除了`$HOME`），不允许受限制的Shell执行Shell脚本，并清理导致某些命令修改其行为的环境变量（例如`VISUAL`或`PAGER`）。
+
 Modern systems provide more secure ways to implement a restricted environment, such as `jails`, `zones`, or `containers`.
 
+​	现代系统提供了更安全的实现受限制环境的方式，比如`jails`、`zones`或`containers`。
 
 
 
 
-### 6.11 Bash POSIX Mode
+
+### 6.11 Bash的POSIX模式
 
 
 
 Starting Bash with the --posix command-line option or executing `set -o posix` while Bash is running will cause Bash to conform more closely to the POSIX standard by changing the behavior to match that specified by POSIX in areas where the Bash default differs.
 
+​	通过使用`--posix`命令行选项启动Bash或在Bash运行时执行`set -o posix`，Bash将更接近POSIX标准，改变行为以匹配POSIX在Bash默认行为有所不同的领域。
+
 When invoked as `sh`, Bash enters POSIX mode after reading the startup files.
+
+​	当以`sh`命令启动Bash时，Bash在读取启动文件后进入POSIX模式。
 
 The following list is what's changed when `POSIX mode` is in effect:
 
+​	以下是`POSIX模式`生效时的更改： 
+
 1. Bash ensures that the `POSIXLY_CORRECT` variable is set.
-2. When a command in the hash table no longer exists, Bash will re-search `$PATH` to find the new location. This is also available with `shopt -s checkhash`.
-3. Bash will not insert a command without the execute bit set into the command hash table, even if it returns it as a (last-ditch) result from a `$PATH` search.
-4. The message printed by the job control code and builtins when a job exits with a non-zero status is `Done(status)`.
-5. The message printed by the job control code and builtins when a job is stopped is `Stopped(signame)`, where signame is, for example, `SIGTSTP`.
-6. Alias expansion is always enabled, even in non-interactive shells.
-7. Reserved words appearing in a context where reserved words are recognized do not undergo alias expansion.
-8. Alias expansion is performed when initially parsing a command substitution. The default mode generally defers it, when enabled, until the command substitution is executed. This means that command substitution will not expand aliases that are defined after the command substitution is initially parsed (e.g., as part of a function definition).
-9. The POSIX `PS1` and `PS2` expansions of `!` to the history number and `!!` to `!` are enabled, and parameter expansion is performed on the values of `PS1` and `PS2` regardless of the setting of the `promptvars` option.
-10. The POSIX startup files are executed (`$ENV`) rather than the normal Bash files.
-11. Tilde expansion is only performed on assignments preceding a command name, rather than on all assignment statements on the line.
-12. The default history file is ~/.sh_history (this is the default value of `$HISTFILE`).
-13. Redirection operators do not perform filename expansion on the word in the redirection unless the shell is interactive.
-14. Redirection operators do not perform word splitting on the word in the redirection.
-15. Function names must be valid shell `name`s. That is, they may not contain characters other than letters, digits, and underscores, and may not start with a digit. Declaring a function with an invalid name causes a fatal syntax error in non-interactive shells.
-16. Function names may not be the same as one of the POSIX special builtins.
-17. POSIX special builtins are found before shell functions during command lookup.
-18. When printing shell function definitions (e.g., by `type`), Bash does not print the `function` keyword.
-19. Literal tildes that appear as the first character in elements of the `PATH` variable are not expanded as described above under [Tilde Expansion](https://www.gnu.org/software/bash/manual/bash.html#Tilde-Expansion).
-20. The `time` reserved word may be used by itself as a command. When used in this way, it displays timing statistics for the shell and its completed children. The `TIMEFORMAT` variable controls the format of the timing information.
-21. When parsing and expanding a ${…} expansion that appears within double quotes, single quotes are no longer special and cannot be used to quote a closing brace or other special character, unless the operator is one of those defined to perform pattern removal. In this case, they do not have to appear as matched pairs.
-22. The parser does not recognize `time` as a reserved word if the next token begins with a `-`.
-23. The `!` character does not introduce history expansion within a double-quoted string, even if the `histexpand` option is enabled.
-24. If a POSIX special builtin returns an error status, a non-interactive shell exits. The fatal errors are those listed in the POSIX standard, and include things like passing incorrect options, redirection errors, variable assignment errors for assignments preceding the command name, and so on.
-25. A non-interactive shell exits with an error status if a variable assignment error occurs when no command name follows the assignment statements. A variable assignment error occurs, for example, when trying to assign a value to a readonly variable.
-26. A non-interactive shell exits with an error status if a variable assignment error occurs in an assignment statement preceding a special builtin, but not with any other simple command. For any other simple command, the shell aborts execution of that command, and execution continues at the top level ("the shell shall not perform any further processing of the command in which the error occurred").
-27. A non-interactive shell exits with an error status if the iteration variable in a `for` statement or the selection variable in a `select` statement is a readonly variable.
-28. Non-interactive shells exit if filename in `.` filename is not found.
-29. Non-interactive shells exit if a syntax error in an arithmetic expansion results in an invalid expression.
-30. Non-interactive shells exit if a parameter expansion error occurs.
-31. Non-interactive shells exit if there is a syntax error in a script read with the `.` or `source` builtins, or in a string processed by the `eval` builtin.
-32. While variable indirection is available, it may not be applied to the `#` and `?` special parameters.
-33. Expanding the `*` special parameter in a pattern context where the expansion is double-quoted does not treat the `$*` as if it were double-quoted.
-34. Assignment statements preceding POSIX special builtins persist in the shell environment after the builtin completes.
-35. The `command` builtin does not prevent builtins that take assignment statements as arguments from expanding them as assignment statements; when not in POSIX mode, assignment builtins lose their assignment statement expansion properties when preceded by `command`.
-36. The `bg` builtin uses the required format to describe each job placed in the background, which does not include an indication of whether the job is the current or previous job.
-37. The output of `kill -l` prints all the signal names on a single line, separated by spaces, without the `SIG` prefix.
-38. The `kill` builtin does not accept signal names with a `SIG` prefix.
-39. The `export` and `readonly` builtin commands display their output in the format required by POSIX.
-40. The `trap` builtin displays signal names without the leading `SIG`.
-41. The `trap` builtin doesn't check the first argument for a possible signal specification and revert the signal handling to the original disposition if it is, unless that argument consists solely of digits and is a valid signal number. If users want to reset the handler for a given signal to the original disposition, they should use `-` as the first argument.
-42. `trap -p` displays signals whose dispositions are set to SIG_DFL and those that were ignored when the shell started.
-43. The `.` and `source` builtins do not search the current directory for the filename argument if it is not found by searching `PATH`.
-44. Enabling POSIX mode has the effect of setting the `inherit_errexit` option, so subshells spawned to execute command substitutions inherit the value of the -e option from the parent shell. When the `inherit_errexit` option is not enabled, Bash clears the -e option in such subshells.
-45. Enabling POSIX mode has the effect of setting the `shift_verbose` option, so numeric arguments to `shift` that exceed the number of positional parameters will result in an error message.
-46. When the `alias` builtin displays alias definitions, it does not display them with a leading `alias ` unless the -p option is supplied.
-47. When the `set` builtin is invoked without options, it does not display shell function names and definitions.
-48. When the `set` builtin is invoked without options, it displays variable values without quotes, unless they contain shell metacharacters, even if the result contains nonprinting characters.
-49. When the `cd` builtin is invoked in logical mode, and the pathname constructed from `$PWD` and the directory name supplied as an argument does not refer to an existing directory, `cd` will fail instead of falling back to physical mode.
-50. When the `cd` builtin cannot change a directory because the length of the pathname constructed from `$PWD` and the directory name supplied as an argument exceeds `PATH_MAX` when all symbolic links are expanded, `cd` will fail instead of attempting to use only the supplied directory name.
-51. The `pwd` builtin verifies that the value it prints is the same as the current directory, even if it is not asked to check the file system with the -P option.
-52. When listing the history, the `fc` builtin does not include an indication of whether or not a history entry has been modified.
-53. The default editor used by `fc` is `ed`.
-54. The `type` and `command` builtins will not report a non-executable file as having been found, though the shell will attempt to execute such a file if it is the only so-named file found in `$PATH`.
-55. The `vi` editing mode will invoke the `vi` editor directly when the `v` command is run, instead of checking `$VISUAL` and `$EDITOR`.
-56. When the `xpg_echo` option is enabled, Bash does not attempt to interpret any arguments to `echo` as options. Each argument is displayed, after escape characters are converted.
-57. The `ulimit` builtin uses a block size of 512 bytes for the -c and -f options.
-58. The arrival of `SIGCHLD` when a trap is set on `SIGCHLD` does not interrupt the `wait` builtin and cause it to return immediately. The trap command is run once for each child that exits.
-59. The `read` builtin may be interrupted by a signal for which a trap has been set. If Bash receives a trapped signal while executing `read`, the trap handler executes and `read` returns an exit status greater than 128.
-60. The `printf` builtin uses `double` (via `strtod`) to convert arguments corresponding to floating point conversion specifiers, instead of `long double` if it's available. The `L` length modifier forces `printf` to use `long double` if it's available.
-61. Bash removes an exited background process's status from the list of such statuses after the `wait` builtin is used to obtain it.
+2. Bash确保设置`POSIXLY_CORRECT`变量。
+3. When a command in the hash table no longer exists, Bash will re-search `$PATH` to find the new location. This is also available with `shopt -s checkhash`.
+4. 当哈希表中的命令不存在时，Bash将重新搜索`$PATH`以找到新位置。这也可以使用`shopt -s checkhash`来实现。
+5. Bash will not insert a command without the execute bit set into the command hash table, even if it returns it as a (last-ditch) result from a `$PATH` search.
+6. Bash不会将没有执行位设置的命令插入到命令哈希表中，即使它将其作为（最后的）`$PATH`搜索的结果返回。
+7. The message printed by the job control code and builtins when a job exits with a non-zero status is `Done(status)`.
+8. 作业控制代码和内建命令在作业以非零状态退出时打印的消息是`Done(status)`。
+9. The message printed by the job control code and builtins when a job is stopped is `Stopped(signame)`, where signame is, for example, `SIGTSTP`.
+10. 作业控制代码和内建命令在作业停止时打印的消息是`Stopped(signame)`，其中signame是例如`SIGTSTP`。
+11. Alias expansion is always enabled, even in non-interactive shells.
+12. 别名扩展始终启用，即使在非交互式Shell中也是如此。
+13. Reserved words appearing in a context where reserved words are recognized do not undergo alias expansion.
+14. 在保留字被识别的上下文中出现的保留字不会经历别名扩展。
+15. Alias expansion is performed when initially parsing a command substitution. The default mode generally defers it, when enabled, until the command substitution is executed. This means that command substitution will not expand aliases that are defined after the command substitution is initially parsed (e.g., as part of a function definition).
+16. 当最初解析命令替换时，会执行别名扩展。默认模式通常会将其推迟，启用时直到执行命令替换时才会执行。这意味着命令替换将不会扩展在命令替换最初解析后定义的别名（例如，作为函数定义的一部分）。
+17. The POSIX `PS1` and `PS2` expansions of `!` to the history number and `!!` to `!` are enabled, and parameter expansion is performed on the values of `PS1` and `PS2` regardless of the setting of the `promptvars` option.
+18. POSIX `PS1`和`PS2`中的`!`扩展为历史编号和`!!`扩展为`!`，并且对`PS1`和`PS2`的值执行参数扩展，而不考虑`promptvars`选项的设置。
+19. The POSIX startup files are executed (`$ENV`) rather than the normal Bash files.
+20. 执行POSIX启动文件（`$ENV`）而不是正常的Bash文件。
+21. Tilde expansion is only performed on assignments preceding a command name, rather than on all assignment statements on the line.
+22. 波浪号扩展仅对出现在命令名称前的赋值执行，而不是对行上的所有赋值执行。
+23. The default history file is ~/.sh_history (this is the default value of `$HISTFILE`).
+24. 默认的历史文件是`~/.sh_history`（这是`$HISTFILE`的默认值）。
+25. Redirection operators do not perform filename expansion on the word in the redirection unless the shell is interactive.
+26. 除非Shell是交互式的，否则重定向操作符不会对重定向中的单词执行文件名扩展。
+27. Redirection operators do not perform word splitting on the word in the redirection.
+28. 重定向操作符不会对重定向中的单词执行词法分割。
+29. Function names must be valid shell `name`s. That is, they may not contain characters other than letters, digits, and underscores, and may not start with a digit. Declaring a function with an invalid name causes a fatal syntax error in non-interactive shells.
+30. 函数名必须是有效的Shell名称。也就是说，它们不能包含除字母、数字和下划线之外的字符，并且不能以数字开头。在非交互式Shell中，使用无效的名称声明函数会导致致命的语法错误。
+31. Function names may not be the same as one of the POSIX special builtins.
+32. 函数名不能与POSIX特殊内建命令相同。
+33. POSIX special builtins are found before shell functions during command lookup.
+34. 在命令查找期间，POSIX特殊内建命令优先于Shell函数找到。
+35. When printing shell function definitions (e.g., by `type`), Bash does not print the `function` keyword.
+36. 打印Shell函数定义时（例如通过`type`），Bash不打印`function`关键字。
+37. Literal tildes that appear as the first character in elements of the `PATH` variable are not expanded as described above under [Tilde Expansion](https://www.gnu.org/software/bash/manual/bash.html#Tilde-Expansion).
+38. 在`PATH`变量的元素中作为第一个字符出现的直接波浪号不会被扩展，如上文[Tilde Expansion](https://www.gnu.org/software/bash/manual/bash.html#Tilde-Expansion)所述。
+39. The `time` reserved word may be used by itself as a command. When used in this way, it displays timing statistics for the shell and its completed children. The `TIMEFORMAT` variable controls the format of the timing information.
+40. `time`保留字可以单独用作命令。当以这种方式使用时，它显示Shell及其已完成子进程的时间统计信息。`TIMEFORMAT`变量控制时间信息的格式。
+41. When parsing and expanding a ${…} expansion that appears within double quotes, single quotes are no longer special and cannot be used to quote a closing brace or other special character, unless the operator is one of those defined to perform pattern removal. In this case, they do not have to appear as matched pairs.
+42. 在解析和扩展双引号内的`${…}`扩展时，单引号不再是特殊字符，不能用于引用闭合大括号或其他特殊字符，除非操作符是被定义为执行模式移除的操作符。在这种情况下，它们不必成对出现。
+43. The parser does not recognize `time` as a reserved word if the next token begins with a `-`.
+44. 如果下一个标记以`-`开头，解析器不会将`time`视为保留字。
+45. The `!` character does not introduce history expansion within a double-quoted string, even if the `histexpand` option is enabled.
+46. 在双引号字符串内，即使启用了`histexpand`选项，`!`字符也不会引入历史扩展。
+47. If a POSIX special builtin returns an error status, a non-interactive shell exits. The fatal errors are those listed in the POSIX standard, and include things like passing incorrect options, redirection errors, variable assignment errors for assignments preceding the command name, and so on.
+48. 如果POSIX特殊内建命令返回错误状态，非交互式Shell将退出。致命错误是POSIX标准中列出的错误，包括传递不正确的选项、重定向错误、在命令名称前进行赋值的变量赋值错误等等。
+49. A non-interactive shell exits with an error status if a variable assignment error occurs when no command name follows the assignment statements. A variable assignment error occurs, for example, when trying to assign a value to a readonly variable.
+50. 如果在赋值语句后没有命令名，非交互式Shell将在变量赋值错误时退出。例如，尝试向只读变量赋值时会发生变量赋值错误。
+51. A non-interactive shell exits with an error status if a variable assignment error occurs in an assignment statement preceding a special builtin, but not with any other simple command. For any other simple command, the shell aborts execution of that command, and execution continues at the top level ("the shell shall not perform any further processing of the command in which the error occurred").
+52. 如果在特殊内建命令前的赋值语句中出现变量赋值错误，非交互式Shell将退出，但在任何其他简单命令中不会。对于任何其他简单命令，Shell将中止该命令的执行，并在顶层继续执行（“Shell不得对发生错误的命令执行任何进一步的处理”）。
+53. A non-interactive shell exits with an error status if the iteration variable in a `for` statement or the selection variable in a `select` statement is a readonly variable.
+54. 如果`for`语句中的迭代变量或`select`语句中的选择变量是只读变量，非交互式Shell将退出。
+55. Non-interactive shells exit if filename in `.` filename is not found.
+56. 在`.` filename`中`filename`的文件名未找到时，非交互式Shell将退出。
+57. Non-interactive shells exit if a syntax error in an arithmetic expansion results in an invalid expression.
+58. 如果算术扩展中的语法错误导致无效表达式，非交互式Shell将退出。
+59. Non-interactive shells exit if a parameter expansion error occurs.
+60. 如果参数扩展错误发生，非交互式Shell将退出。
+61. Non-interactive shells exit if there is a syntax error in a script read with the `.` or `source` builtins, or in a string processed by the `eval` builtin.
+62. 如果`source`内建命令读取的脚本或`eval`内建命令处理的字符串中存在语法错误，非交互式Shell将退出。
+63. While variable indirection is available, it may not be applied to the `#` and `?` special parameters.
+64. 虽然变量间接引用可用，但不能应用于`#`和`?`特殊参数。
+65. Expanding the `*` special parameter in a pattern context where the expansion is double-quoted does not treat the `$*` as if it were double-quoted.
+66. 在扩展为双引号的模式上下文中扩展`*`特殊参数时，不将`$*`视为已扩展为双引号。
+67. Assignment statements preceding POSIX special builtins persist in the shell environment after the builtin completes.
+68. POSIX特殊内建命令之前的赋值语句在内建完成后会保留在Shell环境中。
+69. The `command` builtin does not prevent builtins that take assignment statements as arguments from expanding them as assignment statements; when not in POSIX mode, assignment builtins lose their assignment statement expansion properties when preceded by `command`.
+70. `command`内建命令不会阻止带有赋值语句作为参数的内建命令将其作为赋值语句扩展；当不在POSIX模式下时，如果在`command`之前的赋值内建命令，那么在其之前它会失去赋值语句扩展属性。
+71. The `bg` builtin uses the required format to describe each job placed in the background, which does not include an indication of whether the job is the current or previous job.
+72. `bg`内建命令使用所需的格式来描述放在后台的每个作业，其中不包括该作业是否是当前或上一个作业的指示。
+73. The output of `kill -l` prints all the signal names on a single line, separated by spaces, without the `SIG` prefix.
+74. `kill -l`的输出打印所有信号名称在一行上，用空格分隔，没有`SIG`前缀。
+75. The `kill` builtin does not accept signal names with a `SIG` prefix.
+76. `kill`内建命令不接受带有`SIG`前缀的信号名称。
+77. The `export` and `readonly` builtin commands display their output in the format required by POSIX.
+78. `export`和`readonly`内建命令以POSIX要求的格式显示它们的输出。
+79. The `trap` builtin displays signal names without the leading `SIG`.
+80. `trap`内建命令显示没有前缀`SIG`的信号名称。
+81. The `trap` builtin doesn't check the first argument for a possible signal specification and revert the signal handling to the original disposition if it is, unless that argument consists solely of digits and is a valid signal number. If users want to reset the handler for a given signal to the original disposition, they should use `-` as the first argument.
+82. `trap`内建命令不检查第一个参数是否可能是信号规范，并在如果它是，则将信号处理恢复为原始状态，除非该参数仅由数字组成并且是一个有效的信号编号。如果用户想要将给定信号的处理程序重置为原始状态，则应使用`-`作为第一个参数。
+83. `trap -p` displays signals whose dispositions are set to SIG_DFL and those that were ignored when the shell started.
+84. `trap -p`显示将信号处理状态设置为SIG_DFL以及在Shell启动时忽略的信号。
+85. The `.` and `source` builtins do not search the current directory for the filename argument if it is not found by searching `PATH`.
+86. `.`和`source`内建命令如果在`PATH`中找不到文件名参数，则不会搜索当前目录。
+87. Enabling POSIX mode has the effect of setting the `inherit_errexit` option, so subshells spawned to execute command substitutions inherit the value of the -e option from the parent shell. When the `inherit_errexit` option is not enabled, Bash clears the -e option in such subshells.
+88. 启用POSIX模式会导致设置`inherit_errexit`选项，因此用于执行命令替换的子Shell会继承来自父Shell的`-e`选项的值。当未启用`inherit_errexit`选项时，这样的子Shell会清除`-e`选项。
+89. Enabling POSIX mode has the effect of setting the `shift_verbose` option, so numeric arguments to `shift` that exceed the number of positional parameters will result in an error message.
+90. 启用POSIX模式会导致设置`shift_verbose`选项，因此`shift`的数值参数如果超过位置参数的数量将导致错误消息。
+91. When the `alias` builtin displays alias definitions, it does not display them with a leading `alias ` unless the -p option is supplied.
+92. 当不提供`-p`选项时，`alias`内建命令在显示别名定义时不会显示前缀`alias`。
+93. When the `set` builtin is invoked without options, it does not display shell function names and definitions.
+94. 当没有选项调用`set`内建命令时，不会显示Shell函数名称和定义。
+95. When the `set` builtin is invoked without options, it displays variable values without quotes, unless they contain shell metacharacters, even if the result contains nonprinting characters.
+96. 当没有选项调用`set`内建命令时，显示变量值时不会显示引号，除非它们包含Shell元字符，即使结果包含非打印字符。
+97. When the `cd` builtin is invoked in logical mode, and the pathname constructed from `$PWD` and the directory name supplied as an argument does not refer to an existing directory, `cd` will fail instead of falling back to physical mode.
+98. 当在逻辑模式下调用`cd`内建命令，并且从`$PWD`和作为参数提供的目录名构建的路径名不引用现有目录时，`cd`将失败而不是退回到物理模式。
+99. When the `cd` builtin cannot change a directory because the length of the pathname constructed from `$PWD` and the directory name supplied as an argument exceeds `PATH_MAX` when all symbolic links are expanded, `cd` will fail instead of attempting to use only the supplied directory name.
+100. 当因为所有符号链接被展开而导致从`$PWD`和作为参数提供的目录名构建的路径名长度超过`PATH_MAX`时，`cd`将失败而不是尝试仅使用提供的目录名。
+101. The `pwd` builtin verifies that the value it prints is the same as the current directory, even if it is not asked to check the file system with the -P option.
+102. `pwd`内建命令验证其打印的值是否与当前目录相同，即使未要求使用`-P`选项检查文件系统。
+103. When listing the history, the `fc` builtin does not include an indication of whether or not a history entry has been modified.
+104. 列出历史记录时，`fc`内建命令不包括历史记录条目是否已被修改的指示。
+105. The default editor used by `fc` is `ed`.
+106. `fc`默认使用的编辑器是`ed`。
+107. The `type` and `command` builtins will not report a non-executable file as having been found, though the shell will attempt to execute such a file if it is the only so-named file found in `$PATH`.
+108. `type`和`command`内建命令将不会报告找到一个不可执行的文件，尽管如果Shell只找到一个这样的文件，则会尝试执行该文件。
+109. The `vi` editing mode will invoke the `vi` editor directly when the `v` command is run, instead of checking `$VISUAL` and `$EDITOR`.
+110. 在`vi`编辑模式下，运行`v`命令时，`vi`编辑器将直接调用，而不是检查`$VISUAL`和`$EDITOR`。
+111. When the `xpg_echo` option is enabled, Bash does not attempt to interpret any arguments to `echo` as options. Each argument is displayed, after escape characters are converted.
+112. 启用`xpg_echo`选项时，Bash不会尝试将`echo`的任何参数解释为选项。每个参数在转义字符被转换后显示。
+113. The `ulimit` builtin uses a block size of 512 bytes for the -c and -f options.
+114. `ulimit`内建命令在`-c`和`-f`选项上使用512字节的块大小。
+115. The arrival of `SIGCHLD` when a trap is set on `SIGCHLD` does not interrupt the `wait` builtin and cause it to return immediately. The trap command is run once for each child that exits.
+116. 当在`SIGCHLD`上设置陷阱时，`SIGCHLD`到达不会中断`wait`内建命令并导致它立即返回。陷阱命令会对每个退出的子进程运行一次。
+117. The `read` builtin may be interrupted by a signal for which a trap has been set. If Bash receives a trapped signal while executing `read`, the trap handler executes and `read` returns an exit status greater than 128.
+118. `read`内建命令可能被设置了陷阱的信号中断。如果在执行`read`时Bash接收到受限制信号，则陷阱处理程序会执行，并且`read`返回一个大于128的退出状态。
+119. The `printf` builtin uses `double` (via `strtod`) to convert arguments corresponding to floating point conversion specifiers, instead of `long double` if it's available. The `L` length modifier forces `printf` to use `long double` if it's available.
+120. `printf`内建命令使用`double`（通过`strtod`）来转换与浮点数转换说明符相对应的参数，如果可用，则使用`long double`。如果可用，则`L`长度修饰符会强制`printf`使用`long double`。
+121. Bash removes an exited background process's status from the list of such statuses after the `wait` builtin is used to obtain it.
+122. Bash在使用`wait`内建命令获取已完成进程的状态后会从此类状态列表中移除已退出的后台进程的状态。
 
 There is other POSIX behavior that Bash does not implement by default even when in POSIX mode. Specifically:
 
+​	还有一些Bash默认情况下不实现的其他POSIX行为，即使在POSIX模式下也是如此。具体包括：
+
 1. The `fc` builtin checks `$EDITOR` as a program to edit history entries if `FCEDIT` is unset, rather than defaulting directly to `ed`. `fc` uses `ed` if `EDITOR` is unset.
-2. As noted above, Bash requires the `xpg_echo` option to be enabled for the `echo` builtin to be fully conformant.
+2. `fc`内建命令在编辑历史记录条目时会检查`$EDITOR`作为编辑程序，如果未设置`FCEDIT`，而不是直接默认为`ed`。如果`EDITOR`未设置，`fc`将使用`ed`。
+3. As noted above, Bash requires the `xpg_echo` option to be enabled for the `echo` builtin to be fully conformant.
+4. 如前所述，Bash需要启用`xpg_echo`选项才能使`echo`内建命令完全符合规范。
 
 Bash can be configured to be POSIX-conformant by default, by specifying the --enable-strict-posix-default to `configure` when building (see [Optional Features](https://www.gnu.org/software/bash/manual/bash.html#Optional-Features)).
+
+​	Bash可以通过在构建时在`configure`中指定`--enable-strict-posix-default`来配置为默认符合POSIX规范（参见[Optional Features](https://www.gnu.org/software/bash/manual/bash.html#Optional-Features)）。
 
 
 
@@ -6079,86 +6322,128 @@ Bash can be configured to be POSIX-conformant by default, by specifying the --en
 
 Bash-4.0 introduced the concept of a *shell compatibility level*, specified as a set of options to the shopt builtin (`compat31`, `compat32`, `compat40`, `compat41`, and so on). There is only one current compatibility level – each option is mutually exclusive. The compatibility level is intended to allow users to select behavior from previous versions that is incompatible with newer versions while they migrate scripts to use current features and behavior. It's intended to be a temporary solution.
 
+​	Bash-4.0引入了*shell兼容性级别*的概念，通过一组shopt内建命令选项（`compat31`、`compat32`、`compat40`、`compat41`等）来指定。只有一个当前的兼容性级别 - 每个选项是互斥的。兼容性级别旨在允许用户选择先前版本的行为，这些行为与新版本不兼容，同时将脚本迁移到使用当前功能和行为。这是一个临时解决方案。
+
 This section does not mention behavior that is standard for a particular version (e.g., setting `compat32` means that quoting the rhs of the regexp matching operator quotes special regexp characters in the word, which is default behavior in bash-3.2 and subsequent versions).
+
+​	本节不涉及特定版本的标准行为（例如，设置`compat32`意味着在`bash-3.2`及以后版本中引用`[[`命令的正则表达式匹配运算符（=~）的rhs时没有特殊效果）。
 
 If a user enables, say, `compat32`, it may affect the behavior of other compatibility levels up to and including the current compatibility level. The idea is that each compatibility level controls behavior that changed in that version of Bash, but that behavior may have been present in earlier versions. For instance, the change to use locale-based comparisons with the `[[` command came in bash-4.1, and earlier versions used ASCII-based comparisons, so enabling `compat32` will enable ASCII-based comparisons as well. That granularity may not be sufficient for all uses, and as a result users should employ compatibility levels carefully. Read the documentation for a particular feature to find out the current behavior.
 
+​	如果用户启用了例如`compat32`，它可能会影响其他兼容性级别的行为，包括当前的兼容性级别。每个兼容性级别控制在该Bash版本中发生的行为更改，但这种行为可能在较早的版本中存在。例如，使用基于区域设置的比较来执行`[[`命令的更改是在`bash-4.1`中引入的，而较早的版本使用基于ASCII的比较，因此启用`compat32`也会启用基于ASCII的比较。这种粒度可能对所有用途都不够充分，因此用户应谨慎使用兼容性级别。要了解当前行为，请阅读特定功能的文档。
+
 Bash-4.3 introduced a new shell variable: `BASH_COMPAT`. The value assigned to this variable (a decimal version number like 4.2, or an integer corresponding to the `compat`NN option, like 42) determines the compatibility level.
+
+​	Bash-4.3引入了一个新的Shell变量：`BASH_COMPAT`。分配给此变量的值（一个十进制版本号，如4.2，或对应于`compat`NN选项的整数，如42）确定兼容性级别。
 
 Starting with bash-4.4, Bash has begun deprecating older compatibility levels. Eventually, the options will be removed in favor of `BASH_COMPAT`.
 
+​	从`bash-4.4`开始，Bash开始弃用旧的兼容性级别。最终，这些选项将被`BASH_COMPAT`取代。
+
 Bash-5.0 is the final version for which there will be an individual shopt option for the previous version. Users should use `BASH_COMPAT` on bash-5.0 and later versions.
 
+​	`bash-5.0`是最后一个为上一个版本提供单独的shopt选项的版本。用户应该在`bash-5.0`及更高版本中使用`BASH_COMPAT`。
+
 The following table describes the behavior changes controlled by each compatibility level setting. The `compat`NN tag is used as shorthand for setting the compatibility level to NN using one of the following mechanisms. For versions prior to bash-5.0, the compatibility level may be set using the corresponding `compat`NN shopt option. For bash-4.3 and later versions, the `BASH_COMPAT` variable is preferred, and it is required for bash-5.1 and later versions.
+
+​	以下表格描述了每个兼容性级别设置控制的行为更改。使用`compat`NN标记作为简写方式，使用以下机制之一将兼容性级别设置为NN。对于`bash-5.0`之前的版本，可以使用相应的`compat`NN shopt选项来设置兼容性级别。对于`bash-4.3`及更高版本，首选`BASH_COMPAT`变量，并且`bash-5.1`及更高版本需要使用它。
 
 - `compat31`
 
   - quoting the rhs of the `[[` command's regexp matching operator (=~) has no special effect
+  - 引用`[[`命令的正则表达式匹配运算符（=~）的rhs不会产生特殊效果。
 
 - `compat32`
 
   - interrupting a command list such as "a ; b ; c" causes the execution of the next command in the list (in bash-4.0 and later versions, the shell acts as if it received the interrupt, so interrupting one command in a list aborts the execution of the entire list)
+  - 中断一个命令列表（例如 "a ; b ; c"）会导致执行列表中的下一个命令（在`bash-4.0`及更高版本中，Shell会像收到中断一样处理，因此中断列表中的一个命令会中止整个列表的执行）。
 
 - `compat40`
 
   - the `<` and `>` operators to the `[[` command do not consider the current locale when comparing strings; they use ASCII ordering. Bash versions prior to bash-4.1 use ASCII collation and strcmp(3); bash-4.1 and later use the current locale's collation sequence and strcoll(3).
+  - `[[`命令中的`<`和`>`操作符在比较字符串时不考虑当前区域设置；它们使用ASCII排序。`bash-4.1`之前的Bash版本使用ASCII排序和strcmp(3)；`bash-4.1`及更高版本使用当前区域设置的排序序列和strcoll(3)。
 
 - `compat41`
 
   - in posix mode, `time` may be followed by options and still be recognized as a reserved word (this is POSIX interpretation 267)
+  - 在posix模式下，`time`可以在后面跟随选项，仍然会被识别为保留字（这是POSIX解释267）。
   - in posix mode, the parser requires that an even number of single quotes occur in the word portion of a double-quoted ${…} parameter expansion and treats them specially, so that characters within the single quotes are considered quoted (this is POSIX interpretation 221)
+  - 在posix模式下，解析器要求在双引号${…}参数扩展的单词部分中的单引号成对出现偶数次，并且对它们进行特殊处理，以使单引号内的字符被视为已引用（这是POSIX解释221）。
 
 - `compat42`
 
   - the replacement string in double-quoted pattern substitution does not undergo quote removal, as it does in versions after bash-4.2
+  - 双引号模式替换中的替换字符串不会进行引号删除，如在`bash-4.2`之后的版本中一样。
   - in posix mode, single quotes are considered special when expanding the word portion of a double-quoted ${…} parameter expansion and can be used to quote a closing brace or other special character (this is part of POSIX interpretation 221); in later versions, single quotes are not special within double-quoted word expansions
+  - 在posix模式下，当扩展双引号`${…}`参数扩展的单词部分时，单引号被视为特殊字符，并可用于引用右括号或其他特殊字符（这是POSIX解释221）；在后续版本中，在双引号中的单引号在扩展时不再是特殊字符。
 
 - `compat43`
 
   - the shell does not print a warning message if an attempt is made to use a quoted compound assignment as an argument to declare (e.g., declare -a foo=`(1 2)`). Later versions warn that this usage is deprecated
+  - 如果尝试将引号复合赋值作为declare的参数（例如`declare -a foo=`(1 2)`）使用，Shell不会打印警告消息。在后续版本中，会警告此用法已弃用。
   - word expansion errors are considered non-fatal errors that cause the current command to fail, even in posix mode (the default behavior is to make them fatal errors that cause the shell to exit)
+  - 单词扩展错误被视为非致命错误，即使在posix模式下也会导致当前命令失败（默认行为是使它们成为导致Shell退出的致命错误）。
   - when executing a shell function, the loop state (while/until/etc.) is not reset, so `break` or `continue` in that function will break or continue loops in the calling context. Bash-4.4 and later reset the loop state to prevent this
+  - 执行Shell函数时，循环状态（while/until等）不会被重置，因此在该函数中的`break`或`continue`将中断或继续调用上下文中的循环。`bash-4.4`及更高版本会重置循环状态以防止这种情况发生。
 
 - `compat44`
 
   - the shell sets up the values used by `BASH_ARGV` and `BASH_ARGC` so they can expand to the shell's positional parameters even if extended debugging mode is not enabled
+  - Shell设置了用于`BASH_ARGV`和`BASH_ARGC`的值，以便即使未启用扩展调试模式，它们也可以扩展为Shell的位置参数。
   - a subshell inherits loops from its parent context, so `break` or `continue` will cause the subshell to exit. Bash-5.0 and later reset the loop state to prevent the exit
+  - 子Shell继承了父上下文中的循环，因此`break`或`continue`将导致子Shell退出。`bash-5.0`及更高版本重置循环状态以防止退出。
   - variable assignments preceding builtins like `export` and `readonly` that set attributes continue to affect variables with the same name in the calling environment even if the shell is not in posix mode
+  - 在不是posix模式的情况下，设置属性的变量赋值在Shell不是posix模式时，继续影响调用环境中具有相同名称的变量。
 
 - `compat50 (set using BASH_COMPAT)`
 
   - Bash-5.1 changed the way `$RANDOM` is generated to introduce slightly more randomness. If the shell compatibility level is set to 50 or lower, it reverts to the method from bash-5.0 and previous versions, so seeding the random number generator by assigning a value to `RANDOM` will produce the same sequence as in bash-5.0
+  - `bash-5.1`更改了生成`$RANDOM`的方式，引入了稍微更多的随机性。如果Shell兼容性级别设置为50或更低，则会恢复到`bash-5.0`及之前版本的方法，因此通过给`RANDOM`分配一个值来初始化随机数生成器会产生与`bash-5.0`相同的序列。
   - If the command hash table is empty, Bash versions prior to bash-5.1 printed an informational message to that effect, even when producing output that can be reused as input. Bash-5.1 suppresses that message when the -l option is supplied.
+  - 如果命令哈希表为空，则`bash-5.1`之前的Bash版本会打印一条信息，即使产生的输出可以重新用作输入。当提供了-l选项时，`bash-5.1`不会显示该消息。
 
 - `compat51 (set using BASH_COMPAT)`
 
   - The `unset` builtin will unset the array `a` given an argument like `a[@]`. Bash-5.2 will unset an element with key `@` (associative arrays) or remove all the elements without unsetting the array (indexed arrays)
+  - `unset`内建命令将会删除数组`a`，给定类似`a[@]`的参数。`bash-5.2`将会删除具有键`@`（关联数组）的元素，或者删除所有元素而不会删除数组（索引数组）。
   - arithmetic commands ( ((...)) ) and the expressions in an arithmetic for statement can be expanded more than onceexpressions used as arguments to arithmetic operators in the `[[` conditional command can be expanded more than once
+  - 算术命令（((...))）和算术for语句中的表达式可以扩展多次；用作`[[`条件命令中算术运算符的参数的表达式可以扩展多次。
   - the expressions in substring parameter brace expansion can be expanded more than once
+  - 子字符串参数花括号扩展中的表达式可以扩展多次。
   - the expressions in the `$(( ... ))` word expansion can be expanded more than oncearithmetic expressions used as indexed array subscripts can be expanded more than once
+  - `$(( ... ))`单词扩展中的表达式可以扩展多次；用作索引数组下标的算术表达式也可以扩展多次。
   - `test -v`, when given an argument of `A[@]`, where A is an existing associative array, will return true if the array has any set elements. Bash-5.2 will look for and report on a key named `@`
+  - `test -v`，给定参数`A[@]`，其中A是一个已存在的关联数组，如果数组有任何已设置的元素，则返回true。`bash-5.2`将寻找并报告名为`@`的键。
   - the `${parameter[:]=value}` word expansion will return value, before any variable-specific transformations have been performed (e.g., converting to lowercase). Bash-5.2 will return the final value assigned to the variable.
+  - `${parameter[:]=value}`单词扩展将在执行任何变量特定的转换（例如转换为小写）之前返回value。`bash-5.2`将返回分配给变量的最终值。
   - Parsing command substitutions will behave as if extended glob (see [The Shopt Builtin](https://www.gnu.org/software/bash/manual/bash.html#The-Shopt-Builtin)) is enabled, so that parsing a command substitution containing an extglob pattern (say, as part of a shell function) will not fail. This assumes the intent is to enable extglob before the command is executed and word expansions are performed. It will fail at word expansion time if extglob hasn't been enabled by the time the command is executed.
+  - 解析命令替换时将表现得好像启用了扩展模式（参见[The Shopt Builtin](https://www.gnu.org/software/bash/manual/bash.html#The-Shopt-Builtin)），因此解析包含extglob模式的命令替换（例如作为Shell函数的一部分）不会失败。这假设意图是在执行命令和进行单词扩展之前启用extglob模式。如果在执行命令时还未启用extglob，则在单词扩展时将失败。
 
 
 
 
 
-## 7 Job Control
+## 7 作业控制
 
 This chapter discusses what job control is, how it works, and how Bash allows you to access its facilities.
 
+​	本章讨论作业控制是什么，它是如何工作的，以及Bash如何允许您访问其功能。
 
 
 
 
-### 7.1 Job Control Basics
+
+### 7.1 作业控制基础
 
 
 
 Job control refers to the ability to selectively stop (suspend) the execution of processes and continue (resume) their execution at a later point. A user typically employs this facility via an interactive interface supplied jointly by the operating system kernel's terminal driver and Bash.
 
+​	作业控制是指有选择地停止（暂停）进程的执行并在以后的某个时间点继续（恢复）其执行。用户通常通过操作系统内核的终端驱动程序和Bash共同提供的交互界面来使用此功能。
+
 The shell associates a job with each pipeline. It keeps a table of currently executing jobs, which may be listed with the `jobs` command. When Bash starts a job asynchronously, it prints a line that looks like:
+
+​	Shell将每个管道与一个作业相关联。它保持当前正在执行的作业的列表，并可以使用`jobs`命令列出这些作业。当Bash以异步方式启动作业时，它会打印一行，看起来像这样：
 
 ```
 [1] 25647
@@ -6166,69 +6451,162 @@ The shell associates a job with each pipeline. It keeps a table of currently exe
 
 indicating that this job is job number 1 and that the process ID of the last process in the pipeline associated with this job is 25647. All of the processes in a single pipeline are members of the same job. Bash uses the job abstraction as the basis for job control.
 
-To facilitate the implementation of the user interface to job control, the operating system maintains the notion of a current terminal process group ID. Members of this process group (processes whose process group ID is equal to the current terminal process group ID) receive keyboard-generated signals such as `SIGINT`. These processes are said to be in the foreground. Background processes are those whose process group ID differs from the terminal`s; such processes are immune to keyboard-generated signals. Only foreground processes are allowed to read from or, if the user so specifies with `stty tostop`, write to the terminal. Background processes which attempt to read from (write to when `stty tostop` is in effect) the terminal are sent a `SIGTTIN` (`SIGTTOU`) signal by the kernel's terminal driver, which, unless caught, suspends the process.
+表示该作业是作业编号为1，并且与该作业关联的管道中的最后一个进程的进程ID为25647。单个管道中的所有进程都是同一作业的成员。Bash使用作业抽象作为作业控制的基础。
+
+To facilitate the implementation of the user interface to job control, the operating system maintains the notion of a current terminal process group ID. Members of this process group (processes whose process group ID is equal to the current terminal process group ID) receive keyboard-generated signals such as `SIGINT`. These processes are said to be in the foreground. Background processes are those whose process group ID differs from the terminal's; such processes are immune to keyboard-generated signals. Only foreground processes are allowed to read from or, if the user so specifies with `stty tostop`, write to the terminal. Background processes which attempt to read from (write to when `stty tostop` is in effect) the terminal are sent a `SIGTTIN` (`SIGTTOU`) signal by the kernel's terminal driver, which, unless caught, suspends the process.
+
+​	为了方便实现作业控制的用户界面，操作系统维护了当前终端进程组ID的概念。该进程组的成员（其进程组ID等于当前终端进程组ID）接收键盘生成的信号，例如`SIGINT`。这些进程称为前台进程。后台进程是其进程组ID与终端的不同的进程；这样的进程对键盘生成的信号免疫。只有前台进程允许从终端读取或（如果用户通过`stty tostop`指定）写入。后台进程如果尝试从终端读取（在`stty tostop`生效时写入）将被内核的终端驱动程序发送`SIGTTIN`（`SIGTTOU`）信号，除非捕获，否则会挂起该进程。
 
 If the operating system on which Bash is running supports job control, Bash contains facilities to use it. Typing the *suspend* character (typically `^Z`, Control-Z) while a process is running causes that process to be stopped and returns control to Bash. Typing the *delayed suspend* character (typically `^Y`, Control-Y) causes the process to be stopped when it attempts to read input from the terminal, and control to be returned to Bash. The user then manipulates the state of this job, using the `bg` command to continue it in the background, the `fg` command to continue it in the foreground, or the `kill` command to kill it. A `^Z` takes effect immediately, and has the additional side effect of causing pending output and typeahead to be discarded.
 
+​	如果支持Bash运行的操作系统支持作业控制，Bash包含使用它的功能。在进程运行时键入*暂停* 字符（通常为`^Z`，Control-Z）会导致该进程停止并将控制权返回给Bash。键入 *延迟暂停* 字符（通常为`^Y`，Control-Y）会导致进程在尝试从终端读取输入时停止，并将控制权返回给Bash。然后用户可以使用`bg`命令将作业继续在后台运行，使用`fg`命令将作业继续在前台运行，或者使用`kill`命令将其终止。`^Z`立即生效，并且附加的副作用是导致未决的输出和预读被丢弃。
+
 There are a number of ways to refer to a job in the shell. The character `%` introduces a job specification (*jobspec*).
+
+​	在Shell中有许多引用作业的方式。字符`％`引入了作业规范（ *jobspec* ）。
 
 Job number `n` may be referred to as `%n`. The symbols `%%` and `%+` refer to the shell's notion of the current job, which is the last job stopped while it was in the foreground or started in the background. A single `%` (with no accompanying job specification) also refers to the current job. The previous job may be referenced using `%-`. If there is only a single job, `%+` and `%-` can both be used to refer to that job. In output pertaining to jobs (e.g., the output of the `jobs` command), the current job is always flagged with a `+`, and the previous job with a `-`.
 
+​	作业号`n`可以表示为`％n`。符号`%%`和`%+`指的是Shell对当前作业的概念，即最后一个在前台停止或在后台启动的作业。只有`％`（没有随附的作业规范）也指代当前作业。可以使用`%-`引用上一个作业。如果只有一个作业，则`%+`和`%-`都可以用于指代该作业。在与作业相关的输出中（例如，`jobs`命令的输出），当前作业始终带有`+`标志，上一个作业带有`-`标志。
+
 A job may also be referred to using a prefix of the name used to start it, or using a substring that appears in its command line. For example, `%ce` refers to a stopped job whose command name begins with `ce`. Using `%?ce`, on the other hand, refers to any job containing the string `ce` in its command line. If the prefix or substring matches more than one job, Bash reports an error.
+
+​	作业还可以使用其启动名称的前缀或出现在其命令行中的子字符串来引用。例如，`％ce`引用了一个其命令名称以`ce`开头的停止作业。然而，使用`％?ce`指的是包含字符串`ce`的任何作业。如果前缀或子字符串匹配多个作业，Bash会报告错误。
 
 Simply naming a job can be used to bring it into the foreground: `%1` is a synonym for `fg %1`, bringing job 1 from the background into the foreground. Similarly, `%1 &` resumes job 1 in the background, equivalent to `bg %1`
 
+​	仅仅命名一个作业可用于将其带入前台：`％1`是将作业1从后台带入前台的同义词。类似地，`％1＆`会在后台恢复作业1，相当于`bg％1`。
+
 The shell learns immediately whenever a job changes state. Normally, Bash waits until it is about to print a prompt before reporting changes in a job's status so as to not interrupt any other output. If the -b option to the `set` builtin is enabled, Bash reports such changes immediately (see [The Set Builtin](https://www.gnu.org/software/bash/manual/bash.html#The-Set-Builtin)). Any trap on `SIGCHLD` is executed for each child process that exits.
+
+​	Shell立即得知作业更改状态。通常，Bash在打印提示之前等待报告作业状态的更改，以不中断其他输出。如果启用`set`内建命令的-b选项，则Bash会立即报告此类更改（请参阅[The Set Builtin](https://www.gnu.org/software/bash/manual/bash.html#The-Set-Builtin)）。每个子进程退出时，`SIGCHLD`的任何陷阱都会被执行。
 
 If an attempt to exit Bash is made while jobs are stopped, (or running, if the `checkjobs` option is enabled – see [The Shopt Builtin](https://www.gnu.org/software/bash/manual/bash.html#The-Shopt-Builtin)), the shell prints a warning message, and if the `checkjobs` option is enabled, lists the jobs and their statuses. The `jobs` command may then be used to inspect their status. If a second attempt to exit is made without an intervening command, Bash does not print another warning, and any stopped jobs are terminated.
 
+​	如果在作业暂停时（或如果启用了`checkjobs`选项，则在运行时）尝试退出Bash，则Shell会打印一条警告消息，如果启用了`checkjobs`选项，则列出作业及其状态。然后可以使用`jobs`命令检查它们的状态。如果在没有中间命令的情况下再次尝试退出，则Bash不会打印另一个警告，并且任何已停止的作业都将终止。
+
 When the shell is waiting for a job or process using the `wait` builtin, and job control is enabled, `wait` will return when the job changes state. The -f option causes `wait` to wait until the job or process terminates before returning.
 
+​	当Shell使用`wait`内建命令等待作业或进程，并且启用了作业控制时，`wait`将在作业更改状态时返回。-f选项导致`wait`在作业或进程终止之前等待。
 
 
 
 
-### 7.2 Job Control Builtins
+
+### 7.2 作业控制内建命令
 
 - `bg`
 
-  `bg [jobspec …] `Resume each suspended job jobspec in the background, as if it had been started with `&`. If jobspec is not supplied, the current job is used. The return status is zero unless it is run when job control is not enabled, or, when run with job control enabled, any jobspec was not found or specifies a job that was started without job control.
+  ```
+  bg [jobspec …]
+  ```
+
+  Resume each suspended job jobspec in the background, as if it had been started with `&`. If jobspec is not supplied, the current job is used. The return status is zero unless it is run when job control is not enabled, or, when run with job control enabled, any jobspec was not found or specifies a job that was started without job control.
+
+  将每个挂起的作业（jobspec）在后台恢复运行，就像使用 `&` 启动它一样。如果未提供 jobspec，则使用当前作业。返回状态为零，除非在未启用作业控制时运行，或在启用作业控制的情况下，找不到 jobspec 或指定的作业是在没有作业控制的情况下启动的。
 
 - `fg`
 
-  `fg [jobspec] `Resume the job jobspec in the foreground and make it the current job. If jobspec is not supplied, the current job is used. The return status is that of the command placed into the foreground, or non-zero if run when job control is disabled or, when run with job control enabled, jobspec does not specify a valid job or jobspec specifies a job that was started without job control.
+  ```
+  fg [jobspec]
+  ```
+
+  Resume the job jobspec in the foreground and make it the current job. If jobspec is not supplied, the current job is used. The return status is that of the command placed into the foreground, or non-zero if run when job control is disabled or, when run with job control enabled, jobspec does not specify a valid job or jobspec specifies a job that was started without job control.
+
+  将作业（jobspec）在前台恢复运行，并将其设置为当前作业。如果未提供 jobspec，则使用当前作业。返回状态是被放在前台的命令的状态，或者在禁用作业控制时运行或在启用作业控制的情况下 jobspec 未指定有效作业或指定了在没有作业控制的情况下启动的作业。
 
 - `jobs`
 
-  `jobs [-lnprs] [jobspec] jobs -x command [arguments] `The first form lists the active jobs. The options have the following meanings:`-l`List process IDs in addition to the normal information.`-n`Display information only about jobs that have changed status since the user was last notified of their status.`-p`List only the process ID of the job's process group leader.`-r`Display only running jobs.`-s`Display only stopped jobs.If jobspec is given, output is restricted to information about that job. If jobspec is not supplied, the status of all jobs is listed.If the -x option is supplied, `jobs` replaces any jobspec found in command or arguments with the corresponding process group ID, and executes command, passing it arguments, returning its exit status.
+  ```
+  jobs [-lnprs] [jobspec]
+  jobs -x command [arguments]
+  ```
+
+  The first form lists the active jobs. The options have the following meanings:
+
+  第一种形式列出所有活动作业。选项的含义如下：
+
+  - `-l`:  List process IDs in addition to the normal information.
+
+  - `-n`:  Display information only about jobs that have changed status since the user was last notified of their status.
+
+  - `-p`:  List only the process ID of the job's process group leader.
+
+  - `-r`:  Display only running jobs.
+
+  - `-s`: Display only stopped jobs.
+  - `-l`：除了常规信息外，还列出进程 ID。
+  - `-n`：仅显示自上次用户上次通知其状态以来更改状态的作业信息。
+  - `-p`：仅列出作业的进程组组长的进程 ID。
+  - `-r`：仅显示正在运行的作业。
+  - `-s`：仅显示停止的作业。
+
+  
+
+  If jobspec is given, output is restricted to information about that job. If jobspec is not supplied, the status of all jobs is listed.
+
+  如果提供了 jobspec，则输出仅限于有关该作业的信息。如果未提供 jobspec，则列出所有作业的状态。
+
+  If the -x option is supplied, `jobs` replaces any jobspec found in command or arguments with the corresponding process group ID, and executes command, passing it arguments, returning its exit status.
+
+  如果提供了 `-x` 选项，则 `jobs` 将任何在 command 或 arguments 中找到的 jobspec 替换为相应的进程组 ID，并执行 command，并传递其参数，返回其退出状态。
 
 - `kill`
 
-  `kill [-s sigspec] [-n signum] [-sigspec] jobspec or pid kill -l|-L [exit_status] `Send a signal specified by sigspec or signum to the process named by job specification jobspec or process ID pid. sigspec is either a case-insensitive signal name such as `SIGINT` (with or without the `SIG` prefix) or a signal number; signum is a signal number. If sigspec and signum are not present, `SIGTERM` is used. The -l option lists the signal names. If any arguments are supplied when -l is given, the names of the signals corresponding to the arguments are listed, and the return status is zero. exit_status is a number specifying a signal number or the exit status of a process terminated by a signal. The -L option is equivalent to -l. The return status is zero if at least one signal was successfully sent, or non-zero if an error occurs or an invalid option is encountered.
+  ```
+  kill [-s sigspec] [-n signum] [-sigspec] jobspec or pid
+  kill -l|-L [exit_status]
+  ```
+
+  Send a signal specified by sigspec or signum to the process named by job specification jobspec or process ID pid. sigspec is either a case-insensitive signal name such as `SIGINT` (with or without the `SIG` prefix) or a signal number; signum is a signal number. If sigspec and signum are not present, `SIGTERM` is used. The -l option lists the signal names. If any arguments are supplied when -l is given, the names of the signals corresponding to the arguments are listed, and the return status is zero. exit_status is a number specifying a signal number or the exit status of a process terminated by a signal. The -L option is equivalent to -l. The return status is zero if at least one signal was successfully sent, or non-zero if an error occurs or an invalid option is encountered.
+
+  向由作业规范 jobspec 或进程 ID pid 指定的进程发送由 sigspec 或 signum 指定的信号。sigspec 可以是大小写不敏感的信号名称，例如 `SIGINT`（带或不带 `SIG` 前缀），也可以是信号编号；signum 是信号编号。如果 sigspec 和 signum 都不存在，则使用 `SIGTERM` 信号。`-l` 选项列出信号名称。如果在给出 `-l` 时提供了任何参数，则列出与参数对应的信号名称，并返回状态为零。exit_status 是指定信号编号或由信号终止的进程的退出状态的数字。`-L` 选项等效于 `-l`。如果成功发送了至少一个信号，则返回状态为零，否则如果发生错误或遇到无效选项，则返回非零。
 
 - `wait`
 
-  `wait [-fn] [-p varname] [jobspec or pid …] `Wait until the child process specified by each process ID pid or job specification jobspec exits and return the exit status of the last command waited for. If a job spec is given, all processes in the job are waited for. If no arguments are given, `wait` waits for all running background jobs and the last-executed process substitution, if its process id is the same as $!, and the return status is zero. If the -n option is supplied, `wait` waits for a single job from the list of pids or jobspecs or, if no arguments are supplied, any job, to complete and returns its exit status. If none of the supplied arguments is a child of the shell, or if no arguments are supplied and the shell has no unwaited-for children, the exit status is 127. If the -p option is supplied, the process or job identifier of the job for which the exit status is returned is assigned to the variable varname named by the option argument. The variable will be unset initially, before any assignment. This is useful only when the -n option is supplied. Supplying the -f option, when job control is enabled, forces `wait` to wait for each pid or jobspec to terminate before returning its status, instead of returning when it changes status. If neither jobspec nor pid specifies an active child process of the shell, the return status is 127. If `wait` is interrupted by a signal, the return status will be greater than 128, as described above (see [Signals](https://www.gnu.org/software/bash/manual/bash.html#Signals)). Otherwise, the return status is the exit status of the last process or job waited for.
+  ```
+  wait [-fn] [-p varname] [jobspec or pid …]
+  ```
+
+  Wait until the child process specified by each process ID pid or job specification jobspec exits and return the exit status of the last command waited for. If a job spec is given, all processes in the job are waited for. If no arguments are given, `wait` waits for all running background jobs and the last-executed process substitution, if its process id is the same as $!, and the return status is zero. If the -n option is supplied, `wait` waits for a single job from the list of pids or jobspecs or, if no arguments are supplied, any job, to complete and returns its exit status. If none of the supplied arguments is a child of the shell, or if no arguments are supplied and the shell has no unwaited-for children, the exit status is 127. If the -p option is supplied, the process or job identifier of the job for which the exit status is returned is assigned to the variable varname named by the option argument. The variable will be unset initially, before any assignment. This is useful only when the -n option is supplied. Supplying the -f option, when job control is enabled, forces `wait` to wait for each pid or jobspec to terminate before returning its status, instead of returning when it changes status. If neither jobspec nor pid specifies an active child process of the shell, the return status is 127. If `wait` is interrupted by a signal, the return status will be greater than 128, as described above (see [Signals](https://www.gnu.org/software/bash/manual/bash.html#Signals)). Otherwise, the return status is the exit status of the last process or job waited for.
+
+  等待由每个进程 ID pid 或作业规范 jobspec 指定的子进程退出，并返回最后等待的命令的退出状态。如果给出作业规范，则等待该作业中的所有进程。如果未提供任何参数，则 `wait` 等待所有正在运行的后台作业和最后执行的进程替代，如果其进程 ID 与 `$!` 相同，则返回状态为零。如果提供了 `-n` 选项，则 `wait` 等待来自 pid 或 jobspecs 列表中的单个作业，如果未提供任何参数，则等待任何作业完成，并返回其退出状态。如果提供的参数不是 shell 的子进程，或者如果没有提供参数且 shell 没有未等待的子进程，则退出状态为 127。如果提供了 `-p` 选项，则返回的退出状态为该选项参数指定的变量 varname 的进程或作业标识符。在任何赋值之前，该变量最初为未设置状态。这仅在提供 `-n` 选项时有用。在启用作业控制时，提供 `-f` 选项会强制 `wait` 在返回其状态之前等待每个 pid 或 jobspec 终止，而不是在其更改状态时返回。如果 jobspec 和 pid 都不指定 shell 的活动子进程，则返回状态为 127。如果 `wait` 被信号中断，则返回状态将大于 128，如上述所述（请参阅[Signals](https://www.gnu.org/software/bash/manual/bash.html#Signals)）。否则，返回状态为最后一个等待的进程或作业的退出状态。
 
 - `disown`
 
-  `disown [-ar] [-h] [jobspec … | pid … ] `Without options, remove each jobspec from the table of active jobs. If the -h option is given, the job is not removed from the table, but is marked so that `SIGHUP` is not sent to the job if the shell receives a `SIGHUP`. If jobspec is not present, and neither the -a nor the -r option is supplied, the current job is used. If no jobspec is supplied, the -a option means to remove or mark all jobs; the -r option without a jobspec argument restricts operation to running jobs.
+  ```
+  disown [-ar] [-h] [jobspec … | pid … ]
+  ```
+
+  Without options, remove each jobspec from the table of active jobs. If the -h option is given, the job is not removed from the table, but is marked so that `SIGHUP` is not sent to the job if the shell receives a `SIGHUP`. If jobspec is not present, and neither the -a nor the -r option is supplied, the current job is used. If no jobspec is supplied, the -a option means to remove or mark all jobs; the -r option without a jobspec argument restricts operation to running jobs.
+
+  在没有选项的情况下，从活动作业表中删除每个 jobspec。如果给出了 `-h` 选项，则该作业不会从表中删除，但是如果 Shell 接收到 `SIGHUP`，则会将其标记为不发送给作业。如果没有 jobspec 存在，且未提供 `-a` 或 `-r` 选项，则使用当前作业。如果未提供 jobspec，则 `-a` 选项意味着删除或标记所有作业；没有 jobspec 参数的 `-r` 选项将操作限制为运行中的作业。
 
 - `suspend`
 
-  `suspend [-f] `Suspend the execution of this shell until it receives a `SIGCONT` signal. A login shell, or a shell without job control enabled, cannot be suspended; the -f option can be used to override this and force the suspension. The return status is 0 unless the shell is a login shell or job control is not enabled and -f is not supplied.
+  ```
+  suspend [-f]
+  ```
+  
+  Suspend the execution of this shell until it receives a `SIGCONT` signal. A login shell, or a shell without job control enabled, cannot be suspended; the -f option can be used to override this and force the suspension. The return status is 0 unless the shell is a login shell or job control is not enabled and -f is not supplied.
+  
+  暂停此 Shell 的执行，直到收到 `SIGCONT` 信号。登录 Shell 或未启用作业控制的 Shell 无法暂停；`-f` 选项可用于覆盖此设置并强制挂起。返回状态为 0，除非 Shell 是登录 Shell 或未启用作业控制且未提供 `-f`。
 
 When job control is not active, the `kill` and `wait` builtins do not accept jobspec arguments. They must be supplied process IDs.
 
+​	当作业控制未激活时，`kill` 和 `wait` 内建命令不接受作业规范（jobspec）参数。必须提供进程 ID。
 
 
 
 
-### 7.3 Job Control Variables
+
+### 7.3 作业控制变量
 
 - `auto_resume`
 
   This variable controls how the shell interacts with the user and job control. If this variable exists then single word simple commands without redirections are treated as candidates for resumption of an existing job. There is no ambiguity allowed; if there is more than one job beginning with the string typed, then the most recently accessed job will be selected. The name of a stopped job, in this context, is the command line used to start it. If this variable is set to the value `exact`, the string supplied must match the name of a stopped job exactly; if set to `substring`, the string supplied needs to match a substring of the name of a stopped job. The `substring` value provides functionality analogous to the `%?` job ID (see [Job Control Basics](https://www.gnu.org/software/bash/manual/bash.html#Job-Control-Basics)). If set to any other value, the supplied string must be a prefix of a stopped job's name; this provides functionality analogous to the `%` job ID.
+  
+  此变量控制Shell与用户和作业控制的交互方式。如果此变量存在，则不带重定向的单词简单命令将被视为恢复现有作业的候选项。不允许任何歧义；如果有多个以输入的字符串开头的作业，则选择最近访问的作业。在此上下文中，已停止作业的名称是启动它的命令行。如果此变量设置为值 `exact`，则所提供的字符串必须与已停止作业的名称完全匹配；如果设置为 `substring`，则所提供的字符串需要与已停止作业名称的子字符串匹配。`substring` 值提供类似于 `%?` 作业 ID（见 [作业控制基础](https://www.gnu.org/software/bash/manual/bash.html#Job-Control-Basics)）。如果设置为其他任何值，则所提供的字符串必须是已停止作业名称的前缀；这提供了类似于 `%` 作业 ID 的功能。
 
 
 
@@ -6236,47 +6614,54 @@ When job control is not active, the `kill` and `wait` builtins do not accept job
 
 
 
-## 8 Command Line Editing
+## 8 命令行编辑
 
 This chapter describes the basic features of the GNU command line editing interface. Command line editing is provided by the Readline library, which is used by several different programs, including Bash. Command line editing is enabled by default when using an interactive shell, unless the --noediting option is supplied at shell invocation. Line editing is also used when using the -e option to the `read` builtin command (see [Bash Builtin Commands](https://www.gnu.org/software/bash/manual/bash.html#Bash-Builtins)). By default, the line editing commands are similar to those of Emacs. A vi-style line editing interface is also available. Line editing can be enabled at any time using the -o emacs or -o vi options to the `set` builtin command (see [The Set Builtin](https://www.gnu.org/software/bash/manual/bash.html#The-Set-Builtin)), or disabled using the +o emacs or +o vi options to `set`.
 
+​	本章描述GNU命令行编辑接口的基本特性。命令行编辑由Readline库提供，多个不同的程序使用它，包括Bash。当使用交互式Shell时，默认情况下启用命令行编辑，除非在Shell调用时提供了 `--noediting` 选项。在使用 `read` 内建命令时（参见[Bash内建命令](https://www.gnu.org/software/bash/manual/bash.html#Bash-Builtins)），也会使用行编辑。默认情况下，行编辑命令类似于Emacs的命令。还提供了Vi风格的行编辑接口。可以随时使用 `-o emacs` 或 `-o vi` 选项来启用行编辑，或使用 `+o emacs` 或 `+o vi` 选项来禁用行编辑，这些选项是 `set` 内建命令的一部分（参见 [set 内建命令](https://www.gnu.org/software/bash/manual/bash.html#The-Set-Builtin)）。
 
 
 
 
 
 
-
-
-
-
-
-
-
-### 8.1 Introduction to Line Editing
+### 8.1 命令行编辑简介 Introduction to Line Editing
 
 The following paragraphs describe the notation used to represent keystrokes.
 
+​	以下段落描述了表示按键的符号约定。
+
 The text C-k is read as `Control-K` and describes the character produced when the `k` key is pressed while the Control key is depressed.
+
+​	文本 `C-k` 表示按下 `k` 键同时按下 Control 键时产生的字符。
 
 The text M-k is read as `Meta-K` and describes the character produced when the Meta key (if you have one) is depressed, and the `k` key is pressed. The Meta key is labeled `ALT` on many keyboards. On keyboards with two keys labeled `ALT` (usually to either side of the space bar), the `ALT` on the left side is generally set to work as a Meta key. The `ALT` key on the right may also be configured to work as a Meta key or may be configured as some other modifier, such as a Compose key for typing accented characters.
 
+​	文本 `M-k` 表示在按下 Meta 键（如果您有的话）的同时按下 `k` 键时产生的字符。在许多键盘上，Meta 键标记为 `ALT`。对于带有两个标记为 `ALT` 的键的键盘（通常位于空格键的两侧），左侧的 `ALT` 通常被设置为工作为 Meta 键。右侧的 `ALT` 键也可以被配置为工作为 Meta 键，或者可以被配置为其他修饰键，比如用于输入带重音字符的组合键。
+
 If you do not have a Meta or `ALT` key, or another key working as a Meta key, the identical keystroke can be generated by typing `ESC` *first*, and then typing `k`. Either process is known as *metafying* the `k` key.
+
+​	如果您没有 Meta 键或 `ALT` 键，或者没有其他工作为 Meta 键的键，那么可以通过首先键入 `ESC`，然后再键入 `k` 来生成相同的按键。无论哪种方式，都被称为将 `k` 键转换为 Meta 键。
 
 The text M-C-k is read as `Meta-Control-k` and describes the character produced by *metafying* C-k.
 
+​	文本 `M-C-k` 表示在将 C-k 转换为 Meta 键后产生的字符。
+
 In addition, several keys have their own names. Specifically, `DEL`, `ESC`, `LFD`, `SPC`, `RET`, and `TAB` all stand for themselves when seen in this text, or in an init file (see [Readline Init File](https://www.gnu.org/software/bash/manual/bash.html#Readline-Init-File)). If your keyboard lacks a `LFD` key, typing `C-j` will produce the desired character. The `RET` key may be labeled `Return` or `Enter` on some keyboards.
 
+​	此外，有几个按键有自己的名称。具体来说，`DEL`，`ESC`，`LFD`，`SPC`，`RET` 和 `TAB` 在本文或初始化文件（参见[Readline Init File](https://www.gnu.org/software/bash/manual/bash.html#Readline-Init-File)）中表示它们自己。如果您的键盘缺少 `LFD` 键，按下 `C-j` 将产生所需的字符。`RET` 键可能在某些键盘上标记为 `Return` 或 `Enter`。
 
 
 
 
-### 8.2 Readline Interaction
+
+### 8.2 Readline 交互
 
 
 
 Often during an interactive session you type in a long line of text, only to notice that the first word on the line is misspelled. The Readline library gives you a set of commands for manipulating the text as you type it in, allowing you to just fix your typo, and not forcing you to retype the majority of the line. Using these editing commands, you move the cursor to the place that needs correction, and delete or insert the text of the corrections. Then, when you are satisfied with the line, you simply press `RET`. You do not have to be at the end of the line to press `RET`; the entire line is accepted regardless of the location of the cursor within the line.
 
+​	在交互式会话期间，通常会输入一长行文本，但在发现行首单词拼写错误时，您只想纠正拼写错误，而不是重新输入大部分行。Readline 库为您提供了一组命令，以便在输入文本时对其进行操作，让您可以移动光标到需要更正的位置，并删除或插入更正的文本。然后，当您对整行满意时，只需按下 `RET` 即可。您不必在行尾按下 `RET`；无论光标在行中的位置如何，整行都会被接受。
 
 
 
@@ -6287,71 +6672,104 @@ Often during an interactive session you type in a long line of text, only to not
 
 
 
-#### 8.2.1 Readline Bare Essentials
+
+#### 8.2.1 Readline 基本编辑
 
 
 
 In order to enter characters into the line, simply type them. The typed character appears where the cursor was, and then the cursor moves one space to the right. If you mistype a character, you can use your erase character to back up and delete the mistyped character.
 
+​	为了在行中输入字符，只需直接键入它们。键入的字符将出现在光标所在位置，然后光标向右移动一个空格。如果您输入错误字符，可以使用擦除字符来后退并删除错误的字符。
+
 Sometimes you may mistype a character, and not notice the error until you have typed several other characters. In that case, you can type C-b to move the cursor to the left, and then correct your mistake. Afterwards, you can move the cursor to the right with C-f.
 
+​	有时候您可能会输入错误的字符，但直到您键入其他几个字符后才注意到错误。在这种情况下，您可以键入C-b将光标向左移动，然后更正错误。之后，您可以使用C-f将光标向右移动。
+
 When you add text in the middle of a line, you will notice that characters to the right of the cursor are `pushed over` to make room for the text that you have inserted. Likewise, when you delete text behind the cursor, characters to the right of the cursor are `pulled back` to fill in the blank space created by the removal of the text. A list of the bare essentials for editing the text of an input line follows.
+
+​	当您在一行中间添加文本时，您会注意到光标右侧的字符会被“挤过去”以腾出空间插入您插入的文本。同样，当您删除光标后的文本时，光标右侧的字符会“拉回来”以填补删除文本后留下的空白空间。下面列出了编辑输入行文本的基本要点。
 
 - C-b
 
   Move back one character.
 
+  向后移动一个字符。
+
 - C-f
 
   Move forward one character.
+
+  向前移动一个字符。
 
 - `DEL` or `Backspace`
 
   Delete the character to the left of the cursor.
 
+  删除光标左侧的字符。
+
 - C-d
 
   Delete the character underneath the cursor.
+
+  删除光标下的字符。
 
 - Printing characters
 
   Insert the character into the line at the cursor.
 
+  在光标处插入字符。
+
 - C-_ or C-x C-u
 
   Undo the last editing command. You can undo all the way back to an empty line.
+  
+  撤消上一个编辑命令。您可以撤消到空行为止。
 
 (Depending on your configuration, the `Backspace` key might be set to delete the character to the left of the cursor and the `DEL` key set to delete the character underneath the cursor, like C-d, rather than the character to the left of the cursor.)
 
+（根据您的配置，`Backspace`键可能被设置为删除光标左侧的字符，而`DEL`键设置为删除光标下的字符，而不是光标左侧的字符，就像C-d一样。）
 
 
 
-
-#### 8.2.2 Readline Movement Commands
+#### 8.2.2 Readline 移动命令
 
 The above table describes the most basic keystrokes that you need in order to do editing of the input line. For your convenience, many other commands have been added in addition to C-b, C-f, C-d, and `DEL`. Here are some commands for moving more rapidly about the line.
+
+​	上表描述了您需要的最基本按键来对输入行进行编辑。为了方便起见，除了C-b、C-f、C-d和`DEL`之外，还添加了许多其他命令。下面是一些用于更快地移动输入行的命令。
 
 - C-a
 
   Move to the start of the line.
 
+  移动到行的开头。
+
 - C-e
 
   Move to the end of the line.
+
+  移动到行的末尾。
 
 - M-f
 
   Move forward a word, where a word is composed of letters and digits.
 
+  向前移动一个单词，其中一个单词由字母和数字组成。
+
 - M-b
 
   Move backward a word.
 
+  向后移动一个单词。
+
 - C-l
 
   Clear the screen, reprinting the current line at the top.
+  
+  清屏，将当前行重新打印在顶部。
 
 Notice how C-f moves forward a character, while M-f moves forward a word. It is a loose convention that control keystrokes operate on characters while meta keystrokes operate on words.
+
+​	请注意，C-f向前移动一个字符，而M-f向前移动一个单词。这是一种宽松的约定，即控制按键用于字符，而元按键用于单词。
 
 
 
@@ -6363,78 +6781,119 @@ Notice how C-f moves forward a character, while M-f moves forward a word. It is 
 
 *Killing* text means to delete the text from the line, but to save it away for later use, usually by *yanking* (re-inserting) it back into the line. (`Cut` and `paste` are more recent jargon for `kill` and `yank`.)
 
+​	“删除”文本意味着从行中删除文本，但将其保存以备后用，通常是通过“插入”（重新插入）回到行中。 （“剪切”和“粘贴”是更近期的术语，用于代替“删除”和“插入”。）
+
 If the description for a command says that it `kills` text, then you can be sure that you can get the text back in a different (or the same) place later.
+
+​	如果某个命令的描述说它“删除”文本，那么您可以确定可以在稍后的不同（或相同）位置得到该文本。
 
 When you use a kill command, the text is saved in a *kill-ring*. Any number of consecutive kills save all of the killed text together, so that when you yank it back, you get it all. The kill ring is not line specific; the text that you killed on a previously typed line is available to be yanked back later, when you are typing another line.
 
+​	使用kill命令时，文本保存在一个“kill-ring”中。连续的多次删除将所有删除的文本保存在一起，因此当您重新插入时，您可以得到所有文本。kill ring不是特定于某一行的；您在先前键入的行上删除的文本在您键入另一行时可供稍后重新插入。
+
 Here is the list of commands for killing text.
+
+​	以下是用于删除文本的命令列表。
 
 - C-k
 
   Kill the text from the current cursor position to the end of the line.
 
+  从光标当前位置删除到行尾的文本。
+
 - M-d
 
   Kill from the cursor to the end of the current word, or, if between words, to the end of the next word. Word boundaries are the same as those used by M-f.
+
+  从光标到当前单词的末尾删除文本，或者如果位于单词之间，则删除到下一个单词的末尾。单词边界与M-f使用的相同。
 
 - M-DEL
 
   Kill from the cursor to the start of the current word, or, if between words, to the start of the previous word. Word boundaries are the same as those used by M-b.
 
+  从光标到当前单词的开头删除文本，或者如果位于单词之间，则删除到上一个单词的开头。单词边界与M-b使用的相同。
+
 - C-w
 
   Kill from the cursor to the previous whitespace. This is different than M-DEL because the word boundaries differ.
+  
+  从光标到前面的空格删除文本。与M-DEL不同，因为单词边界不同。
 
 Here is how to *yank* the text back into the line. Yanking means to copy the most-recently-killed text from the kill buffer.
+
+​	以下是如何将文本“粘贴”回到行中。粘贴意味着将最近删除的文本从删除缓冲区复制回来。
 
 - C-y
 
   Yank the most recently killed text back into the buffer at the cursor.
 
+  将最近删除的文本从缓冲区插入到光标处。
+
 - M-y
 
   Rotate the kill-ring, and yank the new top. You can only do this if the prior command is C-y or M-y.
+  
+  旋转kill-ring，并插入新的顶部。只有在先前的命令是C-y或M-y时才能这样做。
 
 
 
 
 
-#### 8.2.4 Readline Arguments
+#### 8.2.4 Readline 参数
 
 You can pass numeric arguments to Readline commands. Sometimes the argument acts as a repeat count, other times it is the *sign* of the argument that is significant. If you pass a negative argument to a command which normally acts in a forward direction, that command will act in a backward direction. For example, to kill text back to the start of the line, you might type `M-- C-k`.
 
+​	您可以向Readline命令传递数值参数。有时参数作为重复计数，其他时候参数的*符号*是重要的。如果您向通常朝向前方向运行的命令传递负参数，该命令将以向后方向运行。例如，要删除文本直到行的开头，您可以键入`M-- C-k`。
+
 The general way to pass numeric arguments to a command is to type meta digits before the command. If the first `digit` typed is a minus sign (`-`), then the sign of the argument will be negative. Once you have typed one meta digit to get the argument started, you can type the remainder of the digits, and then the command. For example, to give the C-d command an argument of 10, you could type `M-1 0 C-d`, which will delete the next ten characters on the input line.
 
+​	向命令传递数值参数的一般方法是在命令之前键入元数字。如果第一个键入的`数字`是负号（`-`），则参数的符号将为负。一旦您键入一个元数字以启动参数，您可以键入其余数字，然后再键入命令。例如，要给C-d命令传递10个参数，可以键入`M-1 0 C-d`，这将删除输入行上的下一个十个字符。
 
 
 
 
-#### 8.2.5 Searching for Commands in the History
+
+#### 8.2.5 在历史记录中搜索命令
 
 Readline provides commands for searching through the command history (see [Bash History Facilities](https://www.gnu.org/software/bash/manual/bash.html#Bash-History-Facilities)) for lines containing a specified string. There are two search modes: *incremental* and *non-incremental*.
 
+​	Readline提供了在命令历史记录（参见[Bash历史记录功能](https://www.gnu.org/software/bash/manual/bash.html#Bash-History-Facilities)）中搜索包含指定字符串的行的命令。有两种搜索模式：*增量搜索* 和 *非增量搜索* 。
+
 Incremental searches begin before the user has finished typing the search string. As each character of the search string is typed, Readline displays the next entry from the history matching the string typed so far. An incremental search requires only as many characters as needed to find the desired history entry. To search backward in the history for a particular string, type C-r. Typing C-s searches forward through the history. The characters present in the value of the `isearch-terminators` variable are used to terminate an incremental search. If that variable has not been assigned a value, the `ESC` and C-J characters will terminate an incremental search. C-g will abort an incremental search and restore the original line. When the search is terminated, the history entry containing the search string becomes the current line.
+
+​	增量搜索在用户完成输入搜索字符串之前开始。每键入搜索字符串的一个字符，Readline会显示与迄今为止键入的字符串匹配的历史记录的下一个条目。增量搜索仅需要找到所需历史记录条目所需的字符。要向后搜索特定字符串的历史记录，请键入C-r。键入C-s将向前搜索历史记录。增量搜索使用`isearch-terminators`变量值中存在的字符来终止搜索。如果该变量尚未被赋值，则`ESC`和C-J字符将终止增量搜索。C-g将中止增量搜索并恢复原始行。搜索终止后，包含搜索字符串的历史记录条目成为当前行。
 
 To find other matching entries in the history list, type C-r or C-s as appropriate. This will search backward or forward in the history for the next entry matching the search string typed so far. Any other key sequence bound to a Readline command will terminate the search and execute that command. For instance, a `RET` will terminate the search and accept the line, thereby executing the command from the history list. A movement command will terminate the search, make the last line found the current line, and begin editing.
 
+​	要查找历史记录列表中的其他匹配条目，请键入相应的C-r或C-s。这将根据迄今为止键入的搜索字符串向后或向前搜索历史记录，以查找下一个匹配的条目。任何其他绑定到Readline命令的键序列都将终止搜索并执行该命令。例如，按`RET`将终止搜索并接受该行，从而执行历史记录列表中的命令。移动命令将终止搜索，使找到的最后一行成为当前行，并开始编辑。
+
 Readline remembers the last incremental search string. If two C-rs are typed without any intervening characters defining a new search string, any remembered search string is used.
+
+​	Readline会记住最后的增量搜索字符串。如果连续键入两个C-r而没有中间字符定义新的搜索字符串，则将使用任何记住的搜索字符串。
 
 Non-incremental searches read the entire search string before starting to search for matching history lines. The search string may be typed by the user or be part of the contents of the current line.
 
+​	非增量搜索在开始搜索匹配历史记录行之前读取整个搜索字符串。搜索字符串可以由用户键入，也可以是当前行内容的一部分。
 
 
 
 
-### 8.3 Readline Init File
+
+### 8.3 Readline 初始化文件
 
 
 
 Although the Readline library comes with a set of Emacs-like keybindings installed by default, it is possible to use a different set of keybindings. Any user can customize programs that use Readline by putting commands in an *inputrc* file, conventionally in their home directory. The name of this file is taken from the value of the shell variable `INPUTRC`. If that variable is unset, the default is ~/.inputrc. If that file does not exist or cannot be read, the ultimate default is /etc/inputrc. The `bind` builtin command can also be used to set Readline keybindings and variables. See [Bash Builtin Commands](https://www.gnu.org/software/bash/manual/bash.html#Bash-Builtins).
 
+​	尽管Readline库默认安装了一组类似Emacs的键绑定，但可以使用不同的键绑定。任何用户都可以通过将命令放入*inputrc*文件（通常位于用户的主目录中）来自定义使用Readline的程序。此文件的名称取自shell变量`INPUTRC`的值。如果该变量未设置，则默认为~/.inputrc。如果该文件不存在或无法读取，则最终默认为/etc/inputrc。`bind`内置命令也可以用于设置Readline键绑定和变量。请参阅[Bash内置命令](https://www.gnu.org/software/bash/manual/bash.html#Bash-Builtins)。
+
 When a program which uses the Readline library starts up, the init file is read, and the key bindings are set.
+
+​	当使用Readline库的程序启动时，会读取init文件并设置键绑定。
 
 In addition, the `C-x C-r` command re-reads this init file, thus incorporating any changes that you might have made to it.
 
+​	此外，`C-x C-r`命令重新读取此init文件，从而合并您可能对其进行的任何更改。
 
 
 
@@ -6442,65 +6901,437 @@ In addition, the `C-x C-r` command re-reads this init file, thus incorporating a
 
 
 
-
-#### 8.3.1 Readline Init File Syntax
+#### 8.3.1 Readline 初始化文件语法
 
 There are only a few basic constructs allowed in the Readline init file. Blank lines are ignored. Lines beginning with a `#` are comments. Lines beginning with a `$` indicate conditional constructs (see [Conditional Init Constructs](https://www.gnu.org/software/bash/manual/bash.html#Conditional-Init-Constructs)). Other lines denote variable settings and key bindings.
 
-- Variable Settings
+​	Readline初始化文件中只允许几个基本结构。空行将被忽略。以`#`开头的行是注释行。以`$`开头的行表示条件结构（参见[条件初始化结构](https://www.gnu.org/software/bash/manual/bash.html#Conditional-Init-Constructs)）。其他行表示变量设置和键绑定。
 
-  You can modify the run-time behavior of Readline by altering the values of variables in Readline using the `set` command within the init file. The syntax is simple:`set variable value `Here, for example, is how to change from the default Emacs-like key binding to use `vi` line editing commands:`set editing-mode vi `Variable names and values, where appropriate, are recognized without regard to case. Unrecognized variable names are ignored.Boolean variables (those that can be set to on or off) are set to on if the value is null or empty, on (case-insensitive), or 1. Any other value results in the variable being set to off.The `bind -V` command lists the current Readline variable names and values. See [Bash Builtin Commands](https://www.gnu.org/software/bash/manual/bash.html#Bash-Builtins).A great deal of run-time behavior is changeable with the following variables.`active-region-start-color`A string variable that controls the text color and background when displaying the text in the active region (see the description of `enable-active-region` below). This string must not take up any physical character positions on the display, so it should consist only of terminal escape sequences. It is output to the terminal before displaying the text in the active region. This variable is reset to the default value whenever the terminal type changes. The default value is the string that puts the terminal in standout mode, as obtained from the terminal's terminfo description. A sample value might be `\e[01;33m`.`active-region-end-color`A string variable that "undoes" the effects of `active-region-start-color` and restores "normal" terminal display appearance after displaying text in the active region. This string must not take up any physical character positions on the display, so it should consist only of terminal escape sequences. It is output to the terminal after displaying the text in the active region. This variable is reset to the default value whenever the terminal type changes. The default value is the string that restores the terminal from standout mode, as obtained from the terminal's terminfo description. A sample value might be `\e[0m`.`bell-style`Controls what happens when Readline wants to ring the terminal bell. If set to `none`, Readline never rings the bell. If set to `visible`, Readline uses a visible bell if one is available. If set to `audible` (the default), Readline attempts to ring the terminal's bell.`bind-tty-special-chars`If set to `on` (the default), Readline attempts to bind the control characters treated specially by the kernel's terminal driver to their Readline equivalents.`blink-matching-paren`If set to `on`, Readline attempts to briefly move the cursor to an opening parenthesis when a closing parenthesis is inserted. The default is `off`.`colored-completion-prefix`If set to `on`, when listing completions, Readline displays the common prefix of the set of possible completions using a different color. The color definitions are taken from the value of the `LS_COLORS` environment variable. If there is a color definition in `LS_COLORS` for the custom suffix `readline-colored-completion-prefix`, Readline uses this color for the common prefix instead of its default. The default is `off`.`colored-stats`If set to `on`, Readline displays possible completions using different colors to indicate their file type. The color definitions are taken from the value of the `LS_COLORS` environment variable. The default is `off`.`comment-begin`The string to insert at the beginning of the line when the `insert-comment` command is executed. The default value is `"#"`.`completion-display-width`The number of screen columns used to display possible matches when performing completion. The value is ignored if it is less than 0 or greater than the terminal screen width. A value of 0 will cause matches to be displayed one per line. The default value is -1.`completion-ignore-case`If set to `on`, Readline performs filename matching and completion in a case-insensitive fashion. The default value is `off`.`completion-map-case`If set to `on`, and completion-ignore-case is enabled, Readline treats hyphens (`-`) and underscores (`_`) as equivalent when performing case-insensitive filename matching and completion. The default value is `off`.`completion-prefix-display-length`The length in characters of the common prefix of a list of possible completions that is displayed without modification. When set to a value greater than zero, common prefixes longer than this value are replaced with an ellipsis when displaying possible completions.`completion-query-items`The number of possible completions that determines when the user is asked whether the list of possibilities should be displayed. If the number of possible completions is greater than or equal to this value, Readline will ask whether or not the user wishes to view them; otherwise, they are simply listed. This variable must be set to an integer value greater than or equal to zero. A zero value means Readline should never ask; negative values are treated as zero. The default limit is `100`.`convert-meta`If set to `on`, Readline will convert characters with the eighth bit set to an ASCII key sequence by stripping the eighth bit and prefixing an `ESC` character, converting them to a meta-prefixed key sequence. The default value is `on`, but will be set to `off` if the locale is one that contains eight-bit characters. This variable is dependent on the `LC_CTYPE` locale category, and may change if the locale is changed.`disable-completion`If set to `On`, Readline will inhibit word completion. Completion characters will be inserted into the line as if they had been mapped to `self-insert`. The default is `off`.`echo-control-characters`When set to `on`, on operating systems that indicate they support it, Readline echoes a character corresponding to a signal generated from the keyboard. The default is `on`.`editing-mode`The `editing-mode` variable controls which default set of key bindings is used. By default, Readline starts up in Emacs editing mode, where the keystrokes are most similar to Emacs. This variable can be set to either `emacs` or `vi`.`emacs-mode-string`If the show-mode-in-prompt variable is enabled, this string is displayed immediately before the last line of the primary prompt when emacs editing mode is active. The value is expanded like a key binding, so the standard set of meta- and control prefixes and backslash escape sequences is available. Use the `\1` and `\2` escapes to begin and end sequences of non-printing characters, which can be used to embed a terminal control sequence into the mode string. The default is `@`.`enable-active-region`The *point* is the current cursor position, and *mark* refers to a saved cursor position (see [Commands For Moving](https://www.gnu.org/software/bash/manual/bash.html#Commands-For-Moving)). The text between the point and mark is referred to as the *region*. When this variable is set to `On`, Readline allows certain commands to designate the region as *active*. When the region is active, Readline highlights the text in the region using the value of the `active-region-start-color`, which defaults to the string that enables the terminal's standout mode. The active region shows the text inserted by bracketed-paste and any matching text found by incremental and non-incremental history searches. The default is `On`.`enable-bracketed-paste`When set to `On`, Readline configures the terminal to insert each paste into the editing buffer as a single string of characters, instead of treating each character as if it had been read from the keyboard. This is called putting the terminal into *bracketed paste mode*; it prevents Readline from executing any editing commands bound to key sequences appearing in the pasted text. The default is `On`.`enable-keypad`When set to `on`, Readline will try to enable the application keypad when it is called. Some systems need this to enable the arrow keys. The default is `off`.`enable-meta-key`When set to `on`, Readline will try to enable any meta modifier key the terminal claims to support when it is called. On many terminals, the meta key is used to send eight-bit characters. The default is `on`.`expand-tilde`If set to `on`, tilde expansion is performed when Readline attempts word completion. The default is `off`.`history-preserve-point`If set to `on`, the history code attempts to place the point (the current cursor position) at the same location on each history line retrieved with `previous-history` or `next-history`. The default is `off`.`history-size`Set the maximum number of history entries saved in the history list. If set to zero, any existing history entries are deleted and no new entries are saved. If set to a value less than zero, the number of history entries is not limited. By default, the number of history entries is not limited. If an attempt is made to set history-size to a non-numeric value, the maximum number of history entries will be set to 500.`horizontal-scroll-mode`This variable can be set to either `on` or `off`. Setting it to `on` means that the text of the lines being edited will scroll horizontally on a single screen line when they are longer than the width of the screen, instead of wrapping onto a new screen line. This variable is automatically set to `on` for terminals of height 1. By default, this variable is set to `off`.`input-meta`If set to `on`, Readline will enable eight-bit input (it will not clear the eighth bit in the characters it reads), regardless of what the terminal claims it can support. The default value is `off`, but Readline will set it to `on` if the locale contains eight-bit characters. The name `meta-flag` is a synonym for this variable. This variable is dependent on the `LC_CTYPE` locale category, and may change if the locale is changed.`isearch-terminators`The string of characters that should terminate an incremental search without subsequently executing the character as a command (see [Searching for Commands in the History](https://www.gnu.org/software/bash/manual/bash.html#Searching)). If this variable has not been given a value, the characters `ESC` and C-J will terminate an incremental search.`keymap`Sets Readline's idea of the current keymap for key binding commands. Built-in `keymap` names are `emacs`, `emacs-standard`, `emacs-meta`, `emacs-ctlx`, `vi`, `vi-move`, `vi-command`, and `vi-insert`. `vi` is equivalent to `vi-command` (`vi-move` is also a synonym); `emacs` is equivalent to `emacs-standard`. Applications may add additional names. The default value is `emacs`. The value of the `editing-mode` variable also affects the default keymap.`keyseq-timeout`Specifies the duration Readline will wait for a character when reading an ambiguous key sequence (one that can form a complete key sequence using the input read so far, or can take additional input to complete a longer key sequence). If no input is received within the timeout, Readline will use the shorter but complete key sequence. Readline uses this value to determine whether or not input is available on the current input source (`rl_instream` by default). The value is specified in milliseconds, so a value of 1000 means that Readline will wait one second for additional input. If this variable is set to a value less than or equal to zero, or to a non-numeric value, Readline will wait until another key is pressed to decide which key sequence to complete. The default value is `500`.`mark-directories`If set to `on`, completed directory names have a slash appended. The default is `on`.`mark-modified-lines`This variable, when set to `on`, causes Readline to display an asterisk (`*`) at the start of history lines which have been modified. This variable is `off` by default.`mark-symlinked-directories`If set to `on`, completed names which are symbolic links to directories have a slash appended (subject to the value of `mark-directories`). The default is `off`.`match-hidden-files`This variable, when set to `on`, causes Readline to match files whose names begin with a `.` (hidden files) when performing filename completion. If set to `off`, the leading `.` must be supplied by the user in the filename to be completed. This variable is `on` by default.`menu-complete-display-prefix`If set to `on`, menu completion displays the common prefix of the list of possible completions (which may be empty) before cycling through the list. The default is `off`.`output-meta`If set to `on`, Readline will display characters with the eighth bit set directly rather than as a meta-prefixed escape sequence. The default is `off`, but Readline will set it to `on` if the locale contains eight-bit characters. This variable is dependent on the `LC_CTYPE` locale category, and may change if the locale is changed.`page-completions`If set to `on`, Readline uses an internal `more`-like pager to display a screenful of possible completions at a time. This variable is `on` by default.`print-completions-horizontally`If set to `on`, Readline will display completions with matches sorted horizontally in alphabetical order, rather than down the screen. The default is `off`.`revert-all-at-newline`If set to `on`, Readline will undo all changes to history lines before returning when `accept-line` is executed. By default, history lines may be modified and retain individual undo lists across calls to `readline()`. The default is `off`.`show-all-if-ambiguous`This alters the default behavior of the completion functions. If set to `on`, words which have more than one possible completion cause the matches to be listed immediately instead of ringing the bell. The default value is `off`.`show-all-if-unmodified`This alters the default behavior of the completion functions in a fashion similar to show-all-if-ambiguous. If set to `on`, words which have more than one possible completion without any possible partial completion (the possible completions don't share a common prefix) cause the matches to be listed immediately instead of ringing the bell. The default value is `off`.`show-mode-in-prompt`If set to `on`, add a string to the beginning of the prompt indicating the editing mode: emacs, vi command, or vi insertion. The mode strings are user-settable (e.g., emacs-mode-string). The default value is `off`.`skip-completed-text`If set to `on`, this alters the default completion behavior when inserting a single match into the line. It's only active when performing completion in the middle of a word. If enabled, Readline does not insert characters from the completion that match characters after point in the word being completed, so portions of the word following the cursor are not duplicated. For instance, if this is enabled, attempting completion when the cursor is after the `e` in `Makefile` will result in `Makefile` rather than `Makefilefile`, assuming there is a single possible completion. The default value is `off`.`vi-cmd-mode-string`If the show-mode-in-prompt variable is enabled, this string is displayed immediately before the last line of the primary prompt when vi editing mode is active and in command mode. The value is expanded like a key binding, so the standard set of meta- and control prefixes and backslash escape sequences is available. Use the `\1` and `\2` escapes to begin and end sequences of non-printing characters, which can be used to embed a terminal control sequence into the mode string. The default is `(cmd)`.`vi-ins-mode-string`If the show-mode-in-prompt variable is enabled, this string is displayed immediately before the last line of the primary prompt when vi editing mode is active and in insertion mode. The value is expanded like a key binding, so the standard set of meta- and control prefixes and backslash escape sequences is available. Use the `\1` and `\2` escapes to begin and end sequences of non-printing characters, which can be used to embed a terminal control sequence into the mode string. The default is `(ins)`.`visible-stats`If set to `on`, a character denoting a file's type is appended to the filename when listing possible completions. The default is `off`.
+- 变量设置
 
-- Key Bindings
+  You can modify the run-time behavior of Readline by altering the values of variables in Readline using the `set` command within the init file. The syntax is simple:
 
-  The syntax for controlling key bindings in the init file is simple. First you need to find the name of the command that you want to change. The following sections contain tables of the command name, the default keybinding, if any, and a short description of what the command does.Once you know the name of the command, simply place on a line in the init file the name of the key you wish to bind the command to, a colon, and then the name of the command. There can be no space between the key name and the colon – that will be interpreted as part of the key name. The name of the key can be expressed in different ways, depending on what you find most comfortable.In addition to command names, Readline allows keys to be bound to a string that is inserted when the key is pressed (a macro).The `bind -p` command displays Readline function names and bindings in a format that can be put directly into an initialization file. See [Bash Builtin Commands](https://www.gnu.org/software/bash/manual/bash.html#Bash-Builtins).keyname: function-name or macrokeyname is the name of a key spelled out in English. For example:`Control-u: universal-argument Meta-Rubout: backward-kill-word Control-o: "> output" `In the example above, C-u is bound to the function `universal-argument`, M-DEL is bound to the function `backward-kill-word`, and C-o is bound to run the macro expressed on the right hand side (that is, to insert the text `> output` into the line).A number of symbolic character names are recognized while processing this key binding syntax: DEL, ESC, ESCAPE, LFD, NEWLINE, RET, RETURN, RUBOUT, SPACE, SPC, and TAB."keyseq": function-name or macrokeyseq differs from keyname above in that strings denoting an entire key sequence can be specified, by placing the key sequence in double quotes. Some GNU Emacs style key escapes can be used, as in the following example, but the special character names are not recognized.`"\C-u": universal-argument "\C-x\C-r": re-read-init-file "\e[11~": "Function Key 1" `In the above example, C-u is again bound to the function `universal-argument` (just as it was in the first example), `C-x C-r` is bound to the function `re-read-init-file`, and `ESC [ 1 1 ~` is bound to insert the text `Function Key 1`.The following GNU Emacs style escape sequences are available when specifying key sequences:`\C-`control prefix`\M-`meta prefix`\e`an escape character`\\`backslash`\"``"`, a double quotation mark`\'``'`, a single quote or apostropheIn addition to the GNU Emacs style escape sequences, a second set of backslash escapes is available:`\a`alert (bell)`\b`backspace`\d`delete`\f`form feed`\n`newline`\r`carriage return`\t`horizontal tab`\v`vertical tab`\nnn`the eight-bit character whose value is the octal value nnn (one to three digits)`\xHH`the eight-bit character whose value is the hexadecimal value HH (one or two hex digits)When entering the text of a macro, single or double quotes must be used to indicate a macro definition. Unquoted text is assumed to be a function name. In the macro body, the backslash escapes described above are expanded. Backslash will quote any other character in the macro text, including `"` and `'`. For example, the following binding will make `C-x \` insert a single `\` into the line:`"\C-x\\": "\\" `
+  您可以通过在init文件中使用`set`命令修改Readline的变量值，从而修改Readline的运行时行为。语法很简单：
+
+  ```
+  set variable value
+  ```
+
+  Here, for example, is how to change from the default Emacs-like key binding to use `vi` line editing commands:
+
+  例如，以下是如何从默认的Emacs-like键绑定更改为使用`vi`行编辑命令的示例：
+
+  ```
+  set editing-mode vi
+  ```
+
+  Variable names and values, where appropriate, are recognized without regard to case. Unrecognized variable names are ignored.
+
+  变量名和值（如果适用）的识别不区分大小写。未被识别的变量名将被忽略。
+
+  Boolean variables (those that can be set to on or off) are set to on if the value is null or empty, on (case-insensitive), or 1. Any other value results in the variable being set to off.
+
+  布尔变量（可以设置为开启或关闭的变量）如果值为null或空、on（不区分大小写）或1，则设置为开启。任何其他值将导致变量被设置为关闭。
+
+  The `bind -V` command lists the current Readline variable names and values. See [Bash Builtin Commands](https://www.gnu.org/software/bash/manual/bash.html#Bash-Builtins).
+
+  `bind -V`命令列出当前Readline变量名和值。请参阅[Bash内置命令](https://www.gnu.org/software/bash/manual/bash.html#Bash-Builtins)。
+
+  A great deal of run-time behavior is changeable with the following variables.
+
+  使用以下变量可以更改许多运行时行为。
+
+  `active-region-start-color`: A string variable that controls the text color and background when displaying the text in the active region (see the description of `enable-active-region` below). This string must not take up any physical character positions on the display, so it should consist only of terminal escape sequences. It is output to the terminal before displaying the text in the active region. This variable is reset to the default value whenever the terminal type changes. The default value is the string that puts the terminal in standout mode, as obtained from the terminal's terminfo description. A sample value might be `\e[01;33m`.
+
+  `active-region-start-color`：一个字符串变量，控制显示活动区域（参见下面的`enable-active-region`描述）中的文本的文本颜色和背景。此字符串不能占据显示器上的任何物理字符位置，因此它只应包含终端转义序列。它在显示活动区域中的文本之前输出到终端。每当终端类型更改时，此变量会重置为默认值。默认值是将终端置于显着模式的字符串，从终端的terminfo描述获取。示例值可能是`\e[01;33m`。
+
+  `active-region-end-color`: A string variable that "undoes" the effects of `active-region-start-color` and restores "normal" terminal display appearance after displaying text in the active region. This string must not take up any physical character positions on the display, so it should consist only of terminal escape sequences. It is output to the terminal after displaying the text in the active region. This variable is reset to the default value whenever the terminal type changes. The default value is the string that restores the terminal from standout mode, as obtained from the terminal's terminfo description. A sample value might be `\e[0m`.
+
+  `active-region-end-color`：一个字符串变量，用于"撤销" `active-region-start-color`的效果，并在显示活动区域中的文本之后恢复"正常"终端显示外观。此字符串不能占据显示器上的任何物理字符位置，因此它只应包含终端转义序列。它在显示活动区域中的文本之后输出到终端。每当终端类型更改时，此变量会重置为默认值。默认值是从终端的terminfo描述获取的将终端从显着模式恢复的字符串。示例值可能是`\e[0m`。
+
+  `bell-style`: Controls what happens when Readline wants to ring the terminal bell. If set to `none`, Readline never rings the bell. If set to `visible`, Readline uses a visible bell if one is available. If set to `audible` (the default), Readline attempts to ring the terminal's bell.
+
+  `bell-style`：控制当Readline希望响起终端响铃时会发生什么。如果设置为`none`，Readline将永不响铃。如果设置为`visible`，Readline将使用可见响铃（如果可用）。如果设置为`audible`（默认），Readline将尝试响铃终端的响铃。
+
+  `bind-tty-special-chars`If set to `on` (the default), Readline attempts to bind the control characters treated specially by the kernel's terminal driver to their Readline equivalents.
+
+  `bind-tty-special-chars`：如果设置为`on`（默认），Readline将尝试将内核终端驱动程序特别处理的控制字符绑定到它们的Readline等效字符。
+
+  `blink-matching-paren`: If set to `on`, Readline attempts to briefly move the cursor to an opening parenthesis when a closing parenthesis is inserted. The default is `off`.
+
+  `blink-matching-paren`：如果设置为`on`，Readline尝试在插入关闭括号时将光标短暂地移到开括号。默认值为`off`。
+
+  `colored-completion-prefix`：If set to `on`, when listing completions, Readline displays the common prefix of the set of possible completions using a different color. The color definitions are taken from the value of the `LS_COLORS` environment variable. If there is a color definition in `LS_COLORS` for the custom suffix `readline-colored-completion-prefix`, Readline uses this color for the common prefix instead of its default. The default is `off`.
+
+  `colored-completion-prefix`：如果设置为`on`，在列出完成项时，Readline会使用不同的颜色显示可能完成项的公共前缀。颜色定义取自`LS_COLORS`环境变量的值。如果`LS_COLORS`中对自定义后缀`readline-colored-completion-prefix`进行了颜色定义，则Readline将使用此颜色作为公共前缀的颜色，而不是其默认颜色。默认值为`off`。
+
+  `colored-stats`: If set to `on`, Readline displays possible completions using different colors to indicate their file type. The color definitions are taken from the value of the `LS_COLORS` environment variable. The default is `off`.
+
+  `colored-stats`：如果设置为`on`，Readline将使用不同的颜色显示可能的完成项，以指示它们的文件类型。颜色定义取自`LS_COLORS`环境变量的值。默认值为`off`。
+
+  `comment-begin`: The string to insert at the beginning of the line when the `insert-comment` command is executed. The default value is `"#"`.
+
+  `comment-begin`：执行`insert-comment`命令时，在行的开头插入的字符串。默认值为`"#"`。
+
+  `completion-display-width`: The number of screen columns used to display possible matches when performing completion. The value is ignored if it is less than 0 or greater than the terminal screen width. A value of 0 will cause matches to be displayed one per line. The default value is -1.
+
+  `completion-display-width`：在执行完成时用于显示可能匹配项的屏幕列数。如果值小于0或大于终端屏幕宽度，则忽略该值。值为0将导致每行显示一个匹配项。默认值为-1。
+
+  `completion-ignore-case`: If set to `on`, Readline performs filename matching and completion in a case-insensitive fashion. The default value is `off`.
+
+  `completion-ignore-case`：如果设置为`on`，Readline将以不区分大小写的方式进行文件名匹配和完成。默认值为`off`。
+
+  `completion-map-case`: If set to `on`, and completion-ignore-case is enabled, Readline treats hyphens (`-`) and underscores (`_`) as equivalent when performing case-insensitive filename matching and completion. The default value is `off`.
+
+  `completion-map-case`：如果设置为`on`，并且启用了`completion-ignore-case`，Readline在执行不区分大小写的文件名匹配和完成时将连字符（`-`）和下划线（`_`）视为相同。默认值为`off`。
+
+  `completion-prefix-display-length`The length in characters of the common prefix of a list of possible completions that is displayed without modification. When set to a value greater than zero, common prefixes longer than this value are replaced with an ellipsis when displaying possible completions.
+
+  `completion-prefix-display-length`：在显示可能完成项时，显示未经修改的可能完成项列表的公共前缀的长度（可能为空）。当设置为大于零的值时，超过此值的公共前缀在显示可能完成项时将替换为省略号。
+
+  `completion-query-items`The number of possible completions that determines when the user is asked whether the list of possibilities should be displayed. If the number of possible completions is greater than or equal to this value, Readline will ask whether or not the user wishes to view them; otherwise, they are simply listed. This variable must be set to an integer value greater than or equal to zero. A zero value means Readline should never ask; negative values are treated as zero. The default limit is `100`.
+
+  `completion-query-items`：确定是否要询问用户是否应显示可能完成项列表的可能完成项数目。如果可能完成项数目大于或等于此值，Readline将询问用户是否希望查看它们；否则，它们将仅列出。此变量必须设置为大于或等于零的整数值。零值意味着Readline永远不会询问；负值视为零。默认限制为`100`。
+
+  `convert-meta`If set to `on`, Readline will convert characters with the eighth bit set to an ASCII key sequence by stripping the eighth bit and prefixing an `ESC` character, converting them to a meta-prefixed key sequence. The default value is `on`, but will be set to `off` if the locale is one that contains eight-bit characters. This variable is dependent on the `LC_CTYPE` locale category, and may change if the locale is changed.
+
+  `convert-meta`：如果设置为`on`，Readline将转换具有第八位设置的字符为ASCII键序列，通过去除第八位并在前面添加一个`ESC`字符，将其转换为带元前缀的键序列。默认值为`on`，但如果区域设置中包含八位字符，则将其设置为`off`。该变量依赖于`LC_CTYPE`区域设置类别，如果更改区域设置，则可能会更改此变量的值。
+
+  `disable-completion`If set to `On`, Readline will inhibit word completion. Completion characters will be inserted into the line as if they had been mapped to `self-insert`. The default is `off`.
+
+  `disable-completion`：如果设置为`On`，Readline将禁止单词完成。完成字符将被插入到行中，就像它们已被映射到`self-insert`一样。默认值为`off`。
+
+  `echo-control-characters`When set to `on`, on operating systems that indicate they support it, Readline echoes a character corresponding to a signal generated from the keyboard. The default is `on`.
+
+  `echo-control-characters`：当设置为`on`时，在支持的操作系统上，Readline会回显与键盘生成的信号相对应的字符。默认值为`on`。
+
+  `editing-mode`The `editing-mode` variable controls which default set of key bindings is used. By default, Readline starts up in Emacs editing mode, where the keystrokes are most similar to Emacs. This variable can be set to either `emacs` or `vi`.
+
+  `editing-mode`：`editing-mode`变量控制使用哪个默认的键绑定集。默认情况下，Readline以Emacs编辑模式启动，其中按键与Emacs最相似。此变量可以设置为`emacs`或`vi`。
+
+  `emacs-mode-string`If the show-mode-in-prompt variable is enabled, this string is displayed immediately before the last line of the primary prompt when emacs editing mode is active. The value is expanded like a key binding, so the standard set of meta- and control prefixes and backslash escape sequences is available. Use the `\1` and `\2` escapes to begin and end sequences of non-printing characters, which can be used to embed a terminal control sequence into the mode string. The default is `@`.
+
+  `emacs-mode-string`：如果启用了show-mode-in-prompt变量，则在激活emacs编辑模式时，在主提示的最后一行之前立即显示此字符串。该值会像键绑定一样展开，因此可以使用标准的元和控制前缀以及反斜杠转义序列。使用`\1`和`\2`转义序列来开始和结束非打印字符序列，这可以用于将终端控制序列嵌入到模式字符串中。默认值为`@`。
+
+  `enable-active-region`The *point* is the current cursor position, and *mark* refers to a saved cursor position (see [Commands For Moving](https://www.gnu.org/software/bash/manual/bash.html#Commands-For-Moving)). The text between the point and mark is referred to as the *region*. When this variable is set to `On`, Readline allows certain commands to designate the region as *active*. When the region is active, Readline highlights the text in the region using the value of the `active-region-start-color`, which defaults to the string that enables the terminal's standout mode. The active region shows the text inserted by bracketed-paste and any matching text found by incremental and non-incremental history searches. The default is `On`.
+
+  `enable-active-region`：*point*是当前光标位置，*mark*是保存的光标位置（参见[Commands For Moving](https://www.gnu.org/software/bash/manual/bash.html#Commands-For-Moving)）。点和标记之间的文本称为*region*。当此变量设置为`On`时，Readline允许某些命令指定该区域为*active*。当区域处于活动状态时，Readline使用`active-region-start-color`的值来突出显示区域中的文本，默认值为启用终端的显着模式的字符串。活动区域显示由方括号粘贴插入的文本以及增量和非增量历史搜索找到的任何匹配文本。默认值为`On`。
+
+  `enable-bracketed-paste`When set to `On`, Readline configures the terminal to insert each paste into the editing buffer as a single string of characters, instead of treating each character as if it had been read from the keyboard. This is called putting the terminal into *bracketed paste mode*; it prevents Readline from executing any editing commands bound to key sequences appearing in the pasted text. The default is `On`.
+
+  `enable-bracketed-paste`：当设置为`On`时，Readline会将终端配置为将每个粘贴的内容作为单个字符字符串插入到编辑缓冲区中，而不是将每个字符视为从键盘读取的字符。这称为将终端置于*bracketed paste mode*，它会阻止Readline执行绑定到粘贴文本中出现的按键序列的任何编辑命令。默认值为`On`。
+
+  `enable-keypad`When set to `on`, Readline will try to enable the application keypad when it is called. Some systems need this to enable the arrow keys. The default is `off`.
+
+  `enable-keypad`：当设置为`on`时，Readline将尝试在调用时启用应用程序键盘。某些系统需要这样做以启用箭头键。默认值为`off`。
+
+  `enable-meta-key`When set to `on`, Readline will try to enable any meta modifier key the terminal claims to support when it is called. On many terminals, the meta key is used to send eight-bit characters. The default is `on`.
+
+  `enable-meta-key`：当设置为`on`时，Readline将在调用时尝试启用终端声称支持的任何元修饰键。在许多终端上，元键用于发送八位字符。默认值为`on`。
+
+  `expand-tilde`If set to `on`, tilde expansion is performed when Readline attempts word completion. The default is `off`.
+
+  `expand-tilde`：如果设置为`on`，则在Readline尝试进行单词完成时，会执行波浪线展开。默认值为`off`。
+
+  `history-preserve-point`If set to `on`, the history code attempts to place the point (the current cursor position) at the same location on each history line retrieved with `previous-history` or `next-history`. The default is `off`.
+
+  `history-preserve-point`：如果设置为`on`，历史记录代码将尝试将点（当前光标位置）放置在使用`previous-history`或`next-history`检索的每行历史记录的相同位置。默认值为`off`。
+
+  `history-size`Set the maximum number of history entries saved in the history list. If set to zero, any existing history entries are deleted and no new entries are saved. If set to a value less than zero, the number of history entries is not limited. By default, the number of history entries is not limited. If an attempt is made to set history-size to a non-numeric value, the maximum number of history entries will be set to 500.
+
+  `history-size`：设置保存在历史记录列表中的最大历史记录条目数。如果设置为零，将删除任何现有的历史记录条目，并且不保存新的条目。如果设置为小于零的值，则历史记录条目的数量不受限制。默认情况下，历史记录条目的数量不受限制。如果尝试将history-size设置为非数字值，则将最大历史记录条目数设置为500。
+
+  `horizontal-scroll-mode`This variable can be set to either `on` or `off`. Setting it to `on` means that the text of the lines being edited will scroll horizontally on a single screen line when they are longer than the width of the screen, instead of wrapping onto a new screen line. This variable is automatically set to `on` for terminals of height 1. By default, this variable is set to `off`.
+
+  `horizontal-scroll-mode`：此变量可以设置为`on`或`off`。将其设置为`on`表示正在编辑的行的文本在屏幕宽度小于屏幕宽度时在单个屏幕行上水平滚动，而不是换行到新的屏幕行。对于高度为1的终端，此变量将自动设置为`on`。默认情况下，此变量设置为`off`。
+
+  `input-meta`If set to `on`, Readline will enable eight-bit input (it will not clear the eighth bit in the characters it reads), regardless of what the terminal claims it can support. The default value is `off`, but Readline will set it to `on` if the locale contains eight-bit characters. The name `meta-flag` is a synonym for this variable. This variable is dependent on the `LC_CTYPE` locale category, and may change if the locale is changed.
+
+  `input-meta`：如果设置为`on`，Readline将启用八位输入（在读取的字符中不会清除第八位），而不管终端声称支持什么。默认值为`off`，但如果区域设置包含八位字符，则Readline将其设置为`on`。名称`meta-flag`是此变量的同义词。此变量依赖于`LC_CTYPE`区域设置类别，如果更改区域设置，则可能会更改此变量的值。
+
+  `isearch-terminators`The string of characters that should terminate an incremental search without subsequently executing the character as a command (see [Searching for Commands in the History](https://www.gnu.org/software/bash/manual/bash.html#Searching)). If this variable has not been given a value, the characters `ESC` and C-J will terminate an incremental search.
+
+  `isearch-terminators`：应终止增量搜索的字符的字符串，而不会随后将字符作为命令执行（参见[搜索历史记录中的命令](https://www.gnu.org/software/bash/manual/bash.html#Searching)）。如果此变量没有被赋予一个值，字符`ESC`和C-J将终止增量搜索。
+
+  `keymap`Sets Readline's idea of the current keymap for key binding commands. Built-in `keymap` names are `emacs`, `emacs-standard`, `emacs-meta`, `emacs-ctlx`, `vi`, `vi-move`, `vi-command`, and `vi-insert`. `vi` is equivalent to `vi-command` (`vi-move` is also a synonym); `emacs` is equivalent to `emacs-standard`. Applications may add additional names. The default value is `emacs`. The value of the `editing-mode` variable also affects the default keymap.
+
+  `keymap`：为键绑定命令设置Readline的当前键映射。内置`keymap`名称为`emacs`、`emacs-standard`、`emacs-meta`、`emacs-ctlx`、`vi`、`vi-move`、`vi-command`和`vi-insert`。`vi`相当于`vi-command`（`vi-move`也是一个同义词）；`emacs`相当于`emacs-standard`。应用程序可以添加额外的名称。默认值为`emacs`。`editing-mode`变量的值也会影响默认键映射。
+
+  `keyseq-timeout`Specifies the duration Readline will wait for a character when reading an ambiguous key sequence (one that can form a complete key sequence using the input read so far, or can take additional input to complete a longer key sequence). If no input is received within the timeout, Readline will use the shorter but complete key sequence. Readline uses this value to determine whether or not input is available on the current input source (`rl_instream` by default). The value is specified in milliseconds, so a value of 1000 means that Readline will wait one second for additional input. If this variable is set to a value less than or equal to zero, or to a non-numeric value, Readline will wait until another key is pressed to decide which key sequence to complete. The default value is `500`.
+
+  `keyseq-timeout`：指定Readline在读取不明确的键序列（可以使用到目前为止的输入形成完整的键序列，或者可以接受附加输入以完成较长的键序列）时等待字符的持续时间。如果在超时时间内没有收到输入，Readline将使用较短但完整的键序列。Readline使用此值来确定当前输入源（默认情况下为`rl_instream`）是否有输入可用。该值以毫秒为单位指定，因此值为1000表示Readline将等待一秒钟的附加输入。如果此变量设置为小于或等于零的值，或者设置为非数字值，则Readline将等待按下另一个键来决定要完成哪个键序列。默认值为`500`。
+
+  `mark-directories`If set to `on`, completed directory names have a slash appended. The default is `on`.
+
+  `mark-directories`：如果设置为`on`，已完成的目录名称将附加一个斜杠。默认值为`on`。
+
+  `mark-modified-lines`This variable, when set to `on`, causes Readline to display an asterisk (`*`) at the start of history lines which have been modified. This variable is `off` by default.
+
+  `mark-modified-lines`：当设置为`on`时，Readline会在已被修改的历史记录行的开头显示一个星号（`*`）。默认情况下，此变量为`off`。
+
+  `mark-symlinked-directories`If set to `on`, completed names which are symbolic links to directories have a slash appended (subject to the value of `mark-directories`). The default is `off`.
+
+  `mark-symlinked-directories`：如果设置为`on`，已完成的名称是指向目录的符号链接，则附加一个斜杠（取决于`mark-directories`的值）。默认值为`off`。
+
+  `match-hidden-files`This variable, when set to `on`, causes Readline to match files whose names begin with a `.` (hidden files) when performing filename completion. If set to `off`, the leading `.` must be supplied by the user in the filename to be completed. This variable is `on` by default.
+
+  `match-hidden-files`：当设置为`on`时，Readline在执行文件名完成时匹配以`.`开头的文件（隐藏文件）。如果设置为`off`，则必须由用户在要完成的文件名中提供前导`.`。默认情况下，此变量为`on`。
+
+  `menu-complete-display-prefix`If set to `on`, menu completion displays the common prefix of the list of possible completions (which may be empty) before cycling through the list. The default is `off`.
+
+  `menu-complete-display-prefix`：如果设置为`on`，菜单完成将在循环显示列表之前显示可能完成项列表（可能为空）的公共前缀。默认值为`off`。
+
+  `output-meta`If set to `on`, Readline will display characters with the eighth bit set directly rather than as a meta-prefixed escape sequence. The default is `off`, but Readline will set it to `on` if the locale contains eight-bit characters. This variable is dependent on the `LC_CTYPE` locale category, and may change if the locale is changed.
+
+  `output-meta`：如果设置为`on`，Readline将直接显示第八位设置的字符，而不是作为带有元前缀的转义序列。默认值为`off`，但如果区域设置包含八位字符，则Readline将其设置为`on`。此变量依赖于`LC_CTYPE`区域设置类别，如果更改区域设置，则可能会更改此变量的值。
+
+  `page-completions`If set to `on`, Readline uses an internal `more`-like pager to display a screenful of possible completions at a time. This variable is `on` by default.
+
+  `page-completions`：如果设置为`on`，Readline将使用类似`more`的内部分页程序一次显示一屏幕可能的完成项。默认情况下，此变量为`on`。
+
+  `print-completions-horizontally`If set to `on`, Readline will display completions with matches sorted horizontally in alphabetical order, rather than down the screen. The default is `off`.
+
+  `print-completions-horizontally`：如果设置为`on`，Readline将以字母顺序水平显示匹配的完成项，而不是在屏幕上向下显示。默认值为`off`。
+
+  `revert-all-at-newline`If set to `on`, Readline will undo all changes to history lines before returning when `accept-line` is executed. By default, history lines may be modified and retain individual undo lists across calls to `readline()`. The default is `off`.
+
+  `revert-all-at-newline`：如果设置为`on`，Readline将在执行`accept-line`时返回之前撤消所有对历史记录行的更改。默认情况下，历史记录行可以在对`readline()`的调用之间被修改并保留各自的撤消列表。默认值为`off`。
+
+  `show-all-if-ambiguous`This alters the default behavior of the completion functions. If set to `on`, words which have more than one possible completion cause the matches to be listed immediately instead of ringing the bell. The default value is `off`.
+
+  `show-all-if-ambiguous`：这改变了完成函数的默认行为。如果设置为`on`，具有多个可能完成的单词会导致立即列出匹配项，而不会响铃。默认值为`off`。
+
+  `show-all-if-unmodified`This alters the default behavior of the completion functions in a fashion similar to show-all-if-ambiguous. If set to `on`, words which have more than one possible completion without any possible partial completion (the possible completions don't share a common prefix) cause the matches to be listed immediately instead of ringing the bell. The default value is `off`.
+
+  `show-all-if-unmodified`：这改变了完成函数的默认行为，类似于`show-all-if-ambiguous`。如果设置为`on`，没有可能的部分完成（可能完成不共享公共前缀）的单词会导致立即列出匹配项，而不会响铃。默认值为`off`。
+
+  `show-mode-in-prompt`If set to `on`, add a string to the beginning of the prompt indicating the editing mode: emacs, vi command, or vi insertion. The mode strings are user-settable (e.g., emacs-mode-string). The default value is `off`.
+
+  `show-mode-in-prompt`：如果设置为`on`，则在提示的开头添加一个字符串，指示编辑模式：emacs、vi命令或vi插入。模式字符串是可由用户设置的（例如，emacs-mode-string）。默认值为`off`。
+
+  `skip-completed-text`If set to `on`, this alters the default completion behavior when inserting a single match into the line. It's only active when performing completion in the middle of a word. If enabled, Readline does not insert characters from the completion that match characters after point in the word being completed, so portions of the word following the cursor are not duplicated. For instance, if this is enabled, attempting completion when the cursor is after the `e` in `Makefile` will result in `Makefile` rather than `Makefilefile`, assuming there is a single possible completion. The default value is `off`.
+
+  `skip-completed-text`：如果设置为`on`，则在向行中插入单个匹配项时，会更改默认的完成行为。仅在单词的中间执行完成时才激活它。如果启用，Readline不会插入与正在完成的单词中光标后面的字符相匹配的完成字符，因此不会复制光标后面的单词部分。例如，如果启用此功能，并且光标在`Makefile`的`e`之后时尝试完成，结果将是`Makefile`而不是`Makefilefile`，假设只有一个可能的完成项。默认值为`off`。
+
+  `vi-cmd-mode-string`If the show-mode-in-prompt variable is enabled, this string is displayed immediately before the last line of the primary prompt when vi editing mode is active and in command mode. The value is expanded like a key binding, so the standard set of meta- and control prefixes and backslash escape sequences is available. Use the `\1` and `\2` escapes to begin and end sequences of non-printing characters, which can be used to embed a terminal control sequence into the mode string. The default is `(cmd)`.
+
+  `vi-cmd-mode-string`：如果启用了show-mode-in-prompt变量，则在激活vi编辑模式和命令模式时，在主提示的最后一行之前立即显示此字符串。该值会像键绑定一样展开，因此可以使用标准的元和控制前缀以及反斜杠转义序列。使用`\1`和`\2`转义序列来开始和结束非打印字符序列，这可以用于将终端控制序列嵌入到模式字符串中。默认值为`(cmd)`。
+
+  `vi-ins-mode-string`If the show-mode-in-prompt variable is enabled, this string is displayed immediately before the last line of the primary prompt when vi editing mode is active and in insertion mode. The value is expanded like a key binding, so the standard set of meta- and control prefixes and backslash escape sequences is available. Use the `\1` and `\2` escapes to begin and end sequences of non-printing characters, which can be used to embed a terminal control sequence into the mode string. The default is `(ins)`.
+
+  `vi-ins-mode-string`：如果启用了show-mode-in-prompt变量，则在激活vi编辑模式和插入模式时，在主提示的最后一行之前立即显示此字符串。该值会像键绑定一样展开，因此可以使用标准的元和控制前缀以及反斜杠转义序列。使用`\1`和`\2`转义序列来开始和结束非打印字符序列，这可以用于将终端控制序列嵌入到模式字符串中。默认值为`(ins)`。
+
+  `visible-stats`If set to `on`, a character denoting a file's type is appended to the filename when listing possible completions. The default is `off`.
+
+  `visible-stats`：如果设置为`on`，则在列出可能完成项时，会在文件名后附加表示文件类型的字符。默认值为`off`。
+
+   
+
+- 键绑定
+
+  The syntax for controlling key bindings in the init file is simple. First you need to find the name of the command that you want to change. The following sections contain tables of the command name, the default keybinding, if any, and a short description of what the command does.
+  
+  在初始化文件中控制键绑定的语法很简单。首先，您需要找到要更改的命令的名称。以下部分包含命令名称、默认键绑定（如果有）以及命令功能的简短描述的表格。
+  
+  Once you know the name of the command, simply place on a line in the init file the name of the key you wish to bind the command to, a colon, and then the name of the command. There can be no space between the key name and the colon – that will be interpreted as part of the key name. The name of the key can be expressed in different ways, depending on what you find most comfortable.
+  
+  一旦您知道命令的名称，只需在初始化文件中的一行上放置您希望绑定到命令的键的名称、冒号，然后是命令的名称。键的名称可以用不同的方式表示，具体取决于您最舒服的方式。
+  
+  In addition to command names, Readline allows keys to be bound to a string that is inserted when the key is pressed (a macro).
+  
+  除了命令名称，Readline还允许将键绑定到在按键时插入的字符串（宏）。
+  
+  The `bind -p` command displays Readline function names and bindings in a format that can be put directly into an initialization file. See [Bash Builtin Commands](https://www.gnu.org/software/bash/manual/bash.html#Bash-Builtins).
+  
+  `bind -p` 命令以可直接放入初始化文件的格式显示 Readline 函数名称和绑定。请参阅 [Bash 内置命令](https://www.gnu.org/software/bash/manual/bash.html#Bash-Builtins)。
+  
+  - keyname: function-name or macro 键名：函数名称或宏
+  
+    keyname is the name of a key spelled out in English. For example:
+  
+    键名是用英文拼写出的按键名称。例如：
+  
+    ```
+    Control-u: universal-argument
+    Meta-Rubout: backward-kill-word
+    Control-o: "> output"
+    ```
+  
+    In the example above, C-u is bound to the function `universal-argument`, M-DEL is bound to the function `backward-kill-word`, and C-o is bound to run the macro expressed on the right hand side (that is, to insert the text `> output` into the line).A number of symbolic character names are recognized while processing this key binding syntax: DEL, ESC, ESCAPE, LFD, NEWLINE, RET, RETURN, RUBOUT, SPACE, SPC, and TAB.
+  
+    在上面的示例中，C-u 绑定到函数 `universal-argument`，M-DEL 绑定到函数 `backward-kill-word`，C-o 绑定到执行右边表达式的宏（即将文本 `> output` 插入到行中）。处理此键绑定语法时，会识别一些符号字符名称：DEL、ESC、ESCAPE、LFD、NEWLINE、RET、RETURN、RUBOUT、SPACE、SPC 和 TAB。
+  
+  - "keyseq": function-name or macro "键序列"：函数名称或宏
+  
+    keyseq differs from keyname above in that strings denoting an entire key sequence can be specified, by placing the key sequence in double quotes. Some GNU Emacs style key escapes can be used, as in the following example, but the special character names are not recognized.
+  
+    "键序列" 与上面的键名不同，可以指定表示整个键序列的字符串，只需将键序列放在双引号中。一些 GNU Emacs 风格的键逃逸也可以使用，如下面的示例所示，但不识别特殊字符名称。
+    
+    ```
+    "\C-u": universal-argument
+    "\C-x\C-r": re-read-init-file
+    "\e[11~": "Function Key 1"
+    ```
+  
+    In the above example, C-u is again bound to the function `universal-argument` (just as it was in the first example), `C-x C-r` is bound to the function `re-read-init-file`, and `ESC [ 1 1 ~` is bound to insert the text `Function Key 1`.
+    
+    在上面的示例中，C-u 再次绑定到函数 `universal-argument`（与第一个示例中的一样），`C-x C-r` 绑定到函数 `re-read-init-file`，`ESC [ 1 1 ~` 绑定到插入文本 `Function Key 1`。
+    
+    
+  
+  The following GNU Emacs style escape sequences are available when specifying key sequences:
+  
+  GNU Emacs 风格的逃逸序列在指定键序列时提供以下选项：
+  
+  - `\C-`：控制前缀
+  - `\M-`：元前缀
+  - `\e`：转义字符
+  - `\\`：反斜杠
+  - `\"\"`：双引号
+  - `\'\'`：单引号或撇号
+  
+  
+  
+  In addition to the GNU Emacs style escape sequences, a second set of backslash escapes is available:
+  
+  ​	除了 GNU Emacs 风格的逃逸序列外，还提供第二组反斜杠逃逸：
+  
+  
+  
+  - `\a`：警报（响铃）
+  - `\b`：退格
+  - `\d`：删除
+  - `\f`：换页符
+  - `\n`：换行
+  - `\r`：回车
+  - `\t`：水平制表符
+  - `\v`：垂直制表符
+  - `\nnn`：八位字符，其值为八进制值 nnn（一到三位数）
+  - `\xHH`：八位字符，其值为十六进制值 HH（一到两位十六进制数）
+  
+  
+  
+  When entering the text of a macro, single or double quotes must be used to indicate a macro definition. Unquoted text is assumed to be a function name. In the macro body, the backslash escapes described above are expanded. Backslash will quote any other character in the macro text, including `"` and `'`. For example, the following binding will make `C-x \` insert a single `\` into the line:
+  
+  ​	在输入宏文本时，必须使用单引号或双引号来表示宏定义。未引用的文本被视为函数名。在宏体中，会展开上述反斜杠逃逸。反斜杠将对宏文本中的任何其他字符进行转义，包括 `"` 和 `'`。例如，以下绑定将使 `C-x \` 插入一个单独的 `\` 到行中：
+  
+  ```
+  "\C-x\\": "\\"
+  ```
+  
+  
 
 
 
 
 
-#### 8.3.2 Conditional Init Constructs
+#### 8.3.2 条件初始化结构
 
 Readline implements a facility similar in spirit to the conditional compilation features of the C preprocessor which allows key bindings and variable settings to be performed as the result of tests. There are four parser directives used.
 
+​	Readline 实现了一种类似于 C 预处理器的条件编译功能，允许根据测试的结果执行键绑定和变量设置。有四个解析器指令用于此目的。
+
 - `$if`
 
-  The `$if` construct allows bindings to be made based on the editing mode, the terminal being used, or the application using Readline. The text of the test, after any comparison operator, extends to the end of the line; unless otherwise noted, no characters are required to isolate it.`mode`The `mode=` form of the `$if` directive is used to test whether Readline is in `emacs` or `vi` mode. This may be used in conjunction with the `set keymap` command, for instance, to set bindings in the `emacs-standard` and `emacs-ctlx` keymaps only if Readline is starting out in `emacs` mode.`term`The `term=` form may be used to include terminal-specific key bindings, perhaps to bind the key sequences output by the terminal's function keys. The word on the right side of the `=` is tested against both the full name of the terminal and the portion of the terminal name before the first `-`. This allows `sun` to match both `sun` and `sun-cmd`, for instance.`version`The `version` test may be used to perform comparisons against specific Readline versions. The `version` expands to the current Readline version. The set of comparison operators includes `=` (and `==`), `!=`, `<=`, `>=`, `<`, and `>`. The version number supplied on the right side of the operator consists of a major version number, an optional decimal point, and an optional minor version (e.g., `7.1`). If the minor version is omitted, it is assumed to be `0`. The operator may be separated from the string `version` and from the version number argument by whitespace. The following example sets a variable if the Readline version being used is 7.0 or newer:`$if version >= 7.0 set show-mode-in-prompt on $endif ``application`The application construct is used to include application-specific settings. Each program using the Readline library sets the application name, and you can test for a particular value. This could be used to bind key sequences to functions useful for a specific program. For instance, the following command adds a key sequence that quotes the current or previous word in Bash:`$if Bash # Quote the current or previous word "\C-xq": "\eb\"\ef\"" $endif ``variable`The variable construct provides simple equality tests for Readline variables and values. The permitted comparison operators are `=`, `==`, and `!=`. The variable name must be separated from the comparison operator by whitespace; the operator may be separated from the value on the right hand side by whitespace. Both string and boolean variables may be tested. Boolean variables must be tested against the values on and off. The following example is equivalent to the `mode=emacs` test described above:`$if editing-mode == emacs set show-mode-in-prompt on $endif `
+  The `$if` construct allows bindings to be made based on the editing mode, the terminal being used, or the application using Readline. The text of the test, after any comparison operator, extends to the end of the line; unless otherwise noted, no characters are required to isolate it.
+
+  `$if` 结构允许基于编辑模式、使用的终端或使用 Readline 的应用程序进行绑定。测试的文本，在任何比较运算符之后，延伸到行的末尾；除非另有说明，不需要任何字符来隔离它。
+
+  `mode`: The `mode=` form of the `$if` directive is used to test whether Readline is in `emacs` or `vi` mode. This may be used in conjunction with the `set keymap` command, for instance, to set bindings in the `emacs-standard` and `emacs-ctlx` keymaps only if Readline is starting out in `emacs` mode.
+
+  `mode`：`$if` 指令的 `mode=` 形式用于测试 Readline 是否处于 `emacs` 或 `vi` 模式。例如，这可与 `set keymap` 命令一起使用，只有当 Readline 在 `emacs` 模式下启动时，才设置 `emacs-standard` 和 `emacs-ctlx` 键映射中的绑定。
+
+  `term`: The `term=` form may be used to include terminal-specific key bindings, perhaps to bind the key sequences output by the terminal's function keys. The word on the right side of the `=` is tested against both the full name of the terminal and the portion of the terminal name before the first `-`. This allows `sun` to match both `sun` and `sun-cmd`, for instance.
+
+  `term`：`term=` 形式可用于包含特定于终端的键绑定，也许是为了绑定终端功能键输出的键序列。`=` 右侧的单词将与终端的完整名称和第一个 `-` 前的终端名称部分进行匹配。这允许 `sun` 匹配 `sun` 和 `sun-cmd`，例如。
+
+  `version`: The `version` test may be used to perform comparisons against specific Readline versions. The `version` expands to the current Readline version. The set of comparison operators includes `=` (and `==`), `!=`, `<=`, `>=`, `<`, and `>`. The version number supplied on the right side of the operator consists of a major version number, an optional decimal point, and an optional minor version (e.g., `7.1`). If the minor version is omitted, it is assumed to be `0`. The operator may be separated from the string `version` and from the version number argument by whitespace. The following example sets a variable if the Readline version being used is 7.0 or newer:
+
+  `version`：`version` 测试可用于与特定的 Readline 版本进行比较。`version` 展开为当前的 Readline 版本。可用的比较运算符包括 `=`（和 `==`）、`!=`、`<=`、`>=`、`<` 和 `>`。运算符右侧提供的版本号包括主版本号、可选的小数点和可选的次版本号（例如 `7.1`）。如果省略次版本号，则默认为 `0`。运算符可以与字符串 `version` 和版本号参数之间用空格分隔。以下示例设置一个变量，如果使用的 Readline 版本是 7.0 或更高版本：
+
+  ```
+  $if version >= 7.0
+  set show-mode-in-prompt on
+  $endif
+  ```
+
+  `application`: The application construct is used to include application-specific settings. Each program using the Readline library sets the application name, and you can test for a particular value. This could be used to bind key sequences to functions useful for a specific program. For instance, the following command adds a key sequence that quotes the current or previous word in Bash:
+
+  `application`：application 结构用于包含特定于应用程序的设置。每个使用 Readline 库的程序都会设置应用程序名称，您可以测试特定的值。这可用于将键序列绑定到特定程序有用的功能上。例如，以下命令添加了一个键序列，用于在 Bash 中引用当前或前一个单词：
+
+  ```
+  $if Bash
+  # Quote the current or previous word
+  "\C-xq": "\eb\"\ef\""
+  $endif
+  ```
+
+  `variable`: The variable construct provides simple equality tests for Readline variables and values. The permitted comparison operators are `=`, `==`, and `!=`. The variable name must be separated from the comparison operator by whitespace; the operator may be separated from the value on the right hand side by whitespace. Both string and boolean variables may be tested. Boolean variables must be tested against the values on and off. The following example is equivalent to the `mode=emacs` test described above:
+
+  `variable`：variable 结构提供了对 Readline 变量和值的简单等式测试。允许使用的比较运算符有 `=`、`==` 和 `!=`。变量名必须与比较运算符用空格分隔；运算符可以与右侧值用空格分隔。可以测试字符串和布尔变量。布尔变量必须根据 on 和 off 进行测试。以下示例等同于上面描述的 `mode=emacs` 测试：
+
+  ```
+  $if editing-mode == emacs
+  set show-mode-in-prompt on
+  $endif
+  ```
+
+  
 
 - `$endif`
 
   This command, as seen in the previous example, terminates an `$if` command.
 
+  正如前面的示例中所见，此命令终止 `$if` 命令。
+
 - `$else`
 
   Commands in this branch of the `$if` directive are executed if the test fails.
 
+  如果测试失败，则执行 `$if` 指令的此分支中的命令。
+
 - `$include`
 
-  This directive takes a single filename as an argument and reads commands and bindings from that file. For example, the following directive reads from /etc/inputrc:`$include /etc/inputrc `
+  This directive takes a single filename as an argument and reads commands and bindings from that file. For example, the following directive reads from /etc/inputrc:
+  
+  此指令以单个文件名作为参数，并从该文件中读取命令和绑定。例如，以下指令从 /etc/inputrc 中读取：
+  
+  ```
+  $include /etc/inputrc
+  ```
+  
+  
 
 
 
 
 
-#### 8.3.3 Sample Init File
+#### 8.3.3 示例初始化文件
 
 Here is an example of an inputrc file. This illustrates key binding, variable assignment, and conditional syntax.
+
+​	以下是一个 inputrc 文件的示例。这展示了键绑定、变量赋值和条件语法。
 
 ```
 # This file controls the behaviour of line input editing for
 # programs that use the GNU Readline library.  Existing
 # programs include FTP, Bash, and GDB.
+# 以下是一个 inputrc 文件的示例。
+# 这控制着使用 GNU Readline 库的程序中的行输入编辑行为。
+# 现有的程序包括 FTP、Bash 和 GDB。
 #
 # You can re-read the inputrc file with C-x C-r.
 # Lines beginning with '#' are comments.
+# 您可以使用 C-x C-r 重新读取 inputrc 文件。以 '#' 开头的行是注释。
 #
 # First, include any system-wide bindings and variable
 # assignments from /etc/Inputrc
+# 首先，包括来自 /etc/Inputrc 的任何系统范围的绑定和变量赋值。
 $include /etc/Inputrc
 
 #
 # Set various bindings for emacs mode.
+# 为 emacs 模式设置不同的绑定。
 
 set editing-mode emacs 
 
@@ -6510,6 +7341,7 @@ Meta-Control-h:	backward-kill-word	Text after the function name is ignored
 
 #
 # Arrow keys in keypad mode
+# 下面是在小键盘模式下的箭头键绑定
 #
 #"\M-OD":        backward-char
 #"\M-OC":        forward-char
@@ -6517,6 +7349,7 @@ Meta-Control-h:	backward-kill-word	Text after the function name is ignored
 #"\M-OB":        next-history
 #
 # Arrow keys in ANSI mode
+# 在 ANSI 模式下的箭头键绑定
 #
 "\M-[D":        backward-char
 "\M-[C":        forward-char
@@ -6524,6 +7357,7 @@ Meta-Control-h:	backward-kill-word	Text after the function name is ignored
 "\M-[B":        next-history
 #
 # Arrow keys in 8 bit keypad mode
+# 在 8 位小键盘模式下的箭头键绑定
 #
 #"\M-\C-OD":       backward-char
 #"\M-\C-OC":       forward-char
@@ -6531,6 +7365,7 @@ Meta-Control-h:	backward-kill-word	Text after the function name is ignored
 #"\M-\C-OB":       next-history
 #
 # Arrow keys in 8 bit ANSI mode
+# 在 8 位 ANSI 模式下的箭头键绑定
 #
 #"\M-\C-[D":       backward-char
 #"\M-\C-[C":       forward-char
@@ -6542,46 +7377,64 @@ C-q: quoted-insert
 $endif
 
 # An old-style binding.  This happens to be the default.
+# 旧式绑定。这也是默认设置。
 TAB: complete
 
 # Macros that are convenient for shell interaction
+# 对于与 shell 交互方便的宏
 $if Bash
 # edit the path
+# 编辑路径
 "\C-xp": "PATH=${PATH}\e\C-e\C-a\ef\C-f"
 # prepare to type a quoted word --
 # insert open and close double quotes
 # and move to just after the open quote
+# 准备输入引号包裹的单词 --
+# 插入开头和结尾的双引号
+# 并移到开头引号的后面
 "\C-x\"": "\"\"\C-b"
 # insert a backslash (testing backslash escapes
 # in sequences and macros)
+# 插入反斜杠（测试反斜杠转义
+# 在序列和宏中）
 "\C-x\\": "\\"
 # Quote the current or previous word
+# 引用当前或上一个单词
 "\C-xq": "\eb\"\ef\""
 # Add a binding to refresh the line, which is unbound
+# 添加一个刷新行的绑定，该绑定未绑定
 "\C-xr": redraw-current-line
 # Edit variable on current line.
+# 在当前行编辑变量。
 "\M-\C-v": "\C-a\C-k$\C-y\M-\C-e\C-a\C-y="
 $endif
 
 # use a visible bell if one is available
+# 使用可见的提示音（可用时）
 set bell-style visible
 
 # don't strip characters to 7 bits when reading
+# 在读取时不要将字符截断为7位
 set input-meta on
 
 # allow iso-latin1 characters to be inserted rather
 # than converted to prefix-meta sequences
+# 允许插入 ISO-Latin1 字符，而不是转换为前缀-Meta序列
 set convert-meta off
 
 # display characters with the eighth bit set directly
 # rather than as meta-prefixed characters
+# 直接显示具有第八位设置的字符，而不是作为Meta前缀字符显示
 set output-meta on
 
 # if there are 150 or more possible completions for a word,
 # ask whether or not the user wants to see all of them
+# 如果单词有150个或更多的可能完成项，
+# 询问用户是否要查看所有完成项
 set completion-query-items 150
 
 # For FTP
+# 对于FTP
 $if Ftp
 "\C-xg": "get \M-?"
 "\C-xt": "put \M-?"
@@ -6593,578 +7446,840 @@ $endif
 
 
 
-### 8.4 Bindable Readline Commands
+### 8.4 可绑定的 Readline 命令
 
 This section describes Readline commands that may be bound to key sequences. You can list your key bindings by executing `bind -P` or, for a more terse format, suitable for an inputrc file, `bind -p`. (See [Bash Builtin Commands](https://www.gnu.org/software/bash/manual/bash.html#Bash-Builtins).) Command names without an accompanying key sequence are unbound by default.
 
+​	本节描述可以绑定到键序列的 Readline 命令。您可以通过执行 `bind -P` 或者更简洁的格式 `bind -p`（适用于 inputrc 文件），列出您的键绑定。(参见[Bash 内置命令](https://www.gnu.org/software/bash/manual/bash.html#Bash-Builtins)。) 默认情况下，没有附带键序列的命令是未绑定的。
+
 In the following descriptions, *point* refers to the current cursor position, and *mark* refers to a cursor position saved by the `set-mark` command. The text between the point and mark is referred to as the *region*.
 
+​	在以下描述中，*point* 指的是当前光标位置，*mark* 指的是由 `set-mark` 命令保存的光标位置。光标和标记之间的文本被称为*区域*。
 
 
 
 
-
-
-
-
-
-
-
-
-
-#### 8.4.1 Commands For Moving
+#### 8.4.1 光标移动命令
 
 - `beginning-of-line (C-a)`
 
   Move to the start of the current line.
 
+  移动到当前行的开头。
+
 - `end-of-line (C-e)`
 
   Move to the end of the line.
+
+  移动到当前行的末尾。
 
 - `forward-char (C-f)`
 
   Move forward a character.
 
+  向前移动一个字符。
+
 - `backward-char (C-b)`
 
   Move back a character.
+
+  向后移动一个字符。
 
 - `forward-word (M-f)`
 
   Move forward to the end of the next word. Words are composed of letters and digits.
 
+  向前移动到下一个单词的末尾。单词由字母和数字组成。
+
 - `backward-word (M-b)`
 
   Move back to the start of the current or previous word. Words are composed of letters and digits.
+
+  向后移动到当前或前一个单词的开头。单词由字母和数字组成。
 
 - `shell-forward-word (M-C-f)`
 
   Move forward to the end of the next word. Words are delimited by non-quoted shell metacharacters.
 
+  向前移动到下一个单词的末尾。单词由未加引号的 shell 元字符界定。
+
 - `shell-backward-word (M-C-b)`
 
   Move back to the start of the current or previous word. Words are delimited by non-quoted shell metacharacters.
+
+  向后移动到当前或前一个单词的开头。单词由未加引号的 shell 元字符界定。
 
 - `previous-screen-line ()`
 
   Attempt to move point to the same physical screen column on the previous physical screen line. This will not have the desired effect if the current Readline line does not take up more than one physical line or if point is not greater than the length of the prompt plus the screen width.
 
+  尝试将光标移动到上一个物理屏幕行上的相同列。如果当前的 Readline 行不占据超过一个物理行，或者光标位置不大于提示符加上屏幕宽度的长度，则此命令不会起作用。
+
 - `next-screen-line ()`
 
   Attempt to move point to the same physical screen column on the next physical screen line. This will not have the desired effect if the current Readline line does not take up more than one physical line or if the length of the current Readline line is not greater than the length of the prompt plus the screen width.
+
+  尝试将光标移动到下一个物理屏幕行上的相同列。如果当前的 Readline 行不占据超过一个物理行，或者当前 Readline 行的长度不大于提示符加上屏幕宽度的长度，则此命令不会起作用。
 
 - `clear-display (M-C-l)`
 
   Clear the screen and, if possible, the terminal's scrollback buffer, then redraw the current line, leaving the current line at the top of the screen.
 
+  清除屏幕，并如果可能，清除终端的回滚缓冲区，然后重新绘制当前行，将当前行置于屏幕顶部。
+
 - `clear-screen (C-l)`
 
   Clear the screen, then redraw the current line, leaving the current line at the top of the screen.
 
+  清除屏幕，然后重新绘制当前行，将当前行置于屏幕顶部。
+
 - `redraw-current-line ()`
 
   Refresh the current line. By default, this is unbound.
+  
+  刷新当前行。默认情况下，此命令未绑定。
 
 
 
 
 
-#### 8.4.2 Commands For Manipulating The History
+#### 8.4.2 历史记录操作命令
 
 - `accept-line (Newline or Return)`
 
   Accept the line regardless of where the cursor is. If this line is non-empty, add it to the history list according to the setting of the `HISTCONTROL` and `HISTIGNORE` variables. If this line is a modified history line, then restore the history line to its original state.
 
+  接受当前行，无论光标在什么位置。如果此行非空，则根据 `HISTCONTROL` 和 `HISTIGNORE` 变量的设置将其添加到历史列表中。如果此行是修改过的历史行，则将历史行恢复为其原始状态。
+
 - `previous-history (C-p)`
 
   Move `back` through the history list, fetching the previous command.
+
+  向后移动并从历史列表中获取上一条命令。
 
 - `next-history (C-n)`
 
   Move `forward` through the history list, fetching the next command.
 
+  向前移动并从历史列表中获取下一条命令。
+
 - `beginning-of-history (M-<)`
 
   Move to the first line in the history.
+
+  移动到历史的第一行。
 
 - `end-of-history (M->)`
 
   Move to the end of the input history, i.e., the line currently being entered.
 
+  移动到输入历史的末尾，即当前正在输入的行。
+
 - `reverse-search-history (C-r)`
 
   Search backward starting at the current line and moving `up` through the history as necessary. This is an incremental search. This command sets the region to the matched text and activates the mark.
+
+  从当前行开始向后搜索，并根据需要移动到历史记录中的上一条命令。这是一个递增搜索。此命令设置区域以匹配的文本，并激活标记。
 
 - `forward-search-history (C-s)`
 
   Search forward starting at the current line and moving `down` through the history as necessary. This is an incremental search. This command sets the region to the matched text and activates the mark.
 
+  从当前行开始向前搜索，并根据需要移动到历史记录中的下一条命令。这是一个递增搜索。此命令设置区域以匹配的文本，并激活标记。
+
 - `non-incremental-reverse-search-history (M-p)`
 
   Search backward starting at the current line and moving `up` through the history as necessary using a non-incremental search for a string supplied by the user. The search string may match anywhere in a history line.
+
+  从当前行开始向后搜索，并根据需要使用用户提供的非递增搜索字符串移动到历史记录中的上一条命令。搜索字符串可以匹配历史行中的任何位置。
 
 - `non-incremental-forward-search-history (M-n)`
 
   Search forward starting at the current line and moving `down` through the history as necessary using a non-incremental search for a string supplied by the user. The search string may match anywhere in a history line.
 
+  从当前行开始向前搜索，并根据需要使用用户提供的非递增搜索字符串移动到历史记录中的下一条命令。搜索字符串可以匹配历史行中的任何位置。
+
 - `history-search-forward ()`
 
   Search forward through the history for the string of characters between the start of the current line and the point. The search string must match at the beginning of a history line. This is a non-incremental search. By default, this command is unbound.
+
+  从当前行的开头到光标位置之间搜索历史记录中的字符串。搜索字符串必须匹配历史行的开头。这是一个非递增搜索。默认情况下，此命令未绑定。
 
 - `history-search-backward ()`
 
   Search backward through the history for the string of characters between the start of the current line and the point. The search string must match at the beginning of a history line. This is a non-incremental search. By default, this command is unbound.
 
+  从当前行的开头到光标位置之间向后搜索历史记录中的字符串。搜索字符串必须匹配历史行的开头。这是一个非递增搜索。默认情况下，此命令未绑定。
+
 - `history-substring-search-forward ()`
 
   Search forward through the history for the string of characters between the start of the current line and the point. The search string may match anywhere in a history line. This is a non-incremental search. By default, this command is unbound.
+
+  从当前行的开头到光标位置之间向前搜索历史记录中的字符串。搜索字符串可以匹配历史行中的任何位置。这是一个非递增搜索。默认情况下，此命令未绑定。
 
 - `history-substring-search-backward ()`
 
   Search backward through the history for the string of characters between the start of the current line and the point. The search string may match anywhere in a history line. This is a non-incremental search. By default, this command is unbound.
 
+  从当前行的开头到光标位置之间向后搜索历史记录中的字符串。搜索字符串可以匹配历史行中的任何位置。这是一个非递增搜索。默认情况下，此命令未绑定。
+
 - `yank-nth-arg (M-C-y)`
 
   Insert the first argument to the previous command (usually the second word on the previous line) at point. With an argument n, insert the nth word from the previous command (the words in the previous command begin with word 0). A negative argument inserts the nth word from the end of the previous command. Once the argument n is computed, the argument is extracted as if the `!n` history expansion had been specified.
+
+  在光标位置插入前一条命令的第一个参数（通常是前一行的第二个单词）。如果提供了参数 n，则插入前一条命令的第 n 个单词（前一条命令的单词从单词 0 开始）。负数参数将插入前一条命令的倒数第 n 个单词。一旦计算出参数 n，则提取参数就像指定了 `!n` 历史扩展一样。
 
 - `yank-last-arg (M-. or M-_)`
 
   Insert last argument to the previous command (the last word of the previous history entry). With a numeric argument, behave exactly like `yank-nth-arg`. Successive calls to `yank-last-arg` move back through the history list, inserting the last word (or the word specified by the argument to the first call) of each line in turn. Any numeric argument supplied to these successive calls determines the direction to move through the history. A negative argument switches the direction through the history (back or forward). The history expansion facilities are used to extract the last argument, as if the `!$` history expansion had been specified.
 
+  在光标位置插入前一条命令的最后一个参数（前一条历史记录条目的最后一个单词）。通过数字参数，表现与 `yank-nth-arg` 完全相同。连续调用 `yank-last-arg` 将在历史列表中向后移动，依次插入每一行的最后一个单词（或由第一个调用的参数指定的单词）。连续调用这些命令并提供任何数字参数，将决定历史记录的遍历方向（向后或向前）。历史扩展工具用于提取最后一个参数，就像指定了 `!$` 历史扩展一样。
+
 - `operate-and-get-next (C-o)`
 
   Accept the current line for return to the calling application as if a newline had been entered, and fetch the next line relative to the current line from the history for editing. A numeric argument, if supplied, specifies the history entry to use instead of the current line.
 
+  接受当前行以返回给调用应用程序，就像输入换行符一样，并从历史中获取相对于当前行的下一行以进行编辑。如果提供了数字参数，则使用该历史条目代替当前行。
+
 - `fetch-history ()`
 
   With a numeric argument, fetch that entry from the history list and make it the current line. Without an argument, move back to the first entry in the history list.
+  
+  使用数字参数从历史列表中获取相应的条目，并将其设为当前行。如果没有参数，则返回到历史列表中的第一个条目。
 
 
 
 
 
-#### 8.4.3 Commands For Changing Text
+#### 8.4.3 文本修改命令
 
 - `*end-of-file* (usually C-d)`
 
   The character indicating end-of-file as set, for example, by `stty`. If this character is read when there are no characters on the line, and point is at the beginning of the line, Readline interprets it as the end of input and returns EOF.
 
+  表示文件结束的字符，例如通过 `stty` 设置。如果在行上没有字符，且光标位于行的开头时读取此字符，Readline 将将其解释为输入的结束，并返回 EOF。
+
 - `delete-char (C-d)`
 
   Delete the character at point. If this function is bound to the same character as the tty EOF character, as C-d commonly is, see above for the effects.
+
+  删除光标位置的字符。如果将此函数绑定到与 tty 的 EOF 字符相同的字符（通常是 C-d），请参阅上面的效果说明。
 
 - `backward-delete-char (Rubout)`
 
   Delete the character behind the cursor. A numeric argument means to kill the characters instead of deleting them.
 
+  删除光标后面的字符。数字参数表示删除字符而不是杀死字符。
+
 - `forward-backward-delete-char ()`
 
   Delete the character under the cursor, unless the cursor is at the end of the line, in which case the character behind the cursor is deleted. By default, this is not bound to a key.
+
+  删除光标下的字符，除非光标在行的末尾，在这种情况下，删除光标后面的字符。默认情况下，此命令未绑定到任何键。
 
 - `quoted-insert (C-q or C-v)`
 
   Add the next character typed to the line verbatim. This is how to insert key sequences like C-q, for example.
 
+  逐字添加下一个键入的字符到行中。这是插入类似 C-q 的键序列的方法。
+
 - `self-insert (a, b, A, 1, !, …)`
 
   Insert yourself.
+
+  插入字符本身。
 
 - `bracketed-paste-begin ()`
 
   This function is intended to be bound to the "bracketed paste" escape sequence sent by some terminals, and such a binding is assigned by default. It allows Readline to insert the pasted text as a single unit without treating each character as if it had been read from the keyboard. The characters are inserted as if each one was bound to `self-insert` instead of executing any editing commands.Bracketed paste sets the region (the characters between point and the mark) to the inserted text. It uses the concept of an *active mark*: when the mark is active, Readline redisplay uses the terminal's standout mode to denote the region.
 
+  此函数旨在绑定到一些终端发送的“括号粘贴”转义序列，并且默认情况下已分配此绑定。它允许 Readline 将粘贴的文本作为单个单元插入，而不是将每个字符视为从键盘读取。这些字符被插入，就像每个字符都绑定到 `self-insert` 而不是执行任何编辑命令。括号粘贴设置区域（光标与标记之间的字符）为插入的文本。它使用“活动标记”的概念：当标记处于活动状态时，Readline 重显示使用终端的反白显示模式来表示区域。
+
 - `transpose-chars (C-t)`
 
   Drag the character before the cursor forward over the character at the cursor, moving the cursor forward as well. If the insertion point is at the end of the line, then this transposes the last two characters of the line. Negative arguments have no effect.
+
+  将光标前面的字符拖移到光标处的字符上，并将光标向前移动。如果插入点在行的末尾，则会交换行的最后两个字符。负数参数没有影响。
 
 - `transpose-words (M-t)`
 
   Drag the word before point past the word after point, moving point past that word as well. If the insertion point is at the end of the line, this transposes the last two words on the line.
 
+  将光标前的单词移到光标后的单词上，并将光标移到该单词之后。如果插入点在行的末尾，则会交换行的最后两个单词。
+
 - `upcase-word (M-u)`
 
   Uppercase the current (or following) word. With a negative argument, uppercase the previous word, but do not move the cursor.
+
+  将当前（或后面的）单词转换为大写。使用负数参数时，将前一个单词转换为大写，但不移动光标。
 
 - `downcase-word (M-l)`
 
   Lowercase the current (or following) word. With a negative argument, lowercase the previous word, but do not move the cursor.
 
+  将当前（或后面的）单词转换为小写。使用负数参数时，将前一个单词转换为小写，但不移动光标。
+
 - `capitalize-word (M-c)`
 
   Capitalize the current (or following) word. With a negative argument, capitalize the previous word, but do not move the cursor.
 
+  将当前（或后面的）单词的首字母大写。使用负数参数时，将前一个单词的首字母大写，但不移动光标。
+
 - `overwrite-mode ()`
 
   Toggle overwrite mode. With an explicit positive numeric argument, switches to overwrite mode. With an explicit non-positive numeric argument, switches to insert mode. This command affects only `emacs` mode; `vi` mode does overwrite differently. Each call to `readline()` starts in insert mode.In overwrite mode, characters bound to `self-insert` replace the text at point rather than pushing the text to the right. Characters bound to `backward-delete-char` replace the character before point with a space.By default, this command is unbound.
+  
+  切换覆盖模式。通过显式的正数数字参数，切换到覆盖模式。通过显式的非正数数字参数，切换到插入模式。此命令仅影响 `emacs` 模式；`vi` 模式以不同的方式执行覆盖。每次调用 `readline()` 时都会以插入模式开始。在覆盖模式下，绑定为 `self-insert` 的字符将替换点处的文本，而不是将文本向右推动。绑定为 `backward-delete-char` 的字符将用空格替换点前面的字符。默认情况下，此命令未绑定。
 
 
 
 
 
-#### 8.4.4 Killing And Yanking
+#### 8.4.4 剪切和粘贴 Killing And Yanking
 
 - `kill-line (C-k)`
 
   Kill the text from point to the end of the line. With a negative numeric argument, kill backward from the cursor to the beginning of the current line.
 
+  从光标到行尾的文本被剪切。如果提供了负数数字参数，则从光标到当前行的开头进行剪切。
+
 - `backward-kill-line (C-x Rubout)`
 
   Kill backward from the cursor to the beginning of the current line. With a negative numeric argument, kill forward from the cursor to the end of the current line.
+
+  从光标向行的开头进行剪切。如果提供了负数数字参数，则从光标向当前行的末尾进行剪切。
 
 - `unix-line-discard (C-u)`
 
   Kill backward from the cursor to the beginning of the current line.
 
+  从光标向行的开头进行剪切。
+
 - `kill-whole-line ()`
 
   Kill all characters on the current line, no matter where point is. By default, this is unbound.
+
+  剪切当前行的所有字符，无论光标在什么位置。默认情况下，此命令未绑定。
 
 - `kill-word (M-d)`
 
   Kill from point to the end of the current word, or if between words, to the end of the next word. Word boundaries are the same as `forward-word`.
 
+  从光标位置剪切到当前单词的末尾，或者如果光标位于单词之间，则剪切到下一个单词的末尾。单词边界与 `forward-word` 相同。
+
 - `backward-kill-word (M-DEL)`
 
   Kill the word behind point. Word boundaries are the same as `backward-word`.
+
+  剪切光标后的单词。单词边界与 `backward-word` 相同。
 
 - `shell-kill-word (M-C-d)`
 
   Kill from point to the end of the current word, or if between words, to the end of the next word. Word boundaries are the same as `shell-forward-word`.
 
+  从光标位置剪切到当前单词的末尾，或者如果光标位于单词之间，则剪切到下一个单词的末尾。单词边界与 `shell-forward-word` 相同。
+
 - `shell-backward-kill-word ()`
 
   Kill the word behind point. Word boundaries are the same as `shell-backward-word`.
+
+  剪切光标后的单词。单词边界与 `shell-backward-word` 相同。
 
 - `shell-transpose-words (M-C-t)`
 
   Drag the word before point past the word after point, moving point past that word as well. If the insertion point is at the end of the line, this transposes the last two words on the line. Word boundaries are the same as `shell-forward-word` and `shell-backward-word`.
 
+  将光标前的单词移到光标后的单词上，并将光标移到该单词之后。如果插入点在行的末尾，则会交换行的最后两个单词。单词边界与 `shell-forward-word` 和 `shell-backward-word` 相同。
+
 - `unix-word-rubout (C-w)`
 
   Kill the word behind point, using white space as a word boundary. The killed text is saved on the kill-ring.
+
+  使用空格作为单词边界剪切光标后的单词。被剪切的文本保存在 kill-ring 中。
 
 - `unix-filename-rubout ()`
 
   Kill the word behind point, using white space and the slash character as the word boundaries. The killed text is saved on the kill-ring.
 
+  使用空格和斜杠字符作为单词边界剪切光标后的单词。被剪切的文本保存在 kill-ring 中。
+
 - `delete-horizontal-space ()`
 
   Delete all spaces and tabs around point. By default, this is unbound.
+
+  删除光标周围的所有空格和制表符。默认情况下，此命令未绑定。
 
 - `kill-region ()`
 
   Kill the text in the current region. By default, this command is unbound.
 
+  剪切当前区域中的文本。默认情况下，此命令未绑定。
+
 - `copy-region-as-kill ()`
 
   Copy the text in the region to the kill buffer, so it can be yanked right away. By default, this command is unbound.
+
+  将区域中的文本复制到 kill 缓冲区，以便可以立即粘贴。默认情况下，此命令未绑定。
 
 - `copy-backward-word ()`
 
   Copy the word before point to the kill buffer. The word boundaries are the same as `backward-word`. By default, this command is unbound.
 
+  将光标前的单词复制到 kill 缓冲区。单词边界与 `backward-word` 相同。默认情况下，此命令未绑定。
+
 - `copy-forward-word ()`
 
   Copy the word following point to the kill buffer. The word boundaries are the same as `forward-word`. By default, this command is unbound.
+
+  将光标后的单词复制到 kill 缓冲区。单词边界与 `forward-word` 相同。默认情况下，此命令未绑定。
 
 - `yank (C-y)`
 
   Yank the top of the kill ring into the buffer at point.
 
+  将 kill 环中的内容粘贴到光标处的缓冲区。
+
 - `yank-pop (M-y)`
 
   Rotate the kill-ring, and yank the new top. You can only do this if the prior command is `yank` or `yank-pop`.
+  
+  旋转 kill 环，并粘贴新的顶部内容。仅在先前的命令是 `yank` 或 `yank-pop` 时可以执行此操作。
 
 
 
 
 
-#### 8.4.5 Specifying Numeric Arguments
+#### 8.4.5 指定数值参数
 
 - `digit-argument (M-0, M-1, … M--)`
 
   Add this digit to the argument already accumulating, or start a new argument. M-- starts a negative argument.
 
+  将此数字添加到已经累积的参数中，或开始一个新的参数。M-- 表示一个负数参数。
+
 - `universal-argument ()`
 
   This is another way to specify an argument. If this command is followed by one or more digits, optionally with a leading minus sign, those digits define the argument. If the command is followed by digits, executing `universal-argument` again ends the numeric argument, but is otherwise ignored. As a special case, if this command is immediately followed by a character that is neither a digit nor minus sign, the argument count for the next command is multiplied by four. The argument count is initially one, so executing this function the first time makes the argument count four, a second time makes the argument count sixteen, and so on. By default, this is not bound to a key.
+  
+  这是另一种指定参数的方式。如果在该命令后跟一个或多个数字，可选择带有负号的前导符号，这些数字定义了参数。如果该命令后跟数字，再次执行 `universal-argument` 将结束数值参数，但忽略其他情况。作为特例，如果该命令紧接着跟着一个既不是数字也不是负号的字符，下一条命令的参数计数将乘以四。参数计数最初为一，因此第一次执行此函数将参数计数设置为四，第二次设置为十六，依此类推。默认情况下，该命令未绑定到键。
 
 
 
 
 
-#### 8.4.6 Letting Readline Type For You
+#### 8.4.6 让 Readline 为你键入
 
 - `complete (TAB)`
 
   Attempt to perform completion on the text before point. The actual completion performed is application-specific. Bash attempts completion treating the text as a variable (if the text begins with `$`), username (if the text begins with `~`), hostname (if the text begins with `@`), or command (including aliases and functions) in turn. If none of these produces a match, filename completion is attempted.
 
+  尝试对光标之前的文本进行自动补全。实际的补全操作是应用程序特定的。对于 Bash，它会依次尝试将文本视为变量（如果文本以 `$` 开头），用户名（如果文本以 `~` 开头），主机名（如果文本以 `@` 开头）或命令（包括别名和函数）。如果这些都没有匹配，则尝试进行文件名补全。
+
 - `possible-completions (M-?)`
 
   List the possible completions of the text before point. When displaying completions, Readline sets the number of columns used for display to the value of `completion-display-width`, the value of the environment variable `COLUMNS`, or the screen width, in that order.
+
+  列出光标之前的文本可能的自动补全选项。在显示补全选项时，Readline 将显示的列数设置为 `completion-display-width` 的值，环境变量 `COLUMNS` 的值或屏幕宽度，按此顺序。
 
 - `insert-completions (M-*)`
 
   Insert all completions of the text before point that would have been generated by `possible-completions`.
 
+  插入光标之前所有可能的自动补全选项。
+
 - `menu-complete ()`
 
   Similar to `complete`, but replaces the word to be completed with a single match from the list of possible completions. Repeated execution of `menu-complete` steps through the list of possible completions, inserting each match in turn. At the end of the list of completions, the bell is rung (subject to the setting of `bell-style`) and the original text is restored. An argument of n moves n positions forward in the list of matches; a negative argument may be used to move backward through the list. This command is intended to be bound to `TAB`, but is unbound by default.
+
+  类似于 `complete`，但用单个匹配项替换要补全的单词。重复执行 `menu-complete` 将在可能的补全列表中依次插入每个匹配项。在补全列表的末尾，会响铃（取决于 `bell-style` 的设置），并恢复原始文本。n 个参数将 n 个位置前进或后退。这个命令原本是要绑定到 `TAB` 键，但默认情况下未绑定。
 
 - `menu-complete-backward ()`
 
   Identical to `menu-complete`, but moves backward through the list of possible completions, as if `menu-complete` had been given a negative argument.
 
+  与 `menu-complete` 相同，但向后移动可能的补全列表，就像给 `menu-complete` 一个负数参数一样。
+
 - `delete-char-or-list ()`
 
   Deletes the character under the cursor if not at the beginning or end of the line (like `delete-char`). If at the end of the line, behaves identically to `possible-completions`. This command is unbound by default.
+
+  如果不在行的开头或结尾，则删除光标下的字符（类似于 `delete-char`）。如果在行的末尾，则与 `possible-completions` 表现相同。默认情况下，此命令未绑定。
 
 - `complete-filename (M-/)`
 
   Attempt filename completion on the text before point.
 
+  尝试对光标之前的文本进行文件名补全。
+
 - `possible-filename-completions (C-x /)`
 
   List the possible completions of the text before point, treating it as a filename.
+
+  列出光标之前的文本可能的文件名补全选项。
 
 - `complete-username (M-~)`
 
   Attempt completion on the text before point, treating it as a username.
 
+  尝试对光标之前的文本进行用户名补全。
+
 - `possible-username-completions (C-x ~)`
 
   List the possible completions of the text before point, treating it as a username.
+
+  列出光标之前的文本可能的用户名补全选项。
 
 - `complete-variable (M-$)`
 
   Attempt completion on the text before point, treating it as a shell variable.
 
+  尝试对光标之前的文本进行 Shell 变量补全。
+
 - `possible-variable-completions (C-x $)`
 
   List the possible completions of the text before point, treating it as a shell variable.
+
+  列出光标之前的文本可能的 Shell 变量补全选项。
 
 - `complete-hostname (M-@)`
 
   Attempt completion on the text before point, treating it as a hostname.
 
+  尝试对光标之前的文本进行主机名补全。
+
 - `possible-hostname-completions (C-x @)`
 
   List the possible completions of the text before point, treating it as a hostname.
+
+  列出光标之前的文本可能的主机名补全选项。
 
 - `complete-command (M-!)`
 
   Attempt completion on the text before point, treating it as a command name. Command completion attempts to match the text against aliases, reserved words, shell functions, shell builtins, and finally executable filenames, in that order.
 
+  尝试对光标之前的文本进行命令名补全。命令补全尝试将文本与别名、保留字、Shell 函数、Shell 内建命令以及最后是可执行文件名依次进行匹配。
+
 - `possible-command-completions (C-x !)`
 
   List the possible completions of the text before point, treating it as a command name.
+
+  列出光标之前的文本可能的命令名补全选项。
 
 - `dynamic-complete-history (M-TAB)`
 
   Attempt completion on the text before point, comparing the text against lines from the history list for possible completion matches.
 
+  尝试对光标之前的文本进行动态历史记录补全，比对历史记录列表中的文本，找到可能的匹配项。
+
 - `dabbrev-expand ()`
 
   Attempt menu completion on the text before point, comparing the text against lines from the history list for possible completion matches.
 
+  尝试对光标之前的文本进行菜单补全，比对历史记录列表中的文本，找到可能的匹配项。
+
 - `complete-into-braces (M-{)`
 
   Perform filename completion and insert the list of possible completions enclosed within braces so the list is available to the shell (see [Brace Expansion](https://www.gnu.org/software/bash/manual/bash.html#Brace-Expansion)).
+  
+  执行文件名补全，并在大括号内插入可能的补全列表，使列表对 Shell 可见（参见 [Brace Expansion](https://www.gnu.org/software/bash/manual/bash.html#Brace-Expansion)）。
 
 
 
 
 
-#### 8.4.7 Keyboard Macros
+#### 8.4.7 键盘宏
 
 - `start-kbd-macro (C-x ()`
 
   Begin saving the characters typed into the current keyboard macro.
 
+  开始保存当前键盘宏中键入的字符。
+
 - `end-kbd-macro (C-x ))`
 
   Stop saving the characters typed into the current keyboard macro and save the definition.
+
+  停止保存当前键盘宏中键入的字符并保存定义。
 
 - `call-last-kbd-macro (C-x e)`
 
   Re-execute the last keyboard macro defined, by making the characters in the macro appear as if typed at the keyboard.
 
+  通过使宏中的字符显示为键盘上键入的字符，重新执行最后一个定义的键盘宏。
+
 - `print-last-kbd-macro ()`
 
   Print the last keyboard macro defined in a format suitable for the inputrc file.
+  
+  以适用于 inputrc 文件的格式打印最后一个定义的键盘宏。
 
 
 
 
 
-#### 8.4.8 Some Miscellaneous Commands
+#### 8.4.8 一些杂项命令
 
 - `re-read-init-file (C-x C-r)`
 
   Read in the contents of the inputrc file, and incorporate any bindings or variable assignments found there.
 
+  重新读取 inputrc 文件的内容，并包含其中找到的任何绑定或变量赋值。
+
 - `abort (C-g)`
 
   Abort the current editing command and ring the terminal's bell (subject to the setting of `bell-style`).
+
+  中止当前的编辑命令并响铃终端的铃声（取决于 `bell-style` 的设置）。
 
 - `do-lowercase-version (M-A, M-B, M-x, …)`
 
   If the metafied character x is upper case, run the command that is bound to the corresponding metafied lower case character. The behavior is undefined if x is already lower case.
 
+  如果 metafied 字符 x 是大写的，则运行绑定到相应 metafied 小写字符的命令。如果 x 已经是小写的，则行为未定义。
+
 - `prefix-meta (ESC)`
 
   Metafy the next character typed. This is for keyboards without a meta key. Typing `ESC f` is equivalent to typing M-f.
+
+  将下一个键入的字符转换为 meta 键字符。这适用于没有 meta 键的键盘。输入 `ESC f` 等同于输入 M-f。
 
 - `undo (C-_ or C-x C-u)`
 
   Incremental undo, separately remembered for each line.
 
+  增量撤消，每行单独记忆。
+
 - `revert-line (M-r)`
 
   Undo all changes made to this line. This is like executing the `undo` command enough times to get back to the beginning.
+
+  撤消对该行所做的所有更改。这相当于执行足够多次 `undo` 命令，使得回到最开始的状态。
 
 - `tilde-expand (M-&)`
 
   Perform tilde expansion on the current word.
 
+  对当前单词执行波浪线扩展（tilde expansion）。
+
 - `set-mark (C-@)`
 
   Set the mark to the point. If a numeric argument is supplied, the mark is set to that position.
+
+  将标记设置为当前光标位置。如果提供了一个数字参数，标记会被设置为该位置。
 
 - `exchange-point-and-mark (C-x C-x)`
 
   Swap the point with the mark. The current cursor position is set to the saved position, and the old cursor position is saved as the mark.
 
+  交换光标和标记的位置。当前光标位置设置为保存的位置，旧的光标位置保存为标记。
+
 - `character-search (C-])`
 
   A character is read and point is moved to the next occurrence of that character. A negative argument searches for previous occurrences.
+
+  读取一个字符，并将光标移到该字符的下一个出现位置。负数参数搜索前面的出现位置。
 
 - `character-search-backward (M-C-])`
 
   A character is read and point is moved to the previous occurrence of that character. A negative argument searches for subsequent occurrences.
 
+  读取一个字符，并将光标移到该字符的前一个出现位置。负数参数搜索后面的出现位置。
+
 - `skip-csi-sequence ()`
 
   Read enough characters to consume a multi-key sequence such as those defined for keys like Home and End. Such sequences begin with a Control Sequence Indicator (CSI), usually ESC-[. If this sequence is bound to "\e[", keys producing such sequences will have no effect unless explicitly bound to a Readline command, instead of inserting stray characters into the editing buffer. This is unbound by default, but usually bound to ESC-[.
+
+  读取足够的字符以消耗类似于 Home 和 End 等键定义的多键序列。这些序列通常以控制序列指示符（CSI）开始，通常为 ESC-[。如果该序列绑定为 "\e["，则产生这些序列的键将不会产生效果，除非明确绑定到 Readline 命令，而不是将杂乱的字符插入到编辑缓冲区。默认情况下，此命令未绑定，但通常绑定到 ESC-[。
 
 - `insert-comment (M-#)`
 
   Without a numeric argument, the value of the `comment-begin` variable is inserted at the beginning of the current line. If a numeric argument is supplied, this command acts as a toggle: if the characters at the beginning of the line do not match the value of `comment-begin`, the value is inserted, otherwise the characters in `comment-begin` are deleted from the beginning of the line. In either case, the line is accepted as if a newline had been typed. The default value of `comment-begin` causes this command to make the current line a shell comment. If a numeric argument causes the comment character to be removed, the line will be executed by the shell.
 
+  如果没有数字参数，则在当前行的开头插入 `comment-begin` 变量的值。如果提供了数字参数，则此命令将充当切换：如果行首的字符与 `comment-begin` 的值不匹配，则插入该值，否则从行首删除 `comment-begin` 中的字符。无论哪种情况，该行都被接受，就像键入了一个新行一样。`comment-begin` 的默认值使此命令将当前行设置为 Shell 注释。如果数字参数导致注释字符被移除，则该行将由 Shell 执行。
+
 - `dump-functions ()`
 
   Print all of the functions and their key bindings to the Readline output stream. If a numeric argument is supplied, the output is formatted in such a way that it can be made part of an inputrc file. This command is unbound by default.
+
+  将所有函数及其键绑定打印到 Readline 输出流中。如果提供了数字参数，则输出以适合作为 inputrc 文件的一部分的格式进行格式化。默认情况下，此命令未绑定。
 
 - `dump-variables ()`
 
   Print all of the settable variables and their values to the Readline output stream. If a numeric argument is supplied, the output is formatted in such a way that it can be made part of an inputrc file. This command is unbound by default.
 
+  将所有可设置的变量及其值打印到 Readline 输出流中。如果提供了数字参数，则输出以适合作为 inputrc 文件的一部分的格式进行格式化。默认情况下，此命令未绑定。
+
 - `dump-macros ()`
 
   Print all of the Readline key sequences bound to macros and the strings they output. If a numeric argument is supplied, the output is formatted in such a way that it can be made part of an inputrc file. This command is unbound by default.
+
+  将所有绑定到宏的 Readline 键序列及其输出字符串打印出来。如果提供了数字参数，则输出以适合作为 inputrc 文件的一部分的格式进行格式化。默认情况下，此命令未绑定。
 
 - `spell-correct-word (C-x s)`
 
   Perform spelling correction on the current word, treating it as a directory or filename, in the same way as the `cdspell` shell option. Word boundaries are the same as those used by `shell-forward-word`.
 
+  对当前单词执行拼写纠正，将其视为目录或文件名，与 `cdspell` Shell 选项相同。单词边界与 `shell-forward-word` 使用的相同。
+
 - `glob-complete-word (M-g)`
 
   The word before point is treated as a pattern for pathname expansion, with an asterisk implicitly appended. This pattern is used to generate a list of matching file names for possible completions.
+
+  将光标之前的单词视为路径名扩展的模式，隐含地附加一个星号。该模式用于生成可能的补全项的匹配文件名列表。
 
 - `glob-expand-word (C-x *)`
 
   The word before point is treated as a pattern for pathname expansion, and the list of matching file names is inserted, replacing the word. If a numeric argument is supplied, a `*` is appended before pathname expansion.
 
+  将光标之前的单词视为路径名扩展的模式，并插入匹配文件名的列表，替换该单词。如果提供了数字参数，则在路径名扩展之前附加一个 `*`。
+
 - `glob-list-expansions (C-x g)`
 
   The list of expansions that would have been generated by `glob-expand-word` is displayed, and the line is redrawn. If a numeric argument is supplied, a `*` is appended before pathname expansion.
+
+  显示由 `glob-expand-word` 生成的扩展列表，并重绘该行。如果提供了数字参数，则在路径名扩展之前附加一个 `*`。
 
 - `display-shell-version (C-x C-v)`
 
   Display version information about the current instance of Bash.
 
+  显示有关当前 Bash 实例的版本信息。
+
 - `shell-expand-line (M-C-e)`
 
   Expand the line as the shell does. This performs alias and history expansion as well as all of the shell word expansions (see [Shell Expansions](https://www.gnu.org/software/bash/manual/bash.html#Shell-Expansions)).
+
+  以 Shell 的方式展开行。这将执行别名和历史记录扩展，以及所有 Shell 单词扩展（参见 [Shell Expansions](https://www.gnu.org/software/bash/manual/bash.html#Shell-Expansions)）。
 
 - `history-expand-line (M-^)`
 
   Perform history expansion on the current line.
 
+  对当前行执行历史记录扩展。
+
 - `magic-space ()`
 
   Perform history expansion on the current line and insert a space (see [History Expansion](https://www.gnu.org/software/bash/manual/bash.html#History-Interaction)).
+
+  在当前行上执行历史扩展，并插入一个空格（参见[历史扩展](https://www.gnu.org/software/bash/manual/bash.html#History-Interaction)）。
 
 - `alias-expand-line ()`
 
   Perform alias expansion on the current line (see [Aliases](https://www.gnu.org/software/bash/manual/bash.html#Aliases)).
 
+  在当前行上执行别名扩展（参见[别名](https://www.gnu.org/software/bash/manual/bash.html#Aliases)）。
+
 - `history-and-alias-expand-line ()`
 
   Perform history and alias expansion on the current line.
+
+  在当前行上执行历史和别名扩展。
 
 - `insert-last-argument (M-. or M-_)`
 
   A synonym for `yank-last-arg`.
 
+  `yank-last-arg` 的同义词。
+
 - `edit-and-execute-command (C-x C-e)`
 
   Invoke an editor on the current command line, and execute the result as shell commands. Bash attempts to invoke `$VISUAL`, `$EDITOR`, and `emacs` as the editor, in that order.
+  
+  在当前命令行上调用编辑器，并将结果作为 Shell 命令执行。Bash 尝试按顺序调用 `$VISUAL`，`$EDITOR` 和 `emacs` 作为编辑器。
 
 
 
 
 
-### 8.5 Readline vi Mode
+### 8.5 Readline vi 模式
 
 While the Readline library does not have a full set of `vi` editing functions, it does contain enough to allow simple editing of the line. The Readline `vi` mode behaves as specified in the POSIX standard.
 
+​	虽然 Readline 库没有完整的 `vi` 编辑功能集，但它包含足够的功能来允许对行进行简单的编辑。Readline 的 `vi` 模式遵循 POSIX 标准的规定。
+
 In order to switch interactively between `emacs` and `vi` editing modes, use the `set -o emacs` and `set -o vi` commands (see [The Set Builtin](https://www.gnu.org/software/bash/manual/bash.html#The-Set-Builtin)). The Readline default is `emacs` mode.
+
+​	为了在 `emacs` 和 `vi` 编辑模式之间进行交互切换，请使用 `set -o emacs` 和 `set -o vi` 命令（参见 [The Set Builtin](https://www.gnu.org/software/bash/manual/bash.html#The-Set-Builtin)）。Readline 默认是 `emacs` 模式。
 
 When you enter a line in `vi` mode, you are already placed in `insertion` mode, as if you had typed an `i`. Pressing `ESC` switches you into `command` mode, where you can edit the text of the line with the standard `vi` movement keys, move to previous history lines with `k` and subsequent lines with `j`, and so forth.
 
+​	当您进入 `vi` 模式的行时，已经处于 `插入` 模式，就像您键入了一个 `i`。按下 `ESC` 键会切换到 `命令` 模式，在该模式下，您可以使用标准的 `vi` 移动键来编辑行的文本，使用 `k` 键移到上一个历史行，使用 `j` 键移到后续历史行，等等。
 
 
 
 
-### 8.6 Programmable Completion
+
+### 8.6 可编程自动完成
 
 
 
 When word completion is attempted for an argument to a command for which a completion specification (a compspec) has been defined using the `complete` builtin (see [Programmable Completion Builtins](https://www.gnu.org/software/bash/manual/bash.html#Programmable-Completion-Builtins)), the programmable completion facilities are invoked.
 
+​	当尝试对一个命令的参数进行单词完成时，如果使用`complete`内置命令定义了一个完成规范（compspec），那么可编程自动完成功能将被调用。
+
 First, the command name is identified. If a compspec has been defined for that command, the compspec is used to generate the list of possible completions for the word. If the command word is the empty string (completion attempted at the beginning of an empty line), any compspec defined with the -E option to `complete` is used. If the command word is a full pathname, a compspec for the full pathname is searched for first. If no compspec is found for the full pathname, an attempt is made to find a compspec for the portion following the final slash. If those searches do not result in a compspec, any compspec defined with the -D option to `complete` is used as the default. If there is no default compspec, Bash attempts alias expansion on the command word as a final resort, and attempts to find a compspec for the command word from any successful expansion
+
+​	首先，识别命令名称。如果已为该命令定义了compspec，则将使用该compspec来生成该单词的可能完成列表。如果命令单词是空字符串（在空行的开头尝试完成），则将使用任何使用`complete`命令定义的-E选项的compspec。如果命令单词是完整路径名，则首先搜索完整路径名的compspec。如果在完整路径名中没有找到compspec，则尝试为最后一个斜杠后面的部分找到compspec。如果这些搜索未生成compspec，则将使用使用`complete`命令定义的-D选项的任何compspec作为默认值。如果没有默认的compspec，则Bash将在最后的情况下尝试对命令单词进行别名扩展，并尝试从任何成功的扩展中找到compspec。
 
 Once a compspec has been found, it is used to generate the list of matching words. If a compspec is not found, the default Bash completion described above (see [Letting Readline Type For You](https://www.gnu.org/software/bash/manual/bash.html#Commands-For-Completion)) is performed.
 
+找到compspec后，将使用它来生成匹配的单词列表。如果未找到compspec，则执行上述默认Bash完成（参见[让Readline为您输入](https://www.gnu.org/software/bash/manual/bash.html#Commands-For-Completion)）。
+
 First, the actions specified by the compspec are used. Only matches which are prefixed by the word being completed are returned. When the -f or -d option is used for filename or directory name completion, the shell variable `FIGNORE` is used to filter the matches. See [Bash Variables](https://www.gnu.org/software/bash/manual/bash.html#Bash-Variables), for a description of `FIGNORE`.
+
+​	首先使用compspec指定的操作。只返回与正在完成的单词有相同前缀的匹配项。当用于文件名或目录名完成的-f或-d选项时，将使用shell变量`FIGNORE`来过滤匹配项。有关`FIGNORE`的说明，请参见[Bash变量](https://www.gnu.org/software/bash/manual/bash.html#Bash-Variables)。
 
 Any completions specified by a filename expansion pattern to the -G option are generated next. The words generated by the pattern need not match the word being completed. The `GLOBIGNORE` shell variable is not used to filter the matches, but the `FIGNORE` shell variable is used.
 
+​	接下来，根据-G选项指定的文件名扩展模式生成任何完成。模式生成的单词不需要与正在完成的单词匹配。不使用`GLOBIGNORE` shell变量来过滤匹配项，但使用`FIGNORE` shell变量。
+
 Next, the string specified as the argument to the -W option is considered. The string is first split using the characters in the `IFS` special variable as delimiters. Shell quoting is honored within the string, in order to provide a mechanism for the words to contain shell metacharacters or characters in the value of `IFS`. Each word is then expanded using brace expansion, tilde expansion, parameter and variable expansion, command substitution, and arithmetic expansion, as described above (see [Shell Expansions](https://www.gnu.org/software/bash/manual/bash.html#Shell-Expansions)). The results are split using the rules described above (see [Word Splitting](https://www.gnu.org/software/bash/manual/bash.html#Word-Splitting)). The results of the expansion are prefix-matched against the word being completed, and the matching words become the possible completions.
+
+​	然后，考虑作为-W选项参数指定的字符串。首先使用`IFS`特殊变量中的字符作为分隔符来拆分该字符串。字符串内部的shell引用被尊重，以提供包含shell元字符或`IFS`值中字符的单词的机制。然后，使用大括号扩展、波浪线扩展、参数和变量扩展、命令替换和算术扩展来扩展每个单词，如上面所述（参见[Shell扩展](https://www.gnu.org/software/bash/manual/bash.html#Shell-Expansions)）。然后使用上面描述的规则对结果进行拆分（参见[单词拆分](https://www.gnu.org/software/bash/manual/bash.html#Word-Splitting)）。然后，将扩展的结果与正在完成的单词进行前缀匹配，匹配的单词成为可能的完成项。
 
 After these matches have been generated, any shell function or command specified with the -F and -C options is invoked. When the command or function is invoked, the `COMP_LINE`, `COMP_POINT`, `COMP_KEY`, and `COMP_TYPE` variables are assigned values as described above (see [Bash Variables](https://www.gnu.org/software/bash/manual/bash.html#Bash-Variables)). If a shell function is being invoked, the `COMP_WORDS` and `COMP_CWORD` variables are also set. When the function or command is invoked, the first argument ($1) is the name of the command whose arguments are being completed, the second argument ($2) is the word being completed, and the third argument ($3) is the word preceding the word being completed on the current command line. No filtering of the generated completions against the word being completed is performed; the function or command has complete freedom in generating the matches.
 
+​	在生成这些匹配项后，将调用使用-F和-C选项指定的任何shell函数或命令。当调用命令或函数时，将如上所述为`COMP_LINE`、`COMP_POINT`、`COMP_KEY`和`COMP_TYPE`变量分配值（参见[Bash变量](https://www.gnu.org/software/bash/manual/bash.html#Bash-Variables)）。如果调用的是shell函数，则还设置`COMP_WORDS`和`COMP_CWORD`变量。当调用函数或命令时，第一个参数（$1）是正在完成其参数的命令的名称，第二个参数（$2）是正在完成的单词，第三个参数（$3）是当前命令行上正在完成的单词之前的单词。不对生成的完成项进行与正在完成的单词匹配的过滤；函数或命令在生成匹配项时具有完全自由。
+
 Any function specified with -F is invoked first. The function may use any of the shell facilities, including the `compgen` and `compopt` builtins described below (see [Programmable Completion Builtins](https://www.gnu.org/software/bash/manual/bash.html#Programmable-Completion-Builtins)), to generate the matches. It must put the possible completions in the `COMPREPLY` array variable, one per array element.
+
+​	首先调用使用-F指定的函数。函数可以使用任何shell工具，包括下面描述的`compgen`和`compopt`内置命令，来生成匹配项。它必须将可能的完成项放入`COMPREPLY`数组变量中，每个数组元素一个。
 
 Next, any command specified with the -C option is invoked in an environment equivalent to command substitution. It should print a list of completions, one per line, to the standard output. Backslash may be used to escape a newline, if necessary.
 
+​	接下来，将在等效于命令替换的环境中调用使用-C选项指定的任何命令。它应该将完成项的列表打印到标准输出中，每行一个。如果需要，可以使用反斜杠来转义换行符。
+
 After all of the possible completions are generated, any filter specified with the -X option is applied to the list. The filter is a pattern as used for pathname expansion; a `&` in the pattern is replaced with the text of the word being completed. A literal `&` may be escaped with a backslash; the backslash is removed before attempting a match. Any completion that matches the pattern will be removed from the list. A leading `!` negates the pattern; in this case any completion not matching the pattern will be removed. If the `nocasematch` shell option (see the description of `shopt` in [The Shopt Builtin](https://www.gnu.org/software/bash/manual/bash.html#The-Shopt-Builtin)) is enabled, the match is performed without regard to the case of alphabetic characters.
+
+​	在生成所有可能的完成项后，将应用使用-X选项指定的任何过滤器到列表中。过滤器是用于路径名扩展的模式；模式中的`&`将替换为正在完成的单词的文本。字面上的`&`可以使用反斜杠转义；反斜杠在尝试匹配之前被移除。与模式匹配的任何完成项都将从列表中删除。在这种情况下，以`!`开头的模式是否定的；在这种情况下，与模式不匹配的任何完成项都将被删除。如果启用了`nocasematch` shell选项（参见[The Shopt Builtin](https://www.gnu.org/software/bash/manual/bash.html#The-Shopt-Builtin)中对`shopt`的说明），则执行匹配时不考虑字母字符的大小写。
 
 Finally, any prefix and suffix specified with the -P and -S options are added to each member of the completion list, and the result is returned to the Readline completion code as the list of possible completions.
 
+​	最后，将为完成列表的每个成员添加使用-P和-S选项指定的前缀和后缀，并将结果作为可能完成的列表返回给Readline的完成代码。
+
 If the previously-applied actions do not generate any matches, and the -o dirnames option was supplied to `complete` when the compspec was defined, directory name completion is attempted.
+
+​	如果先前应用的操作未生成任何匹配项，并且在定义compspec时提供了-o dirnames选项，则尝试目录名完成。
 
 If the -o plusdirs option was supplied to `complete` when the compspec was defined, directory name completion is attempted and any matches are added to the results of the other actions.
 
+​	如果在定义compspec时提供了-o plusdirs选项，则会尝试目录名完成，并将任何匹配项添加到其他操作的结果中。
+
 By default, if a compspec is found, whatever it generates is returned to the completion code as the full set of possible completions. The default Bash completions are not attempted, and the Readline default of filename completion is disabled. If the -o bashdefault option was supplied to `complete` when the compspec was defined, the default Bash completions are attempted if the compspec generates no matches. If the -o default option was supplied to `complete` when the compspec was defined, Readline's default completion will be performed if the compspec (and, if attempted, the default Bash completions) generate no matches.
+
+​	默认情况下，如果找到compspec，则将其生成的内容作为完成代码的全部可能完成项返回。不尝试默认的Bash完成，也禁用Readline默认的文件名完成。如果在定义compspec时提供了-o bashdefault选项，则如果compspec未生成匹配项，则尝试默认的Bash完成。如果在定义compspec时提供了-o default选项，则如果compspec（以及如果尝试了默认的Bash完成）未生成匹配项，则执行Readline的默认完成。
 
 When a compspec indicates that directory name completion is desired, the programmable completion functions force Readline to append a slash to completed names which are symbolic links to directories, subject to the value of the mark-directories Readline variable, regardless of the setting of the mark-symlinked-directories Readline variable.
 
+​	当compspec指示需要目录名完成时，可编程完成函数会强制Readline在完成的名称后追加斜杠，即使完成的名称是指向目录的符号链接，这取决于mark-directories Readline变量的值，而不受mark-symlinked-directories Readline变量设置的影响。
+
 There is some support for dynamically modifying completions. This is most useful when used in combination with a default completion specified with -D. It's possible for shell functions executed as completion handlers to indicate that completion should be retried by returning an exit status of 124. If a shell function returns 124, and changes the compspec associated with the command on which completion is being attempted (supplied as the first argument when the function is executed), programmable completion restarts from the beginning, with an attempt to find a new compspec for that command. This allows a set of completions to be built dynamically as completion is attempted, rather than being loaded all at once.
 
+​	对于动态修改完成项，提供了一些支持。当与使用-D指定的默认完成组合使用时，这非常有用。作为完成处理程序执行的shell函数可以通过返回退出状态为124来指示应重新尝试完成。如果shell函数返回124，并且更改了与正在尝试完成的命令相关联的compspec（在函数执行时作为第一个参数提供），则可编程完成将从头开始重新启动，尝试为该命令找到新的compspec。这允许在尝试完成时动态构建完成集，而不是一次性加载所有完成。
+
 For instance, assuming that there is a library of compspecs, each kept in a file corresponding to the name of the command, the following default completion function would load completions dynamically:
+
+​	例如，假设存在一组compspecs，每个compspec都保存在与命令名称相对应的文件中，以下默认完成函数将动态加载完成：
 
 ```
 _completion_loader()
@@ -7178,41 +8293,230 @@ complete -D -F _completion_loader -o bashdefault -o default
 
 
 
-### 8.7 Programmable Completion Builtins
+### 8.7 可编程完成内建命令
 
 
 
 Three builtin commands are available to manipulate the programmable completion facilities: one to specify how the arguments to a particular command are to be completed, and two to modify the completion as it is happening.
 
+​	有三个内建命令可用于操作可编程完成功能：一个用于指定如何完成特定命令的参数，另外两个用于在完成过程中修改完成行为。
+
 - `compgen`
 
-  `compgen [option] [word] `Generate possible completion matches for word according to the options, which may be any option accepted by the `complete` builtin with the exception of -p and -r, and write the matches to the standard output. When using the -F or -C options, the various shell variables set by the programmable completion facilities, while available, will not have useful values.The matches will be generated in the same way as if the programmable completion code had generated them directly from a completion specification with the same flags. If word is specified, only those completions matching word will be displayed.The return value is true unless an invalid option is supplied, or no matches were generated.
+  ```
+  compgen [option] [word]
+  ```
+
+  Generate possible completion matches for word according to the options, which may be any option accepted by the `complete` builtin with the exception of -p and -r, and write the matches to the standard output. When using the -F or -C options, the various shell variables set by the programmable completion facilities, while available, will not have useful values.
+
+  根据选项生成单词的可能完成匹配，并将匹配结果写入标准输出。选项可以是`complete`内建命令接受的任何选项，除了-p和-r。使用-F或-C选项时，虽然可编程完成工具设置的各种shell变量可用，但它们的值可能无用。
+
+  The matches will be generated in the same way as if the programmable completion code had generated them directly from a completion specification with the same flags. If word is specified, only those completions matching word will be displayed.The return value is true unless an invalid option is supplied, or no matches were generated.
+
+  生成的匹配项将与如果可编程完成代码直接从具有相同标志的完成规范生成它们的方式相同。如果指定了单词，则只显示与单词匹配的完成项。除非提供了无效的选项或未生成匹配项，否则返回值为真。
 
 - `complete`
 
-  `complete [-abcdefgjksuv] [-o comp-option] [-DEI] [-A action] [-G globpat] [-W wordlist] [-F function] [-C command] [-X filterpat] [-P prefix] [-S suffix] name [name …] complete -pr [-DEI] [name …] `Specify how arguments to each name should be completed. If the -p option is supplied, or if no options are supplied, existing completion specifications are printed in a way that allows them to be reused as input. The -r option removes a completion specification for each name, or, if no names are supplied, all completion specifications. The -D option indicates that other supplied options and actions should apply to the “default” command completion; that is, completion attempted on a command for which no completion has previously been defined. The -E option indicates that other supplied options and actions should apply to “empty” command completion; that is, completion attempted on a blank line. The -I option indicates that other supplied options and actions should apply to completion on the initial non-assignment word on the line, or after a command delimiter such as `;` or `|`, which is usually command name completion. If multiple options are supplied, the -D option takes precedence over -E, and both take precedence over -I. If any of -D, -E, or -I are supplied, any other name arguments are ignored; these completions only apply to the case specified by the option.The process of applying these completion specifications when word completion is attempted is described above (see [Programmable Completion](https://www.gnu.org/software/bash/manual/bash.html#Programmable-Completion)).Other options, if specified, have the following meanings. The arguments to the -G, -W, and -X options (and, if necessary, the -P and -S options) should be quoted to protect them from expansion before the `complete` builtin is invoked.`-o comp-option`The comp-option controls several aspects of the compspec's behavior beyond the simple generation of completions. comp-option may be one of:`bashdefault`Perform the rest of the default Bash completions if the compspec generates no matches.`default`Use Readline's default filename completion if the compspec generates no matches.`dirnames`Perform directory name completion if the compspec generates no matches.`filenames`Tell Readline that the compspec generates filenames, so it can perform any filename-specific processing (like adding a slash to directory names, quoting special characters, or suppressing trailing spaces). This option is intended to be used with shell functions specified with -F.`noquote`Tell Readline not to quote the completed words if they are filenames (quoting filenames is the default).`nosort`Tell Readline not to sort the list of possible completions alphabetically.`nospace`Tell Readline not to append a space (the default) to words completed at the end of the line.`plusdirs`After any matches defined by the compspec are generated, directory name completion is attempted and any matches are added to the results of the other actions.`-A action`The action may be one of the following to generate a list of possible completions:`alias`Alias names. May also be specified as -a.`arrayvar`Array variable names.`binding`Readline key binding names (see [Bindable Readline Commands](https://www.gnu.org/software/bash/manual/bash.html#Bindable-Readline-Commands)).`builtin`Names of shell builtin commands. May also be specified as -b.`command`Command names. May also be specified as -c.`directory`Directory names. May also be specified as -d.`disabled`Names of disabled shell builtins.`enabled`Names of enabled shell builtins.`export`Names of exported shell variables. May also be specified as -e.`file`File names. May also be specified as -f.`function`Names of shell functions.`group`Group names. May also be specified as -g.`helptopic`Help topics as accepted by the `help` builtin (see [Bash Builtin Commands](https://www.gnu.org/software/bash/manual/bash.html#Bash-Builtins)).`hostname`Hostnames, as taken from the file specified by the `HOSTFILE` shell variable (see [Bash Variables](https://www.gnu.org/software/bash/manual/bash.html#Bash-Variables)).`job`Job names, if job control is active. May also be specified as -j.`keyword`Shell reserved words. May also be specified as -k.`running`Names of running jobs, if job control is active.`service`Service names. May also be specified as -s.`setopt`Valid arguments for the -o option to the `set` builtin (see [The Set Builtin](https://www.gnu.org/software/bash/manual/bash.html#The-Set-Builtin)).`shopt`Shell option names as accepted by the `shopt` builtin (see [Bash Builtin Commands](https://www.gnu.org/software/bash/manual/bash.html#Bash-Builtins)).`signal`Signal names.`stopped`Names of stopped jobs, if job control is active.`user`User names. May also be specified as -u.`variable`Names of all shell variables. May also be specified as -v.`-C command`command is executed in a subshell environment, and its output is used as the possible completions. Arguments are passed as with the -F option.`-F function`The shell function function is executed in the current shell environment. When it is executed, $1 is the name of the command whose arguments are being completed, $2 is the word being completed, and $3 is the word preceding the word being completed, as described above (see [Programmable Completion](https://www.gnu.org/software/bash/manual/bash.html#Programmable-Completion)). When it finishes, the possible completions are retrieved from the value of the `COMPREPLY` array variable.`-G globpat`The filename expansion pattern globpat is expanded to generate the possible completions.`-P prefix`prefix is added at the beginning of each possible completion after all other options have been applied.`-S suffix`suffix is appended to each possible completion after all other options have been applied.`-W wordlist`The wordlist is split using the characters in the `IFS` special variable as delimiters, and each resultant word is expanded. The possible completions are the members of the resultant list which match the word being completed.`-X filterpat`filterpat is a pattern as used for filename expansion. It is applied to the list of possible completions generated by the preceding options and arguments, and each completion matching filterpat is removed from the list. A leading `!` in filterpat negates the pattern; in this case, any completion not matching filterpat is removed.The return value is true unless an invalid option is supplied, an option other than -p or -r is supplied without a name argument, an attempt is made to remove a completion specification for a name for which no specification exists, or an error occurs adding a completion specification.
+  ```
+  complete [-abcdefgjksuv] [-o comp-option] [-DEI] [-A action] [-G globpat]
+  [-W wordlist] [-F function] [-C command] [-X filterpat]
+  [-P prefix] [-S suffix] name [name …]
+  complete -pr [-DEI] [name …]
+  ```
+
+  Specify how arguments to each name should be completed. If the -p option is supplied, or if no options are supplied, existing completion specifications are printed in a way that allows them to be reused as input. The -r option removes a completion specification for each name, or, if no names are supplied, all completion specifications. The -D option indicates that other supplied options and actions should apply to the “default” command completion; that is, completion attempted on a command for which no completion has previously been defined. The -E option indicates that other supplied options and actions should apply to “empty” command completion; that is, completion attempted on a blank line. The -I option indicates that other supplied options and actions should apply to completion on the initial non-assignment word on the line, or after a command delimiter such as `;` or `|`, which is usually command name completion. If multiple options are supplied, the -D option takes precedence over -E, and both take precedence over -I. If any of -D, -E, or -I are supplied, any other name arguments are ignored; these completions only apply to the case specified by the option.
+
+  指定如何完成每个名称的参数。如果提供了-p选项，或者未提供任何选项，则以允许它们作为输入被重新使用的方式打印现有的完成规范。-r选项删除每个名称的完成规范，或者如果未提供名称，则删除所有的完成规范。-D选项指示其他提供的选项和操作应用于“默认”命令完成；即尝试对未定义完成的命令进行完成。-E选项指示其他提供的选项和操作应用于“空白”命令完成；即在空白行上尝试完成。-I选项指示其他提供的选项和操作应用于行中的初始非赋值单词，或者在命令分隔符（如;或|）之后，通常是命令名称完成。如果提供了多个选项，则-D选项优先于-E选项，二者优先于-I选项。如果提供了-D、-E或-I中的任何一个，将忽略任何其他名称参数；这些完成仅适用于选项指定的情况。
+
+  The process of applying these completion specifications when word completion is attempted is described above (see [Programmable Completion](https://www.gnu.org/software/bash/manual/bash.html#Programmable-Completion)).Other options, if specified, have the following meanings. The arguments to the -G, -W, and -X options (and, if necessary, the -P and -S options) should be quoted to protect them from expansion before the `complete` builtin is invoked.
+
+  在尝试进行单词完成时，应用这些完成规范的过程如上所述（见[可编程完成](https://www.gnu.org/software/bash/manual/bash.html#Programmable-Completion)）。如果指定了其他选项，则具有以下含义。在调用`complete`内建之前，应用于-G、-W和-X选项（如有必要，还包括-P和-S选项）的参数应进行引用以保护它们免受扩展。
+
+  `-o comp-option`: The comp-option controls several aspects of the compspec's behavior beyond the simple generation of completions. comp-option may be one of:
+
+  `-o comp-option`：comp-option控制compspec的行为方式，除了简单地生成完成项之外。comp-option可以是以下之一：
+
+  - `bashdefault`: Perform the rest of the default Bash completions if the compspec generates no matches.
+
+  - `default`: Use Readline's default filename completion if the compspec generates no matches.
+
+  - `dirnames`: Perform directory name completion if the compspec generates no matches.
+
+  - `filenames`: Tell Readline that the compspec generates filenames, so it can perform any filename-specific processing (like adding a slash to directory names, quoting special characters, or suppressing trailing spaces). This option is intended to be used with shell functions specified with -F.
+
+  - `noquote`: Tell Readline not to quote the completed words if they are filenames (quoting filenames is the default).
+
+  - `nosort`: Tell Readline not to sort the list of possible completions alphabetically.
+
+  - `nospace`: Tell Readline not to append a space (the default) to words completed at the end of the line.
+
+  - `plusdirs`: After any matches defined by the compspec are generated, directory name completion is attempted and any matches are added to the results of the other actions.
+  - `bashdefault`：如果compspec未生成匹配项，则执行其余默认Bash完成。
+  - `default`：如果compspec未生成匹配项，则使用Readline的默认文件名完成。
+  - `dirnames`：如果compspec未生成匹配项，则执行目录名完成。
+  - `filenames`：告诉Readline，compspec生成文件名，因此可以执行任何文件名特定处理（例如向目录名添加斜杠，引用特殊字符或抑制尾随空格）。此选项旨在与使用-F指定的shell函数一起使用。
+  - `noquote`：告诉Readline不要引用已完成的单词，如果它们是文件名（引用文件名是默认的）。
+  - `nosort`：告诉Readline不要对可能完成列表按字母顺序排序。
+  - `nospace`：告诉Readline不要在行尾完成的单词后附加空格（默认情况下）。
+  - `plusdirs`：在生成由compspec定义的任何匹配项后，尝试目录名完成，并将任何匹配项添加到其他操作的结果中。
+
+  
+
+  `-A action`: The action may be one of the following to generate a list of possible completions: action可以是以下之一，用于生成可能完成项列表：
+
+  - `alias`: Alias names. May also be specified as -a.
+
+  - `arrayvar`: Array variable names.
+
+  - `binding`: Readline key binding names (see [Bindable Readline Commands](https://www.gnu.org/software/bash/manual/bash.html#Bindable-Readline-Commands)).
+
+  - `builtin`: Names of shell builtin commands. May also be specified as -b.
+
+  - `command`: Command names. May also be specified as -c.
+
+  - `directory`: Directory names. May also be specified as -d.
+
+  - `disabled`: Names of disabled shell builtins.
+
+  - `enabled`: Names of enabled shell builtins.
+
+  - `export`: Names of exported shell variables. May also be specified as -e.
+
+  - `file`: File names. May also be specified as -f.
+
+  - `function`: Names of shell functions.
+
+  - `group`: Group names. May also be specified as -g.
+
+  - `helptopic`: Help topics as accepted by the `help` builtin (see [Bash Builtin Commands](https://www.gnu.org/software/bash/manual/bash.html#Bash-Builtins)).
+
+  - `hostname`: Hostnames, as taken from the file specified by the `HOSTFILE` shell variable (see [Bash Variables](https://www.gnu.org/software/bash/manual/bash.html#Bash-Variables)).
+
+  - `job`: Job names, if job control is active. May also be specified as -j.
+
+  - `keyword`: Shell reserved words. May also be specified as -k.
+
+  - `running`: Names of running jobs, if job control is active.
+
+  - `service`: Service names. May also be specified as -s.
+
+  - `setopt`: Valid arguments for the -o option to the `set` builtin (see [The Set Builtin](https://www.gnu.org/software/bash/manual/bash.html#The-Set-Builtin)).
+
+  - `shopt`: Shell option names as accepted by the `shopt` builtin (see [Bash Builtin Commands](https://www.gnu.org/software/bash/manual/bash.html#Bash-Builtins)).
+
+  - `signal`: Signal names.
+
+  - `stopped`: Names of stopped jobs, if job control is active.
+
+  - `user`: User names. May also be specified as -u.
+
+  - `variable`: Names of all shell variables. May also be specified as -v.
+  - `alias`：别名名称。也可以指定为-a。
+  - `arrayvar`：数组变量名称。
+  - `binding`：Readline键绑定名称（见[可绑定的Readline命令](https://www.gnu.org/software/bash/manual/bash.html#Bindable-Readline-Commands)）。
+  - `builtin`：Shell内建命令的名称。也可以指定为-b。
+  - `command`：命令名称。也可以指定为-c。
+  - `directory`：目录名称。也可以指定为-d。
+  - `disabled`：已禁用的Shell内建命令的名称。
+  - `enabled`：已启用的Shell内建命令的名称。
+  - `export`：已导出的Shell变量的名称。也可以指定为-e。
+  - `file`：文件名。也可以指定为-f。
+  - `function`：Shell函数的名称。
+  - `group`：组名称。也可以指定为-g。
+  - `helptopic`：`help`内建命令接受的帮助主题（见[Bash内建命令](https://www.gnu.org/software/bash/manual/bash.html#Bash-Builtins)）。
+  - `hostname`：主机名，从`HOSTFILE` shell变量指定的文件中获取（见[Bash变量](https://www.gnu.org/software/bash/manual/bash.html#Bash-Variables)）。
+  - `job`：作业名称（如果作业控制处于活动状态）。也可以指定为-j。
+  - `keyword`：Shell保留字。也可以指定为-k。
+  - `running`：运行中的作业名称（如果作业控制处于活动状态）。
+  - `service`：服务名称。也可以指定为-s。
+  - `setopt`：`set`内建命令的-o选项的有效参数（见[set内建命令](https://www.gnu.org/software/bash/manual/bash.html#The-Set-Builtin)）。
+  - `shopt`：`shopt`内建命令接受的Shell选项名称（见[Bash内建命令](https://www.gnu.org/software/bash/manual/bash.html#Bash-Builtins)）。
+  - `signal`：信号名称。
+  - `stopped`：已停止的作业名称（如果作业控制处于活动状态）。
+  - `user`：用户名称。也可以指定为-u。
+  - `variable`：所有Shell变量的名称。也可以指定为-v。
+
+  
+
+  `-C command`: command is executed in a subshell environment, and its output is used as the possible completions. Arguments are passed as with the -F option.
+
+  `-C command`：在子shell环境中执行command，并将其输出用作可能的完成项。参数传递方式与-F选项相同。
+
+  `-F function`: The shell function function is executed in the current shell environment. When it is executed, `$1` is the name of the command whose arguments are being completed, `$2` is the word being completed, and $3 is the word preceding the word being completed, as described above (see [Programmable Completion](https://www.gnu.org/software/bash/manual/bash.html#Programmable-Completion)). When it finishes, the possible completions are retrieved from the value of the `COMPREPLY` array variable.
+
+  `-F function`：在当前shell环境中执行shell函数function。在执行时，`$1`是正在完成其参数的命令的名称，`$2`是正在完成的单词，$3是正在完成的单词之前的单词，如上所述（见[可编程完成](https://www.gnu.org/software/bash/manual/bash.html#Programmable-Completion)）。执行完成后，可能的完成项从`COMPREPLY`数组变量的值中检索。
+
+  `-G globpat`: The filename expansion pattern globpat is expanded to generate the possible completions.
+
+  `-G globpat`：文件名扩展模式globpat会扩展为生成可能的完成项。
+
+  `-P prefix`: prefix is added at the beginning of each possible completion after all other options have been applied.
+
+  `-P prefix`：在应用了所有其他选项后，将prefix添加到每个可能的完成项的开头。
+
+  `-S suffix`: suffix is appended to each possible completion after all other options have been applied.
+
+  `-S suffix`：在应用了所有其他选项后，将suffix附加到每个可能的完成项。
+
+  `-W wordlist`: The wordlist is split using the characters in the `IFS` special variable as delimiters, and each resultant word is expanded. The possible completions are the members of the resultant list which match the word being completed.
+
+  `-W wordlist`：使用`IFS`特殊变量中的字符作为分隔符拆分wordlist，然后展开每个结果单词。可能的完成项是与正在完成的单词匹配的结果列表的成员。
+
+  `-X filterpat`: filterpat is a pattern as used for filename expansion. It is applied to the list of possible completions generated by the preceding options and arguments, and each completion matching filterpat is removed from the list. A leading `!` in filterpat negates the pattern; in this case, any completion not matching filterpat is removed.
+
+  `-X filterpat`：filterpat是用于文件名扩展的模式。它应用于由前面的选项和参数生成的可能完成列表，每个与filterpat匹配的完成项都将从列表中删除。filterpat中的前导`!`表示否定模式；在这种情况下，任何与filterpat不匹配的完成项都将被删除。
+
+  
+
+  The return value is true unless an invalid option is supplied, an option other than -p or -r is supplied without a name argument, an attempt is made to remove a completion specification for a name for which no specification exists, or an error occurs adding a completion specification.
+
+  除非提供了无效的选项，否则返回值为真；或者提供了除-p或-r以外的选项，但没有提供名称参数；或者尝试删除不存在规范的名称的完成；或者发生添加完成规范的错误。
 
 - `compopt`
 
-  `compopt [-o option] [-DEI] [+o option] [name] `Modify completion options for each name according to the options, or for the currently-executing completion if no names are supplied. If no options are given, display the completion options for each name or the current completion. The possible values of option are those valid for the `complete` builtin described above. The -D option indicates that other supplied options should apply to the “default” command completion; that is, completion attempted on a command for which no completion has previously been defined. The -E option indicates that other supplied options should apply to “empty” command completion; that is, completion attempted on a blank line. The -I option indicates that other supplied options should apply to completion on the initial non-assignment word on the line, or after a command delimiter such as `;` or `|`, which is usually command name completion.If multiple options are supplied, the -D option takes precedence over -E, and both take precedence over -IThe return value is true unless an invalid option is supplied, an attempt is made to modify the options for a name for which no completion specification exists, or an output error occurs.
+  ```
+  compopt [-o option] [-DEI] [+o option] [name]
+  ```
+  
+  Modify completion options for each name according to the options, or for the currently-executing completion if no names are supplied. If no options are given, display the completion options for each name or the current completion. The possible values of option are those valid for the `complete` builtin described above. The -D option indicates that other supplied options should apply to the “default” command completion; that is, completion attempted on a command for which no completion has previously been defined. The -E option indicates that other supplied options should apply to “empty” command completion; that is, completion attempted on a blank line. The -I option indicates that other supplied options should apply to completion on the initial non-assignment word on the line, or after a command delimiter such as `;` or `|`, which is usually command name completion.
+  
+  根据选项修改每个名称的完成选项，或者如果未提供名称，则修改当前执行的完成选项。如果未给出选项，则显示每个名称或当前完成的完成选项。选项的可能值与上述`complete`内建命令中的有效选项相同。-D选项指示其他提供的选项应用于“默认”命令完成；即尝试对未定义完成的命令进行完成。-E选项指示其他提供的选项应用于“空白”命令完成；即在空白行上尝试完成。-I选项指示其他提供的选项应用于行中的初始非赋值单词，或者在命令分隔符（如;或|）之后，通常是命令名称完成。
+  
+  If multiple options are supplied, the -D option takes precedence over -E, and both take precedence over -I
+  
+  如果提供了多个选项，则-D选项优先于-E选项，二者优先于-I选项。
+  
+  The return value is true unless an invalid option is supplied, an attempt is made to modify the options for a name for which no completion specification exists, or an output error occurs.
+  
+  返回值为真，除非提供了无效的选项，尝试修改不存在规范的名称的选项，或者输出错误发生。
 
 
 
 
 
-### 8.8 A Programmable Completion Example
+### 8.8 可编程完成示例
 
 The most common way to obtain additional completion functionality beyond the default actions `complete` and `compgen` provide is to use a shell function and bind it to a particular command using `complete -F`.
 
+​	除了`complete`和`compgen`提供的默认操作外，获得附加完成功能最常见的方法是使用一个shell函数，并将其绑定到特定命令上，使用`complete -F`。
+
 The following function provides completions for the `cd` builtin. It is a reasonably good example of what shell functions must do when used for completion. This function uses the word passed as `$2` to determine the directory name to complete. You can also use the `COMP_WORDS` array variable; the current word is indexed by the `COMP_CWORD` variable.
+
+​	以下函数为`cd`内建命令提供了完成功能。这是一个相当不错的示例，展示了在完成中使用shell函数必须做的事情。该函数使用传递的单词作为`$2`来确定要完成的目录名称。也可以使用`COMP_WORDS`数组变量；当前的单词由`COMP_CWORD`变量索引。
 
 The function relies on the `complete` and `compgen` builtins to do much of the work, adding only the things that the Bash `cd` does beyond accepting basic directory names: tilde expansion (see [Tilde Expansion](https://www.gnu.org/software/bash/manual/bash.html#Tilde-Expansion)), searching directories in $CDPATH, which is described above (see [Bourne Shell Builtins](https://www.gnu.org/software/bash/manual/bash.html#Bourne-Shell-Builtins)), and basic support for the `cdable_vars` shell option (see [The Shopt Builtin](https://www.gnu.org/software/bash/manual/bash.html#The-Shopt-Builtin)). `_comp_cd` modifies the value of IFS so that it contains only a newline to accommodate file names containing spaces and tabs – `compgen` prints the possible completions it generates one per line.
 
+​	这个函数依赖于`complete`和`compgen`内建命令来完成大部分工作，只添加了Bash `cd`完成的基本目录名称接受以外的功能：波浪号扩展（参见[波浪号扩展](https://www.gnu.org/software/bash/manual/bash.html#Tilde-Expansion)），在$CDPATH中搜索目录（如上所述，参见[Bourne Shell内建命令](https://www.gnu.org/software/bash/manual/bash.html#Bourne-Shell-Builtins)），以及对`cdable_vars` shell选项的基本支持（参见[shopt内建命令](https://www.gnu.org/software/bash/manual/bash.html#The-Shopt-Builtin)）。`_comp_cd`修改IFS的值，以便其中仅包含换行符，以适应包含空格和制表符的文件名 - `compgen`将其生成的可能完成打印为每行一个。
+
 Possible completions go into the COMPREPLY array variable, one completion per array element. The programmable completion system retrieves the completions from there when the function returns.
+
+​	可能的完成项放入COMPREPLY数组变量中，每个数组元素一个完成项。当函数返回时，可编程完成系统从这里检索完成项。
 
 ```
 # A completion function for the cd builtin
 # based on the cd completion function from the bash_completion package
+# 一个用于cd内建命令的完成函数
+# 基于bash_completion软件包中的cd完成函数
 _comp_cd()
 {
     local IFS=$' \t\n'    # normalize IFS
@@ -7220,22 +8524,27 @@ _comp_cd()
     local i j k
 
     # Tilde expansion, which also expands tilde to full pathname
+    # 波浪号扩展，还将波浪号扩展为完整路径名
     case "$2" in
     \~*)    eval cur="$2" ;;
     *)      cur=$2 ;;
     esac
 
     # no cdpath or absolute pathname -- straight directory completion
+    # 没有cdpath或绝对路径名 - 直接进行目录完成
     if [[ -z "${CDPATH:-}" ]] || [[ "$cur" == @(./*|../*|/*) ]]; then
         # compgen prints paths one per line; could also use while loop
+        # compgen按行打印路径; 也可以使用while循环
         IFS=$'\n'
         COMPREPLY=( $(compgen -d -- "$cur") )
         IFS=$' \t\n'
     # CDPATH+directories in the current directory if not in CDPATH
     else
+    # CDPATH + 在CDPATH中不存在的当前目录中的目录
         IFS=$'\n'
         _skipdot=false
         # preprocess CDPATH to convert null directory names to .
+        # 预处理CDPATH以将空目录名转换为.
         _cdpath=${CDPATH/#:/.:}
         _cdpath=${_cdpath//::/:.:}
         _cdpath=${_cdpath/%:/:.}
@@ -7243,7 +8552,7 @@ _comp_cd()
             if [[ $i -ef . ]]; then _skipdot=true; fi
             k="${#COMPREPLY[@]}"
             for j in $( compgen -d -- "$i/$cur" ); do
-                COMPREPLY[k++]=${j#$i/}        # cut off directory
+                COMPREPLY[k++]=${j#$i/}        # cut off directory # 去掉目录
             done
         done
         $_skipdot || COMPREPLY+=( $(compgen -d -- "$cur") )
@@ -7251,6 +8560,7 @@ _comp_cd()
     fi
 
     # variable names if appropriate shell option set and no completions
+    # 适用于适当的shell选项，并且没有完成项的情况下变量名
     if shopt -q cdable_vars && [[ ${#COMPREPLY[@]} -eq 0 ]]; then
         COMPREPLY=( $(compgen -v -- "$cur") )
     fi
@@ -7261,19 +8571,31 @@ _comp_cd()
 
 We install the completion function using the -F option to `complete`:
 
+​	我们使用`complete`的-F选项安装完成函数：
+
 ```
 # Tell readline to quote appropriate and append slashes to directories;
 # use the bash default completion for other arguments
+# 告诉Readline对适当的内容进行引用，并为目录添加斜杠；
+# 对其他参数使用bash默认的完成
 complete -o filenames -o nospace -o bashdefault -F _comp_cd cd
 ```
 
-Since we'd like Bash and Readline to take care of some of the other details for us, we use several other options to tell Bash and Readline what to do. The -o filenames option tells Readline that the possible completions should be treated as filenames, and quoted appropriately. That option will also cause Readline to append a slash to filenames it can determine are directories (which is why we might want to extend `_comp_cd` to append a slash if we`re using directories found via CDPATH: Readline can't tell those completions are directories). The -o nospace option tells Readline to not append a space character to the directory name, in case we want to append to it. The -o bashdefault option brings in the rest of the "Bash default" completions – possible completions that Bash adds to the default Readline set. These include things like command name completion, variable completion for words beginning with `$` or `${`, completions containing pathname expansion patterns (see [Filename Expansion](https://www.gnu.org/software/bash/manual/bash.html#Filename-Expansion)), and so on.
+Since we'd like Bash and Readline to take care of some of the other details for us, we use several other options to tell Bash and Readline what to do. The -o filenames option tells Readline that the possible completions should be treated as filenames, and quoted appropriately. That option will also cause Readline to append a slash to filenames it can determine are directories (which is why we might want to extend `_comp_cd` to append a slash if we're using directories found via CDPATH: Readline can't tell those completions are directories). The -o nospace option tells Readline to not append a space character to the directory name, in case we want to append to it. The -o bashdefault option brings in the rest of the "Bash default" completions – possible completions that Bash adds to the default Readline set. These include things like command name completion, variable completion for words beginning with `$` or `${`, completions containing pathname expansion patterns (see [Filename Expansion](https://www.gnu.org/software/bash/manual/bash.html#Filename-Expansion)), and so on.
+
+​	由于我们希望Bash和Readline帮助我们处理一些其他细节，我们使用了几个其他选项来告诉Bash和Readline要做什么。-o filenames选项告诉Readline将可能的完成视为文件名，并适当地引用它们。该选项还会导致Readline为它能确定是目录的文件名添加斜杠（这就是为什么我们可能希望扩展`_comp_cd`以在使用CDPATH找到的目录时添加斜杠：Readline不能确定这些完成是目录）。-o nospace选项告诉Readline在目录名后不要附加空格字符，以防我们想要附加内容。-o bashdefault选项引入了“Bash默认”完成的其余部分 - 可能的完成由Bash添加到默认的Readline集中。这些包括命令名称完成，以$或${开头的单词的变量完成，包含路径名扩展模式的完成（参见[文件名扩展](https://www.gnu.org/software/bash/manual/bash.html#Filename-Expansion)）等。
 
 Once installed using `complete`, `_comp_cd` will be called every time we attempt word completion for a `cd` command.
 
+​	一旦使用`complete`安装，每次我们尝试为`cd`命令进行单词完成时，都会调用`_comp_cd`。
+
 Many more examples – an extensive collection of completions for most of the common GNU, Unix, and Linux commands – are available as part of the bash_completion project. This is installed by default on many GNU/Linux distributions. Originally written by Ian Macdonald, the project now lives at https://github.com/scop/bash-completion/. There are ports for other systems such as Solaris and Mac OS X.
 
+​	更多示例 - 大多数常见的GNU、Unix和Linux命令的广泛完成集合 - 可在bash_completion项目的一部分中找到。这在许多GNU/Linux发行版上默认安装。该项目最初由Ian Macdonald编写，现在位于https://github.com/scop/bash-completion/。还有其他系统的端口，如Solaris和Mac OS X。
+
 An older version of the bash_completion package is distributed with bash in the examples/complete subdirectory.
+
+​	bash_completion软件包的旧版本在bash的examples/complete子目录中分发。
 
 
 
@@ -7284,12 +8606,6 @@ An older version of the bash_completion package is distributed with bash in the 
 ## 9 Using History Interactively
 
 This chapter describes how to use the GNU History Library interactively, from a user's standpoint. It should be considered a user's guide. For information on using the GNU History Library in other programs, see the GNU Readline Library Manual.
-
-
-
-
-
-
 
 
 
@@ -7311,195 +8627,338 @@ The shell allows control over which commands are saved on the history list. The 
 
 
 
-### 9.2 Bash History Builtins
+### 9.2 Bash历史内建命令
 
 
 
 Bash provides two builtin commands which manipulate the history list and history file.
 
+​	Bash提供了两个内建命令来操作历史记录列表和历史记录文件。
+
 - `fc`
 
-  `fc [-e ename] [-lnr] [first] [last] fc -s [pat=rep] [command] `The first form selects a range of commands from first to last from the history list and displays or edits and re-executes them. Both first and last may be specified as a string (to locate the most recent command beginning with that string) or as a number (an index into the history list, where a negative number is used as an offset from the current command number).When listing, a first or last of 0 is equivalent to -1 and -0 is equivalent to the current command (usually the `fc` command); otherwise 0 is equivalent to -1 and -0 is invalid.If last is not specified, it is set to first. If first is not specified, it is set to the previous command for editing and -16 for listing. If the -l flag is given, the commands are listed on standard output. The -n flag suppresses the command numbers when listing. The -r flag reverses the order of the listing. Otherwise, the editor given by ename is invoked on a file containing those commands. If ename is not given, the value of the following variable expansion is used: `${FCEDIT:-${EDITOR:-vi}}`. This says to use the value of the `FCEDIT` variable if set, or the value of the `EDITOR` variable if that is set, or `vi` if neither is set. When editing is complete, the edited commands are echoed and executed.In the second form, command is re-executed after each instance of pat in the selected command is replaced by rep. command is interpreted the same as first above.A useful alias to use with the `fc` command is `r='fc -s'`, so that typing `r cc` runs the last command beginning with `cc` and typing `r` re-executes the last command (see [Aliases](https://www.gnu.org/software/bash/manual/bash.html#Aliases)).
+  ```
+  fc [-e ename] [-lnr] [first] [last]
+  fc -s [pat=rep] [command]
+  ```
+
+  The first form selects a range of commands from first to last from the history list and displays or edits and re-executes them. Both first and last may be specified as a string (to locate the most recent command beginning with that string) or as a number (an index into the history list, where a negative number is used as an offset from the current command number).
+
+  第一种形式从历史记录列表中选择从first到last的命令，并显示或编辑并重新执行它们。first和last都可以被指定为一个字符串（用于定位以该字符串开头的最近的命令）或一个数字（历史记录列表中的索引，负数用作当前命令编号的偏移量）。
+
+  When listing, a first or last of 0 is equivalent to -1 and -0 is equivalent to the current command (usually the `fc` command); otherwise 0 is equivalent to -1 and -0 is invalid.
+
+  在列出命令时，first或last为0等同于-1，而-0等同于当前命令（通常是`fc`命令）；否则0等同于-1，-0无效。
+
+  If last is not specified, it is set to first. If first is not specified, it is set to the previous command for editing and -16 for listing. If the -l flag is given, the commands are listed on standard output. The -n flag suppresses the command numbers when listing. The -r flag reverses the order of the listing. Otherwise, the editor given by ename is invoked on a file containing those commands. If ename is not given, the value of the following variable expansion is used: `${FCEDIT:-${EDITOR:-vi}}`. This says to use the value of the `FCEDIT` variable if set, or the value of the `EDITOR` variable if that is set, or `vi` if neither is set. When editing is complete, the edited commands are echoed and executed.
+
+  如果未指定last，则它将被设置为first。如果未指定first，则对于编辑，它将被设置为上一条命令，并对于列表，它将被设置为-16。如果给出了-l标志，则命令将列在标准输出中。-n标志在列出时不显示命令编号。-r标志反转列出顺序。否则，将使用ename指定的编辑器打开包含这些命令的文件。如果未给出ename，则使用以下变量展开的值：`${FCEDIT:-${EDITOR:-vi}}`。这意味着如果已设置`FCEDIT`变量，则使用该值；否则，如果设置了`EDITOR`变量，则使用该值；如果两者都未设置，则使用`vi`。编辑完成后，编辑后的命令将被回显并执行。
+
+  In the second form, command is re-executed after each instance of pat in the selected command is replaced by rep. command is interpreted the same as first above.A useful alias to use with the `fc` command is `r='fc -s'`, so that typing `r cc` runs the last command beginning with `cc` and typing `r` re-executes the last command (see [Aliases](https://www.gnu.org/software/bash/manual/bash.html#Aliases)).
+
+  在第二种形式中，每次在选定的命令中找到pat的实例时，command都会被重新执行，并替换为rep。command的解释与上面的first相同。一个与`fc`命令一起使用的有用别名是`r='fc -s'`，这样键入`r cc`将运行以`cc`开头的最后一条命令，键入`r`将重新执行上一条命令（参见[别名](https://www.gnu.org/software/bash/manual/bash.html#Aliases)）。
 
 - `history`
 
-  `history [n] history -c history -d offset history -d start-end history [-anrw] [filename] history -ps arg `With no options, display the history list with line numbers. Lines prefixed with a `*` have been modified. An argument of n lists only the last n lines. If the shell variable `HISTTIMEFORMAT` is set and not null, it is used as a format string for strftime to display the time stamp associated with each displayed history entry. No intervening blank is printed between the formatted time stamp and the history line.Options, if supplied, have the following meanings:`-c`Clear the history list. This may be combined with the other options to replace the history list completely.`-d offset`Delete the history entry at position offset. If offset is positive, it should be specified as it appears when the history is displayed. If offset is negative, it is interpreted as relative to one greater than the last history position, so negative indices count back from the end of the history, and an index of `-1` refers to the current `history -d` command.`-d start-end`Delete the range of history entries between positions start and end, inclusive. Positive and negative values for start and end are interpreted as described above.`-a`Append the new history lines to the history file. These are history lines entered since the beginning of the current Bash session, but not already appended to the history file.`-n`Append the history lines not already read from the history file to the current history list. These are lines appended to the history file since the beginning of the current Bash session.`-r`Read the history file and append its contents to the history list.`-w`Write out the current history list to the history file.`-p`Perform history substitution on the args and display the result on the standard output, without storing the results in the history list.`-s`The args are added to the end of the history list as a single entry.If a filename argument is supplied when any of the -w, -r, -a, or -n options is used, Bash uses filename as the history file. If not, then the value of the `HISTFILE` variable is used.The return value is 0 unless an invalid option is encountered, an error occurs while reading or writing the history file, an invalid offset or range is supplied as an argument to -d, or the history expansion supplied as an argument to -p fails.
+  ```
+  history [n]
+  history -c
+  history -d offset
+  history -d start-end
+  history [-anrw] [filename]
+  history -ps arg
+  ```
+  
+  With no options, display the history list with line numbers. Lines prefixed with a `*` have been modified. An argument of n lists only the last n lines. If the shell variable `HISTTIMEFORMAT` is set and not null, it is used as a format string for strftime to display the time stamp associated with each displayed history entry. No intervening blank is printed between the formatted time stamp and the history line.Options, if supplied, have the following meanings:
+  
+  如果没有选项，将显示带有行号的历史记录列表。以`*`为前缀的行已经被修改。参数n只列出最后n行。如果shell变量`HISTTIMEFORMAT`被设置且不为空，则它将用作一个strftime格式字符串，用于显示与每个显示的历史记录条目相关联的时间戳。格式化时间戳和历史记录行之间不会打印空格。如果提供了选项，则它们有以下含义：
+  
+  - `-c`: Clear the history list. This may be combined with the other options to replace the history list completely.
+  
+  - `-d offset`: Delete the history entry at position offset. If offset is positive, it should be specified as it appears when the history is displayed. If offset is negative, it is interpreted as relative to one greater than the last history position, so negative indices count back from the end of the history, and an index of `-1` refers to the current `history -d` command.
+  
+  - `-d start-end`: Delete the range of history entries between positions start and end, inclusive. Positive and negative values for start and end are interpreted as described above.
+  
+  - `-a`: Append the new history lines to the history file. These are history lines entered since the beginning of the current Bash session, but not already appended to the history file.
+  
+  - `-n`: Append the history lines not already read from the history file to the current history list. These are lines appended to the history file since the beginning of the current Bash session.
+  
+  - `-r`: Read the history file and append its contents to the history list.
+  
+  - `-w`: Write out the current history list to the history file.
+  
+  - `-p`: Perform history substitution on the args and display the result on the standard output, without storing the results in the history list.
+  
+  - `-s`: The args are added to the end of the history list as a single entry.
+  - `-c`：清除历史记录列表。这可以与其他选项组合，以完全替换历史记录列表。
+  - `-d offset`：删除位于偏移量位置的历史记录条目。如果offset是正数，则应指定在显示历史记录时显示的值。如果offset是负数，则解释为相对于最后一个历史位置的一个大于一的偏移量，因此负索引从历史记录的末尾开始计数，索引为`-1`指的是当前`history -d`命令。
+  - `-d start-end`：删除位置在start和end之间（包括start和end）的历史记录条目。对于start和end的正值和负值解释与上述相同。
+  - `-a`：将新的历史记录行追加到历史记录文件。这些是自当前Bash会话开始以来输入的历史记录行，但尚未追加到历史记录文件中。
+  - `-n`：将尚未从历史记录文件读取的历史记录行追加到当前历史记录列表。这些是自当前Bash会话开始以来附加到历史记录文件的行。
+  - `-r`：读取历史记录文件并将其内容追加到历史记录列表中。
+  - `-w`：将当前历史记录列表写入历史记录文件。
+  - `-p`：在args上执行历史替换，并在标准输出中显示结果，而不将结果存储在历史记录列表中。
+  - `-s`：将args添加到历史记录列表的末尾，作为单个条目。
+  
+  
+  
+  If a filename argument is supplied when any of the -w, -r, -a, or -n options is used, Bash uses filename as the history file. If not, then the value of the `HISTFILE` variable is used.The return value is 0 unless an invalid option is encountered, an error occurs while reading or writing the history file, an invalid offset or range is supplied as an argument to -d, or the history expansion supplied as an argument to -p fails.
+  
+  ​	如果在使用-w、-r、-a或-n选项时提供了文件名参数，则Bash将filename用作历史记录文件。如果没有提供，则使用`HISTFILE`变量的值。返回值为0，除非遇到无效选项，读取或写入历史记录文件时出现错误，提供了无效的-d参数偏移量或范围，或者作为-p参数提供的历史扩展失败。
 
 
 
 
 
-### 9.3 History Expansion
+### 9.3 历史记录扩展
 
 
 
 The History library provides a history expansion feature that is similar to the history expansion provided by `csh`. This section describes the syntax used to manipulate the history information.
 
+​	历史记录库提供了一个历史记录扩展功能，类似于`csh`提供的历史记录扩展。本节描述了用于操作历史信息的语法。
+
 History expansions introduce words from the history list into the input stream, making it easy to repeat commands, insert the arguments to a previous command into the current input line, or fix errors in previous commands quickly.
+
+​	历史记录扩展将历史记录列表中的命令引入到输入流中，使得重复执行命令、将先前命令的参数插入到当前输入行或快速修复先前命令中的错误变得容易。
 
 History expansion is performed immediately after a complete line is read, before the shell breaks it into words, and is performed on each line individually. Bash attempts to inform the history expansion functions about quoting still in effect from previous lines.
 
+​	历史扩展是在完整行被读取后立即执行的，之后shell将其分解成单词，并在每行单独执行。Bash试图通知历史扩展函数前面行中仍然有效的引用。
+
 History expansion takes place in two parts. The first is to determine which line from the history list should be used during substitution. The second is to select portions of that line for inclusion into the current one. The line selected from the history is called the *event*, and the portions of that line that are acted upon are called *words*. Various *modifiers* are available to manipulate the selected words. The line is broken into words in the same fashion that Bash does, so that several words surrounded by quotes are considered one word. History expansions are introduced by the appearance of the history expansion character, which is `!` by default.
+
+​	历史扩展分为两个部分。第一个是确定在替换期间应该使用历史记录列表中的哪一行。第二个是选择该行的部分并包含到当前行中。从历史记录中选择的行称为*事件*，对该行进行操作的部分称为*单词*。各种*修饰符*可用于操作所选单词。行的分解方式与Bash相同，因此由引号括起来的多个单词被视为一个单词。历史扩展通过历史扩展字符（默认为`!`）的出现引入。
 
 History expansion implements shell-like quoting conventions: a backslash can be used to remove the special handling for the next character; single quotes enclose verbatim sequences of characters, and can be used to inhibit history expansion; and characters enclosed within double quotes may be subject to history expansion, since backslash can escape the history expansion character, but single quotes may not, since they are not treated specially within double quotes.
 
+​	历史扩展实现了类似于shell的引用约定：反斜杠可用于删除下一个字符的特殊处理；单引号用于包围字符的原样序列，并可用于禁止历史扩展；而在双引号内部的字符可能会受到历史扩展的影响，因为反斜杠可以转义历史扩展字符，但单引号不可以，因为在双引号内部不会对其进行特殊处理。
+
 When using the shell, only `\` and `'` may be used to escape the history expansion character, but the history expansion character is also treated as quoted if it immediately precedes the closing double quote in a double-quoted string.
+
+​	在使用shell时，仅`\`和`'`可用于转义历史扩展字符，但如果历史扩展字符紧跟在双引号中的闭合引号之前，则历史扩展字符也会被视为被引用。
 
 Several shell options settable with the `shopt` builtin (see [The Shopt Builtin](https://www.gnu.org/software/bash/manual/bash.html#The-Shopt-Builtin)) may be used to tailor the behavior of history expansion. If the `histverify` shell option is enabled, and Readline is being used, history substitutions are not immediately passed to the shell parser. Instead, the expanded line is reloaded into the Readline editing buffer for further modification. If Readline is being used, and the `histreedit` shell option is enabled, a failed history expansion will be reloaded into the Readline editing buffer for correction. The -p option to the `history` builtin command may be used to see what a history expansion will do before using it. The -s option to the `history` builtin may be used to add commands to the end of the history list without actually executing them, so that they are available for subsequent recall. This is most useful in conjunction with Readline.
 
+​	可以使用`shopt`内建命令（参见[The Shopt Builtin](https://www.gnu.org/software/bash/manual/bash.html#The-Shopt-Builtin)）设置的几个shell选项来定制历史扩展的行为。如果启用了`histverify` shell选项，并且使用了Readline，历史替换不会立即传递给shell解析器。相反，扩展后的行会重新加载到Readline编辑缓冲区中进行进一步修改。如果正在使用Readline，并且启用了`histreedit` shell选项，那么失败的历史扩展将被重新加载到Readline编辑缓冲区中进行修正。可以使用`history`内建命令的-p选项来查看历史扩展在使用之前会做什么。可以使用`history`内建命令的-s选项将命令添加到历史列表的末尾，而不实际执行它们，以便它们可供随后调用。这在与Readline一起使用时最有用。
+
 The shell allows control of the various characters used by the history expansion mechanism with the `histchars` variable, as explained above (see [Bash Variables](https://www.gnu.org/software/bash/manual/bash.html#Bash-Variables)). The shell uses the history comment character to mark history timestamps when writing the history file.
 
+​	Shell允许使用`histchars`变量控制历史扩展机制使用的各种字符，如上所述（参见[Bash Variables](https://www.gnu.org/software/bash/manual/bash.html#Bash-Variables)）。当写入历史文件时，Shell使用历史注释字符来标记历史时间戳。
 
 
 
-
-
-
-
-
-#### 9.3.1 Event Designators
-
-
+#### 9.3.1 事件设计符 Event Designators
 
 An event designator is a reference to a command line entry in the history list. Unless the reference is absolute, events are relative to the current position in the history list.
+
+​	事件设计符是对历史记录列表中的命令行条目的引用。除非引用是绝对的，否则事件是相对于历史记录列表中的当前位置的。
 
 - `!`
 
   Start a history substitution, except when followed by a space, tab, the end of the line, `=` or `(` (when the `extglob` shell option is enabled using the `shopt` builtin).
 
+  事件设计符是对历史记录列表中的命令行条目的引用。除非引用是绝对的，否则事件是相对于历史记录列表中的当前位置的。
+
 - `!n`
 
   Refer to command line n.
+
+  引用第n条命令行。
 
 - `!-n`
 
   Refer to the command n lines back.
 
+  引用n行之前的命令。
+
 - `!!`
 
   Refer to the previous command. This is a synonym for `!-1`.
+
+  引用前一条命令。这是`!-1`的同义词。
 
 - `!string`
 
   Refer to the most recent command preceding the current position in the history list starting with string.
 
+  引用历史记录列表中当前位置之前最近以string开头的命令。
+
 - `!?string[?]`
 
   Refer to the most recent command preceding the current position in the history list containing string. The trailing `?` may be omitted if the string is followed immediately by a newline. If string is missing, the string from the most recent search is used; it is an error if there is no previous search string.
+
+  引用历史记录列表中当前位置之前最近包含string的命令。如果string后面紧跟一个换行符，则可以省略尾随的`?`。如果缺少string，则使用最近的搜索字符串；如果没有先前的搜索字符串，则出现错误。
 
 - `^string1^string2^`
 
   Quick Substitution. Repeat the last command, replacing string1 with string2. Equivalent to `!!:s^string1^string2^`.
 
+  快速替换。重复上一条命令，并将string1替换为string2。相当于`!!:s^string1^string2^`。
+
 - `!#`
 
   The entire command line typed so far.
+  
+  到目前为止输入的整个命令行。
 
 
 
 
 
-#### 9.3.2 Word Designators
+#### 9.3.2 单词设计符 Word Designators
 
 Word designators are used to select desired words from the event. A `:` separates the event specification from the word designator. It may be omitted if the word designator begins with a `^`, `$`, `*`, `-`, or `%`. Words are numbered from the beginning of the line, with the first word being denoted by 0 (zero). Words are inserted into the current line separated by single spaces.
 
+​	单词设计符用于从事件中选择所需的单词。`:`用于将事件说明与单词设计符分隔开。如果单词设计符以`^`，`$`，`*`，`-`或`%`开头，则可以省略`:`。单词从行的开头编号，第一个单词用0（零）表示。插入到当前行的单词之间用单个空格分隔。
+
 For example,
+
+例如，
 
 - `!!`
 
   designates the preceding command. When you type this, the preceding command is repeated in toto.
 
+  表示前一个命令。当您键入此命令时，前一个命令将完全重复。
+
 - `!!:$`
 
   designates the last argument of the preceding command. This may be shortened to `!$`.
 
+  表示前一个命令的最后一个参数。可以缩写为`!$`。
+
 - `!fi:2`
 
   designates the second argument of the most recent command starting with the letters `fi`.
+  
+  表示以字母`fi`开头的最近一条命令的第二个参数。
 
 Here are the word designators:
+
+以下是单词设计符：
 
 - `0 (zero)`
 
   The `0`th word. For many applications, this is the command word.
 
+  第0个单词。对于许多应用程序，这是命令单词。
+
 - `n`
 
   The nth word.
+
+  第n个单词。
 
 - `^`
 
   The first argument; that is, word 1.
 
+  第一个参数；即第1个单词。
+
 - `$`
 
   The last argument.
+
+  最后一个参数。
 
 - `%`
 
   The first word matched by the most recent `?string?` search, if the search string begins with a character that is part of a word.
 
+  由最近的`?string?`搜索匹配的第一个单词，如果搜索字符串以单词的一部分开头。
+
 - `x-y`
 
   A range of words; `-y` abbreviates `0-y`.
+
+  由最近的`?string?`搜索匹配的第一个单词，如果搜索字符串以单词的一部分开头。
 
 - `*`
 
   All of the words, except the `0`th. This is a synonym for `1-$`. It is not an error to use `*` if there is just one word in the event; the empty string is returned in that case.
 
+  所有单词，不包括第0个。这相当于`1-$`。如果事件中只有一个单词，则使用`*`不会报错；在这种情况下，返回空字符串。
+
 - `x*`
 
   Abbreviates `x-$`
 
+  缩写为`x-$`。
+
 - `x-`
 
   Abbreviates `x-$` like `x*`, but omits the last word. If `x` is missing, it defaults to 0.
+  
+  缩写为`x-$`，类似于`x*`，但省略最后一个单词。如果缺少`x`，默认为0。
 
 If a word designator is supplied without an event specification, the previous command is used as the event.
 
+​	如果提供了单词设计符而没有事件说明，则使用上一条命令作为事件。
 
 
 
 
-#### 9.3.3 Modifiers
+
+#### 9.3.3 修饰符
 
 After the optional word designator, you can add a sequence of one or more of the following modifiers, each preceded by a `:`. These modify, or edit, the word or words selected from the history event.
+
+​	在可选的单词设计符之后，可以添加一个或多个以下修饰符序列，每个修饰符之前有一个`:`。这些修饰符修改或编辑从历史事件中选择的单词或单词组。
 
 - `h`
 
   Remove a trailing pathname component, leaving only the head.
 
+  移除尾部的路径名组件，仅保留头部。
+
 - `t`
 
   Remove all leading pathname components, leaving the tail.
+
+  移除所有前导路径名组件，仅保留尾部。
 
 - `r`
 
   Remove a trailing suffix of the form `.suffix`, leaving the basename.
 
+  移除尾部的后缀形式`.suffix`，仅保留基本名称。
+
 - `e`
 
   Remove all but the trailing suffix.
+
+  仅保留尾部的后缀。
 
 - `p`
 
   Print the new command but do not execute it.
 
+  打印新命令，但不执行它。
+
 - `q`
 
   Quote the substituted words, escaping further substitutions.
+
+  引用替换的单词，对后续替换进行转义。
 
 - `x`
 
   Quote the substituted words as with `q`, but break into words at spaces, tabs, and newlines. The `q` and `x` modifiers are mutually exclusive; the last one supplied is used.
 
+  与`q`相同，引用替换的单词，但在空格、制表符和换行符处断开成单词。`q`和`x`修饰符是互斥的；使用最后提供的那个。
+
 - `s/old/new/`
 
   Substitute new for the first occurrence of old in the event line. Any character may be used as the delimiter in place of `/`. The delimiter may be quoted in old and new with a single backslash. If `&` appears in new, it is replaced by old. A single backslash will quote the `&`. If old is null, it is set to the last old substituted, or, if no previous history substitutions took place, the last string in a !?string`[?]` search. If new is null, each matching old is deleted. The final delimiter is optional if it is the last character on the input line.
 
+  用new替换事件行中第一次出现的old。可以使用任何字符代替`/`作为分隔符。分隔符可以在old和new中用单个反斜杠进行转义。如果new中出现`&`，它将被old替换。一个单个反斜杠将引用`&`。如果old为空，则将其设置为最后一次替换的old，或者如果没有进行先前的历史替换，则设置为!?string`[?]`搜索中的最后一个字符串。如果new为空，则删除每个匹配的old。如果分隔符是输入行上的最后一个字符，则最后一个分隔符是可选的。
+
 - `&`
 
   Repeat the previous substitution.
+
+  重复上一次的替换。
 
 - `g`
 
@@ -7507,96 +8966,68 @@ After the optional word designator, you can add a sequence of one or more of the
 
   Cause changes to be applied over the entire event line. Used in conjunction with `s`, as in `gs/old/new/`, or with `&`.
 
+  将更改应用于整个事件行。与`s`一起使用，例如`gs/old/new/`，或与`&`一起使用。
+
 - `G`
 
   Apply the following `s` or `&` modifier once to each word in the event.
+  
+  对事件中的每个单词应用以下`s`或`&`修饰符一次。
 
 
 
 
 
-## 10 Installing Bash
+## 10 安装 Bash
 
 This chapter provides basic instructions for installing Bash on the various supported platforms. The distribution supports the GNU operating systems, nearly every version of Unix, and several non-Unix systems such as BeOS and Interix. Other independent ports exist for MS-DOS, OS/2, and Windows platforms.
 
+​	本章提供在不同支持的平台上安装 Bash 的基本说明。该发行版支持 GNU 操作系统，几乎支持每个版本的 Unix，以及一些非 Unix 系统，如 BeOS 和 Interix。还存在其他独立的端口用于 MS-DOS、OS/2 和 Windows 平台。
 
 
 
 
 
 
-
-
-
-
-
-
-
-### 10.1 Basic Installation
+### 10.1 基本安装
 
 
 
 These are installation instructions for Bash.
 
+​	以下是 Bash 的安装说明。
+
 The simplest way to compile Bash is:
 
-1. ```
-   cd
-   ```
+​	编译 Bash 最简单的方法是：
 
-    
+1. `cd` to the directory containing the source code and type `./configure` to configure Bash for your system. If you're using `csh` on an old version of System V, you might need to type `sh ./configure` instead to prevent `csh` from trying to execute `configure` itself.
 
-   to the directory containing the source code and type `
+2. 切换到包含源代码的目录，然后键入 `./configure` 来配置适合您系统的 Bash。如果您正在旧版本的 System V 上使用 `csh`，您可能需要键入 `sh ./configure` 以防止 `csh` 尝试执行 `configure`。
 
-   ./configure
-
-   ` to configure Bash for your system. If you`re using
-
-    
-
-   ```
-   csh
-   ```
-
-    
-
-   on an old version of System V, you might need to type `
-
-   sh ./configure
-
-   ` instead to prevent
-
-    
-
-   ```
-   csh
-   ```
-
-    
-
-   from trying to execute
-
-    
-
-   ```
-   configure
-   ```
-
-    
-
-   itself.
+   运行 `configure` 需要一些时间。运行时，它会打印消息，告知它正在检查哪些功能。
 
    Running `configure` takes some time. While running, it prints messages telling which features it is checking for.
 
-2. Type `make` to compile Bash and build the `bashbug` bug reporting script.
+3. Type `make` to compile Bash and build the `bashbug` bug reporting script.
 
-3. Optionally, type `make tests` to run the Bash test suite.
+4. 键入 `make` 来编译 Bash 并构建 `bashbug` 错误报告脚本。
 
-4. Type `make install` to install `bash` and `bashbug`. This will also install the manual pages and Info file, message translation files, some supplemental documentation, a number of example loadable builtin commands, and a set of header files for developing loadable builtins. You may need additional privileges to install `bash` to your desired destination, so `sudo make install` might be required. More information about controlling the locations where `bash` and other files are installed is below (see [Installation Names](https://www.gnu.org/software/bash/manual/bash.html#Installation-Names)).
+5. Optionally, type `make tests` to run the Bash test suite.
+
+6. 可选地，键入 `make tests` 来运行 Bash 测试套件。
+
+7. Type `make install` to install `bash` and `bashbug`. This will also install the manual pages and Info file, message translation files, some supplemental documentation, a number of example loadable builtin commands, and a set of header files for developing loadable builtins. You may need additional privileges to install `bash` to your desired destination, so `sudo make install` might be required. More information about controlling the locations where `bash` and other files are installed is below (see [Installation Names](https://www.gnu.org/software/bash/manual/bash.html#Installation-Names)).
+
+8. 键入 `make install` 来安装 `bash` 和 `bashbug`。这还将安装手册页面和 Info 文件、消息翻译文件、一些辅助文档、一组示例可加载内置命令，以及用于开发可加载内置命令的一组头文件。您可能需要额外的权限来将 `bash` 安装到所需的目标位置，因此可能需要使用 `sudo make install`。有关控制 `bash` 和其他文件安装位置的更多信息请参见下面的内容（见 [Installation Names](https://www.gnu.org/software/bash/manual/bash.html#Installation-Names)）。
 
 The `configure` shell script attempts to guess correct values for various system-dependent variables used during compilation. It uses those values to create a Makefile in each directory of the package (the top directory, the builtins, doc, po, and support directories, each directory under lib, and several others). It also creates a config.h file containing system-dependent definitions. Finally, it creates a shell script named `config.status` that you can run in the future to recreate the current configuration, a file config.cache that saves the results of its tests to speed up reconfiguring, and a file config.log containing compiler output (useful mainly for debugging `configure`). If at some point config.cache contains results you don't want to keep, you may remove or edit it.
 
+`configure` shell 脚本会尝试猜测各种依赖于系统的编译变量的正确值。它使用这些值在软件包的每个目录（顶级目录、内置命令、文档、po 和 support 目录、lib 下的每个目录以及其他几个目录）中创建 Makefile。它还会创建一个包含系统相关定义的 config.h 文件。最后，它会创建一个名为 `config.status` 的 shell 脚本，您可以在将来运行它以重新创建当前配置，一个保存其测试结果的文件 config.cache，以加快重新配置的速度，以及一个包含编译器输出的文件 config.log（主要用于调试 `configure`）。如果 config.cache 包含您不希望保留的结果，可以删除或编辑它。
+
 To find out more about the options and arguments that the `configure` script understands, type
+
+要了解 `configure` 脚本了解的选项和参数的更多信息，请在 Bash 源目录中的 Bash 提示符处键入
 
 ```
 bash-4.2$ ./configure --help
@@ -7605,6 +9036,8 @@ bash-4.2$ ./configure --help
 at the Bash prompt in your Bash source directory.
 
 If you want to build Bash in a directory separate from the source directory – to build for multiple architectures, for example – just use the full path to the configure script. The following commands will build bash in a directory under /usr/local/build from the source code in /usr/local/src/bash-4.4:
+
+如果要在与源目录分开的目录中构建 Bash（例如，为多个架构构建），只需使用 configure 脚本的完整路径。以下命令将在 /usr/local/build 目录下从 /usr/local/src/bash-4.4 源代码构建 bash：
 
 ```
 mkdir /usr/local/build/bash-4.4
@@ -7615,19 +9048,29 @@ make
 
 See [Compiling For Multiple Architectures](https://www.gnu.org/software/bash/manual/bash.html#Compiling-For-Multiple-Architectures) for more information about building in a directory separate from the source.
 
+​	有关在与源码分开的目录中构建的更多信息，请参阅[为多个架构编译](https://www.gnu.org/software/bash/manual/bash.html#Compiling-For-Multiple-Architectures)。
+
 If you need to do unusual things to compile Bash, please try to figure out how `configure` could check whether or not to do them, and mail diffs or instructions to [bash-maintainers@gnu.org](mailto:bash-maintainers@gnu.org) so they can be considered for the next release.
+
+​	如果需要进行不寻常的编译工作，请尝试弄清楚 `configure` 如何检查是否要执行它们，并将差异或说明发送到 [bash-maintainers@gnu.org](mailto:bash-maintainers@gnu.org) ，以便它们可以考虑在下一个版本中使用。
 
 The file configure.ac is used to create `configure` by a program called Autoconf. You only need configure.ac if you want to change it or regenerate `configure` using a newer version of Autoconf. If you do this, make sure you are using Autoconf version 2.69 or newer.
 
+​	configure.ac 文件用于使用名为 Autoconf 的程序创建 `configure`。只有在想要更改它或使用更新版本的 Autoconf 重新生成 `configure` 时才需要 configure.ac。如果这样做，请确保您使用的是 Autoconf 版本 2.69 或更高版本。
+
 You can remove the program binaries and object files from the source code directory by typing `make clean`. To also remove the files that `configure` created (so you can compile Bash for a different kind of computer), type `make distclean`.
 
+​	您可以通过键入 `make clean` 从源码目录中删除程序二进制文件和对象文件。要删除 `configure` 创建的文件（以便您可以为不同类型的计算机编译 Bash），请键入 `make distclean`。
 
 
 
 
-### 10.2 Compilers and Options
+
+### 10.2 编译器和选项
 
 Some systems require unusual options for compilation or linking that the `configure` script does not know about. You can give `configure` initial values for variables by setting them in the environment. Using a Bourne-compatible shell, you can do that on the command line like this:
+
+​	某些系统需要编译或链接的非常规选项，这些选项 `configure` 脚本不知道。您可以通过在环境中设置这些变量来为 `configure` 提供变量的初始值。使用 Bourne 兼容的 shell，您可以在命令行上这样做：
 
 ```
 CC=c89 CFLAGS=-O2 LIBS=-lposix ./configure
@@ -7635,23 +9078,33 @@ CC=c89 CFLAGS=-O2 LIBS=-lposix ./configure
 
 On systems that have the `env` program, you can do it like this:
 
+​	在具有 `env` 程序的系统上，可以这样做：
+
 ```
 env CPPFLAGS=-I/usr/local/include LDFLAGS=-s ./configure
 ```
 
 The configuration process uses GCC to build Bash if it is available.
 
+​	配置过程使用 GCC 来构建 Bash（如果可用）。
 
 
 
 
-### 10.3 Compiling For Multiple Architectures
+
+### 10.3 为多种架构进行编译
 
 You can compile Bash for more than one kind of computer at the same time, by placing the object files for each architecture in their own directory. To do this, you must use a version of `make` that supports the `VPATH` variable, such as GNU `make`. `cd` to the directory where you want the object files and executables to go and run the `configure` script from the source directory (see [Basic Installation](https://www.gnu.org/software/bash/manual/bash.html#Basic-Installation)). You may need to supply the --srcdir=PATH argument to tell `configure` where the source files are. `configure` automatically checks for the source code in the directory that `configure` is in and in `..`.
 
+​	您可以同时为多种类型的计算机编译 Bash，方法是将每种架构的对象文件放在自己的目录中。要做到这一点，您必须使用支持 `VPATH` 变量的 `make` 版本，比如 GNU `make`。切换到希望对象文件和可执行文件进入的目录，并从源目录运行 `configure` 脚本（参见[基本安装](https://www.gnu.org/software/bash/manual/bash.html#Basic-Installation)）。您可能需要提供 --srcdir=PATH 参数告诉 `configure` 源文件的位置。`configure` 会自动在它所在的目录和 `..` 中检查源代码。
+
 If you have to use a `make` that does not support the `VPATH` variable, you can compile Bash for one architecture at a time in the source code directory. After you have installed Bash for one architecture, use `make distclean` before reconfiguring for another architecture.
 
+​	如果您必须使用不支持 `VPATH` 变量的 `make`，则可以在源代码目录中一次为一个架构编译 Bash。在为一种架构安装了 Bash 之后，在为另一种架构重新配置之前，请使用 `make distclean`。
+
 Alternatively, if your system supports symbolic links, you can use the support/mkclone script to create a build tree which has symbolic links back to each file in the source directory. Here's an example that creates a build directory in the current directory from a source directory /usr/gnu/src/bash-2.0:
+
+​	或者，如果您的系统支持符号链接，您可以使用 support/mkclone 脚本创建一个构建目录，其中有一个符号链接返回到源目录中的每个文件。以下是一个示例，在当前目录中创建一个构建目录，该构建目录源自 /usr/gnu/src/bash-2.0：
 
 ```
 bash /usr/gnu/src/bash-2.0/support/mkclone -s /usr/gnu/src/bash-2.0 .
@@ -7659,19 +9112,29 @@ bash /usr/gnu/src/bash-2.0/support/mkclone -s /usr/gnu/src/bash-2.0 .
 
 The `mkclone` script requires Bash, so you must have already built Bash for at least one architecture before you can create build directories for other architectures.
 
+​	或者，如果您的系统支持符号链接，您可以使用 support/mkclone 脚本创建一个构建目录，其中有一个符号链接返回到源目录中的每个文件。以下是一个示例，在当前目录中创建一个构建目录，该构建目录源自 /usr/gnu/src/bash-2.0：
 
 
 
 
-### 10.4 Installation Names
+
+### 10.4 安装名称
 
 By default, `make install` will install into /usr/local/bin, /usr/local/man, etc.; that is, the *installation prefix* defaults to /usr/local. You can specify an installation prefix other than /usr/local by giving `configure` the option --prefix=PATH, or by specifying a value for the `prefix` `make` variable when running `make install` (e.g., `make install prefix=PATH`). The `prefix` variable provides a default for `exec_prefix` and other variables used when installing bash.
 
+​	默认情况下，`make install` 将安装到 /usr/local/bin、/usr/local/man 等目录；即 *安装前缀*  默认为 /usr/local。您可以通过给 `configure` 选项 --prefix=PATH 或在运行 `make install` 时指定 `prefix` `make` 变量的值来指定安装前缀（例如 `make install prefix=PATH`）。`prefix` 变量为安装 bash 时使用的 `exec_prefix` 和其他变量提供了默认值。
+
 You can specify separate installation prefixes for architecture-specific files and architecture-independent files. If you give `configure` the option --exec-prefix=PATH, `make install` will use PATH as the prefix for installing programs and libraries. Documentation and other data files will still use the regular prefix.
+
+​	您可以为架构特定的文件和与架构无关的文件指定单独的安装前缀。如果为 `configure` 提供 --exec-prefix=PATH 选项，`make install` 将使用 PATH 作为安装程序和库的前缀。文档和其他数据文件仍将使用常规前缀。
 
 If you would like to change the installation locations for a single run, you can specify these variables as arguments to `make`: `make install exec_prefix=/` will install `bash` and `bashbug` into /bin instead of the default /usr/local/bin.
 
+​	如果要在单个运行中更改安装位置，可以将这些变量作为 `make` 的参数来指定：`make install exec_prefix=/` 将 `bash` 和 `bashbug` 安装到 /bin，而不是默认的 /usr/local/bin。
+
 If you want to see the files bash will install and where it will install them without changing anything on your system, specify the variable `DESTDIR` as an argument to `make`. Its value should be the absolute directory path you'd like to use as the root of your sample installation tree. For example,
+
+​	如果要查看 bash 将安装的文件以及它们的安装位置，而不在系统上更改任何内容，请将变量 `DESTDIR` 指定为 `make` 的参数。它的值应该是样本安装树的根的绝对目录路径。例如，
 
 ```
 mkdir /fs1/bash-install
@@ -7680,41 +9143,53 @@ make install DESTDIR=/fs1/bash-install
 
 will install `bash` into /fs1/bash-install/usr/local/bin/bash, the documentation into directories within /fs1/bash-install/usr/local/share, the example loadable builtins into /fs1/bash-install/usr/local/lib/bash, and so on. You can use the usual `exec_prefix` and `prefix` variables to alter the directory paths beneath the value of `DESTDIR`.
 
+​	将 `bash` 安装到 /fs1/bash-install/usr/local/bin/bash，将文档安装到 /fs1/bash-install/usr/local/share 中的目录，将示例可加载内置命令安装到 /fs1/bash-install/usr/local/lib/bash 等等。您可以使用常规的 `exec_prefix` 和 `prefix` 变量来更改 `DESTDIR` 的值之下的目录路径。
+
 The GNU Makefile standards provide a more complete description of these variables and their effects.
 
+​	GNU Makefile 标准提供了这些变量及其影响的更完整的描述。
 
 
 
-
-### 10.5 Specifying the System Type
+### 10.5 指定系统类型
 
 There may be some features `configure` can not figure out automatically, but needs to determine by the type of host Bash will run on. Usually `configure` can figure that out, but if it prints a message saying it can not guess the host type, give it the --host=TYPE option. `TYPE` can either be a short name for the system type, such as `sun4`, or a canonical name with three fields: `CPU-COMPANY-SYSTEM` (e.g., `i386-unknown-freebsd4.2`).
 
+​	有些功能 `configure` 无法自动确定，但需要根据 Bash 将运行的主机类型来确定。通常，`configure` 可以找出它，但如果它打印出一条消息说无法猜测主机类型，则给它传递 `--host=TYPE` 选项。`TYPE` 可以是系统类型的简短名称，例如 `sun4`，或具有三个字段的规范名称：`CPU-COMPANY-SYSTEM`（例如 `i386-unknown-freebsd4.2`）。
+
 See the file support/config.sub for the possible values of each field.
 
+​	请参阅文件 support/config.sub，了解每个字段可能的值。
 
 
 
 
-### 10.6 Sharing Defaults
+
+### 10.6 共享默认设置
 
 If you want to set default values for `configure` scripts to share, you can create a site shell script called `config.site` that gives default values for variables like `CC`, `cache_file`, and `prefix`. `configure` looks for PREFIX/share/config.site if it exists, then PREFIX/etc/config.site if it exists. Or, you can set the `CONFIG_SITE` environment variable to the location of the site script. A warning: the Bash `configure` looks for a site script, but not all `configure` scripts do.
 
+​	如果要设置默认值，以供 `configure` 脚本共享，可以创建一个名为 `config.site` 的站点 shell 脚本，为变量如 `CC`、`cache_file` 和 `prefix` 提供默认值。`configure` 首先查找 PREFIX/share/config.site，如果存在，则查找 PREFIX/etc/config.site。或者，您可以将 `CONFIG_SITE` 环境变量设置为站点脚本的位置。警告：Bash 的 `configure` 会寻找站点脚本，但并不是所有的 `configure` 脚本都会这样做。
 
 
 
-
-### 10.7 Operation Controls
+### 10.7 操作控制
 
 `configure` recognizes the following options to control how it operates.
+
+​	`configure` 识别以下选项来控制其操作方式。
 
 - `--cache-file=file`
 
   Use and save the results of the tests in file instead of ./config.cache. Set file to /dev/null to disable caching, for debugging `configure`.
 
+  将测试的结果使用 file 保存在 ./config.cache 中，而不是使用 ./config.cache。将 file 设置为 /dev/null 可以禁用缓存，用于调试 `configure`。
+
 - `--help`
 
   Print a summary of the options to `configure`, and exit.
+
+  打印关于 `configure` 选项的摘要，并退出。
 
 - `--quiet`
 
@@ -7724,37 +9199,55 @@ If you want to set default values for `configure` scripts to share, you can crea
 
   Do not print messages saying which checks are being made.
 
+  不要打印提示正在进行哪些检查的消息。
+
 - `--srcdir=dir`
 
   Look for the Bash source code in directory dir. Usually `configure` can determine that directory automatically.
 
+  在目录 dir 中查找 Bash 源代码。通常，`configure` 可以自动确定该目录。
+
 - `--version`
 
   Print the version of Autoconf used to generate the `configure` script, and exit.
+  
+  打印生成 `configure` 脚本的 Autoconf 版本，并退出。
 
 `configure` also accepts some other, not widely used, boilerplate options. `configure --help` prints the complete list.
 
+​	`configure` 还接受一些其他不常用的样板选项。`configure --help` 打印完整列表。
 
 
 
 
-### 10.8 Optional Features
+
+### 10.8 可选功能
 
 The Bash `configure` has a number of --enable-feature options, where feature indicates an optional part of Bash. There are also several --with-package options, where package is something like `bash-malloc` or `purify`. To turn off the default use of a package, use --without-package. To configure Bash without a feature that is enabled by default, use --disable-feature.
 
+​	Bash 的 `configure` 有许多 --enable-feature 选项，其中 feature 表示 Bash 的可选部分。还有几个 --with-package 选项，其中 package 是诸如 `bash-malloc` 或 `purify` 的东西。要关闭默认使用的包，使用 --without-package。要在默认启用的情况下配置 Bash，使用 --disable-feature。
+
 Here is a complete list of the --enable- and --with- options that the Bash `configure` recognizes.
+
+​	下面是 Bash 的 `configure` 可识别的 --enable- 和 --with- 选项的完整列表。
 
 - `--with-afs`
 
   Define if you are using the Andrew File System from Transarc.
 
+  如果使用来自 Transarc 的 Andrew 文件系统，请定义。
+
 - `--with-bash-malloc`
 
   Use the Bash version of `malloc` in the directory lib/malloc. This is not the same `malloc` that appears in GNU libc, but an older version originally derived from the 4.2 BSD `malloc`. This `malloc` is very fast, but wastes some space on each allocation. This option is enabled by default. The NOTES file contains a list of systems for which this should be turned off, and `configure` disables this option automatically for a number of systems.
 
+  在目录 lib/malloc 中使用 Bash 版本的 `malloc`。这不是出现在 GNU libc 中的 `malloc`，而是最初来源于 4.2 BSD 的 `malloc` 的较旧版本。这个 `malloc` 非常快，但在每次分配时浪费一些空间。此选项默认启用。NOTES 文件中列出了应该关闭此选项的系统的列表，`configure` 会自动在许多系统上禁用此选项。
+
 - `--with-curses`
 
   Use the curses library instead of the termcap library. This should be supplied if your system has an inadequate or incomplete termcap database.
+
+  使用 curses 库而不是 termcap 库。如果您的系统的 termcap 数据库不足或不完整，则应提供此选项。
 
 - `--with-gnu-malloc`
 
@@ -7764,525 +9257,653 @@ Here is a complete list of the --enable- and --with- options that the Bash `conf
 
   Define this to make Bash link with a locally-installed version of Readline rather than the version in lib/readline. This works only with Readline 5.0 and later versions. If PREFIX is `yes` or not supplied, `configure` uses the values of the make variables `includedir` and `libdir`, which are subdirectories of `prefix` by default, to find the installed version of Readline if it is not in the standard system include and library directories. If PREFIX is `no`, Bash links with the version in lib/readline. If PREFIX is set to any other value, `configure` treats it as a directory pathname and looks for the installed version of Readline in subdirectories of that directory (include files in PREFIX/`include` and the library in PREFIX/`lib`).
 
+  定义此选项以使 Bash 链接到本地安装的 Readline 版本，而不是位于 lib/readline 中的版本。这仅适用于 Readline 5.0 及更高版本。如果 PREFIX 是 `yes` 或未提供，则 `configure` 使用 make 变量 `includedir` 和 `libdir` 的值，这些值默认是 `prefix` 的子目录，以查找不在标准系统包含和库目录中的已安装版本的 Readline。如果 PREFIX 是 `no`，Bash 将链接到 lib/readline 中的版本。如果 PREFIX 设置为任何其他值，`configure` 将将其视为目录路径名，并在该目录的子目录中查找已安装的 Readline 版本（include 文件位于 PREFIX/include，库位于 PREFIX/lib）。
+
 - `--with-libintl-prefix[=PREFIX]`
 
   Define this to make Bash link with a locally-installed version of the libintl library instead of the version in lib/intl.
+
+  定义此选项以使 Bash 链接到本地安装的 libintl 库版本，而不是 lib/intl 中的版本。
 
 - `--with-libiconv-prefix[=PREFIX]`
 
   Define this to make Bash look for libiconv in PREFIX instead of the standard system locations. There is no version included with Bash.
 
+  定义此选项以在 PREFIX 中查找 libiconv，而不是在标准系统位置中查找。Bash 中没有包含版本。
+
 - `--enable-minimal-config`
 
   This produces a shell with minimal features, close to the historical Bourne shell.
+  
+  这将生成一个具有最小功能的 shell，接近历史上的 Bourne shell。
 
 There are several --enable- options that alter how Bash is compiled, linked, and installed, rather than changing run-time features.
+
+​	以下是改变Bash编译、链接和安装方式的一些 --enable- 选项，而不是改变运行时功能。
 
 - `--enable-largefile`
 
   Enable support for [large files](http://www.unix.org/version2/whatsnew/lfs20mar.html) if the operating system requires special compiler options to build programs which can access large files. This is enabled by default, if the operating system provides large file support.
 
+  如果操作系统需要特殊的编译器选项来构建能够访问大文件的程序，请启用对[大文件的支持](http://www.unix.org/version2/whatsnew/lfs20mar.html)。如果操作系统提供了大文件支持，则默认启用此选项。
+
 - `--enable-profiling`
 
   This builds a Bash binary that produces profiling information to be processed by `gprof` each time it is executed.
+
+  这将构建一个 Bash 二进制文件，每次执行时都会产生 `gprof` 处理的性能分析信息。
 
 - `--enable-separate-helpfiles`
 
   Use external files for the documentation displayed by the `help` builtin instead of storing the text internally.
 
+  使用外部文件来存储由 `help` 内建命令显示的文档，而不是在内部存储文本。
+
 - `--enable-static-link`
 
   This causes Bash to be linked statically, if `gcc` is being used. This could be used to build a version to use as root's shell.
+  
+  如果正在使用 `gcc`，则会导致 Bash 静态链接。这可用于构建用作 root 的 shell 版本。
 
 The `minimal-config` option can be used to disable all of the following options, but it is processed first, so individual options may be enabled using `enable-feature`.
 
+​	`minimal-config` 选项可用于禁用以下所有选项，但它首先处理，因此可以使用 `enable-feature` 启用单个选项。
+
 All of the following options except for `alt-array-implementation`, `disabled-builtins`, `direxpand-default`, `strict-posix-default`, and `xpg-echo-default` are enabled by default, unless the operating system does not provide the necessary support.
+
+​	除了 `alt-array-implementation`、`disabled-builtins`、`direxpand-default`、`strict-posix-default` 和 `xpg-echo-default` 之外，以下所有选项默认启用，除非操作系统不提供必要的支持。
 
 - `--enable-alias`
 
   Allow alias expansion and include the `alias` and `unalias` builtins (see [Aliases](https://www.gnu.org/software/bash/manual/bash.html#Aliases)).
 
+  允许别名展开，并包含 `alias` 和 `unalias` 内建命令（参见[别名](https://www.gnu.org/software/bash/manual/bash.html#Aliases)）。
+
 - `--enable-alt-array-implementation`
 
   This builds bash using an alternate implementation of arrays (see [Arrays](https://www.gnu.org/software/bash/manual/bash.html#Arrays)) that provides faster access at the expense of using more memory (sometimes many times more, depending on how sparse an array is).
+
+  使用数组的备用实现构建 bash（参见[数组](https://www.gnu.org/software/bash/manual/bash.html#Arrays)），它提供更快的访问速度，但会使用更多的内存（取决于数组的稀疏程度，有时可能多得多）。
 
 - `--enable-arith-for-command`
 
   Include support for the alternate form of the `for` command that behaves like the C language `for` statement (see [Looping Constructs](https://www.gnu.org/software/bash/manual/bash.html#Looping-Constructs)).
 
+  包含对 `for` 命令的替代形式的支持，该替代形式的行为类似于 C 语言的 `for` 语句（参见[循环结构](https://www.gnu.org/software/bash/manual/bash.html#Looping-Constructs)）。
+
 - `--enable-array-variables`
 
   Include support for one-dimensional array shell variables (see [Arrays](https://www.gnu.org/software/bash/manual/bash.html#Arrays)).
+
+  包含对一维数组 shell 变量的支持（参见[数组](https://www.gnu.org/software/bash/manual/bash.html#Arrays)）。
 
 - `--enable-bang-history`
 
   Include support for `csh`-like history substitution (see [History Expansion](https://www.gnu.org/software/bash/manual/bash.html#History-Interaction)).
 
+  包含对类似于 `csh` 的历史替换的支持（参见[历史交互](https://www.gnu.org/software/bash/manual/bash.html#History-Interaction)）。
+
 - `--enable-brace-expansion`
 
   Include `csh`-like brace expansion ( `b{a,b}c` → `bac bbc` ). See [Brace Expansion](https://www.gnu.org/software/bash/manual/bash.html#Brace-Expansion), for a complete description.
+
+  包含对类似于 `csh` 的花括号扩展的支持（ `b{a,b}c` → `bac bbc` ）。参见[花括号扩展](https://www.gnu.org/software/bash/manual/bash.html#Brace-Expansion)获取完整的描述。
 
 - `--enable-casemod-attributes`
 
   Include support for case-modifying attributes in the `declare` builtin and assignment statements. Variables with the `uppercase` attribute, for example, will have their values converted to uppercase upon assignment.
 
+  在 `declare` 内建命令和赋值语句中包含支持大小写修改属性。例如，带有 `uppercase` 属性的变量在赋值时将其值转换为大写。
+
 - `--enable-casemod-expansion`
 
   Include support for case-modifying word expansions.
+
+  包含支持大小写修改的单词扩展。
 
 - `--enable-command-timing`
 
   Include support for recognizing `time` as a reserved word and for displaying timing statistics for the pipeline following `time` (see [Pipelines](https://www.gnu.org/software/bash/manual/bash.html#Pipelines)). This allows pipelines as well as shell builtins and functions to be timed.
 
+  包含识别 `time` 作为保留字并显示紧随 `time` 的管道的时间统计信息的支持（参见[管道](https://www.gnu.org/software/bash/manual/bash.html#Pipelines)）。这允许对管道以及 shell 内建命令和函数进行计时。
+
 - `--enable-cond-command`
 
   Include support for the `[[` conditional command. (see [Conditional Constructs](https://www.gnu.org/software/bash/manual/bash.html#Conditional-Constructs)).
+
+  包含 `[[` 条件命令的支持（参见[条件结构](https://www.gnu.org/software/bash/manual/bash.html#Conditional-Constructs)）。
 
 - `--enable-cond-regexp`
 
   Include support for matching POSIX regular expressions using the `=~` binary operator in the `[[` conditional command. (see [Conditional Constructs](https://www.gnu.org/software/bash/manual/bash.html#Conditional-Constructs)).
 
+  包含在 `[[` 条件命令中使用 `=~` 二元运算符匹配 POSIX 正则表达式的支持（参见[条件结构](https://www.gnu.org/software/bash/manual/bash.html#Conditional-Constructs)）。
+
 - `--enable-coprocesses`
 
   Include support for coprocesses and the `coproc` reserved word (see [Pipelines](https://www.gnu.org/software/bash/manual/bash.html#Pipelines)).
+
+  包含对协程和 `coproc` 保留字的支持（参见[管道](https://www.gnu.org/software/bash/manual/bash.html#Pipelines)）。
 
 - `--enable-debugger`
 
   Include support for the bash debugger (distributed separately).
 
+  包含对 Bash 调试器的支持（单独分发）。
+
 - `--enable-dev-fd-stat-broken`
 
   If calling `stat` on /dev/fd/N returns different results than calling `fstat` on file descriptor N, supply this option to enable a workaround. This has implications for conditional commands that test file attributes.
+
+  如果在 /dev/fd/N 上调用 `stat` 返回的结果与在文件描述符 N 上调用 `fstat` 返回的结果不同，请使用此选项启用解决方法。这会影响测试文件属性的条件命令。
 
 - `--enable-direxpand-default`
 
   Cause the `direxpand` shell option (see [The Shopt Builtin](https://www.gnu.org/software/bash/manual/bash.html#The-Shopt-Builtin)) to be enabled by default when the shell starts. It is normally disabled by default.
 
+  导致 `direxpand` shell 选项（参见[The Shopt Builtin](https://www.gnu.org/software/bash/manual/bash.html#The-Shopt-Builtin)）在 shell 启动时默认启用。通常情况下，默认情况下它是禁用的。
+
 - `--enable-directory-stack`
 
   Include support for a `csh`-like directory stack and the `pushd`, `popd`, and `dirs` builtins (see [The Directory Stack](https://www.gnu.org/software/bash/manual/bash.html#The-Directory-Stack)).
+
+  包含对类似于 `csh` 的目录堆栈和 `pushd`、`popd` 和 `dirs` 内建命令的支持（参见[目录堆栈](https://www.gnu.org/software/bash/manual/bash.html#The-Directory-Stack)）。
 
 - `--enable-disabled-builtins`
 
   Allow builtin commands to be invoked via `builtin xxx` even after `xxx` has been disabled using `enable -n xxx`. See [Bash Builtin Commands](https://www.gnu.org/software/bash/manual/bash.html#Bash-Builtins), for details of the `builtin` and `enable` builtin commands.
 
+  允许通过 `builtin xxx` 调用内建命令，即使使用 `enable -n xxx` 禁用了 `xxx`。有关 `builtin` 和 `enable` 内建命令的详细信息，请参阅[Bash 内建命令](https://www.gnu.org/software/bash/manual/bash.html#Bash-Builtins)。
+
 - `--enable-dparen-arithmetic`
 
   Include support for the `((…))` command (see [Conditional Constructs](https://www.gnu.org/software/bash/manual/bash.html#Conditional-Constructs)).
+
+  包含对 `((…))` 命令的支持（参见[条件结构](https://www.gnu.org/software/bash/manual/bash.html#Conditional-Constructs)）。
 
 - `--enable-extended-glob`
 
   Include support for the extended pattern matching features described above under [Pattern Matching](https://www.gnu.org/software/bash/manual/bash.html#Pattern-Matching).
 
+  包含对上面 [Pattern Matching](https://www.gnu.org/software/bash/manual/bash.html#Pattern-Matching) 下描述的扩展模式匹配功能的支持。
+
 - `--enable-extended-glob-default`
 
   Set the default value of the `extglob` shell option described above under [The Shopt Builtin](https://www.gnu.org/software/bash/manual/bash.html#The-Shopt-Builtin) to be enabled.
+
+  将 `extglob` shell 选项的默认值设置为启用（参见[The Shopt Builtin](https://www.gnu.org/software/bash/manual/bash.html#The-Shopt-Builtin)）。
 
 - `--enable-function-import`
 
   Include support for importing function definitions exported by another instance of the shell from the environment. This option is enabled by default.
 
+  包含支持从环境中导入另一个实例的 shell 导出的函数定义的支持。此选项默认启用。
+
 - `--enable-glob-asciirange-default`
 
   Set the default value of the `globasciiranges` shell option described above under [The Shopt Builtin](https://www.gnu.org/software/bash/manual/bash.html#The-Shopt-Builtin) to be enabled. This controls the behavior of character ranges when used in pattern matching bracket expressions.
+
+  将 `globasciiranges` shell 选项的默认值设置为启用（参见[The Shopt Builtin](https://www.gnu.org/software/bash/manual/bash.html#The-Shopt-Builtin)）。这控制在模式匹配方括号表达式中使用字符范围的行为。
 
 - `--enable-help-builtin`
 
   Include the `help` builtin, which displays help on shell builtins and variables (see [Bash Builtin Commands](https://www.gnu.org/software/bash/manual/bash.html#Bash-Builtins)).
 
+  包含 `help` 内建命令，用于显示关于 shell 内建命令和变量的帮助信息（参见[Bash 内建命令](https://www.gnu.org/software/bash/manual/bash.html#Bash-Builtins)）。
+
 - `--enable-history`
 
   Include command history and the `fc` and `history` builtin commands (see [Bash History Facilities](https://www.gnu.org/software/bash/manual/bash.html#Bash-History-Facilities)).
+
+  包含命令历史和 `fc`、`history` 内建命令（参见[Bash 历史设施](https://www.gnu.org/software/bash/manual/bash.html#Bash-History-Facilities)）。
 
 - `--enable-job-control`
 
   This enables the job control features (see [Job Control](https://www.gnu.org/software/bash/manual/bash.html#Job-Control)), if the operating system supports them.
 
+  如果操作系统支持作业控制，则启用作业控制功能（参见[Job Control](https://www.gnu.org/software/bash/manual/bash.html#Job-Control)）。
+
 - `--enable-multibyte`
 
   This enables support for multibyte characters if the operating system provides the necessary support.
+
+  如果操作系统提供必要的支持，则启用对多字节字符的支持。
 
 - `--enable-net-redirections`
 
   This enables the special handling of filenames of the form `/dev/tcp/host/port` and `/dev/udp/host/port` when used in redirections (see [Redirections](https://www.gnu.org/software/bash/manual/bash.html#Redirections)).
 
+  如果操作系统支持，则启用在重定向中使用 `/dev/tcp/host/port` 和 `/dev/udp/host/port` 形式的文件名的特殊处理（参见[Redirections](https://www.gnu.org/software/bash/manual/bash.html#Redirections)）。
+
 - `--enable-process-substitution`
 
   This enables process substitution (see [Process Substitution](https://www.gnu.org/software/bash/manual/bash.html#Process-Substitution)) if the operating system provides the necessary support.
+
+  如果操作系统支持，则启用在重定向中使用 `/dev/tcp/host/port` 和 `/dev/udp/host/port` 形式的文件名的特殊处理（参见[Redirections](https://www.gnu.org/software/bash/manual/bash.html#Redirections)）。
 
 - `--enable-progcomp`
 
   Enable the programmable completion facilities (see [Programmable Completion](https://www.gnu.org/software/bash/manual/bash.html#Programmable-Completion)). If Readline is not enabled, this option has no effect.
 
+  启用可编程的完成功能（参见[Programmable Completion](https://www.gnu.org/software/bash/manual/bash.html#Programmable-Completion)）。如果未启用 Readline，此选项不起作用。
+
 - `--enable-prompt-string-decoding`
 
   Turn on the interpretation of a number of backslash-escaped characters in the `$PS0`, `$PS1`, `$PS2`, and `$PS4` prompt strings. See [Controlling the Prompt](https://www.gnu.org/software/bash/manual/bash.html#Controlling-the-Prompt), for a complete list of prompt string escape sequences.
+
+  打开对 `$PS0`、`$PS1`、`$PS2` 和 `$PS4` 提示字符串中许多反斜杠转义字符的解释。请参阅[控制提示符](https://www.gnu.org/software/bash/manual/bash.html#Controlling-the-Prompt)，以获取提示字符串转义序列的完整列表。
 
 - `--enable-readline`
 
   Include support for command-line editing and history with the Bash version of the Readline library (see [Command Line Editing](https://www.gnu.org/software/bash/manual/bash.html#Command-Line-Editing)).
 
+  包含对 BASH 版本 Readline 库的命令行编辑和历史记录的支持（参见[Command Line Editing](https://www.gnu.org/software/bash/manual/bash.html#Command-Line-Editing)）。
+
 - `--enable-restricted`
 
   Include support for a *restricted shell*. If this is enabled, Bash, when called as `rbash`, enters a restricted mode. See [The Restricted Shell](https://www.gnu.org/software/bash/manual/bash.html#The-Restricted-Shell), for a description of restricted mode.
+
+  包含对 *受限制的 shell* 的支持。如果启用，当调用为 `rbash` 时，Bash 将进入受限模式。参见[受限制的 Shell](https://www.gnu.org/software/bash/manual/bash.html#The-Restricted-Shell)以了解受限模式的描述。
 
 - `--enable-select`
 
   Include the `select` compound command, which allows the generation of simple menus (see [Conditional Constructs](https://www.gnu.org/software/bash/manual/bash.html#Conditional-Constructs)).
 
+  包含 `select` 复合命令，允许生成简单菜单（参见[条件结构](https://www.gnu.org/software/bash/manual/bash.html#Conditional-Constructs)）。
+
 - `--enable-single-help-strings`
 
   Store the text displayed by the `help` builtin as a single string for each help topic. This aids in translating the text to different languages. You may need to disable this if your compiler cannot handle very long string literals.
+
+  将 `help` 内建命令显示的文本存储为每个帮助主题的单个字符串。这有助于将文本翻译成不同的语言。如果编译器无法处理非常长的字符串文字，则可能需要禁用此选项。
 
 - `--enable-strict-posix-default`
 
   Make Bash POSIX-conformant by default (see [Bash POSIX Mode](https://www.gnu.org/software/bash/manual/bash.html#Bash-POSIX-Mode)).
 
+  使 Bash 默认符合 POSIX（参见[Bash POSIX 模式](https://www.gnu.org/software/bash/manual/bash.html#Bash-POSIX-Mode)）。
+
 - `--enable-translatable-strings`
 
   Enable support for `$"string"` translatable strings (see [Locale-Specific Translation](https://www.gnu.org/software/bash/manual/bash.html#Locale-Translation)).
+
+  启用支持 `$"string"` 可翻译字符串（参见[特定于区域设置的翻译](https://www.gnu.org/software/bash/manual/bash.html#Locale-Translation)）。
 
 - `--enable-usg-echo-default`
 
   A synonym for `--enable-xpg-echo-default`.
 
+  `--enable-xpg-echo-default` 的同义词。
+
 - `--enable-xpg-echo-default`
 
   Make the `echo` builtin expand backslash-escaped characters by default, without requiring the -e option. This sets the default value of the `xpg_echo` shell option to `on`, which makes the Bash `echo` behave more like the version specified in the Single Unix Specification, version 3. See [Bash Builtin Commands](https://www.gnu.org/software/bash/manual/bash.html#Bash-Builtins), for a description of the escape sequences that `echo` recognizes.
+  
+  默认情况下，使 `echo` 内建命令在不需要 -e 选项的情况下展开反斜杠转义字符。这将将 `xpg_echo` shell 选项的默认值设置为 `on`，使 Bash `echo` 表现更像 Single Unix Specification 版本 3 中指定的版本。请参阅[Bash 内建命令](https://www.gnu.org/software/bash/manual/bash.html#Bash-Builtins)，了解 `echo` 可识别的转义序列的描述。
 
 The file config-top.h contains C Preprocessor `#define` statements for options which are not settable from `configure`. Some of these are not meant to be changed; beware of the consequences if you do. Read the comments associated with each definition for more information about its effect.
 
+​	文件 config-top.h 包含不可从 `configure` 设置的 C 预处理器 `#define` 语句。其中一些不应该更改；如果您这样做，要注意可能产生的后果。请阅读与每个定义相关的注释，以获取有关其影响的更多信息。
 
 
 
 
-## Appendix A Reporting Bugs
+
+## 附录 A: 报告 Bug
 
 Please report all bugs you find in Bash. But first, you should make sure that it really is a bug, and that it appears in the latest version of Bash. The latest version of Bash is always available for FTP from [ftp://ftp.gnu.org/pub/gnu/bash/](ftp://ftp.gnu.org/pub/gnu/bash/) and from http://git.savannah.gnu.org/cgit/bash.git/snapshot/bash-master.tar.gz.
 
+​	请报告您在 Bash 中发现的所有 Bug。但是，请首先确保确实存在 Bug，并且它出现在最新版本的 Bash 中。最新版本的 Bash 可以通过 FTP 从 [ftp://ftp.gnu.org/pub/gnu/bash/](javascript:void(0)) 和 http://git.savannah.gnu.org/cgit/bash.git/snapshot/bash-master.tar.gz 下载。
+
 Once you have determined that a bug actually exists, use the `bashbug` command to submit a bug report. If you have a fix, you are encouraged to mail that as well! Suggestions and `philosophical` bug reports may be mailed to [bug-bash@gnu.org](mailto:bug-bash@gnu.org) or posted to the Usenet newsgroup `gnu.bash.bug`.
 
+​	一旦您确定 Bug 确实存在，可以使用 `bashbug` 命令提交 Bug 报告。如果您有修复建议，欢迎一起发送！您也可以将建议和哲学性的 Bug 报告发送至 [bug-bash@gnu.org](mailto:bug-bash@gnu.org)，或者发布到 Usenet 新闻组 `gnu.bash.bug`。
+
 All bug reports should include:
+
+​	所有 Bug 报告应包括：
 
 - The version number of Bash.
 - The hardware and operating system.
 - The compiler used to compile Bash.
 - A description of the bug behaviour.
 - A short script or `recipe` which exercises the bug and may be used to reproduce it.
+- Bash 的版本号。
+- 硬件和操作系统信息。
+- 用于编译 Bash 的编译器。
+- Bug 行为的描述。
+- 可用于重现 Bug 的简短脚本或 `recipe`。
 
 `bashbug` inserts the first three items automatically into the template it provides for filing a bug report.
 
+​	`bashbug` 会自动将前三个项目插入提供给您用于提交 Bug 报告的模板中。
+
 Please send all reports concerning this manual to [bug-bash@gnu.org](mailto:bug-bash@gnu.org).
 
+​	请将所有与本手册有关的报告发送至 [bug-bash@gnu.org](mailto:bug-bash@gnu.org)。
 
 
 
 
-## Appendix B Major Differences From The Bourne Shell
+
+## 附录 B: 与 Bourne Shell 的主要区别
 
 Bash implements essentially the same grammar, parameter and variable expansion, redirection, and quoting as the Bourne Shell. Bash uses the POSIX standard as the specification of how these features are to be implemented. There are some differences between the traditional Bourne shell and Bash; this section quickly details the differences of significance. A number of these differences are explained in greater depth in previous sections. This section uses the version of `sh` included in SVR4.2 (the last version of the historical Bourne shell) as the baseline reference.
 
+​	Bash 实现了与 Bourne Shell 基本相同的语法、参数和变量展开、重定向和引用。Bash 使用 POSIX 标准作为实现这些特性的规范。Bourne Shell 和 Bash 之间存在一些差异；本节快速介绍了主要的区别。其中一些差异在之前的章节中有更详细的解释。本节以 SVR4.2（历史上 Bourne Shell 的最后版本）中包含的 `sh` 版本作为基准参考。
+
 - Bash is POSIX-conformant, even where the POSIX specification differs from traditional `sh` behavior (see [Bash POSIX Mode](https://www.gnu.org/software/bash/manual/bash.html#Bash-POSIX-Mode)).
+
+- Bash是符合POSIX标准的，即使在POSIX规范与传统`sh`行为不同的情况下也是如此（参见[Bash POSIX Mode](https://www.gnu.org/software/bash/manual/bash.html#Bash-POSIX-Mode)）。
 
 - Bash has multi-character invocation options (see [Invoking Bash](https://www.gnu.org/software/bash/manual/bash.html#Invoking-Bash)).
 
+- Bash具有多字符调用选项（参见[Invoking Bash](https://www.gnu.org/software/bash/manual/bash.html#Invoking-Bash)）。
+
 - Bash has command-line editing (see [Command Line Editing](https://www.gnu.org/software/bash/manual/bash.html#Command-Line-Editing)) and the `bind` builtin.
+
+- Bash具有命令行编辑功能（参见[Command Line Editing](https://www.gnu.org/software/bash/manual/bash.html#Command-Line-Editing)）和`bind`内置命令。
 
 - Bash provides a programmable word completion mechanism (see [Programmable Completion](https://www.gnu.org/software/bash/manual/bash.html#Programmable-Completion)), and builtin commands `complete`, `compgen`, and `compopt`, to manipulate it.
 
+- Bash提供了可编程的单词补全机制（参见[Programmable Completion](https://www.gnu.org/software/bash/manual/bash.html#Programmable-Completion)），以及内置命令`complete`，`compgen`和`compopt`来操作它。
+
 - Bash has command history (see [Bash History Facilities](https://www.gnu.org/software/bash/manual/bash.html#Bash-History-Facilities)) and the `history` and `fc` builtins to manipulate it. The Bash history list maintains timestamp information and uses the value of the `HISTTIMEFORMAT` variable to display it.
+
+- Bash具有命令历史记录功能（参见[Bash History Facilities](https://www.gnu.org/software/bash/manual/bash.html#Bash-History-Facilities)），以及用于操作它的`history`和`fc`内置命令。 Bash历史记录列表会保留时间戳信息，并使用`HISTTIMEFORMAT`变量的值来显示它。
 
 - Bash implements `csh`-like history expansion (see [History Expansion](https://www.gnu.org/software/bash/manual/bash.html#History-Interaction)).
 
+- Bash实现了类似`csh`的历史扩展（参见[History Expansion](https://www.gnu.org/software/bash/manual/bash.html#History-Interaction)）。
+
 - Bash has one-dimensional array variables (see [Arrays](https://www.gnu.org/software/bash/manual/bash.html#Arrays)), and the appropriate variable expansions and assignment syntax to use them. Several of the Bash builtins take options to act on arrays. Bash provides a number of built-in array variables.
+
+- Bash具有一维数组变量（参见[Arrays](https://www.gnu.org/software/bash/manual/bash.html#Arrays)），以及适用于使用它们的相应变量扩展和赋值语法。 Bash内置命令中的几个可以使用选项来操作数组。 Bash提供了许多内置数组变量。
 
 - The `$'…'` quoting syntax, which expands ANSI-C backslash-escaped characters in the text between the single quotes, is supported (see [ANSI-C Quoting](https://www.gnu.org/software/bash/manual/bash.html#ANSI_002dC-Quoting)).
 
+- 支持`$'…'`引用语法，可以在单引号之间的文本中扩展ANSI-C反斜杠转义字符（参见[ANSI-C Quoting](https://www.gnu.org/software/bash/manual/bash.html#ANSI_002dC-Quoting)）。
+
 - Bash supports the `$"…"` quoting syntax to do locale-specific translation of the characters between the double quotes. The -D, --dump-strings, and --dump-po-strings invocation options list the translatable strings found in a script (see [Locale-Specific Translation](https://www.gnu.org/software/bash/manual/bash.html#Locale-Translation)).
+
+- Bash支持`$"…"`引用语法，用于对双引号之间的字符进行本地化翻译。使用`-D`、`--dump-strings`和`--dump-po-strings`调用选项，可以列出脚本中的可翻译字符串（参见[Locale-Specific Translation](https://www.gnu.org/software/bash/manual/bash.html#Locale-Translation)）。
 
 - Bash implements the `!` keyword to negate the return value of a pipeline (see [Pipelines](https://www.gnu.org/software/bash/manual/bash.html#Pipelines)). Very useful when an `if` statement needs to act only if a test fails. The Bash `-o pipefail` option to `set` will cause a pipeline to return a failure status if any command fails.
 
+- Bash实现了`!`关键字来否定管道的返回值（参见[Pipelines](https://www.gnu.org/software/bash/manual/bash.html#Pipelines)）。当`if`语句只在测试失败时才需要执行时，这非常有用。Bash的`-o pipefail`选项可导致管道返回失败状态，如果任何命令失败，则会返回失败状态。
+
 - Bash has the `time` reserved word and command timing (see [Pipelines](https://www.gnu.org/software/bash/manual/bash.html#Pipelines)). The display of the timing statistics may be controlled with the `TIMEFORMAT` variable.
+
+- Bash具有`time`保留字和命令计时功能（参见[Pipelines](https://www.gnu.org/software/bash/manual/bash.html#Pipelines)）。使用`TIMEFORMAT`变量可以控制计时统计信息的显示。
 
 - Bash implements the `for (( expr1 ; expr2 ; expr3 ))` arithmetic for command, similar to the C language (see [Looping Constructs](https://www.gnu.org/software/bash/manual/bash.html#Looping-Constructs)).
 
+- Bash实现了类似C语言的`for (( expr1 ; expr2 ; expr3 ))`循环命令（参见[Looping Constructs](https://www.gnu.org/software/bash/manual/bash.html#Looping-Constructs)）。
+
 - Bash includes the `select` compound command, which allows the generation of simple menus (see [Conditional Constructs](https://www.gnu.org/software/bash/manual/bash.html#Conditional-Constructs)).
+
+- Bash包含`select`复合命令，允许生成简单的菜单（参见[Conditional Constructs](https://www.gnu.org/software/bash/manual/bash.html#Conditional-Constructs)）。
 
 - Bash includes the `[[` compound command, which makes conditional testing part of the shell grammar (see [Conditional Constructs](https://www.gnu.org/software/bash/manual/bash.html#Conditional-Constructs)), including optional regular expression matching.
 
+- Bash包含`[[`复合命令，使条件测试成为shell语法的一部分（参见[Conditional Constructs](https://www.gnu.org/software/bash/manual/bash.html#Conditional-Constructs)），包括可选的正则表达式匹配。
+
 - Bash provides optional case-insensitive matching for the `case` and `[[` constructs.
+
+- Bash为`case`和`[[`结构提供可选的不区分大小写匹配。
 
 - Bash includes brace expansion (see [Brace Expansion](https://www.gnu.org/software/bash/manual/bash.html#Brace-Expansion)) and tilde expansion (see [Tilde Expansion](https://www.gnu.org/software/bash/manual/bash.html#Tilde-Expansion)).
 
+- Bash包含花括号展开（参见[Brace Expansion](https://www.gnu.org/software/bash/manual/bash.html#Brace-Expansion)）和波浪号展开（参见[Tilde Expansion](https://www.gnu.org/software/bash/manual/bash.html#Tilde-Expansion)）。
+
 - Bash implements command aliases and the `alias` and `unalias` builtins (see [Aliases](https://www.gnu.org/software/bash/manual/bash.html#Aliases)).
+
+- Bash实现了命令别名和`alias`、`unalias`内置命令（参见[Aliases](https://www.gnu.org/software/bash/manual/bash.html#Aliases)）。
 
 - Bash provides shell arithmetic, the `((` compound command (see [Conditional Constructs](https://www.gnu.org/software/bash/manual/bash.html#Conditional-Constructs)), and arithmetic expansion (see [Shell Arithmetic](https://www.gnu.org/software/bash/manual/bash.html#Shell-Arithmetic)).
 
+- Bash提供了shell算术，`((`复合命令（参见[Conditional Constructs](https://www.gnu.org/software/bash/manual/bash.html#Conditional-Constructs)）和算术扩展（参见[Shell Arithmetic](https://www.gnu.org/software/bash/manual/bash.html#Shell-Arithmetic)）。
+
 - Variables present in the shell's initial environment are automatically exported to child processes. The Bourne shell does not normally do this unless the variables are explicitly marked using the `export` command.
+
+- 在shell的初始环境中存在的变量会自动导出到子进程。Bourne shell通常不会这样做，除非使用`export`命令明确标记变量。
 
 - Bash supports the `+=` assignment operator, which appends to the value of the variable named on the left hand side.
 
+- Bash支持`+=`赋值运算符，用于将值附加到左边的变量。
+
 - Bash includes the POSIX pattern removal `%`, `#`, `%%` and `##` expansions to remove leading or trailing substrings from variable values (see [Shell Parameter Expansion](https://www.gnu.org/software/bash/manual/bash.html#Shell-Parameter-Expansion)).
+
+- Bash包括POSIX模式移除操作符`%`、`#`、`%%`和`##`，用于从变量值中移除前导或后缀子字符串（参见[Shell Parameter Expansion](https://www.gnu.org/software/bash/manual/bash.html#Shell-Parameter-Expansion)）。
 
 - The expansion `${#xx}`, which returns the length of `${xx}`, is supported (see [Shell Parameter Expansion](https://www.gnu.org/software/bash/manual/bash.html#Shell-Parameter-Expansion)).
 
+- 扩展`${#xx}`，用于返回`${xx}`的长度，被支持（参见[Shell Parameter Expansion](https://www.gnu.org/software/bash/manual/bash.html#Shell-Parameter-Expansion)）。
+
 - The expansion `${var:`offset`[:`length`]}`, which expands to the substring of `var`'s value of length length, beginning at offset, is present (see [Shell Parameter Expansion](https://www.gnu.org/software/bash/manual/bash.html#Shell-Parameter-Expansion)).
+
+- 扩展`${var:offset[:length]}`，用于返回`var`值的长度为length的子字符串，从offset开始（参见[Shell Parameter Expansion](https://www.gnu.org/software/bash/manual/bash.html#Shell-Parameter-Expansion)）。
 
 - The expansion `${var/[/]`pattern`[/`replacement`]}`, which matches pattern and replaces it with replacement in the value of var, is available (see [Shell Parameter Expansion](https://www.gnu.org/software/bash/manual/bash.html#Shell-Parameter-Expansion)).
 
+- 扩展`${var/[pattern[/replacement]]}`，用于匹配pattern并在var值中用replacement替换它（参见[Shell Parameter Expansion](https://www.gnu.org/software/bash/manual/bash.html#Shell-Parameter-Expansion)）。
+
 - The expansion `${!prefix*}` expansion, which expands to the names of all shell variables whose names begin with prefix, is available (see [Shell Parameter Expansion](https://www.gnu.org/software/bash/manual/bash.html#Shell-Parameter-Expansion)).
+
+- 扩展`${!prefix*}`，用于展开所有变量名以prefix开头的shell变量的名称（参见[Shell Parameter Expansion](https://www.gnu.org/software/bash/manual/bash.html#Shell-Parameter-Expansion)）。
 
 - Bash has indirect variable expansion using `${!word}` (see [Shell Parameter Expansion](https://www.gnu.org/software/bash/manual/bash.html#Shell-Parameter-Expansion)).
 
+- Bash通过`${!word}`实现了间接变量展开（参见[Shell Parameter Expansion](https://www.gnu.org/software/bash/manual/bash.html#Shell-Parameter-Expansion)）。
+
 - Bash can expand positional parameters beyond `$9` using `${num}`.
 
-- The POSIX `$()` form of command substitution is implemented (see [Command Substitution](https://www.gnu.org/software/bash/manual/bash.html#Command-Substitution)), and preferred to the Bourne shell's ```` (which is also implemented for backwards compatibility).
+- Bash可以通过`${num}`来扩展超过`$9`的位置参数。
+
+- The POSIX `$()` form of command substitution is implemented (see [Command Substitution](https://www.gnu.org/software/bash/manual/bash.html#Command-Substitution)), and preferred to the Bourne shell's \`\`  (which is also implemented for backwards compatibility).
+
+- Bash实现了POSIX `$()`命令替换形式（参见[Command Substitution](https://www.gnu.org/software/bash/manual/bash.html#Command-Substitution)），并推荐使用而不是Bourne shell的  \`\` 后者也为了向后兼容而实现）。
 
 - Bash has process substitution (see [Process Substitution](https://www.gnu.org/software/bash/manual/bash.html#Process-Substitution)).
 
+- Bash具有进程替换功能（参见[Process Substitution](https://www.gnu.org/software/bash/manual/bash.html#Process-Substitution)）。
+
 - Bash automatically assigns variables that provide information about the current user (`UID`, `EUID`, and `GROUPS`), the current host (`HOSTTYPE`, `OSTYPE`, `MACHTYPE`, and `HOSTNAME`), and the instance of Bash that is running (`BASH`, `BASH_VERSION`, and `BASH_VERSINFO`). See [Bash Variables](https://www.gnu.org/software/bash/manual/bash.html#Bash-Variables), for details.
+
+- Bash自动为当前用户（`UID`、`EUID`和`GROUPS`）、当前主机（`HOSTTYPE`、`OSTYPE`、`MACHTYPE`和`HOSTNAME`）和运行的Bash实例（`BASH`、`BASH_VERSION`和`BASH_VERSINFO`）分配变量。详见[Bash Variables](https://www.gnu.org/software/bash/manual/bash.html#Bash-Variables)。
 
 - The `IFS` variable is used to split only the results of expansion, not all words (see [Word Splitting](https://www.gnu.org/software/bash/manual/bash.html#Word-Splitting)). This closes a longstanding shell security hole.
 
+- `IFS`变量用于仅拆分扩展的结果，而不是所有单词（参见[Word Splitting](https://www.gnu.org/software/bash/manual/bash.html#Word-Splitting)）。这关闭了一个长期存在的shell安全漏洞。
+
 - The filename expansion bracket expression code uses `!` and `^` to negate the set of characters between the brackets. The Bourne shell uses only `!`.
+
+- 文件名展开方括号表达式代码使用`!`和`^`来否定括号之间字符的集合。Bourne shell仅使用`!`。
 
 - Bash implements the full set of POSIX filename expansion operators, including character classes, equivalence classes, and collating symbols (see [Filename Expansion](https://www.gnu.org/software/bash/manual/bash.html#Filename-Expansion)).
 
+- Bash实现了一整套POSIX文件名展开运算符，包括字符类、等价类和排序符号（参见[Filename Expansion](https://www.gnu.org/software/bash/manual/bash.html#Filename-Expansion)）。
+
 - Bash implements extended pattern matching features when the `extglob` shell option is enabled (see [Pattern Matching](https://www.gnu.org/software/bash/manual/bash.html#Pattern-Matching)).
+
+- 当启用`extglob` shell选项时，Bash实现了扩展的模式匹配功能（参见[Pattern Matching](https://www.gnu.org/software/bash/manual/bash.html#Pattern-Matching)）。
 
 - It is possible to have a variable and a function with the same name; `sh` does not separate the two name spaces.
 
+- 可以同时使用变量和同名函数；`sh`不会将两个名称空间分开。
+
 - Bash functions are permitted to have local variables using the `local` builtin, and thus useful recursive functions may be written (see [Bash Builtin Commands](https://www.gnu.org/software/bash/manual/bash.html#Bash-Builtins)).
+
+- Bash函数允许使用`local`内置命令来定义局部变量，从而可以编写有用的递归函数（参见[Bash Builtin Commands](https://www.gnu.org/software/bash/manual/bash.html#Bash-Builtins)）。
 
 - Variable assignments preceding commands affect only that command, even builtins and functions (see [Environment](https://www.gnu.org/software/bash/manual/bash.html#Environment)). In `sh`, all variable assignments preceding commands are global unless the command is executed from the file system.
 
+- 前置的变量赋值仅影响该命令，即使是内置命令和函数（参见[Environment](https://www.gnu.org/software/bash/manual/bash.html#Environment)）。在`sh`中，除非命令从文件系统中执行，否则所有前置的变量赋值都是全局的。
+
 - Bash performs filename expansion on filenames specified as operands to input and output redirection operators (see [Redirections](https://www.gnu.org/software/bash/manual/bash.html#Redirections)).
+
+- Bash会在作为输入和输出重定向操作符的操作数指定的文件名上执行文件名展开（参见[Redirections](https://www.gnu.org/software/bash/manual/bash.html#Redirections)）。
 
 - Bash contains the `<>` redirection operator, allowing a file to be opened for both reading and writing, and the `&>` redirection operator, for directing standard output and standard error to the same file (see [Redirections](https://www.gnu.org/software/bash/manual/bash.html#Redirections)).
 
+- Bash包含`<>`重定向操作符，允许同时为读和写打开文件，并且包含`&>`重定向操作符，用于将标准输出和标准错误重定向到同一个文件（参见[Redirections](https://www.gnu.org/software/bash/manual/bash.html#Redirections)）。
+
 - Bash includes the `<<<` redirection operator, allowing a string to be used as the standard input to a command.
+
+- Bash包含`<<<`重定向操作符，允许将字符串用作命令的标准输入。
 
 - Bash implements the `[n]<&word` and `[n]>&word` redirection operators, which move one file descriptor to another.
 
+- Bash实现了`[n]<&word`和`[n]>&word`重定向操作符，用于将一个文件描述符移动到另一个文件描述符。
+
 - Bash treats a number of filenames specially when they are used in redirection operators (see [Redirections](https://www.gnu.org/software/bash/manual/bash.html#Redirections)).
+
+- 当在重定向操作符中使用特定文件名时，Bash会对其进行特殊处理（参见[Redirections](https://www.gnu.org/software/bash/manual/bash.html#Redirections)）。
 
 - Bash can open network connections to arbitrary machines and services with the redirection operators (see [Redirections](https://www.gnu.org/software/bash/manual/bash.html#Redirections)).
 
+- Bash可以使用重定向操作符打开到任意机器和服务的网络连接（参见[Redirections](https://www.gnu.org/software/bash/manual/bash.html#Redirections)）。
+
 - The `noclobber` option is available to avoid overwriting existing files with output redirection (see [The Set Builtin](https://www.gnu.org/software/bash/manual/bash.html#The-Set-Builtin)). The `>|` redirection operator may be used to override `noclobber`.
+
+- 可用`noclobber`选项来避免使用输出重定向覆盖现有文件（参见[The Set Builtin](https://www.gnu.org/software/bash/manual/bash.html#The-Set-Builtin)）。可以使用`>|`重定向操作符来覆盖`noclobber`。
 
 - The Bash `cd` and `pwd` builtins (see [Bourne Shell Builtins](https://www.gnu.org/software/bash/manual/bash.html#Bourne-Shell-Builtins)) each take -L and -P options to switch between logical and physical modes.
 
+- Bash的`cd`和`pwd`内置命令（参见[Bourne Shell Builtins](https://www.gnu.org/software/bash/manual/bash.html#Bourne-Shell-Builtins)）都可以使用-L和-P选项在逻辑模式和物理模式之间切换。
+
 - Bash allows a function to override a builtin with the same name, and provides access to that builtin's functionality within the function via the `builtin` and `command` builtins (see [Bash Builtin Commands](https://www.gnu.org/software/bash/manual/bash.html#Bash-Builtins)).
+
+- Bash允许函数覆盖具有相同名称的内置命令，并且通过`builtin`和`command`内置命令在函数内访问内置命令的功能（参见[Bash Builtin Commands](https://www.gnu.org/software/bash/manual/bash.html#Bash-Builtins)）。
 
 - The `command` builtin allows selective disabling of functions when command lookup is performed (see [Bash Builtin Commands](https://www.gnu.org/software/bash/manual/bash.html#Bash-Builtins)).
 
+- `command`内置命令允许在执行命令查找时选择性地禁用函数（参见[Bash Builtin Commands](https://www.gnu.org/software/bash/manual/bash.html#Bash-Builtins)）。
+
 - Individual builtins may be enabled or disabled using the `enable` builtin (see [Bash Builtin Commands](https://www.gnu.org/software/bash/manual/bash.html#Bash-Builtins)).
+
+- 可以使用`enable`内置命令来启用或禁用单个内置命令（参见[Bash Builtin Commands](https://www.gnu.org/software/bash/manual/bash.html#Bash-Builtins)）。
 
 - The Bash `exec` builtin takes additional options that allow users to control the contents of the environment passed to the executed command, and what the zeroth argument to the command is to be (see [Bourne Shell Builtins](https://www.gnu.org/software/bash/manual/bash.html#Bourne-Shell-Builtins)).
 
+- Bash的`exec`内置命令接受附加选项，允许用户控制传递给执行的命令的环境内容，以及将命令的第0个参数设置为什么（参见[Bourne Shell Builtins](https://www.gnu.org/software/bash/manual/bash.html#Bourne-Shell-Builtins)）。
+
 - Shell functions may be exported to children via the environment using `export -f` (see [Shell Functions](https://www.gnu.org/software/bash/manual/bash.html#Shell-Functions)).
+
+- 使用`export -f`可以将shell函数导出到子进程的环境中（参见[Shell Functions](https://www.gnu.org/software/bash/manual/bash.html#Shell-Functions)）。
 
 - The Bash `export`, `readonly`, and `declare` builtins can take a -f option to act on shell functions, a -p option to display variables with various attributes set in a format that can be used as shell input, a -n option to remove various variable attributes, and `name=value` arguments to set variable attributes and values simultaneously.
 
+- Bash的`export`、`readonly`和`declare`内置命令可以使用`-f`选项来操作shell函数，使用`-p`选项以可以用作shell输入的格式显示具有各种属性设置的变量，使用`-n`选项来删除各种变量属性，以及通过`name=value`参数同时设置变量属性和值。
+
 - The Bash `hash` builtin allows a name to be associated with an arbitrary filename, even when that filename cannot be found by searching the `$PATH`, using `hash -p` (see [Bourne Shell Builtins](https://www.gnu.org/software/bash/manual/bash.html#Bourne-Shell-Builtins)).
+
+- Bash的`hash`内置命令允许将名称与任意文件名关联，即使在`$PATH`中无法找到该文件名，可以使用`hash -p`（参见[Bourne Shell Builtins](https://www.gnu.org/software/bash/manual/bash.html#Bourne-Shell-Builtins)）。
 
 - Bash includes a `help` builtin for quick reference to shell facilities (see [Bash Builtin Commands](https://www.gnu.org/software/bash/manual/bash.html#Bash-Builtins)).
 
+- Bash包含了`help`内置命令，用于快速查阅shell功能（参见[Bash Builtin Commands](https://www.gnu.org/software/bash/manual/bash.html#Bash-Builtins)）。
+
 - The `printf` builtin is available to display formatted output (see [Bash Builtin Commands](https://www.gnu.org/software/bash/manual/bash.html#Bash-Builtins)).
+
+- 可以使用`printf`内置命令显示格式化输出（参见[Bash Builtin Commands](https://www.gnu.org/software/bash/manual/bash.html#Bash-Builtins)）。
 
 - The Bash `read` builtin (see [Bash Builtin Commands](https://www.gnu.org/software/bash/manual/bash.html#Bash-Builtins)) will read a line ending in `\` with the -r option, and will use the `REPLY` variable as a default if no non-option arguments are supplied. The Bash `read` builtin also accepts a prompt string with the -p option and will use Readline to obtain the line when given the -e option. The `read` builtin also has additional options to control input: the -s option will turn off echoing of input characters as they are read, the -t option will allow `read` to time out if input does not arrive within a specified number of seconds, the -n option will allow reading only a specified number of characters rather than a full line, and the -d option will read until a particular character rather than newline.
 
+- Bash的`read`内置命令（参见[Bash Builtin Commands](https://www.gnu.org/software/bash/manual/bash.html#Bash-Builtins)）在使用-r选项时会读取以`\`结尾的行，并且如果没有提供非选项参数，则会使用`REPLY`变量作为默认值。Bash的`read`内置命令还接受一个-p选项作为提示字符串，并在给定-e选项时使用Readline来获取输入行。`read`内置命令还有其他控制输入的选项：-s选项用于关闭读取输入字符时的回显，-t选项允许`read`在指定的秒数内超时，如果输入未及时到达，则-n选项只允许读取指定数量的字符，而不是整行，并且-d选项将读取直到特定字符而不是换行符。
+
 - The `return` builtin may be used to abort execution of scripts executed with the `.` or `source` builtins (see [Bourne Shell Builtins](https://www.gnu.org/software/bash/manual/bash.html#Bourne-Shell-Builtins)).
+
+- 可以使用`return`内置命令来中止使用`.`或`source`内置命令执行的脚本的执行（参见[Bourne Shell Builtins](https://www.gnu.org/software/bash/manual/bash.html#Bourne-Shell-Builtins)）。
 
 - Bash includes the `shopt` builtin, for finer control of shell optional capabilities (see [The Shopt Builtin](https://www.gnu.org/software/bash/manual/bash.html#The-Shopt-Builtin)), and allows these options to be set and unset at shell invocation (see [Invoking Bash](https://www.gnu.org/software/bash/manual/bash.html#Invoking-Bash)).
 
+- Bash包含了`shopt`内置命令，用于更精细地控制shell的可选功能（参见[The Shopt Builtin](https://www.gnu.org/software/bash/manual/bash.html#The-Shopt-Builtin)），并允许在shell启动时设置和取消这些选项（参见[Invoking Bash](https://www.gnu.org/software/bash/manual/bash.html#Invoking-Bash)）。
+
 - Bash has much more optional behavior controllable with the `set` builtin (see [The Set Builtin](https://www.gnu.org/software/bash/manual/bash.html#The-Set-Builtin)).
+
+- Bash具有许多可选的行为，可以通过`set`内置命令进行控制（参见[The Set Builtin](https://www.gnu.org/software/bash/manual/bash.html#The-Set-Builtin)）。
 
 - The `-x` (xtrace) option displays commands other than simple commands when performing an execution trace (see [The Set Builtin](https://www.gnu.org/software/bash/manual/bash.html#The-Set-Builtin)).
 
+- `-x`（xtrace）选项在执行跟踪时显示除简单命令以外的命令（参见[The Set Builtin](https://www.gnu.org/software/bash/manual/bash.html#The-Set-Builtin)）。
+
 - The `test` builtin (see [Bourne Shell Builtins](https://www.gnu.org/software/bash/manual/bash.html#Bourne-Shell-Builtins)) is slightly different, as it implements the POSIX algorithm, which specifies the behavior based on the number of arguments.
+
+- `test`内置命令（参见[Bourne Shell Builtins](https://www.gnu.org/software/bash/manual/bash.html#Bourne-Shell-Builtins)）略有不同，因为它实现了POSIX算法，该算法根据参数的数量指定行为。
 
 - Bash includes the `caller` builtin, which displays the context of any active subroutine call (a shell function or a script executed with the `.` or `source` builtins). This supports the Bash debugger.
 
-- The
+- Bash包含`caller`内置命令，用于显示任何活动子例程调用（shell函数或使用`.`或`source`内置命令执行的脚本）的上下文。这支持Bash调试器。
 
-   
+- The `trap` builtin (see [Bourne Shell Builtins](https://www.gnu.org/software/bash/manual/bash.html#Bourne-Shell-Builtins)) allows a `DEBUG` pseudo-signal specification, similar to `EXIT`. Commands specified with a `DEBUG` trap are executed before every simple command, `for` command, `case` command, `select` command, every arithmetic `for` command, and before the first command executes in a shell function. The `DEBUG` trap is not inherited by shell functions unless the function has been given the `trace` attribute or the `functrace` option has been enabled using the `shopt` builtin. The `extdebug` shell option has additional effects on the `DEBUG` trap.
 
-  ```
-  trap
-  ```
-
-   
-
-  builtin (see
-
-   
-
-  Bourne Shell Builtins
-
-  ) allows a
-
-   
-
-  ```
-  DEBUG
-  ```
-
-   
-
-  pseudo-signal specification, similar to
-
-   
-
-  ```
-  EXIT
-  ```
-
-  . Commands specified with a
-
-   
-
-  ```
-  DEBUG
-  ```
-
-   
-
-  trap are executed before every simple command,
-
-   
-
-  ```
-  for
-  ```
-
-   
-
-  command,
-
-   
-
-  ```
-  case
-  ```
-
-   
-
-  command,
-
-   
-
-  ```
-  select
-  ```
-
-   
-
-  command, every arithmetic
-
-   
-
-  ```
-  for
-  ```
-
-   
-
-  command, and before the first command executes in a shell function. The
-
-   
-
-  ```
-  DEBUG
-  ```
-
-   
-
-  trap is not inherited by shell functions unless the function has been given the
-
-   
-
-  ```
-  trace
-  ```
-
-   
-
-  attribute or the
-
-   
-
-  ```
-  functrace
-  ```
-
-   
-
-  option has been enabled using the
-
-   
-
-  ```
-  shopt
-  ```
-
-   
-
-  builtin. The
-
-   
-
-  ```
-  extdebug
-  ```
-
-   
-
-  shell option has additional effects on the
-
-   
-
-  ```
-  DEBUG
-  ```
-
-   
-
-  trap.
+- `trap` 内置命令（参见[Bourne Shell Builtins](https://www.gnu.org/software/bash/manual/bash.html#Bourne-Shell-Builtins)）允许使用 `DEBUG` 伪信号规范，类似于 `EXIT`。指定了 `DEBUG` 陷阱的命令会在每个简单命令、`for` 命令、`case` 命令、`select` 命令、每个算术 `for` 命令以及在 shell 函数中第一个命令执行之前被执行。`DEBUG` 陷阱不会被 shell 函数继承，除非函数已经被赋予 `trace` 属性，或者通过 `shopt` 内置命令启用了 `functrace` 选项。`extdebug` shell 选项对 `DEBUG` 陷阱有额外的影响。
 
   The `trap` builtin (see [Bourne Shell Builtins](https://www.gnu.org/software/bash/manual/bash.html#Bourne-Shell-Builtins)) allows an `ERR` pseudo-signal specification, similar to `EXIT` and `DEBUG`. Commands specified with an `ERR` trap are executed after a simple command fails, with a few exceptions. The `ERR` trap is not inherited by shell functions unless the `-o errtrace` option to the `set` builtin is enabled.
 
+  `trap` 内置命令（参见[Bourne Shell Builtins](https://www.gnu.org/software/bash/manual/bash.html#Bourne-Shell-Builtins)）允许使用 `ERR` 伪信号规范，类似于 `EXIT` 和 `DEBUG`。指定了 `ERR` 陷阱的命令会在简单命令失败后被执行，但有几个例外情况。`ERR` 陷阱不会被 shell 函数继承，除非使用 `set` 内置命令启用了 `-o errtrace` 选项。
+  
   The `trap` builtin (see [Bourne Shell Builtins](https://www.gnu.org/software/bash/manual/bash.html#Bourne-Shell-Builtins)) allows a `RETURN` pseudo-signal specification, similar to `EXIT` and `DEBUG`. Commands specified with a `RETURN` trap are executed before execution resumes after a shell function or a shell script executed with `.` or `source` returns. The `RETURN` trap is not inherited by shell functions unless the function has been given the `trace` attribute or the `functrace` option has been enabled using the `shopt` builtin.
+
+  `trap` 内置命令（参见[Bourne Shell Builtins](https://www.gnu.org/software/bash/manual/bash.html#Bourne-Shell-Builtins)）允许使用 `RETURN` 伪信号规范，类似于 `EXIT` 和 `DEBUG`。指定了 `RETURN` 陷阱的命令会在 shell 函数或使用 `.` 或 `source` 内置命令执行的 shell 脚本返回后恢复执行之前被执行。`RETURN` 陷阱不会被 shell 函数继承，除非函数已经被赋予 `trace` 属性，或者通过 `shopt` 内置命令启用了 `functrace` 选项。
 
 - The Bash `type` builtin is more extensive and gives more information about the names it finds (see [Bash Builtin Commands](https://www.gnu.org/software/bash/manual/bash.html#Bash-Builtins)).
 
+- Bash 的 `type` 内置命令更为广泛，并提供有关所找到的名称的更多信息（参见[Bash Builtin Commands](https://www.gnu.org/software/bash/manual/bash.html#Bash-Builtins)）。
+
 - The Bash `umask` builtin permits a -p option to cause the output to be displayed in the form of a `umask` command that may be reused as input (see [Bourne Shell Builtins](https://www.gnu.org/software/bash/manual/bash.html#Bourne-Shell-Builtins)).
+
+- Bash 的 `umask` 内置命令允许使用 `-p` 选项，以使输出以 `umask` 命令的形式显示，可以重新用作输入（参见[Bourne Shell Builtins](https://www.gnu.org/software/bash/manual/bash.html#Bourne-Shell-Builtins)）。
 
 - Bash implements a `csh`-like directory stack, and provides the `pushd`, `popd`, and `dirs` builtins to manipulate it (see [The Directory Stack](https://www.gnu.org/software/bash/manual/bash.html#The-Directory-Stack)). Bash also makes the directory stack visible as the value of the `DIRSTACK` shell variable.
 
+- Bash 实现了类似于 `csh` 的目录堆栈，并提供了 `pushd`、`popd` 和 `dirs` 内置命令来对其进行操作（参见[The Directory Stack](https://www.gnu.org/software/bash/manual/bash.html#The-Directory-Stack)）。Bash 还将目录堆栈可见化为 `DIRSTACK` shell 变量的值。
+
 - Bash interprets special backslash-escaped characters in the prompt strings when interactive (see [Controlling the Prompt](https://www.gnu.org/software/bash/manual/bash.html#Controlling-the-Prompt)).
+
+- 在交互模式下，Bash 会解释提示字符串中的特殊反斜杠转义字符（参见[Controlling the Prompt](https://www.gnu.org/software/bash/manual/bash.html#Controlling-the-Prompt)）。
 
 - The Bash restricted mode is more useful (see [The Restricted Shell](https://www.gnu.org/software/bash/manual/bash.html#The-Restricted-Shell)); the SVR4.2 shell restricted mode is too limited.
 
+- Bash 的受限模式更加实用（参见[The Restricted Shell](https://www.gnu.org/software/bash/manual/bash.html#The-Restricted-Shell)）；而 SVR4.2 shell 的受限模式太过有限。
+
 - The `disown` builtin can remove a job from the internal shell job table (see [Job Control Builtins](https://www.gnu.org/software/bash/manual/bash.html#Job-Control-Builtins)) or suppress the sending of `SIGHUP` to a job when the shell exits as the result of a `SIGHUP`.
+
+- `disown` 内置命令可以从内部 shell 作业表中删除作业（参见[Job Control Builtins](https://www.gnu.org/software/bash/manual/bash.html#Job-Control-Builtins)），或在 shell 退出时作为 `SIGHUP` 结果而不发送 `SIGHUP` 给作业。
 
 - Bash includes a number of features to support a separate debugger for shell scripts.
 
+- Bash 包含许多用于支持单独的 shell 脚本调试器的功能。
+
 - The SVR4.2 shell has two privilege-related builtins (`mldmode` and `priv`) not present in Bash.
+
+- SVR4.2 shell 有两个与特权相关的内置命令（`mldmode` 和 `priv`），而 Bash 中没有这些命令。
 
 - Bash does not have the `stop` or `newgrp` builtins.
 
+- Bash 不具有 `stop` 或 `newgrp` 内置命令。
+
 - Bash does not use the `SHACCT` variable or perform shell accounting.
+
+- Bash 不使用 `SHACCT` 变量，也不执行 shell 账户管理。
 
 - The SVR4.2 `sh` uses a `TIMEOUT` variable like Bash uses `TMOUT`.
 
+- SVR4.2 `sh` 使用类似于 Bash 使用的 `TMOUT` 的 `TIMEOUT` 变量。
+
+
 More features unique to Bash may be found in [Bash Features](https://www.gnu.org/software/bash/manual/bash.html#Bash-Features).
 
+​	Bash 的更多独特功能可以在[Bash Features](https://www.gnu.org/software/bash/manual/bash.html#Bash-Features)中找到。
 
 
-### B.1 Implementation Differences From The SVR4.2 Shell
+
+### B.1 与 SVR4.2 Shell 的实现差异
 
 Since Bash is a completely new implementation, it does not suffer from many of the limitations of the SVR4.2 shell. For instance:
+
+​	由于 Bash 是一个全新的实现，因此它没有许多 SVR4.2 shell 的限制。例如： 
 
 - Bash does not fork a subshell when redirecting into or out of a shell control structure such as an `if` or `while` statement.
 - Bash does not allow unbalanced quotes. The SVR4.2 shell will silently insert a needed closing quote at `EOF` under certain circumstances. This can be the cause of some hard-to-find errors.
@@ -8294,12 +9915,22 @@ Since Bash is a completely new implementation, it does not suffer from many of t
 - Bash allows multiple option arguments when it is invoked (`-x -v`); the SVR4.2 shell allows only one option argument (`-xv`). In fact, some versions of the shell dump core if the second argument begins with a `-`.
 - The SVR4.2 shell exits a script if any builtin fails; Bash exits a script only if one of the POSIX special builtins fails, and only for certain failures, as enumerated in the POSIX standard.
 - The SVR4.2 shell behaves differently when invoked as `jsh` (it turns on job control).
+- Bash 在将输入或输出重定向到 shell 控制结构（例如 `if` 或 `while` 语句）时不会创建子 shell。
+- Bash 不允许不平衡的引号。在某些情况下，SVR4.2 shell 会在 `EOF` 处自动插入所需的闭合引号，这可能导致一些难以发现的错误。
+- SVR4.2 shell 使用了一种基于捕获 `SIGSEGV` 的复杂内存管理方案。如果从阻塞 `SIGSEGV` 的进程（例如通过使用 `system()` C 库函数调用）启动 shell，则其行为会变得不正常。
+- 为了尝试提高安全性，当没有使用 `-p` 选项启动 SVR4.2 shell 时，如果其实际和有效的 UID 和 GID 小于某个魔术阈值（通常为 100），它会将其修改。这可能导致意外结果。
+- SVR4.2 shell 不允许用户捕获 `SIGSEGV`、`SIGALRM` 或 `SIGCHLD`。
+- SVR4.2 shell 不允许取消设置 `IFS`、`MAILCHECK`、`PATH`、`PS1` 或 `PS2` 变量。
+- SVR4.2 shell 将 `^` 视为未记录的 `|` 的等效字符。
+- Bash 允许在启动时使用多个选项参数（`-x -v`）；而 SVR4.2 shell 仅允许一个选项参数（`-xv`）。事实上，某些版本的 shell 如果第二个参数以 `-` 开头，则会导致核心转储。
+- SVR4.2 shell 如果任何内置命令失败，会退出脚本；而 Bash 仅在 POSIX 特殊内置命令之一失败时才退出脚本，并且仅对特定的失败情况进行了列举，这在 POSIX 标准中有所说明。
+- 当作为 `jsh` 调用时，SVR4.2 shell 的行为不同（它会开启作业控制）。
 
 
 
 
 
-## Appendix C GNU Free Documentation License
+## 附录 C：GNU 自由文档许可证
 
 Version 1.3, 3 November 2008
 
@@ -8443,12 +10074,14 @@ of this license document, but changing it is not allowed.
 
 
 
-### ADDENDUM: How to use this License for your documents
+### 附录：如何在您的文档中使用本许可证
 
 To use this License in a document you have written, include a copy of the License in the document and put the following copyright and license notices just after the title page:
 
+​	要在您编写的文档中使用本许可证，请在文档中包含一份许可证的副本，并在标题页之后加入以下版权和许可声明：
+
 ```
-  Copyright (C)  year  your name.
+ Copyright (C)  year  your name.
   Permission is granted to copy, distribute and/or modify this document
   under the terms of the GNU Free Documentation License, Version 1.3
   or any later version published by the Free Software Foundation;
@@ -8459,6 +10092,8 @@ To use this License in a document you have written, include a copy of the Licens
 
 If you have Invariant Sections, Front-Cover Texts and Back-Cover Texts, replace the “with…Texts.” line with this:
 
+​	如果您的文档中包含不变的章节、封面文字和封底文字，请使用以下语句替换上述“with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.”行：
+
 ```
     with the Invariant Sections being list their titles, with
     the Front-Cover Texts being list, and with the Back-Cover Texts
@@ -8467,4 +10102,8 @@ If you have Invariant Sections, Front-Cover Texts and Back-Cover Texts, replace 
 
 If you have Invariant Sections without Cover Texts, or some other combination of the three, merge those two alternatives to suit the situation.
 
+​	如果您的文档中包含不变的章节但不包含封面文字和封底文字，或者包含其他三者的组合，请合并两种备选方案以适应情况。
+
 If your document contains nontrivial examples of program code, we recommend releasing these examples in parallel under your choice of free software license, such as the GNU General Public License, to permit their use in free software.
+
+​	如果您的文档包含复杂的程序代码示例，我们建议以您选择的自由软件许可证（例如GNU通用公共许可证）同时发布这些示例，以便允许它们在自由软件中使用。
