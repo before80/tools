@@ -2035,8 +2035,9 @@ bash filename arguments
   - 否则，表达式为假。
 
   
+
 4 arguments: 按照下面列出的顺序应用以下条件：
-  
+
 - 如果第一个参数是`!`，则结果是由剩余参数组成的三元表达式的否定结果。
   
 - 如果第一个参数恰好是`(`，且第四个参数恰好是`)`，则结果是对第二个和第三个参数进行的两元测试。
@@ -2215,7 +2216,7 @@ bash filename arguments
   - `echo`
 
     ```
-  echo [-neE] [arg …]
+    echo [-neE] [arg …]
     ```
 
     输出参数arg，以空格分隔，并以换行符结束。返回状态为0，除非发生写入错误。如果指定了`-n`选项，则不会输出尾随的换行符。如果使用了`-e`选项，则启用对以下转义字符的解释。`-E`选项禁用对这些转义字符的解释，即使在默认情况下系统会解释它们。可以使用`xpg_echo` shell选项动态确定`echo`是否默认扩展这些转义字符。`echo`不解释`--`表示选项结束的含义。
@@ -4839,29 +4840,30 @@ set editing-mode vi
 
   `version`：`version` 测试可用于与特定的 Readline 版本进行比较。`version` 展开为当前的 Readline 版本。可用的比较运算符包括 `=`（和 `==`）、`!=`、`<=`、`>=`、`<` 和 `>`。运算符右侧提供的版本号包括主版本号、可选的小数点和可选的次版本号（例如 `7.1`）。如果省略次版本号，则默认为 `0`。运算符可以与字符串 `version` 和版本号参数之间用空格分隔。以下示例设置一个变量，如果使用的 Readline 版本是 7.0 或更高版本：
 
-  ```
-$if version >= 7.0
+
+  ```sh
+  $if version >= 7.0
   set show-mode-in-prompt on
-$endif
+  $endif
   ```
 
   `application`：application 结构用于包含特定于应用程序的设置。每个使用 Readline 库的程序都会设置应用程序名称，您可以测试特定的值。这可用于将键序列绑定到特定程序有用的功能上。例如，以下命令添加了一个键序列，用于在 Bash 中引用当前或前一个单词：
 
-  ```
+  ```sh
   $if Bash
   # Quote the current or previous word
   "\C-xq": "\eb\"\ef\""
   $endif
-```
-  
-`variable`：variable 结构提供了对 Readline 变量和值的简单等式测试。允许使用的比较运算符有 `=`、`==` 和 `!=`。变量名必须与比较运算符用空格分隔；运算符可以与右侧值用空格分隔。可以测试字符串和布尔变量。布尔变量必须根据 on 和 off 进行测试。以下示例等同于上面描述的 `mode=emacs` 测试：
-  
-```
+  ```
+
+  `variable`：variable 结构提供了对 Readline 变量和值的简单等式测试。允许使用的比较运算符有 `=`、`==` 和 `!=`。变量名必须与比较运算符用空格分隔；运算符可以与右侧值用空格分隔。可以测试字符串和布尔变量。布尔变量必须根据 on 和 off 进行测试。以下示例等同于上面描述的 `mode=emacs` 测试：
+
+  ```sh
   $if editing-mode == emacs
   set show-mode-in-prompt on
   $endif
   ```
-  
+
   
 
 - `$endif`
@@ -4890,7 +4892,7 @@ $endif
 
 ​	以下是一个 inputrc 文件的示例。这展示了键绑定、变量赋值和条件语法。
 
-```
+  ```
 # 以下是一个 inputrc 文件的示例。
 # 这控制着使用 GNU Readline 库的程序中的行输入编辑行为。
 # 现有的程序包括 FTP、Bash 和 GDB。
@@ -4984,7 +4986,7 @@ $if Ftp
 "\C-xt": "put \M-?"
 "\M-.": yank-last-arg
 $endif
-```
+  ```
 
 
 
@@ -5575,9 +5577,9 @@ complete -D -F _completion_loader -o bashdefault -o default
 
 - `compgen`
 
-  ```
+```
   compgen [option] [word]
-  ```
+```
 
   根据选项生成单词的可能完成匹配，并将匹配结果写入标准输出。选项可以是`complete`内建命令接受的任何选项，除了-p和-r。使用-F或-C选项时，虽然可编程完成工具设置的各种shell变量可用，但它们的值可能无用。
 
@@ -5684,7 +5686,7 @@ complete -D -F _completion_loader -o bashdefault -o default
 
 ​	可能的完成项放入COMPREPLY数组变量中，每个数组元素一个完成项。当函数返回时，可编程完成系统从这里检索完成项。
 
-```
+  ```
 # 一个用于cd内建命令的完成函数
 # 基于bash_completion软件包中的cd完成函数
 _comp_cd()
@@ -5698,7 +5700,7 @@ _comp_cd()
     \~*)    eval cur="$2" ;;
     *)      cur=$2 ;;
     esac
-
+    
     # 没有cdpath或绝对路径名 - 直接进行目录完成
     if [[ -z "${CDPATH:-}" ]] || [[ "$cur" == @(./*|../*|/*) ]]; then
         # compgen按行打印路径; 也可以使用while循环
@@ -5723,15 +5725,15 @@ _comp_cd()
         $_skipdot || COMPREPLY+=( $(compgen -d -- "$cur") )
         IFS=$' \t\n'
     fi
-
+    
     # 适用于适当的shell选项，并且没有完成项的情况下变量名
     if shopt -q cdable_vars && [[ ${#COMPREPLY[@]} -eq 0 ]]; then
         COMPREPLY=( $(compgen -v -- "$cur") )
     fi
-
+    
     return 0
 }
-```
+  ```
 
 ​	我们使用`complete`的-F选项安装完成函数：
 
@@ -5787,10 +5789,10 @@ complete -o filenames -o nospace -o bashdefault -F _comp_cd cd
 
 - `fc`
 
-  ```
+```
   fc [-e ename] [-lnr] [first] [last]
   fc -s [pat=rep] [command]
-  ```
+```
 
   第一种形式从历史记录列表中选择从first到last的命令，并显示或编辑并重新执行它们。first和last都可以被指定为一个字符串（用于定位以该字符串开头的最近的命令）或一个数字（历史记录列表中的索引，负数用作当前命令编号的偏移量）。
 
@@ -6041,9 +6043,9 @@ complete -o filenames -o nospace -o bashdefault -F _comp_cd cd
 
 要了解 `configure` 脚本了解的选项和参数的更多信息，请在 Bash 源目录中的 Bash 提示符处键入
 
-```
+  ```
 bash-4.2$ ./configure --help
-```
+  ```
 
 at the Bash prompt in your Bash source directory.
 
