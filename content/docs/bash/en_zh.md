@@ -53,7 +53,7 @@ Bash is largely compatible with `sh` and incorporates useful features from the K
 
 While the GNU operating system provides other shells, including a version of `csh`, Bash is the default shell. Like other GNU software, Bash is quite portable. It currently runs on nearly every version of Unix and a few other operating systems - independently-supported ports exist for MS-DOS, OS/2, and Windows platforms.
 
-​	尽管GNU操作系统提供了其他shell，包括cs~h的版本，但Bash是默认的shell。与其他GNU软件一样，Bash非常易于移植。它目前可以运行在几乎所有版本的Unix和一些其他操作系统上，也有独立支持的端口适用于MS-DOS、OS/2和Windows平台。
+​	尽管GNU操作系统提供了其他shell，包括`csh`的版本，但Bash是默认的shell。与其他GNU软件一样，Bash非常易于移植。它目前可以运行在几乎所有版本的Unix和一些其他操作系统上，也有独立支持的端口适用于MS-DOS、OS/2和Windows平台。
 
 
 
