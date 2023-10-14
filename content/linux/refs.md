@@ -11,6 +11,14 @@ draft = false
 
 # 相关参考资源
 
+## cyberciti.biz
+
+[https://www.cyberciti.biz/](https://www.cyberciti.biz/)
+
+​	通过在该站点内搜索，可以获得各种Linux命令的使用方法、如何在各个Linux发行版或Mac OS上安装软件等等。
+
+​	但**该站点的站内搜索使用的是Google搜索**。
+
 ## 101.lug.ustc.edu.cn
 
 [https://101.lug.ustc.edu.cn/](https://101.lug.ustc.edu.cn/)
