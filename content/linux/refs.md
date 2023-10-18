@@ -19,6 +19,12 @@ draft = false
 
 ​	但**该站点的站内搜索使用的是Google搜索**。
 
+## bash.cyberciti.biz/guide/Main_Page
+
+https://bash.cyberciti.biz/guide/Main_Page
+
+​	本教程是一本初学者手册，适用于新的Linux用户/系统管理员和学习Linux或计算机科学的学生。
+
 ## 101.lug.ustc.edu.cn
 
 [https://101.lug.ustc.edu.cn/](https://101.lug.ustc.edu.cn/)
