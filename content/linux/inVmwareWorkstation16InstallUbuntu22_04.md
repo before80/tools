@@ -179,9 +179,9 @@ sudo su - root
 
 cd /etc/apt
 # 备份
-cp source.list source.list.bak
+cp sources.list sources.list.bak
 
-vi source.list
+vim sources.list
 # (a) 之后输入
 :1,$s/cn.archive.ubuntu/mirrors.aliyun/
 
@@ -250,6 +250,8 @@ sudo su - root
 # 安装 fcitx
 apt install fcitx -y
 
+# 找到 fcitx.desktop 这个文件
+find / -name "fcitx.desktop"
 # 设置fcitx开机自启动
 cp fcitx.desktop /etc/xdg/autostart/
 
@@ -328,3 +330,122 @@ reboot
 
 
 ![image-20231009095004254](inVmwareWorkstation16InstallUbuntu22_04_img/image-20231009095004254.png)
+
+
+
+## 安装docker
+
+参考：[https://developer.aliyun.com/mirror/docker-ce?spm=a2c6h.13651102.0.0.57e31b114DANS4](https://developer.aliyun.com/mirror/docker-ce?spm=a2c6h.13651102.0.0.57e31b114DANS4)
+
+```cmd
+sudo su - root
+# 卸载旧版本
+for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done
+
+#  安装必要的一些系统工具
+apt-get update
+apt-get -y install apt-transport-https ca-certificates curl software-properties-common
+
+# 安装GPG证书
+curl -fsSL https://mirrors.aliyun.com/docker-ce/linux/ubuntu/gpg | sudo apt-key add -
+# 写入软件源信息
+add-apt-repository "deb [arch=amd64] https://mirrors.aliyun.com/docker-ce/linux/ubuntu $(lsb_release -cs) stable"
+
+# 用于更新系统软件包列表。它会从软件包源下载最新的软件包信息，并将其存储在本地缓存中。
+apt-get -y update
+
+# 安装最新版本的docker-ce
+apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+# 检查当前安装的最新docker-ce的版本
+docker version
+```
+
+![image-20240407154011225](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20240407154011225.png)
+
+![image-20240407154715802](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20240407154715802.png)
+
+![image-20240407154757119](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20240407154757119.png)
+
+![image-20240407154845770](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20240407154845770.png)
+
+![image-20240407154930563](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20240407154930563.png)
+
+## 安装docker desktop
+
+参考：[https://docs.docker.com/desktop/install/ubuntu/](https://docs.docker.com/desktop/install/ubuntu//)
+
+参考：https://docs.docker.com/desktop/get-started/#credentials-management-for-linux-users
+
+```
+sudo su - root
+
+# 切换至 /tmp
+cd /tmp
+
+# 根据https://docs.docker.com/desktop/install/ubuntu/，下载到最新的deb安装包,
+curl -fsSL "https://desktop.docker.com/linux/main/amd64/139021/docker-desktop-4.28.0-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64&_gl=1*17uhrl4*_ga*NDUwMjA5NDQ2LjE3MTI0NzYzNzE.*_ga_XJWPQMJYHQ*MTcxMjQ3NjM3MC4xLjEuMTcxMjQ3NjM4My40Ny4wLjA." -o docker-desktop-4.28.0-amd64.deb
+
+apt-get install ./docker-desktop-4.28.0-amd64.deb
+
+# 安装一款VPN，例如： https://repo.trojan-cdn.com/clash-verge/Clash%20Verge%20v1.3.8/
+curl -fL "https://repo.trojan-cdn.com/clash-verge/Clash%20Verge%20v1.3.8/clash-verge_1.3.8_amd64.deb" -o clash-verge_1.3.8_amd64.deb
+
+dpkg -i clash-verge_1.3.8_amd64.deb
+
+# 使用 docker login 登入时，遇到错误，参考：https://docs.docker.com/desktop/get-started/#credentials-management-for-linux-users
+
+# 生成 gpg key
+gpg --generate-key
+
+# 输入 real name, 个人邮箱后，按照提示 移动鼠标或敲击键盘可以让生成public and secret key 更加随机。
+
+pass init <your_generated_gpg-id_public_key>
+
+# 其中的<your_generated_gpg-id_public_key>，例如 /home/lx/.gnupg/openpgp-revocs.d/DC52BE5CFFF02AFF9F5EA2EB528D238AFBE0070D.rev
+# 完整的命令例如，pass init /home/lx/.gnupg/openpgp-revocs.d/DC52BE5CFFF02AFF9F5EA2EB528D238AFBE0070D.rev
+# 如此一来，会自动将该 <your_generated_gpg-id_public_key> 上传到 你的账户底下。
+# 接着使用 docker login 就可以登入成功
+
+# 若需要 在docker desktop 上登入账号，一定记得先配置代理
+```
+
+![image-20240407160811709](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20240407160811709.png)
+
+![image-20240407161301492](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20240407161301492.png)
+
+打开docker desktop可能会遇到：Virtualisation support
+
+![image-20240407162033257](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20240407162033257.png)
+
+你需要在虚拟机中开启以下设置：
+
+![image-20240407164000600](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20240407164000600.png)
+
+
+
+![image-20240407161336049](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20240407161336049.png)
+
+使用`IMPORT`导入Clash托管配置链接
+
+![image-20240407161536129](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20240407161536129.png)
+
+打开`System Proxy`
+
+![image-20240407164552080](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20240407164552080.png)
+
+![image-20240407161717926](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20240407161717926.png)
+
+选择 `Proxies`中的`Rule`下的Proxy中的任意一个节点
+
+![image-20240407161805307](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20240407161805307.png)
+
+打开docker desktop，设置 `Proxies`
+
+![image-20240407170203621](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20240407170203621.png)
+
+![image-20240407173005950](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20240407173005950.png)
+
+![image-20240407173319104](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20240407173319104.png)
+
+![image-20240407175001734](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20240407175001734.png)
