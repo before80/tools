@@ -49,6 +49,18 @@ docker rmi <image_name>[<:tag_name>]
 
 ### 构建镜像
 
+> Tips:
+>
+> ​	`docker build` 命令是 `docker image build`、`docker buildx build`、`docker builder build`的别名。
+
+用法：
+
+```cmd
+docker build [OPTIONS] PATH
+```
+
+
+
 ```cmd
 # -t 和 --tag 标记一样
 # 在Dockerfile所在文件的目录下进行构建镜像，默认tag_name 是 latest，
@@ -184,7 +196,7 @@ docker images --format "table {{json .ID}}\t{{json .Repository}}\t{{json .Size}}
 
 
 
-##### 以json格式输出
+##### 以JSON格式输出
 
 示例
 
@@ -202,6 +214,40 @@ docker images --format "{{json .ID}} {{json .Repository}}"
 > Tips:
 >
 > 
+
+### 创建容器
+
+```cmd
+
+```
+
+
+
+### 启动容器
+
+```cmd
+docker start <container_id> | <container_name>
+```
+
+
+
+### 停止容器
+
+```cmd
+docker stop <container_id> | <container_name>
+```
+
+
+
+### 删除容器
+
+```cmd
+
+```
+
+
+
+### 查看容器
 
 ```cmd
 
@@ -233,7 +279,7 @@ docker volume
 
 ```
 
-
+创建网络
 
 ## 密钥
 
