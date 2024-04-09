@@ -442,6 +442,18 @@ sudo systemctl enable ssh
 sudo systemctl start ssh
 ```
 
+## 升级 Snap Store
+
+```
+# 这将检查 Snap Store 是否有可用的更新，并自动将其升级到最新版本
+sudo snap refresh snap-store
+
+# 若遇到以下错误：
+# error: cannot refresh "snap-store": snap "snap-store" has running apps (snap-store),pids: 2151 或其他 pids
+# 则先执行 sudo kill 2151 或 其他 pids
+# 再执行sudo snap refresh snap-store
+```
+
 
 
 ## 克隆 <- 重要
@@ -464,7 +476,7 @@ sudo systemctl start ssh
 
 
 
-## 安装docker
+## 安装 docker
 
 参考：[https://developer.aliyun.com/mirror/docker-ce?spm=a2c6h.13651102.0.0.57e31b114DANS4](https://developer.aliyun.com/mirror/docker-ce?spm=a2c6h.13651102.0.0.57e31b114DANS4)
 
@@ -502,7 +514,7 @@ docker version
 
 ![image-20240407154930563](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20240407154930563.png)
 
-## 安装docker desktop
+## 安装 docker desktop
 
 参考：[https://docs.docker.com/desktop/install/ubuntu/](https://docs.docker.com/desktop/install/ubuntu//)
 

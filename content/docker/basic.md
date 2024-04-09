@@ -138,10 +138,10 @@ docker images -f "reference='<*sub_image_name>[:*<sub_tag_name>]'"
 docker images -f "dangling=true"
 docker images -f "dangling=false"
 
-# 过滤镜像，使用 before  过滤器 (意思：在此之前创建的镜像)
+# 过滤镜像，使用 before  过滤器 (意思：在此之前创建的镜像，但不包括此)
 docker images -f "before=<image_name>[:<tag_name>] | <image_id> | <image_name@digest>"
 
-# 过滤镜像，使用 since  过滤器 (意思：在此之后创建的镜像)
+# 过滤镜像，使用 since  过滤器 (意思：在此之后创建的镜像，但不包括此)
 docker images -f "since=<image_name>[:<tag_name>] | <image_id> | <image_name@digest>"
 
 # 过滤镜像，使用 label  过滤器 (意思：label是这样的。这里的label是一种元数据，用于向镜像中添加自定义的信息，
@@ -213,15 +213,40 @@ docker images --format "{{json .ID}} {{json .Repository}}"
 
 > Tips:
 >
-> 
+> ​	`docker create` 命令是 `docker container create`的别名。
+>
+> ​	有些常见的单字符OPTIONS可以合并一起书写，例如：`-i` 和 `-t` ，可以合并成`-it`；
 
 ### 创建容器
 
-```cmd
+用法
 
+```cmd
+docker container create [OPTIONS] IMAGE [COMMAND] [ARG...]
 ```
 
+​	OPTIONS大概有100个，常见的有：
 
+- `-e`，`--env`：用于设置容器中的环境变量
+- `--env-file`：读入到容器中的环境变量文件
+- `--name`：为容器指定名称
+- `-h`，`--hostname`：用于设置容器主机名
+- `--cpus`：用于设置容器主机使用的CPU 数量
+- `-m`， `--memory`：用于对容器使用的内存进行限制
+- `--dns`：用于设置容器使用的 DNS 服务器
+- `-i`：保持容器的 STDIN 打开
+- `-t`：给容器分配一个伪终端
+- `--expose`：暴露一个或多个端口
+- `--ip`：设置容器的IPv4 地址（例如 172.30.100.104）
+- `--ip6`：设置容器的IPv6 地址（例如 2001:db8::33）
+- `-p`： 将容器的端口发布到主机
+- `--rm`：退出容器时自动移除容器
+- `--tmpfs`：挂载tmpfs目录
+- `-v`：绑定挂载卷
+- `--mout`： 将文件系统挂载到容器中
+- `--volume-driver`：容器的可选卷驱动程序
+- `--volumes-from`：从指定容器挂载卷
+- `-w`，`--workdir`：指定容器内的工作目录
 
 ### 启动容器
 
