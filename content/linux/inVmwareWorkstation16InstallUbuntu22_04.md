@@ -315,6 +315,135 @@ reboot
 
 ![image-20231009094410145](inVmwareWorkstation16InstallUbuntu22_04_img/image-20231009094410145.png)
 
+## 防火墙设置
+
+查看防火墙状态
+
+```cmd
+sudo ufw status
+```
+
+> 注：一般情况下防火墙是默认已经安装好的
+
+安装和卸载防火墙
+
+```cmd
+# 安装
+sudo apt install ufw -y
+# 安装好的防火墙默认是 inactive 的状态
+
+# 卸载
+# 注意，这样卸载并不会删除之前设置好的防火墙规则
+sudo apt remove ufw -y
+```
+
+启用防火墙
+
+```cmd
+sudo ufw enable
+```
+
+禁用防火墙
+
+```cmd
+sudo ufw disable
+```
+
+临时停用防火墙
+
+```cmd
+sudo systemctl stop ufw
+```
+
+设置允许通过防火墙的规则
+
+添加端口
+
+```cmd
+sudo ufw allow 端口号
+
+# 或
+
+sudo ufw allow 端口号/协议
+
+# 或
+sudo ufw allow 起始端口号:末尾端口号
+
+# 或
+sudo ufw allow 起始端口号:末尾端口号/协议
+```
+
+例如：
+
+```cmd
+sudo ufw allow 22
+sudo ufw allow 22/tcp
+sudo ufw allow 22/udp
+
+sudo ufw allow 8000:8888
+sudo ufw allow 8000:8888/tcp
+```
+
+去除端口
+
+```cmd
+sudo ufw delete allow 端口号
+
+# 或
+sudo ufw delete allow 端口号/协议
+
+# 或
+sudo ufw delete allow 起始端口号:末尾端口号
+
+# 或
+sudo ufw delete allow 起始端口号:末尾端口号/协议
+```
+
+例如：
+
+```cmd
+sudo ufw delete allow 22
+sudo ufw delete allow 22/tcp
+sudo ufw delete allow 22/udp
+
+sudo ufw delete allow 8000:8888
+sudo ufw delete allow 8000:8888/tcp
+```
+
+
+
+## 安装 OpenSSH 服务器
+
+```cmd
+# 查看系统是否安装了 OpenSSH 服务器
+# 若以下命令有输出，则表示已经安装了
+dpkg -l | grep openssh-server
+
+# 安装 OpenSSH 服务器
+sudo apt update
+sudo apt install -y openssh-server
+
+# 检查 SSH 服务状态
+sudo systemctl status ssh
+
+# 获取 Ubuntu 主机的 IP 地址
+ip a
+
+# 停止 SSH 服务
+sudo systemctl stop ssh
+
+# 禁用 SSH 服务
+sudo systemctl disable ssh
+
+# 启用 SSH 服务
+sudo systemctl enable ssh
+
+# 启动 SSH 服务
+sudo systemctl start ssh
+```
+
+
+
 ## 克隆 <- 重要
 
 ![image-20231009094729624](inVmwareWorkstation16InstallUbuntu22_04_img/image-20231009094729624.png)
@@ -330,6 +459,8 @@ reboot
 
 
 ![image-20231009095004254](inVmwareWorkstation16InstallUbuntu22_04_img/image-20231009095004254.png)
+
+
 
 
 
