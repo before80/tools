@@ -200,7 +200,7 @@ docker images --format "table {{json .ID}}\t{{json .Repository}}\t{{json .Size}}
 
 示例
 
-```
+```cmd
 # 示例1：
 docker images --format json
 # 示例2：
@@ -250,27 +250,167 @@ docker container create [OPTIONS] IMAGE [COMMAND] [ARG...]
 
 ### 启动容器
 
+#### 方式1
+
+​	需先存在容器。
+
+> Tips:
+>
+> ​	`docker start` 命令是 `docker container start`的别名。
+
+用法：
+
 ```cmd
-docker start <container_id> | <container_name>
+docker start [OPTIONS] CONTAINER [CONTAINER...]
 ```
 
+​	其中的 `CONTAINER` 可以是 容器ID 或 容器名称（即使用 `--name` 指定的容器名称）。
 
+示例
+
+```cmd
+docker start c2c064f75c87
+
+docker start golang
+```
+
+#### 方式2
+
+​	没有容器的情况下，将创建容器和启动容器一起操作。
+
+用法：
+
+```cmd
+docker container run [OPTIONS] IMAGE [COMMAND] [ARG...]
+```
+
+​	其中的`OPTIONS`和 `docker create` 的`OPTIONS`命令一样。
+
+### 重新启动容器
+
+> Tips:
+>
+> ​	`docker restart` 命令是 `docker container restart`的别名。
+
+```cmd
+docker restart [OPTIONS] CONTAINER [CONTAINER...]
+```
+
+| Option         | Default | Description                                                  |
+| -------------- | ------- | ------------------------------------------------------------ |
+| `-s, --signal` |         | Signal to send to the container 发送到容器的[信号]({{< ref "https://man7.org/linux/man-pages/man7/signal.7.html">}}) |
+| `-t, --time`   |         | Seconds to wait before killing the container 在终止容器之前等待几秒钟 |
 
 ### 停止容器
 
+#### 方式1
+
+> Tips:
+>
+> ​	`docker stop` 命令是 `docker container stop`的别名。
+
 ```cmd
-docker stop <container_id> | <container_name>
+docker stop [OPTIONS] CONTAINER [CONTAINER...]
+```
+
+| Option         | Default | Description                                                  |
+| -------------- | ------- | ------------------------------------------------------------ |
+| `-s, --signal` |         | Signal to send to the container 发送到容器的[信号]({{< ref "https://man7.org/linux/man-pages/man7/signal.7.html">}}) |
+| `-t, --time`   |         | Seconds to wait before killing the container 在终止容器之前等待几秒钟 |
+
+​	容器内的主进程将收到 `SIGTERM`，并在宽限期后收到  `SIGKILL` 。第一个信号可以使用容器的 Dockerfile 中的 `STOPSIGNAL` 指令进行更改，也可以用 `docker run` 命令中的 `--stop-signal` 选项指定.
+
+#### 方式2
+
+> Tips:
+>
+> ​	`docker kill` 命令是 `docker container kill `的别名。
+
+```cmd
+docker kill [OPTIONS] CONTAINER [CONTAINER...]
+```
+
+| Option         | Default | Description                                                  |
+| -------------- | ------- | ------------------------------------------------------------ |
+| `-s, --signal` |         | Signal to send to the container 发送到容器的Signal to send to the container 发送到容器的[信号]({{< ref "https://man7.org/linux/man-pages/man7/signal.7.html">}}) |
+
+​	该命令默认是向容器内的主进程发送 `SIGKILL` 信号，也可以使用 `-s, --signal` 选项指定的信号。其中的信号可以是格式为 `SIG<NAME>` 的信号名称，例如 `SIGINT` ，也可以是与内核系统调用表中的位置匹配的无符号数字，例如 `2` .
+
+​	虽然默认 ( `SIGKILL` ) 信号将终止容器，但通过 `--signal` 设置的信号可能是非终止信号，具体取决于容器的主进程。例如，大多数情况下 `SIGHUP` 信号将是非终止的，容器收到该信号后将继续运行。
+
+​	`SIG` 前缀是可选的，因此以下示例是等效的：
+
+```
+docker kill --signal=SIGHUP my_container
+docker kill --signal=HUP my_container
+docker kill --signal=1 my_container
 ```
 
 
 
 ### 删除容器
 
-```cmd
+> Tips:
+>
+> ​	`docker rm` 命令是 `docker container rm`、`docker container remove`的别名。
 
+```cmd
+docker rm [OPTIONS] CONTAINER [CONTAINER...]
+```
+
+| Option          | Default | Description                                                  |
+| --------------- | ------- | ------------------------------------------------------------ |
+| `-f, --force`   |         | Force the removal of a running container (uses SIGKILL)  强制移除正在运行的容器（使用 SIGKILL[信号]({{< ref "https://man7.org/linux/man-pages/man7/signal.7.html">}})） |
+| `-l, --link`    |         | Remove the specified link  删除指定的链接                    |
+| `-v, --volumes` |         | Remove anonymous volumes associated with the container  删除与容器关联的匿名卷 |
+
+### 重新命名容器
+
+> Tips:
+>
+> ​	`docker rename` 命令是 `docker container rename`的别名。
+
+```cmd
+docker rename CONTAINER NEW_NAME
+```
+
+示例
+
+```cmd
+docker rename my_container new_my_container
 ```
 
 
+
+### 在主机和容器间复制内容
+
+> Tips:
+>
+> ​	`docker cp` 命令是 `docker container cp`的别名。
+
+```cmd
+docker cp [OPTIONS] CONTAINER:SRC_PATH DEST_PATH
+# 或
+docker cp [OPTIONS] SRC_PATH CONTAINER:DEST_PATH
+```
+
+​	该 `docker cp` 命令将  `SRC_PATH` 的内容复制到 `DEST_PATH` 。你可以将内容`从容器的文件系统复制到宿主机`，也可以`从宿主机文件系统复制到容器内`。如果 `SRC_PATH` 或 `DEST_PATH` 指定为`-`  ，则还可以将 tar 存档从 `STDIN`流入或流出到 `STDOUT` 。 `CONTAINER` 可以是正在运行或停止的容器。 `SRC_PATH` 、 `DEST_PATH` 可以是文件或目录的路径。
+
+ 	该 `docker cp` 命令假定容器路径相对于容器 `/` 的（根）目录。这意味着提供初始正斜杠是可选的；该命令将  `compassionate_darwin:tmp/foo/myfile.txt` 和 `compassionate_darwin:/tmp/foo/myfile.txt` 视为相同路径下的文件。宿主机路径可以是绝对值或相对值。该命令将本地计算机的相对路径解释为相对于运行的 `docker cp` 当前工作目录。
+
+示例
+
+```
+# 将宿主机的文件复制到容器内
+docker cp ./some_file CONTAINER:/work
+
+# 将容器内的文件复制到宿主机中
+docker cp CONTAINER:/var/logs/ /tmp/app_logs
+```
+
+> 注意
+>
+> ​	无法复制某些系统文件，例如 `/proc` 、 `/sys` 、 `/dev` 、tmpfs下的资源以及用户在容器中创建的挂载。
 
 ### 查看容器
 
