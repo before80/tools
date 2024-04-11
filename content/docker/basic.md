@@ -11,6 +11,20 @@ draft = false
 
 ## 镜像
 
+### 搜索镜像
+
+```cmd
+docker search [OPTIONS] TERM
+```
+
+示例
+
+```cmd
+docker search nginx --limit 5 --no-trunc
+```
+
+
+
 ### 拉取镜像
 
 > Tips:
@@ -41,10 +55,14 @@ docker pull golang:1.22.2-alpine
 > Tips:
 >
 > ​	`docker rmi` 命令是 `docker image rm`、`docker image remove` 的别名。
+>
+> ​	`docker rmi`命令默认只会删除从未运行过任何容器的镜像，若需要删除已经运行过容器的镜像，则需要使用 `docker rmi -f`
 
 ```cmd
 docker rmi [OPTIONS] <image_name>[<:tag_name>] [<image_name>[<:tag_name>]...]
 ```
+
+
 
 ### 构建镜像
 
@@ -228,6 +246,7 @@ docker create [OPTIONS] IMAGE [COMMAND] [ARG...]
 - `-h`，`--hostname`：用于设置容器主机名
 - `--cpus`：用于设置容器主机使用的CPU 数量
 - `-m`， `--memory`：用于对容器使用的内存进行限制
+- `--network`：将容器连接到指定的网络
 - `--dns`：用于设置容器使用的 DNS 服务器
 - `-i`：保持容器的 STDIN 打开
 - `-t`：给容器分配一个伪终端
@@ -236,6 +255,7 @@ docker create [OPTIONS] IMAGE [COMMAND] [ARG...]
 - `--ip6`：设置容器的IPv6 地址（例如 2001:db8::33）
 - `-p`： 将容器的端口发布到主机
 - `--rm`：退出容器时自动移除容器
+- `--link`： 添加到另一个容器的链接
 - `--tmpfs`：挂载tmpfs目录
 - `-v`：绑定挂载卷
 - `--mout`： 将文件系统挂载到容器中
@@ -434,12 +454,146 @@ docker volume
 
 ### 网络类型
 
-```cmd
-# 创建网络
+### 默认容器的网络
 
+​	默认情况下，docker容器之间是可以通过IP地址进行相互访问。基于安全考虑，可以在`/etc/docker/daemon.json`文件中添加一个配置项： `"icc": false`，来禁用这种情况。（修改之后，记得先使用`systemctl daemon-reload`再使用 `systemctl restart docker`来重新启动docker，同时注意最后一个配置项的最后不要出现以逗号结尾，否则重新启动docker会报错）
+
+> ​	`icc` 是 `Inter-Container Communication` 的缩写，表示容器间通信。
+
+​	可以通过 `docker run`或 `docker create` 命令的 `--link`选项来添加对另一台容器的访问许可，例如，`--link <another_container_name>:alias_name`，这种情况下，将会在直接修改容器的`/etc/hosts`文件中的映射。若已经在`/etc/docker/daemon.json`文件中添加了配置项： `"icc": false`，要使其不会对这里的`--link`选项的设置产生影响，则需要再在`/etc/docker/daemon.json`文件中添加一个配置项：`"iptables": true` （修改之后，记得先使用`systemctl daemon-reload`再使用 `systemctl restart docker`来重新启动docker，同时注意最后一个配置项的最后不要出现以逗号结尾，否则重新启动docker会报错）。
+
+> 注意1
+>
+> ​	`/etc/docker/daemon.json`中的 `icc`和 `iptables`配置项不会对自定义网络产生影响。
+
+> 注意2
+>
+> ​	即使在`/etc/docker/daemon.json` 设置了`"icc": false` 和 `"iptables": true`，  在使用带有 `--link ng01:ng01`选项的`docker create`或 `docker run` 命令所创建的容器`ng02`后，也仅仅在 `ng02`容器内可以使用`ng01`这个名称来访问`ng01`容器中开放相关端口（例如，80端口）的内容，而在`ng01`容器内却是不能使用`ng02`这个名称来访问`ng02`容器中开放相关端口（例如，80端口）的内容，即创建的链接是`单方向的链接`，`ng02 可以访问 -> ng01， ng01 不可以访问 -> ng02`。
+
+​	
+
+### 自定义网络的介绍
+
+​	为什么需要自定义网络？
+
+​	因为自定义网络可以做到：
+
+（1）对容器进行隔离，提高安全性；
+
+（2）带有DNS解析和服务发现（在同一网络中的容器不仅可以使用IP，也可以使用容器名称进行访问）；
+
+（3）实现容器之间的负载均衡等等。
+
+### 创建自定义网络
+
+```cmd
+docker network create  [--driver <driver_type>] [--subnet=192.168.1.0/24] <custom_net_name>
 ```
 
-创建网络
+​	默认`driver_type`为`bridge`，其他网络驱动类型可以通过`docker network ls`命令列出的列表中的`DRIVER`列查看到。
+
+​	不但，`driver_type`有默认值，`driver_type`也有默认值，其默认值是在已有的bridge驱动类型且没有使用`--subnet`选项定义的网络的subnet的基础上进行递增（注意这里的已有的，包括之前存在但现在已被删除的）。
+
+示例
+
+```cmd
+# 1：查看 默认已经存在的名为 bridge 的网络的 subnet
+docker network inspect bridge | grep Subnet
+                    "Subnet": "172.17.0.0/16",
+                    
+# 2：创建一个使用默认驱动类型和默认subnet的名为 apnet-d的网络
+docker network create apnet-d 
+
+# 3：查看名为 apnet-d 的自定义网络的 subnet
+docker network inspect apnet-d | grep Subnet
+                    "Subnet": "172.18.0.0/16",
+                    
+# 4：创建一个使用默认驱动类型和指定subnet的名为 apnet-1的网络
+docker network create apnet-1 --subnet=192.168.1.0/24
+63db94574e6977dbbc7fd160fbb7ed931a435eec1fb9ef500aee323e94e7cc03
+
+# 5：查看名为 apnet-1 的自定义网络的 subnet
+docker network inspect apnet-1 | grep Subnet
+                    "Subnet": "192.168.1.0/24"
+                    
+# 6：创建一个使用默认驱动类型和默认subnet的名为 apnet-2的网络
+docker network create apnet-2
+ed4df3da3a8f14e4ebc4912f81f5438c77b36b618cf10bce5f6ddaab553fbc8f
+
+# 7：查看名为 apnet-2 的自定义网络的 subnet
+docker network inspect apnet-2 | grep Subnet
+                    "Subnet": "172.19.0.0/16",
+```
+
+### 删除自定义网络
+
+```cmd
+docker network rm <net_name>
+```
+
+> 注意1
+>
+> ​	被删除的网络必须是未被使用过的。若有启动状态的容器使用该网络（容器处于退出状态，则认为没有在使用该网络），则需要通过`docker network disconnect <net_name> <container_name>`来将容器从该网络中移除，在可以正常删除网络。
+
+> 注意2
+>
+> ​	若某容器ConA已经加入了某一网络NetA，但此时ConA处于退出状态，则在使用`docker net rm <net_name>`删除 NetA这一网络后，再使用`docker start <container_name>`启动ConA时，将不能启动ConA容器，以及报以下类似错误：
+>
+> ```cmd
+> Error response from daemon: network <某一网络Id> not found
+> Error: failed to start containers:  <某一容器名称>
+> ```
+>
+> 
+
+### 查看网络列表
+
+```cmd
+docker network ls
+```
+
+### 查看网络信息
+
+```cmd
+docker network inspect <net_name>
+```
+
+### 往自定义网络中加入容器
+
+```cmd
+docker network connect <net_name> <container_name>
+```
+
+> 注意1
+>
+> ​	若要加入该网络的容器处于退出状态，则可能导致在使用`docker start <container_name>`时，不能启动该容器，以及报以下类似的错误：
+>
+> ```cmd
+> Error response from daemon: network <某一网络Id>
+> Error: failed to start containers: <某一容器名称>
+> ```
+>
+> ​	故，最好在往自定义网络中加入容器时，先确认下该容器是否处于启动状态。
+
+> 注意2
+>
+> ​	使用`docker network connect <net_name> <container_name>`并不会删除该容器之前已经存在的网络。
+
+> 注意3
+>
+> ​	若要加入该网络的容器已经加入了该网络，则会报以下类似的错误：
+>
+> ```cmd
+> Error response from daemon: endpoint with name <某一容器名称> already exists in network <某一网络名称>
+> ```
+
+### 往自定义网络中移除容器
+
+```cmd
+docker network disconnect <net_name> <container_name>
+```
+
+
 
 ## 密钥
 

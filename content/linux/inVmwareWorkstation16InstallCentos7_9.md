@@ -399,3 +399,91 @@ fcitx-configtool
 reboot
 ```
 
+## 安装 docker
+
+```cmd
+# 查看系统版本
+# 因 docker 在Centos系统中至少需要的版本是7，作为其基础系统，且建议系统内核版本不低于3.10
+# 查看系统版本
+cat /etc/centos-release
+# 查看系统内核版本
+uname -a
+
+# 安装 yum-utils
+# 说明：device-mapper-persistent-data是Linux下存储技术（DeviceMapper）的驱动
+sudo yum install -y yum-utils device-mapper-persistent-data lvm2
+
+# 安装 docker 安装源
+sudo yum-config-manager --add-repo https://mirrors.aliyun.com/docer-ce/linux/centos/docker-ce.repo
+sudo sed -i 's+download.docekr.com+mirrors.aliyun.com/docker-ce+' /etc/yum.repos.d/docker-ce.repo
+# 提前在本地创建软件包索引缓存，以此来提高搜索和安装软件的速度
+sudo yum makecache fast
+
+# 安装社区版 docker
+# ce 版本为免费的社区版， ee 版本为收费的企业版
+# docker-ce-cli 是 docker Engine 的命令行界面
+# containerd.io 是容器运行时的基本组件，负责管理容器的生命周期、镜像管理和存储
+# docekr-buildx-plugin 是官方提供的构建工具，可快速、高效地构建 docker 镜像，并支持跨平台
+# docker-compose-plugin 是容器编排插件。允许通过一个配置文件来描述服务，并通过命令来管理这些服务
+sudo yum install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+# 说明： docker 应用需要用到各种端口，因此之后每启动一个容器都应逐一到防火墙开放对应端口，否则容器无法启动。为避免因此带来的繁琐操作，建议在启动 docker 服务前将防火墙关闭！
+# 关闭防火墙
+sudo systemctl stop firewalld
+# 禁止防火墙在开机时自动启动
+sudo systemctl disable firewalld
+
+# 启动 docker 服务
+sudo systemctl start docker
+
+# 镜像加速
+# docker 官方镜像仓库网速较差，最好设置国内镜像站点
+# 参考：https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors
+# 例如：
+sudo mkdir -p /etc/docker
+sudo tee /etc/docker/daemon.json <<-'EOF'
+{
+  "registry-mirrors": ["https://te93ynsd.mirror.aliyuncs.com"]
+}
+EOF
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+
+# 测试安装
+# 查看 docker 引擎版本
+docker -v
+
+# 查看 docker-compose 版本
+docker compose version
+
+# 拉取 hello-world镜像
+docker pull hello-world
+# 启动 hello-world镜像
+docker run hello-world
+```
+
+
+
+## 卸载 docker
+
+```cmd
+# 停止 docker 服务
+sudo systemctl stop docker
+
+# 查看已安装的 docker 软件包
+sudo yum list installed | grep docker
+
+# 卸载已安装的 docker 软件包
+sudo yum remove containerd.io.x86_64 docker* -y
+
+# 删除 docker 数据和配置文件
+# 删除存放容器、镜像、卷、网络的配置
+sudo rm -rf /var/lib/docker 
+# 删除管理 docker 容器生命周期的组件（docker 容器的运行环境）
+sudo rm -rf /var/lib/containerd
+# 删除 docker 的配置文件
+sudo rm -rf /etc/docker
+
+
+```
+

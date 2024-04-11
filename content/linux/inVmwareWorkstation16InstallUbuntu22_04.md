@@ -481,27 +481,56 @@ sudo snap refresh snap-store
 参考：[https://developer.aliyun.com/mirror/docker-ce?spm=a2c6h.13651102.0.0.57e31b114DANS4](https://developer.aliyun.com/mirror/docker-ce?spm=a2c6h.13651102.0.0.57e31b114DANS4)
 
 ```cmd
-sudo su - root
 # 卸载旧版本
 for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done
 
 #  安装必要的一些系统工具
-apt-get update
-apt-get -y install apt-transport-https ca-certificates curl software-properties-common
+sudo apt-get update
+sudo apt-get -y install apt-transport-https ca-certificates curl software-properties-common
 
 # 安装GPG证书
-curl -fsSL https://mirrors.aliyun.com/docker-ce/linux/ubuntu/gpg | sudo apt-key add -
+sudo curl -fsSL https://mirrors.aliyun.com/docker-ce/linux/ubuntu/gpg | sudo apt-key add -
 # 写入软件源信息
 add-apt-repository "deb [arch=amd64] https://mirrors.aliyun.com/docker-ce/linux/ubuntu $(lsb_release -cs) stable"
 
 # 用于更新系统软件包列表。它会从软件包源下载最新的软件包信息，并将其存储在本地缓存中。
-apt-get -y update
+sudo apt-get -y update
 
 # 安装最新版本的docker-ce
-apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+# 镜像加速
+# docker 官方镜像仓库网速较差，最好设置国内镜像站点
+# 参考：https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors
+# 例如：
+sudo mkdir -p /etc/docker
+sudo tee /etc/docker/daemon.json <<-'EOF'
+{
+  "registry-mirrors": ["https://te93ynsd.mirror.aliyuncs.com"]
+}
+EOF
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+
+# 将当前普通用户加入到 docker 用户组中
+sudo usermod -aG docker <username>
+
+# 重新登入系统
+reboot
+
+# 设置开启自动启动
+sudo systemctl enable docker
+
+# 启动docker
+sudo systemctl start docker
+
+# 查看 docker 服务的状态
+sudo systemctl status docker
 
 # 检查当前安装的最新docker-ce的版本
 docker version
+
+
 ```
 
 ![image-20240407154011225](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20240407154011225.png)
@@ -592,3 +621,31 @@ pass init <your_generated_gpg-id_public_key>
 ![image-20240407173319104](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20240407173319104.png)
 
 ![image-20240407175001734](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20240407175001734.png)
+
+## 卸载 docker
+
+```cmd
+# 停止 docker 服务
+sudo systemctl stop doccd ..ker
+
+# 查看已安装的 docker 软件包
+sudo dpkg -l | grep docker
+
+# 卸载已安装的 docker 软件包
+sudo apt purge docker* -y
+
+# 删除 docker 数据和配置文件
+# 删除存放容器、镜像、卷、网络的配置
+sudo rm -rf /var/lib/docker 
+# 删除管理 docker 容器生命周期的组件（docker 容器的运行环境）
+sudo rm -rf /var/lib/containerd
+# 删除 docker 的配置文件
+sudo rm -rf /etc/docker
+```
+
+## 卸载 docker-desktop
+
+```
+sudo dpkg -P docker-desktop
+```
+
