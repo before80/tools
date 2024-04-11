@@ -18,7 +18,7 @@ draft = false
 > ​	`docker pull` 命令是 `docker image pull` 的别名。
 
 ```cmd
-docker pull <iamge_name>[<:tag_name>]
+docker pull [OPTIONS] NAME[:TAG|@DIGEST]
 ```
 
 示例
@@ -40,11 +40,10 @@ docker pull golang:1.22.2-alpine
 
 > Tips:
 >
-> ​	`docker rmi` 命令是 `docker image rm` 的别名。
+> ​	`docker rmi` 命令是 `docker image rm`、`docker image remove` 的别名。
 
 ```cmd
-docker image rm <image_name>[<:tag_name>]
-docker rmi <image_name>[<:tag_name>]
+docker rmi [OPTIONS] <image_name>[<:tag_name>] [<image_name>[<:tag_name>]...]
 ```
 
 ### 构建镜像
@@ -78,15 +77,13 @@ docker build -t <image_name>[<:tag_name>] -f /some/dir/<Dockerfile_name>  /some/
 
 > Tips:
 >
-> ​	`docker rmi` 命令是 `docker image rm` 的别名。
->
 > ​	`docker images` 命令是 `docker image ls`的别名。
 
 #### 普通方式
 
 ```cmd
 # 列出镜像列表，不包含隐藏的
-docker imags
+docker images
 docker image ls
 
 # 列出所有镜像列表，包含隐藏的
@@ -122,8 +119,6 @@ docker images <image_name>[:<tag_name>]
 # 按给定的部分镜像名称和部分标签列出镜像，使用了 * , 这种方式类似于以下的使用 -f=reference 标记的命令
 docker images <sub_image_name*>[:<sub_tag_name*>]
 docker images <*sub_image_name>[:*<sub_tag_name>]
-
-
 ```
 
 #### 使用过滤方式列出镜像
@@ -147,7 +142,7 @@ docker images -f "since=<image_name>[:<tag_name>] | <image_id> | <image_name@dig
 # 过滤镜像，使用 label  过滤器 (意思：label是这样的。这里的label是一种元数据，用于向镜像中添加自定义的信息，
 # 查看镜像的元数据可以使用 docker inspect <image_id>，其中Config.Lables字段下的字段就是label，
 # 常见的label有 maintainer（nginx 镜像中有），
-# 也可以使用 docker inspect --format='{{json .Config.Labels}}' <image_id> 获取到这些label)
+# 也可以使用 `docker inspect --format='{{json .Config.Labels}}' <image_id>` 获取到这些label)
 docker images -f "label=<key> | <key>=<value>"
 ```
 
@@ -222,7 +217,7 @@ docker images --format "{{json .ID}} {{json .Repository}}"
 用法
 
 ```cmd
-docker container create [OPTIONS] IMAGE [COMMAND] [ARG...]
+docker create [OPTIONS] IMAGE [COMMAND] [ARG...]
 ```
 
 ​	OPTIONS大概有100个，常见的有：
@@ -298,7 +293,7 @@ docker restart [OPTIONS] CONTAINER [CONTAINER...]
 
 | Option         | Default | Description                                                  |
 | -------------- | ------- | ------------------------------------------------------------ |
-| `-s, --signal` |         | Signal to send to the container 发送到容器的[信号]({{< ref "https://man7.org/linux/man-pages/man7/signal.7.html">}}) |
+| `-s, --signal` |         | Signal to send to the container 发送到容器的[信号](https://man7.org/linux/man-pages/man7/signal.7.html) |
 | `-t, --time`   |         | Seconds to wait before killing the container 在终止容器之前等待几秒钟 |
 
 ### 停止容器
@@ -315,7 +310,7 @@ docker stop [OPTIONS] CONTAINER [CONTAINER...]
 
 | Option         | Default | Description                                                  |
 | -------------- | ------- | ------------------------------------------------------------ |
-| `-s, --signal` |         | Signal to send to the container 发送到容器的[信号]({{< ref "https://man7.org/linux/man-pages/man7/signal.7.html">}}) |
+| `-s, --signal` |         | Signal to send to the container 发送到容器的[信号](https://man7.org/linux/man-pages/man7/signal.7.html) |
 | `-t, --time`   |         | Seconds to wait before killing the container 在终止容器之前等待几秒钟 |
 
 ​	容器内的主进程将收到 `SIGTERM`，并在宽限期后收到  `SIGKILL` 。第一个信号可以使用容器的 Dockerfile 中的 `STOPSIGNAL` 指令进行更改，也可以用 `docker run` 命令中的 `--stop-signal` 选项指定.
@@ -332,7 +327,7 @@ docker kill [OPTIONS] CONTAINER [CONTAINER...]
 
 | Option         | Default | Description                                                  |
 | -------------- | ------- | ------------------------------------------------------------ |
-| `-s, --signal` |         | Signal to send to the container 发送到容器的Signal to send to the container 发送到容器的[信号]({{< ref "https://man7.org/linux/man-pages/man7/signal.7.html">}}) |
+| `-s, --signal` |         | Signal to send to the container 发送到容器的Signal to send to the container 发送到容器的[信号](https://man7.org/linux/man-pages/man7/signal.7.html) |
 
 ​	该命令默认是向容器内的主进程发送 `SIGKILL` 信号，也可以使用 `-s, --signal` 选项指定的信号。其中的信号可以是格式为 `SIG<NAME>` 的信号名称，例如 `SIGINT` ，也可以是与内核系统调用表中的位置匹配的无符号数字，例如 `2` .
 
@@ -360,7 +355,7 @@ docker rm [OPTIONS] CONTAINER [CONTAINER...]
 
 | Option          | Default | Description                                                  |
 | --------------- | ------- | ------------------------------------------------------------ |
-| `-f, --force`   |         | Force the removal of a running container (uses SIGKILL)  强制移除正在运行的容器（使用 SIGKILL[信号]({{< ref "https://man7.org/linux/man-pages/man7/signal.7.html">}})） |
+| `-f, --force`   |         | Force the removal of a running container (uses SIGKILL)  强制移除正在运行的容器（使用 SIGKILL[信号](https://man7.org/linux/man-pages/man7/signal.7.html)） |
 | `-l, --link`    |         | Remove the specified link  删除指定的链接                    |
 | `-v, --volumes` |         | Remove anonymous volumes associated with the container  删除与容器关联的匿名卷 |
 
@@ -410,7 +405,7 @@ docker cp CONTAINER:/var/logs/ /tmp/app_logs
 
 > 注意
 >
-> ​	无法复制某些系统文件，例如 `/proc` 、 `/sys` 、 `/dev` 、tmpfs下的资源以及用户在容器中创建的挂载。
+> ​	无法复制某些系统文件，例如 `/proc` 、 `/sys` 、 `/dev` 、[tmpfs](https://docs.docker.com/reference/cli/docker/container/run/#tmpfs)下的资源以及用户在容器中创建的挂载。
 
 ### 查看容器
 
