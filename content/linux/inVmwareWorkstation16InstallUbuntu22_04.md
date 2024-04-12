@@ -337,25 +337,47 @@ sudo apt install ufw -y
 sudo apt remove ufw -y
 ```
 
-启用防火墙
+自动开机启动防火墙
 
 ```cmd
 sudo ufw enable
 ```
 
-禁用防火墙
+禁止自动开机启动防火墙
 
 ```cmd
 sudo ufw disable
 ```
 
-临时停用防火墙
+当前停用防火墙
 
 ```cmd
 sudo systemctl stop ufw
 ```
 
+当前启用防火墙
+
+```
+sudo systemctl start ufw
+```
+
+当前重启防火墙
+
+```cmd
+sudo systemctl restart ufw
+```
+
+查看已设置的防火墙规则
+
+```
+sudo ufw disable
+```
+
 设置允许通过防火墙的规则
+
+> 提示
+>
+> ​	使用 `sudo ufw allow 端口号`  、`sudo ufw delete allow 端口号`添加或移除的防火墙规则会立即生效，无需重新启动防火墙服务或系统。这是因为 `ufw` 是一个动态防火墙管理工具，它会即时应用新添加或新移除的规则，而不需要重启服务。
 
 添加端口
 

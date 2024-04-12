@@ -339,6 +339,128 @@ wget -O epel.repo https://mirrors.aliyun.com/repo/epel-7.repo
 
 ![image-20231008164830903](inVmwareWorkstation16InstallCentos7_9_img/image-20231008164830903.png)
 
+## 防火墙设置
+
+查看防火墙状态
+
+```cmd
+sudo systemctl status firewalld
+
+# 或
+
+sudo firewall-cmd --state
+```
+
+示例
+
+```cmd
+[root@master ~]# systemctl status firewalld
+● firewalld.service - firewalld - dynamic firewall daemon
+   Loaded: loaded (/usr/lib/systemd/system/firewalld.service; disabled; vendor preset: enabled)
+   Active: inactive (dead)
+     Docs: man:firewalld(1)
+[root@master ~]# sudo firewall-cmd --state
+not running
+[root@master ~]# systemctl start firewalld
+[root@master ~]# sudo firewall-cmd --reload
+success
+[root@master ~]# firewall-cmd --state
+running
+```
+
+> 注：一般情况下防火墙是默认已经安装好的
+
+安装和卸载防火墙
+
+```cmd
+# 安装
+sudo yum install firewalld
+# 安装好的防火墙默认是 inactive 的状态
+
+# 卸载
+# 注意，这样卸载并不会删除之前设置好的防火墙规则
+sudo apt remove ufw -y
+```
+
+自动开机启动防火墙
+
+```cmd
+sudo systemctl enable firewalld
+```
+
+禁止自动开机启动防火墙
+
+```cmd
+sudo systemctl disable firewalld
+```
+
+当前停用防火墙
+
+```cmd
+sudo systemctl stop firewalld
+```
+
+当前启用防火墙
+
+```cmd
+sudo systemctl start firewalld
+```
+
+当前重启防火墙
+
+```cmd
+# 先停止防火墙服务，再重新加载防火墙规则配置，最后再重新启动，这样会中断现有的连接。
+sudo systemctl restart firewalld
+
+# 或
+# 只是重新加载防火墙规则配置，而不会停止防火墙服务，同时不会中断现有的连接。
+sudo firewall-cmd --reload
+```
+
+查看已设置的防火墙规则
+
+查看所有防火墙规则
+
+```cmd
+sudo firewall-cmd --list-all
+```
+
+查看已打开的端口
+
+```cmd
+sudo firewall-cmd --list-ports
+```
+
+查看指定区域的防火墙规则（例如，public、internal、dmz 等）：
+
+```cmd
+sudo firewall-cmd --zone=public --list-all
+```
+
+设置允许通过防火墙的规则
+
+> 提示
+>
+> ​	设置防火墙规则后，记得重新启动防火墙服务，这样才能看到新设置的防火墙规则。
+
+添加端口
+
+示例
+
+```cmd
+sudo firewall-cmd --zone=public --add-port=80/tcp --permanent
+```
+
+去除端口
+
+示例
+
+```cmd
+sudo firewall-cmd --zone=public --remove-port=8080/tcp --permanent
+```
+
+
+
 
 
 ## 克隆 <- 重要

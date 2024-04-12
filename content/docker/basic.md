@@ -411,7 +411,7 @@ docker cp [OPTIONS] SRC_PATH CONTAINER:DEST_PATH
 
 ​	该 `docker cp` 命令将  `SRC_PATH` 的内容复制到 `DEST_PATH` 。你可以将内容`从容器的文件系统复制到宿主机`，也可以`从宿主机文件系统复制到容器内`。如果 `SRC_PATH` 或 `DEST_PATH` 指定为`-`  ，则还可以将 tar 存档从 `STDIN`流入或流出到 `STDOUT` 。 `CONTAINER` 可以是正在运行或停止的容器。 `SRC_PATH` 、 `DEST_PATH` 可以是文件或目录的路径。
 
- 	该 `docker cp` 命令假定容器路径相对于容器 `/` 的（根）目录。这意味着提供初始正斜杠是可选的；该命令将  `compassionate_darwin:tmp/foo/myfile.txt` 和 `compassionate_darwin:/tmp/foo/myfile.txt` 视为相同路径下的文件。宿主机路径可以是绝对值或相对值。该命令将本地计算机的相对路径解释为相对于运行的 `docker cp` 当前工作目录。
+​	该 `docker cp` 命令假定容器路径相对于容器 `/` 的（根）目录。这意味着提供初始正斜杠是可选的；该命令将  `compassionate_darwin:tmp/foo/myfile.txt` 和 `compassionate_darwin:/tmp/foo/myfile.txt` 视为相同路径下的文件。宿主机路径可以是绝对值或相对值。该命令将本地计算机的相对路径解释为相对于运行的 `docker cp` 当前工作目录。
 
 示例
 
@@ -427,10 +427,46 @@ docker cp CONTAINER:/var/logs/ /tmp/app_logs
 >
 > ​	无法复制某些系统文件，例如 `/proc` 、 `/sys` 、 `/dev` 、[tmpfs](https://docs.docker.com/reference/cli/docker/container/run/#tmpfs)下的资源以及用户在容器中创建的挂载。
 
-### 查看容器
+### 查看容器信息
 
 ```cmd
+docker inspect <container>
+```
 
+
+
+### 查看容器列表
+
+```cmd
+# 查看所有状态的容器列表
+docker ps -a
+# 只查看运行中的容器列表
+docker ps
+```
+
+
+
+
+
+## 容器转换成镜像
+
+```cmd
+# 将指定的容器转换成新的镜像，使用该命令后，会在本地镜像中多出一个镜像
+docker commit <container> <new_image_name>[:<tag_name>]
+```
+
+> 注意
+>
+> ​	新镜像并不会包含挂载在数据卷中的数据，而除了数据卷的数据之外的数据都会被保留。
+
+## 镜像的迁移
+
+```cmd
+# 将指定的镜像做成压缩文件，方便其他主机用来载入镜像
+docker save -o <compress_file_name> <image_name>[:<tag_name>]
+
+# 从压缩文件中载入镜像
+docker load -i <compress_file_name>
 ```
 
 
