@@ -2031,11 +2031,11 @@ Before a command is executed, its input and output may be *redirected* using a s
 
 Each redirection that may be preceded by a file descriptor number may instead be preceded by a word of the form {varname}. In this case, for each redirection operator except >&- and <&-, the shell will allocate a file descriptor greater than 10 and assign it to {varname}. If >&- or <&- is preceded by {varname}, the value of varname defines the file descriptor to close. If {varname} is supplied, the redirection persists beyond the scope of the command, allowing the shell programmer to manage the file descriptor's lifetime manually. The `varredir_close` shell option manages this behavior (see [The Shopt Builtin](#432--shopt内置命令)).
 
-​	可以用形式为{varname}的单词来替代可能由文件描述符号之前的数字替代。在这种情况下，对于除了>&-和<&-之外的每个重定向运算符，Shell将分配一个大于10的文件描述符号，并将其分配给{varname}。如果>&-或<&-之前带有{varname}，则varname的值定义要关闭的文件描述符号。如果提供了{varname}，则重定向会持续超出命令的范围，允许Shell程序员手动管理文件描述符的生命周期。`varredir_close` shell选项管理此行为（参见[内置的shopt命令](#432--shopt内置命令)）。
+​	可以用形式为{varname}的单词来替代可能由文件描述符之前的数字替代。在这种情况下，对于除了>&-和<&-之外的每个重定向运算符，Shell将分配一个大于10的文件描述符，并将其分配给{varname}。如果>&-或<&-之前带有{varname}，则varname的值定义要关闭的文件描述符。如果提供了{varname}，则重定向会持续超出命令的范围，允许Shell程序员手动管理文件描述符的生命周期。`varredir_close` shell选项管理此行为（参见[内置的shopt命令](#432--shopt内置命令)）。
 
 In the following descriptions, if the file descriptor number is omitted, and the first character of the redirection operator is `<`, the redirection refers to the standard input (file descriptor 0). If the first character of the redirection operator is `>`, the redirection refers to the standard output (file descriptor 1).
 
-​	在下面的描述中，如果省略了文件描述符号，并且重定向运算符号的第一个字符是`<`，则重定向引用标准输入（文件描述符号0）。如果重定向运算符号的第一个字符是`>`，则重定向引用标准输出（文件描述符号1）。
+​	在下面的描述中，如果省略了文件描述符，并且重定向运算符号的第一个字符是`<`，则重定向引用标准输入（文件描述符0）。如果重定向运算符号的第一个字符是`>`，则重定向引用标准输出（文件描述符1）。
 
 The word following the redirection operator in the following descriptions, unless otherwise noted, is subjected to brace expansion, tilde expansion, parameter expansion, command substitution, arithmetic expansion, quote removal, filename expansion, and word splitting. If it expands to more than one word, Bash reports an error.
 
@@ -2051,7 +2051,7 @@ ls > dirlist 2>&1
 
 directs both standard output (file descriptor 1) and standard error (file descriptor 2) to the file dirlist, while the command
 
-​	将标准输出（文件描述符号1）和标准错误（文件描述符号2）都重定向到文件dirlist，而命令
+​	将标准输出（文件描述符1）和标准错误（文件描述符2）都重定向到文件dirlist，而命令
 
 ```
 ls 2>&1 > dirlist
@@ -2069,25 +2069,25 @@ Bash handles several filenames specially when they are used in redirections, as 
 
   If fd is a valid integer, file descriptor fd is duplicated.
 
-  如果fd是一个有效的整数，将复制文件描述符号fd。
+  如果fd是一个有效的整数，将复制文件描述符fd。
 
 - `/dev/stdin`
 
   File descriptor 0 is duplicated.
 
-  复制文件描述符号0。
+  复制文件描述符0。
 
 - `/dev/stdout`
 
   File descriptor 1 is duplicated.
 
-  复制文件描述符号1。
+  复制文件描述符1。
 
 - `/dev/stderr`
 
   File descriptor 2 is duplicated.
 
-  复制文件描述符号2。
+  复制文件描述符2。
 
 - `/dev/tcp/host/port`
 
@@ -2107,7 +2107,7 @@ A failure to open or create a file causes the redirection to fail.
 
 Redirections using file descriptors greater than 9 should be used with care, as they may conflict with file descriptors the shell uses internally.
 
-​	使用大于9的文件描述符号进行重定向时应谨慎，因为它们可能与Shell在内部使用的文件描述符号发生冲突。
+​	使用大于9的文件描述符进行重定向时应谨慎，因为它们可能与Shell在内部使用的文件描述符发生冲突。
 
 
 
