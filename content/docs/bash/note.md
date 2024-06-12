@@ -68,8 +68,8 @@ lx@lxm:~$
 => 可以，但需要使用`\`进行转义。
 
 ```sh
-lx@lxm:~$ echo "\"Go\" is a programming lanugage."
-"Go" is a programming lanugage.
+lx@lxm:~$ echo "\"Go\" is a programming language."
+"Go" is a programming language.
 ```
 
 
@@ -208,9 +208,9 @@ echo "This will not be printed if the previous command fails."
 >
 > ​	另外，
 >
-> ​	`set -o errexit`：相当于 `/usr/bin/bash -e`，任何命令失败时，脚本立即退出。
+> ​	`set -o errexit`：相当于 `#!/usr/bin/bash -e`，任何命令失败时，脚本立即退出。
 >
-> ​	`set -o nounset`：相当于 `/usr/bin/bash -u`，在脚本中使用未定义的变量时立即退出。
+> ​	`set -o nounset`：相当于 `#!/usr/bin/bash -u`，在脚本中使用未定义的变量时立即退出。
 
 ```sh
 lx@lxm:~/testDir/shell$ chmod u+x bash_o_pipefail_option.sh
@@ -219,9 +219,9 @@ Starting script...
 ls: cannot access '/nonexistent_directory': No such file or directory
 ```
 
-（b）使用`/usr/bin/env`。 
+（b）使用`#!/usr/bin/env`。 
 
-> 说明：因不同系统上的解释器路径可能不同，使用`/usr/bin/env`的方式可以提高脚本的兼容性。
+> 说明：因不同系统上的解释器路径可能不同，使用`#!/usr/bin/env`的方式可以提高脚本的兼容性。
 
 （b.a）无选项
 
