@@ -67,7 +67,7 @@ At its base, a shell is simply a macro processor that executes commands. The ter
 
 A Unix shell is both a command interpreter and a programming language. As a command interpreter, the shell provides the user interface to the rich set of GNU utilities. The programming language features allow these utilities to be combined. Files containing commands can be created, and become commands themselves. These new commands have the same status as system commands in directories such as /bin, allowing users or groups to establish custom environments to automate their common tasks.
 
-​	Unix shell既是命令解释器，也是一种编程语言。作为命令解释器，shell为用户界面提供了丰富的GNU工具集。编程语言的特性允许组合这些实用程序。可以创建包含命令的文件，并使其成为命令本身。这些新命令在/bin等目录中具有与系统命令相同的状态，允许用户或组建立自定义环境来自动化常见任务。
+​	Unix shell既是命令解释器，也是一种编程语言。作为命令解释器，shell为用户接口提供了丰富的GNU工具集。编程语言的特性允许组合这些实用程序。可以创建包含命令的文件，并使其成为命令本身。这些新命令在/bin等目录中具有与系统命令相同的状态，允许用户或组建立自定义环境来自动化常见任务。
 
 Shells may be used interactively or non-interactively. In interactive mode, they accept input typed from the keyboard. When executing non-interactively, shells execute commands read from a file.
 
@@ -6451,7 +6451,7 @@ indicating that this job is job number 1 and that the process ID of the last pro
 
 To facilitate the implementation of the user interface to job control, the operating system maintains the notion of a current terminal process group ID. Members of this process group (processes whose process group ID is equal to the current terminal process group ID) receive keyboard-generated signals such as `SIGINT`. These processes are said to be in the foreground. Background processes are those whose process group ID differs from the terminal's; such processes are immune to keyboard-generated signals. Only foreground processes are allowed to read from or, if the user so specifies with `stty tostop`, write to the terminal. Background processes which attempt to read from (write to when `stty tostop` is in effect) the terminal are sent a `SIGTTIN` (`SIGTTOU`) signal by the kernel's terminal driver, which, unless caught, suspends the process.
 
-​	为了方便实现作业控制的用户界面，操作系统维护了当前终端进程组ID的概念。该进程组的成员（其进程组ID等于当前终端进程组ID）接收键盘生成的信号，例如`SIGINT`。这些进程称为前台进程。后台进程是其进程组ID与终端的不同的进程；这样的进程对键盘生成的信号免疫。只有前台进程允许从终端读取或（如果用户通过`stty tostop`指定）写入。后台进程如果尝试从终端读取（在`stty tostop`生效时写入）将被内核的终端驱动程序发送`SIGTTIN`（`SIGTTOU`）信号，除非捕获，否则会挂起该进程。
+​	为了方便实现作业控制的用户接口，操作系统维护了当前终端进程组ID的概念。该进程组的成员（其进程组ID等于当前终端进程组ID）接收键盘生成的信号，例如`SIGINT`。这些进程称为前台进程。后台进程是其进程组ID与终端的不同的进程；这样的进程对键盘生成的信号免疫。只有前台进程允许从终端读取或（如果用户通过`stty tostop`指定）写入。后台进程如果尝试从终端读取（在`stty tostop`生效时写入）将被内核的终端驱动程序发送`SIGTTIN`（`SIGTTOU`）信号，除非捕获，否则会挂起该进程。
 
 If the operating system on which Bash is running supports job control, Bash contains facilities to use it. Typing the *suspend* character (typically `^Z`, Control-Z) while a process is running causes that process to be stopped and returns control to Bash. Typing the *delayed suspend* character (typically `^Y`, Control-Y) causes the process to be stopped when it attempts to read input from the terminal, and control to be returned to Bash. The user then manipulates the state of this job, using the `bg` command to continue it in the background, the `fg` command to continue it in the foreground, or the `kill` command to kill it. A `^Z` takes effect immediately, and has the additional side effect of causing pending output and typeahead to be discarded.
 
