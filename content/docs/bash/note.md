@@ -112,9 +112,6 @@ lx@lxm:~$ echo "\"Go\" is a programming language."
 
 # -u：在脚本中使用未定义变量时立即退出，并显示错误信息
 #!/usr/bin/bash -u
-
-# -o pipefail：确保管道中的每个命令都成功时才认为整个管道成功。如果任意命令失败，则整个管道失败。
-#!/usr/bin/bash -e -o pipefail
 ```
 
 `#!/usr/bin/bash -e`示例
@@ -304,15 +301,17 @@ ls: cannot access '/nonexistent_directory': No such file or directory
 >
 > ​	我们可以发现，通过`#!/usr/bin/env -S bash -e`确实可以向`bash`传递`-e`选项，而`#!/usr/bin/env -vS bash -e`可以进一步打印出详细信息。
 >
-> ​	其他选项`-x`、`-u`用法和`-e`类似，这里不在赘述。
+> ​	其他选项`-x`、`-u`用法和`-e`类似，这里不再赘述。
 
 
 
 ### Shell命令
 
-##### 保留字
+#### 保留字
 
-​	共24个。以下单词在未加引号的情况下， 被识别为保留字。
+​	共22个。以下单词在未加引号的情况下， 被识别为保留字。
+
+​	可通过在命令行上执行`compgen -k`得到：
 
 ```sh
 if      then      elif      else    fi        time
@@ -323,82 +322,671 @@ case    esac      coproc    select  function
 
 
 
-##### 简单命令
+#### 简单命令
 
-​	第一个单词为要执行的命令名称，其余单词为该命令的参数，单词之间使用空格进行分隔。
+​	第一个单词为要执行的命令名称，其余单词为该命令的参数或选项，单词之间使用空格进行分隔，即仅有一个命令。
+
+> 选项，实际上是参数的一部分！
 
 ​	简单命令的返回状态，是由`POSIX 1003.1`中的`waitpid`函数提供的退出状态码，若简单命令被信号n终止，则退出状态码为`128+n`。
 
-说明下`128+n`
+> 说明：`128+n`的状态码
+>
+> ​	新建`wait_exit_status.sh`，其内容如下：
+>
+> ```sh
+> #!/usr/bin/env bash
+> 
+> echo "This is a test script."
+> echo -n "Enter a number(>=0):"
+> read num
+> 
+> if [ $num -eq 0 ]; then
+>     # 正常退出
+>     echo "Normal exit"
+>     exit 0
+> elif [ $num -gt 0 ]; then
+>     # 模拟被信号终止
+>     # (需要手动发送信号，可以用 `kill -9 <PID>` 终止该脚本)
+>     sleep 100 &
+>     PID=$!
+>     echo "Background PID is $PID"
+>     kill -$num $PID
+>     wait $PID
+> fi
+> ```
+>
+> ```sh
+> lx@lxm:~/testDir/shell$ chmod u+x wait_exit_status.sh
+> lx@lxm:~/testDir/shell$ ./wait_exit_status.sh 
+> This is a test script.
+> Enter a number(>=0):9
+> Background PID is 11820
+> ./wait_exit_status.sh: line 18: 11820 Killed                  sleep 100
+> lx@lxm:~/testDir/shell$ echo "Exit status: $?"
+> Exit status: 137
+> lx@lxm:~/testDir/shell$ ./wait_exit_status.sh 
+> This is a test script.
+> Enter a number(>=0):10
+> Background PID is 12158
+> ./wait_exit_status.sh: line 18: 12158 User defined signal 1   sleep 100
+> lx@lxm:~/testDir/shell$ echo "Exit status: $?"
+> Exit status: 138
+> lx@lxm:~/testDir/shell$ 
+> ```
+>
+> ​	可见，退出状态码 137 = 128 + 9，138 = 128 + 10。
+>
 
-​	新建`wait_exit_status.sh`，其内容如下：
+###### 简单命令示例
 
 ```sh
-#!/usr/bin/env bash
+# 打印当前目录
+pwd
 
-echo "This is a test script."
-echo -n "Enter a number(>=0):"
-read num
+# 列出当前目录中的文件和目录
+ls
+# 或
+ls -l
 
-if [ $num -eq 0 ]; then
-    # 正常退出
-    echo "Normal exit"
-    exit 0
-elif [ $num -gt 0 ]; then
-    # 模拟被信号终止
-    # (需要手动发送信号，可以用 `kill -9 <PID>` 终止该脚本)
-    sleep 100 &
-    PID=$!
-    echo "Background PID is $PID"
-    kill -$num $PID
-    wait $PID
-fi
+# 显示文件内容
+cat filename.txt
+
+# 创建一个新目录
+mkdir new_directory
+
+# 删除一个文件
+rm filename.txt
+
+# 移动或重命名文件
+mv old_filename.txt new_filename.txt
+
+# 复制文件
+cp source.txt destination.txt
+
+# 显示当前日期和时间
+date 
+# 或 
+date +"%Y年%m月%d日 %H:%M"
+date +"%Y/%m/%d"
+
+# 设置环境变量
+export MY_VARIABLE="I LOVE YOU,LINUX SHELL!"
+
+# 显示磁盘使用情况
+df -h
+
+# 压缩文件
+tar -czvf archive.tar.gz /path/to/directory
+
+# 解压缩文件
+tar -xzvf archive.tar.gz
+
+# 查看进程列表
+ps aux
+ps -aux
+```
+
+
+
+#### 管道
+
+​	管道的格式
+
+
+
+#### 命令列表
+
+​	什么是命令列表
+
+
+
+#### 复合命令
+
+​	什么是复合命令
+
+##### 循环结构
+
+###### until
+
+​	until的用法
+
+```sh
+until test-commands; do
+	consequent-commands; 
+done
+```
+
+> 注意：当`test-commands`不成立时，才执行`consequent-commands`。
+
+​	until的示例
+
+​	新建`loop_until_to_count.sh`，其内容如下：
+
+```sh
+#!/usr/bin/env -S bash -e
+
+count=1
+
+until [ $count -gt 5 ]; do
+    echo "Count is: $count"
+    ((count++))
+done
+```
+
+> 为什么使用 `((count++))`？
+>
+> ​	首先解释下，`((count++))` 是一种算术扩展，它对变量 `count` 进行自增操作。
+>
+> ​	还有其他方式吗？
+>
+> ​	好吧，我们先来看下，其他还有哪些方式吧：
+>
+> - `expr`，一个外部命令，可用于计算表达式，还是以自增变量为例： `count=$(expr $count + 1)`
+> - `let`，一个内置命令，可用于执行算术运算，还是以自增变量为例： `let count++`
+> - `variable=$((...))`，用于算术扩展，还是以自增变量为例：`count=$((count + 1))`
+>
+> ​	那为什么使用它呢？
+>
+> 1. **简洁性**：这种语法简单明了，适合于进行单步算术操作。
+> 2. **性能**：`((...))` 在 Bash 中比使用 `expr` 或 `let` 更高效，因为它直接在 shell 中进行计算，而不是调用外部命令。
+> 3. **可读性**：它的语法类似于 C 语言和其他编程语言的算术操作符，使得脚本更加直观和可读。
+
+```sh
+lx@lxm:~/testDir/shell$ chmod u+x loop_until_to_count.sh 
+lx@lxm:~/testDir/shell$ ./loop_until_to_count.sh 
+Count is: 1
+Count is: 2
+Count is: 3
+Count is: 4
+Count is: 5
+```
+
+###### while
+
+​	while的用法
+
+```sh
+while test-commands; do
+	consequent-commands; 
+done
+```
+
+> 注意：当`test-commands`成立时，才执行`consequent-commands`。
+
+​	while的示例
+
+​	新建`loop_while_to_count.sh`，其内容如下：
+
+```sh
+#!/usr/bin/env -S bash -e
+
+count=1
+
+while [ $count -lt 5 ]; do
+    echo "Count is: $count"
+    ((count++))
+done
 ```
 
 ```sh
-lx@lxm:~/testDir/shell$ chmod u+x wait_exit_status.sh
-lx@lxm:~/testDir/shell$ ./wait_exit_status.sh 
-This is a test script.
-Enter a number(>=0):9
-Background PID is 11820
-./wait_exit_status.sh: line 18: 11820 Killed                  sleep 100
-lx@lxm:~/testDir/shell$ echo "Exit status: $?"
-Exit status: 137
-lx@lxm:~/testDir/shell$ ./wait_exit_status.sh 
-This is a test script.
-Enter a number(>=0):10
-Background PID is 12158
-./wait_exit_status.sh: line 18: 12158 User defined signal 1   sleep 100
-lx@lxm:~/testDir/shell$ echo "Exit status: $?"
-Exit status: 138
-lx@lxm:~/testDir/shell$ 
+lx@lxm:~/testDir/shell$ chmod u+x loop_while_to_count.sh 
+lx@lxm:~/testDir/shell$ ./loop_while_to_count.sh 
+Count is: 1
+Count is: 2
+Count is: 3
+Count is: 4
 ```
 
-​	可见，137 = 128 + 9，138 = 128 + 10。
-
-##### 管道
-
-##### 命令列表
-
-##### 复合命令
-
-###### 循环结构
 
 
+###### for
 
-###### 条件结构
+​	for的用法
+
+```sh
+for name [ [in [words …] ] ; ] do
+	commands; 
+done
+```
+
+​	for的示例
+
+​	（1）遍历字符串列表，新建`loop_for_to_iterate_string.sh`，其内容如下：
+
+```sh
+#!/usr/bin/env -S bash -e
+
+for color in red green blue; do
+    echo "Color: $color"
+done
+```
+
+```sh
+lx@lxm:~/testDir/shell$ chmod u+x loop_for_to_iterate_string.sh 
+lx@lxm:~/testDir/shell$ ./loop_for_to_iterate_string.sh 
+Color: red
+Color: green
+Color: blue
+```
+
+​	（2）遍历文件列表，新建`loop_for_to_iterate_filelist.sh`，其内容如下：
+
+```sh
+#!/usr/bin/env -S bash -e
+
+for file in ./for_test_dir/*; do
+    echo "Processing $file"
+done
+```
+
+```sh
+lx@lxm:~/testDir/shell$ chmod u+x loop_for_to_iterate_filelist.sh 
+lx@lxm:~/testDir/shell$ ./loop_for_to_iterate_filelist.sh 
+Processing ./for_test_dir/test_file1.txt
+Processing ./for_test_dir/test_file2.xls
+Processing ./for_test_dir/test_file3.md
+```
+
+​	（3）遍历数组，新建`loop_for_to_iterate_array.sh`，其内容如下：
+
+```sh
+#!/usr/bin/env -S bash -e
+
+fruits=("apple" "banana" "cherry")
+
+# 使用 @
+echo "Using @:"
+for fruit in "${fruits[@]}"; do
+    echo "Fruit: $fruit"
+done
+
+# 使用 *
+echo "Using *:"
+for fruit in "${fruits[*]}"; do
+    echo "Fruit: $fruit"
+done
+
+# 使用 @ 没有引号
+echo "Using @ without quotes:"
+for fruit in ${fruits[@]}; do
+    echo "Fruit: $fruit"
+done
+
+# 使用 * 没有引号
+echo "Using * without quotes:"
+for fruit in ${fruits[*]}; do
+    echo "Fruit: $fruit"
+done
+```
+
+> `@`和`*`
+>
+> ​	`"${array[@]}"`：将数组的每个元素作为独立的参数。
+>
+> ​	`"${array[*]}"`：将整个数组作为一个单一的字符串，元素之间用空格分隔。
+>
+> ​	`@` 和 `*` 在双引号内和双引号外的行为不同。
+>
+> ​	`@` 保留每个数组元素的独立性。
+>
+> ​	`*` 将所有数组元素合并成一个字符串，默认用空格分隔。
+>
+> ​	在 Bash 中，数组元素在传递给 `for` 循环时始终作为字符串处理，无论它们在数组中是什么类型。因此，无论是 `${mixed_array[@]}` 还是 `"${mixed_array[@]}"`，元素的类型都会被视为字符串。
+>
+> ​	在 Bash 中，所有变量默认都是字符串类型，Bash 并不像其他编程语言（如 Python 或 C）那样具备直接的强类型检测机制。
+
+```sh
+lx@lxm:~/testDir/shell$ chmod u+x ./loop_for_to_iterate_array.sh 
+lx@lxm:~/testDir/shell$ ./loop_for_to_iterate_array.sh 
+Using @:
+Fruit: apple
+Fruit: banana
+Fruit: cherry
+Using *:
+Fruit: apple banana cherry
+lx@lxm:~/testDir/shell$ ./loop_for_to_iterate_array.sh 
+Using @:
+Fruit: apple
+Fruit: banana
+Fruit: cherry
+Using *:
+Fruit: apple banana cherry
+Using @ without quotes:
+Fruit: apple
+Fruit: banana
+Fruit: cherry
+Using * without quotes:
+Fruit: apple
+Fruit: banana
+Fruit: cherry
+```
+
+​	（4）遍历`$@`、`@*`，新建`loop_for_to_iterate_dollar.sh`，其内容如下：
+
+```sh
+#!/usr/bin/env -S bash -e
+
+# 统计输入的命令行参数个数
+echo "The number of arguements: $#"
+
+# 打印所有传入的命令行参数，使用 $*
+echo "Using \$*:"
+for arg in "$*"; do
+    echo "Argument: $arg"
+done
+
+echo "Using \$* without quotes:"
+for arg in $*; do
+    echo "Argument: $arg"
+done
+
+# 打印所有传入的命令行参数，使用 $@
+echo "Using \$@:"
+for arg in "$@"; do
+    echo "Argument: $arg"
+done
+
+echo "Using \$@ without quotes:"
+for arg in $@; do
+    echo "Argument: $arg"
+done
+```
+
+```sh
+lx@lxm:~/testDir/shell$ chmod u+x loop_for_to_iterate_dollar.sh 
+lx@lxm:~/testDir/shell$ ./loop_for_to_iterate_dollar.sh a b c d e
+The number of arguements: 5
+Using $*:
+Argument: a b c d e
+Using $* without quotes:
+Argument: a
+Argument: b
+Argument: c
+Argument: d
+Argument: e
+Using $@:
+Argument: a
+Argument: b
+Argument: c
+Argument: d
+Argument: e
+Using $@ without quotes:
+Argument: a
+Argument: b
+Argument: c
+Argument: d
+Argument: e
+```
+
+​	（5）使用 C 风格的 for 循环，新建`loop_for_to_with_c_style.sh`，其内容如下：
+
+```sh
+#!/usr/bin/env -S bash -e
+
+for ((i=1; i<=5; i++)); do
+    echo "Number: $i"
+done
+```
+
+> `((...))`：双圆括号用于执行算术运算，并且允许在其中使用算术运算符（如 `+`, `-`, `*`, `/` 等）
+
+
+```sh
+lx@lxm:~/testDir/shell$ chmod u+x loop_for_to_with_c_style.sh 
+lx@lxm:~/testDir/shell$ ./loop_for_to_with_c_style.sh 
+Number: 1
+Number: 2
+Number: 3
+Number: 4
+Number: 5
+```
+
+###### 	break和continue内置命令
+
+​	break的语法
+
+```sh
+break [n]
+```
+
+> `n` 是一个可选的正整数，指定要退出的嵌套层级。默认值是 `1`，即退出最内层循环。
+
+​	continue的语法
+
+```sh
+continue [n]
+```
+
+> `n` 是一个可选的正整数，指定要跳过的嵌套层级。默认值是 `1`，即跳过最内层循环的当前迭代。
+
+break的示例
+
+​	新建`loop_break.sh`，其内容如下：
+
+```sh
+#!/usr/bin/env -S bash -e
+
+echo "break for (n = default):"
+echo -n "Number: "
+for ((i=1; i<=10; i++)); do
+    if (( i == 5 )); then
+        break
+    fi
+    echo -n "$i "
+done
+
+echo
+echo "break for (n = default = 1):"
+echo -n "Number: "
+for ((i=1; i<=10; i++)); do
+    if (( i == 5 )); then
+        break 1
+    fi
+    echo -n "$i "
+done
+
+echo
+echo "break while (n = default):"
+echo -n "Number: "
+i=0
+while [ $i -le 10 ]; do
+    # 这里若使用((i++)),则程序就此终止
+    ((++i))
+    if [ $i -eq 5 ]; then
+        break
+    fi
+    echo -n "$i "
+done
+
+echo
+echo "break while (n = default = 1):"
+echo -n "Number: "
+i=0
+while [ $i -le 10 ]; do
+    # 这里若使用((i++)),则程序就此终止
+    ((++i))
+    if [ $i -eq 5 ]; then
+        break 1
+    fi
+    echo -n "$i "
+done
+
+echo
+echo "break until (n = default):"
+echo -n "Number: "
+i=0
+until [ $i -gt 10 ]; do
+   # 这里若使用((i++)),则程序就此终止
+    ((++i))
+    if [ $i -eq 5 ]; then
+        break
+    fi
+    echo -n "$i "
+done
+
+echo
+echo "break until (n = default = 1):"
+echo -n "Number: "
+i=0
+until [ $i -gt 10 ]; do
+    # 这里若使用((i++)),则程序就此终止
+    ((++i))
+    if [ $i -eq 5 ]; then
+        break 1
+    fi
+    echo -n "$i "
+done
+
+echo
+```
+
+```sh
+lx@lxm:~/testDir/shell$ chmod u+x loop_break.sh 
+lx@lxm:~/testDir/shell$ ./loop_break.sh
+break for (n = default):
+Number: 1 2 3 4 
+break for (n = default = 1):
+Number: 1 2 3 4 
+break while (n = default):
+Number: 1 2 3 4 
+break while (n = default = 1):
+Number: 1 2 3 4 
+break until (n = default):
+Number: 1 2 3 4 
+break until (n = default = 1):
+Number: 1 2 3 4
+```
+
+continue的示例
+
+​	新建`loop_continue.sh`，其内容如下：
+
+```sh
+#!/usr/bin/env -S bash -e
+
+echo "continue for (n = default):"
+echo -n "Number: "
+for ((i=1; i<=10; i++)); do
+    if (( i == 5 )); then
+        continue
+    fi
+    echo -n "$i "
+done
+
+echo
+echo "continue for (n = default = 1):"
+echo -n "Number: "
+for ((i=1; i<=10; i++)); do
+    if (( i == 5 )); then
+        continue 1
+    fi
+    echo -n "$i "
+done
+
+echo
+echo "continue while (n = default):"
+echo -n "Number: "
+i=0
+while [ $i -le 10 ]; do
+    # 这里若使用((i++)),则程序就此终止
+    ((++i))
+    if [ $i -eq 5 ]; then
+        continue
+    fi
+    echo -n "$i "
+done
+
+echo
+echo "continue while (n = default = 1):"
+echo -n "Number: "
+i=0
+while [ $i -le 10 ]; do
+    # 这里若使用((i++)),则程序就此终止
+    ((++i))
+    if [ $i -eq 5 ]; then
+        continue 1
+    fi
+    echo -n "$i "
+done
+
+echo
+echo "continue until (n = default):"
+echo -n "Number: "
+i=0
+until [ $i -gt 10 ]; do
+   # 这里若使用((i++)),则程序就此终止
+    ((++i))
+    if [ $i -eq 5 ]; then
+        continue
+    fi
+    echo -n "$i "
+done
+
+echo
+echo "continue until (n = default = 1):"
+echo -n "Number: "
+i=0
+until [ $i -gt 10 ]; do
+    # 这里若使用((i++)),则程序就此终止
+    ((++i))
+    if [ $i -eq 5 ]; then
+        continue 1
+    fi
+    echo -n "$i "
+done
+
+echo
+```
+
+```sh
+lx@lxm:~/testDir/shell$ chmod u+x loop_continue.sh 
+lx@lxm:~/testDir/shell$ ./loop_continue.sh 
+continue for (n = default):
+Number: 1 2 3 4 6 7 8 9 10 
+continue for (n = default = 1):
+Number: 1 2 3 4 6 7 8 9 10 
+continue while (n = default):
+Number: 1 2 3 4 6 7 8 9 10 11 
+continue while (n = default = 1):
+Number: 1 2 3 4 6 7 8 9 10 11 
+continue until (n = default):
+Number: 1 2 3 4 6 7 8 9 10 11 
+continue until (n = default = 1):
+Number: 1 2 3 4 6 7 8 9 10 11 
+```
 
 
 
-###### 命令分组
+##### 条件结构
+
+​	if的用法
+
+​	case的用法
+
+​	select的用法
+
+​	`((...))`的用法
+
+​	`[[...]]`的用法
+
+##### 命令分组
+
+​	`()`和`{}`的区别
+
+#### 协程
+
+​	协程的语法
 
 
-
-#### 协程 Coprocesses
 
 #### GNU Parallel
 
 ### Shell 函数
+
+​	函数声明
+
+​	函数内部变量
 
 ### Shell 参数
 
