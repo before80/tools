@@ -3,7 +3,7 @@ title = "Nemo"
 date = 2024-10-06T10:38:29+08:00
 weight = 0
 type = "docs"
-description = "Nemo 是 Linux Mint 中的默认文件管理器，它基于 Nautilus 开发，但提供了更多高级功能，如双窗格、标签页和更丰富的插件支持。"
+description = "Nemo 是 Linux Mint 中的默认文件管理器，它基于 Nautilus 开发，但提供了更多高级功能，如双窗格、书签、标签页和更丰富的插件支持。"
 isCJKLanguage = true
 draft = false
 
