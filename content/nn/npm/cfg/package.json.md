@@ -1021,7 +1021,7 @@ The above is a short hand notation, the full object form can be used to allow ov
 
 To only override `foo` to be `1.0.0` when it's a child (or grandchild, or great grandchild, etc) of the package `bar`:
 
-
+​	若仅在 `foo` 是 `bar` 的子包（或孙子包，或更深层次的子包）时，将其覆盖为 `1.0.0`：
 
 ```json
 {
@@ -1035,7 +1035,7 @@ To only override `foo` to be `1.0.0` when it's a child (or grandchild, or great 
 
 Keys can be nested to any arbitrary length. To override `foo` only when it's a child of `bar` and only when `bar` is a child of `baz`:
 
-
+​	可以任意嵌套键的长度。例如，当 `foo` 是 `bar` 的子项且 `bar` 是 `baz` 的子项时，才覆盖 `foo`：
 
 ```json
 {
@@ -1051,7 +1051,7 @@ Keys can be nested to any arbitrary length. To override `foo` only when it's a c
 
 The key of an override can also include a version, or range of versions. To override `foo` to `1.0.0`, but only when it's a child of `bar@2.0.0`:
 
-
+​	覆盖项的键也可以包含版本或版本范围。例如，仅当 `foo` 是 `bar@2.0.0` 的子项时，才将其覆盖为 `1.0.0`：
 
 ```json
 {
@@ -1065,7 +1065,7 @@ The key of an override can also include a version, or range of versions. To over
 
 You may not set an override for a package that you directly depend on unless both the dependency and the override itself share the exact same spec. To make this limitation easier to deal with, overrides may also be defined as a reference to a spec for a direct dependency by prefixing the name of the package you wish the version to match with a `$`.
 
-
+​	你不能为直接依赖项设置覆盖项，除非依赖项和覆盖项本身的规范完全相同。为了更容易处理这种限制，覆盖项也可以定义为对直接依赖项规范的引用，只需在你希望版本匹配的包名称前加上 `$`。
 
 ```json
 {
@@ -1089,7 +1089,7 @@ You may not set an override for a package that you directly depend on unless bot
 
 You can specify the version of node that your stuff works on:
 
-
+​	你可以指定你的程序在某个 Node.js 版本上运行：
 
 ```json
 {
@@ -1101,9 +1101,11 @@ You can specify the version of node that your stuff works on:
 
 And, like with dependencies, if you don't specify the version (or if you specify "*" as the version), then any version of node will do.
 
+​	与依赖项类似，如果未指定版本（或指定版本为 `"*"`），则任何 Node.js 版本都可以运行。
+
 You can also use the "engines" field to specify which versions of npm are capable of properly installing your program. For example:
 
-
+​	你还可以使用 `engines` 字段指定 npm 的哪些版本可以正确安装你的程序。例如：
 
 ```json
 {
@@ -1115,11 +1117,13 @@ You can also use the "engines" field to specify which versions of npm are capabl
 
 Unless the user has set the [`engine-strict` config](https://docs.npmjs.com/cli/v10/using-npm/config#engine-strict) flag, this field is advisory only and will only produce warnings when your package is installed as a dependency.
 
+​	除非用户已设置 [`engine-strict` 配置](https://docs.npmjs.com/cli/v10/using-npm/config#engine-strict)标志，否则该字段仅作提示作用，当包作为依赖项被安装时，只会产生警告。
+
 ## os
 
 You can specify which operating systems your module will run on:
 
-
+​	你可以指定模块可以在哪些操作系统上运行：
 
 ```json
 {
@@ -1129,7 +1133,7 @@ You can specify which operating systems your module will run on:
 
 You can also block instead of allowing operating systems, just prepend the blocked os with a '!':
 
-
+​	你也可以阻止某些操作系统，只需在要阻止的操作系统前添加 `!`：
 
 ```json
 {
@@ -1139,13 +1143,17 @@ You can also block instead of allowing operating systems, just prepend the block
 
 The host operating system is determined by `process.platform`
 
+​	主机操作系统通过 `process.platform` 来确定。
+
 It is allowed to both block and allow an item, although there isn't any good reason to do this.
+
+​	允许同时阻止和允许某项，但这样做并无太大意义。
 
 ## cpu
 
 If your code only runs on certain cpu architectures, you can specify which ones.
 
-
+​	如果你的代码仅能在某些 CPU 架构上运行，你可以指定这些架构：
 
 ```json
 {
@@ -1155,7 +1163,7 @@ If your code only runs on certain cpu architectures, you can specify which ones.
 
 Like the `os` option, you can also block architectures:
 
-
+​	与 `os` 选项类似，你也可以阻止某些架构：
 
 ```json
 {
@@ -1165,17 +1173,25 @@ Like the `os` option, you can also block architectures:
 
 The host architecture is determined by `process.arch`
 
+​	主机的架构通过 `process.arch` 确定。
+
 ## devEngines
 
 The `devEngines` field aids engineers working on a codebase to all be using the same tooling.
 
+​	`devEngines` 字段可以帮助工程师在开发相同代码库时使用相同的工具。
+
 You can specify a `devEngines` property in your `package.json` which will run before `install`, `ci`, and `run` commands.
 
+​	你可以在 `package.json` 中指定一个 `devEngines` 属性，它将在 `install`、`ci` 和 `run` 命令之前执行。
+
 > Note: `engines` and `devEngines` differ in object shape. They also function very differently. `engines` is designed to alert the user when a dependency uses a differening npm or node version that the project it's being used in, whereas `devEngines` is used to alert people interacting with the source code of a project.
+>
+> ​	注意：`engines` 和 `devEngines` 的对象结构不同，功能也不同。`engines` 旨在当依赖项使用的 npm 或 node 版本与项目不同步时提醒用户，而 `devEngines` 用于提醒与项目源码交互的人员。
 
 The supported keys under the `devEngines` property are `cpu`, `os`, `libc`, `runtime`, and `packageManager`. Each property can be an object or an array of objects. Objects must contain `name`, and optionally can specify `version`, and `onFail`. `onFail` can be `warn`, `error`, or `ignore`, and if left undefined is of the same value as `error`. `npm` will assume that you're running with `node`. Here's an example of a project that will fail if the environment is not `node` and `npm`. If you set `runtime.name` or `packageManager.name` to any other string, it will fail within the npm CLI.
 
-
+​	`devEngines` 属性下支持的键包括 `cpu`、`os`、`libc`、`runtime` 和 `packageManager`。每个属性可以是一个对象或对象数组。对象必须包含 `name`，还可以选择性地指定 `version` 和 `onFail`。`onFail` 可以是 `warn`、`error` 或 `ignore`。如果未定义，则默认为 `error`。npm 将假定你正在使用 `node`。以下是一个示例，如果环境不是 `node` 和 `npm`，则项目将失败。 如果将 `runtime.name` 或 `packageManager.name` 设置为其他字符串，npm CLI 将会失败。
 
 ```json
 {
@@ -1196,23 +1212,35 @@ The supported keys under the `devEngines` property are `cpu`, `os`, `libc`, `run
 
 If you set `"private": true` in your package.json, then npm will refuse to publish it.
 
+​	如果在 `package.json` 中设置 `"private": true`，npm 将拒绝发布它。
+
 This is a way to prevent accidental publication of private repositories. If you would like to ensure that a given package is only ever published to a specific registry (for example, an internal registry), then use the `publishConfig` dictionary described below to override the `registry` config param at publish-time.
+
+​	这是防止意外发布私有存储库的方式。如果你希望某个包仅发布到特定的注册表（例如内部注册表），可以使用下文描述的 `publishConfig` 字典来覆盖发布时的 `registry` 配置参数。
 
 ## publishConfig
 
 This is a set of config values that will be used at publish-time. It's especially handy if you want to set the tag, registry or access, so that you can ensure that a given package is not tagged with "latest", published to the global public registry or that a scoped module is private by default.
 
+​	这是一个配置值的集合，将在发布时使用。如果你想设置 tag、registry 或 access 属性，这非常方便，这样可以确保某个包不会标记为 “latest”、不会发布到全局公共注册表，或者确保作用域模块默认是私有的。
+
 See [`config`](https://docs.npmjs.com/cli/v10/using-npm/config) to see the list of config options that can be overridden.
+
+​	请参阅 [`config`](https://docs.npmjs.com/cli/v10/using-npm/config) 以查看可覆盖的配置选项列表。
 
 ## workspaces
 
 The optional `workspaces` field is an array of file patterns that describes locations within the local file system that the install client should look up to find each [workspace](https://docs.npmjs.com/cli/v10/using-npm/workspaces) that needs to be symlinked to the top level `node_modules` folder.
 
+​	可选的 `workspaces` 字段是一个文件模式数组，用于描述本地文件系统中安装客户端应查找的每个 [workspace](https://docs.npmjs.com/cli/v10/using-npm/workspaces) 的位置，并将其符号链接到顶层的 `node_modules` 文件夹中。
+
 It can describe either the direct paths of the folders to be used as workspaces or it can define globs that will resolve to these same folders.
+
+​	它可以描述作为工作区的文件夹的直接路径，也可以定义能解析到这些文件夹的模式。
 
 In the following example, all folders located inside the folder `./packages` will be treated as workspaces as long as they have valid `package.json` files inside them:
 
-
+​	在以下示例中，只要位于 `./packages` 文件夹内的所有文件夹中包含有效的 `package.json` 文件，它们都会被视为工作区：
 
 ```json
 {
@@ -1223,21 +1251,31 @@ In the following example, all folders located inside the folder `./packages` wil
 
 See [`workspaces`](https://docs.npmjs.com/cli/v10/using-npm/workspaces) for more examples.
 
+​	有关更多示例，请参阅 [`workspaces`](https://docs.npmjs.com/cli/v10/using-npm/workspaces)。
+
 ## DEFAULT VALUES
 
 npm will default some values based on package contents.
+
+​	npm 会根据包内容默认一些值。
 
 - `"scripts": {"start": "node server.js"}`
 
   If there is a `server.js` file in the root of your package, then npm will default the `start` command to `node server.js`.
 
+  如果包的根目录中有一个 `server.js` 文件，那么 npm 会将 `start` 命令默认设置为 `node server.js`。
+
 - `"scripts":{"install": "node-gyp rebuild"}`
 
   If there is a `binding.gyp` file in the root of your package and you have not defined an `install` or `preinstall` script, npm will default the `install` command to compile using node-gyp.
 
+  如果包的根目录中有一个 `binding.gyp` 文件，并且未定义 `install` 或 `preinstall` 脚本，npm 会默认使用 node-gyp 进行编译。
+
 - `"contributors": [...]`
 
   If there is an `AUTHORS` file in the root of your package, npm will treat each line as a `Name <email> (url)` format, where email and url are optional. Lines which start with a `#` or are blank, will be ignored.
+
+  如果包的根目录中有一个 `AUTHORS` 文件，npm 会将文件中的每一行视为 `Name <email> (url)` 格式，其中 email 和 url 是可选的。以 `#` 开头的行或空行将被忽略。
 
 ## SEE ALSO
 
