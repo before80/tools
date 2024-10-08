@@ -10,9 +10,9 @@ draft = false
 
 > 原文：[https://docs.npmjs.com/cli/v10/commands/npm-cache](https://docs.npmjs.com/cli/v10/commands/npm-cache)
 
-Clean install a project
+Manipulates packages cache
 
-
+​	操作包缓存
 
 Version 10.9.0 (Latest)
 
@@ -21,219 +21,80 @@ Version 10.9.0 (Latest)
 
 
 ```bash
-npm ci
-aliases: clean-install, ic, install-clean, isntall-clean
+npm cache add <package-spec>
+npm cache clean [<key>]
+npm cache ls [<name>@<version>]
+npm cache verify
 ```
+
+Note: This command is unaware of workspaces.
+
+​	注意：此命令不支持工作区。
 
 ## Description
 
-This command is similar to [`npm install`](https://docs.npmjs.com/cli/v10/commands/npm-install), except it's meant to be used in automated environments such as test platforms, continuous integration, and deployment -- or any situation where you want to make sure you're doing a clean install of your dependencies.
+Used to add, list, or clean the npm cache folder.
 
-The main differences between using `npm install` and `npm ci` are:
+​	用于添加、列出或清理 npm 缓存文件夹。
 
-- The project **must** have an existing `package-lock.json` or `npm-shrinkwrap.json`.
-- If dependencies in the package lock do not match those in `package.json`, `npm ci` will exit with an error, instead of updating the package lock.
-- `npm ci` can only install entire projects at a time: individual dependencies cannot be added with this command.
-- If a `node_modules` is already present, it will be automatically removed before `npm ci` begins its install.
-- It will never write to `package.json` or any of the package-locks: installs are essentially frozen.
+- add: Add the specified packages to the local cache. This command is primarily intended to be used internally by npm, but it can provide a way to add data to the local installation cache explicitly.
+- **add**：将指定的包添加到本地缓存。此命令主要用于 npm 的内部操作，但也可以提供一种明确地将数据添加到本地安装缓存的方法。
 
-NOTE: If you create your `package-lock.json` file by running `npm install` with flags that can affect the shape of your dependency tree, such as `--legacy-peer-deps` or `--install-links`, you *must* provide the same flags to `npm ci` or you are likely to encounter errors. An easy way to do this is to run, for example, `npm config set legacy-peer-deps=true --location=project` and commit the `.npmrc` file to your repo.
+- clean: Delete all data out of the cache folder. Note that this is typically unnecessary, as npm's cache is self-healing and resistant to data corruption issues.
+- **clean**：删除缓存文件夹中的所有数据。请注意，这通常是不必要的，因为 npm 的缓存是自愈的，并且能够抵御数据损坏问题。
+- verify: Verify the contents of the cache folder, garbage collecting any unneeded data, and verifying the integrity of the cache index and all cached data.
+- **verify**：验证缓存文件夹的内容，清理任何不必要的数据，并验证缓存索引及所有缓存数据的完整性。
 
-## Example
+## Details
 
-Make sure you have a package-lock and an up-to-date install:
+npm stores cache data in an opaque directory within the configured `cache`, named `_cacache`. This directory is a [`cacache`](http://npm.im/cacache)-based content-addressable cache that stores all http request data as well as other package-related data. This directory is primarily accessed through `pacote`, the library responsible for all package fetching as of npm@5.
 
+​	npm 在配置的 `cache` 目录中的一个不透明目录 `_cacache` 中存储缓存数据。该目录是一个基于 [`cacache`](http://npm.im/cacache) 的内容可寻址缓存，存储所有 HTTP 请求数据以及其他与包相关的数据。此目录主要通过 `pacote` 访问，`pacote` 是负责从 npm@5 开始获取所有包的库。
 
+All data that passes through the cache is fully verified for integrity on both insertion and extraction. Cache corruption will either trigger an error, or signal to `pacote` that the data must be refetched, which it will do automatically. For this reason, it should never be necessary to clear the cache for any reason other than reclaiming disk space, thus why `clean` now requires `--force` to run.
 
-```bash
-$ cd ./my/npm/project
-$ npm install
-added 154 packages in 10s
-$ ls | grep package-lock
-```
+​	所有经过缓存的数据在插入和提取时都进行完整性验证。缓存损坏将触发错误，或向 `pacote` 发出信号，表明必须重新获取数据，`pacote` 会自动执行此操作。因此，除了为了回收磁盘空间外，通常不需要清理缓存，这也是 `clean` 现在需要 `--force` 参数才能运行的原因。
 
-Run `npm ci` in that project
+There is currently no method exposed through npm to inspect or directly manage the contents of this cache. In order to access it, `cacache` must be used directly.
 
+​	目前，npm 没有提供直接检查或管理此缓存内容的方法。要访问它，必须直接使用 `cacache`。
 
+npm will not remove data by itself: the cache will grow as new packages are installed.
 
-```bash
-$ npm ci
-added 154 packages in 5s
-```
+​	npm 不会自动删除数据：缓存会随着新包的安装而增长。
 
-Configure Travis CI to build using `npm ci` instead of `npm install`:
+## 关于缓存设计的说明 A note about the cache's design
 
+The npm cache is strictly a cache: it should not be relied upon as a persistent and reliable data store for package data. npm makes no guarantee that a previously-cached piece of data will be available later, and will automatically delete corrupted contents. The primary guarantee that the cache makes is that, if it does return data, that data will be exactly the data that was inserted.
 
+​	npm 缓存严格来说是一个缓存：不应将其视为持久可靠的包数据存储。npm 不保证之前缓存的数据在之后会可用，并会自动删除损坏的内容。缓存的主要保证是，如果返回数据，该数据将与插入时的数据完全相同。
 
-```bash
-# .travis.yml
-install:
-- npm ci
-# keep the npm cache around to speed up installs
-cache:
-  directories:
-  - "$HOME/.npm"
-```
+To run an offline verification of existing cache contents, use `npm cache verify`.
 
-## Configuration
+​	要离线验证现有缓存内容，请使用 `npm cache verify`。
 
-### `install-strategy`
+## 配置 Configuration
 
-- Default: "hoisted"
-- Type: "hoisted", "nested", "shallow", or "linked"
+### `cache`
 
-Sets the strategy for installing packages in node_modules. hoisted (default): Install non-duplicated in top-level, and duplicated as necessary within directory structure. nested: (formerly --legacy-bundling) install in place, no hoisting. shallow (formerly --global-style) only install direct deps at top-level. linked: (experimental) install in node_modules/.store, link in place, unhoisted.
+- Default: Windows: `%LocalAppData%\npm-cache`, Posix: `~/.npm`
+- 默认值：Windows: `%LocalAppData%\npm-cache`，Posix: `~/.npm`
+- Type: Path
 
-### `legacy-bundling`
+The location of npm's cache directory.
 
-- Default: false
-- Type: Boolean
-- DEPRECATED: This option has been deprecated in favor of `--install-strategy=nested`
-
-Instead of hoisting package installs in `node_modules`, install packages in the same manner that they are depended on. This may cause very deep directory structures and duplicate package installs as there is no de-duplicating. Sets `--install-strategy=nested`.
-
-### `global-style`
-
-- Default: false
-- Type: Boolean
-- DEPRECATED: This option has been deprecated in favor of `--install-strategy=shallow`
-
-Only install direct dependencies in the top level `node_modules`, but hoist on deeper dependencies. Sets `--install-strategy=shallow`.
-
-### `omit`
-
-- Default: 'dev' if the `NODE_ENV` environment variable is set to 'production', otherwise empty.
-- Type: "dev", "optional", or "peer" (can be set multiple times)
-
-Dependency types to omit from the installation tree on disk.
-
-Note that these dependencies *are* still resolved and added to the `package-lock.json` or `npm-shrinkwrap.json` file. They are just not physically installed on disk.
-
-If a package type appears in both the `--include` and `--omit` lists, then it will be included.
-
-If the resulting omit list includes `'dev'`, then the `NODE_ENV` environment variable will be set to `'production'` for all lifecycle scripts.
-
-### `include`
-
-- Default:
-- Type: "prod", "dev", "optional", or "peer" (can be set multiple times)
-
-Option that allows for defining which types of dependencies to install.
-
-This is the inverse of `--omit=<type>`.
-
-Dependency types specified in `--include` will not be omitted, regardless of the order in which omit/include are specified on the command-line.
-
-### `strict-peer-deps`
-
-- Default: false
-- Type: Boolean
-
-If set to `true`, and `--legacy-peer-deps` is not set, then *any* conflicting `peerDependencies` will be treated as an install failure, even if npm could reasonably guess the appropriate resolution based on non-peer dependency relationships.
-
-By default, conflicting `peerDependencies` deep in the dependency graph will be resolved using the nearest non-peer dependency specification, even if doing so will result in some packages receiving a peer dependency outside the range set in their package's `peerDependencies` object.
-
-When such an override is performed, a warning is printed, explaining the conflict and the packages involved. If `--strict-peer-deps` is set, then this warning is treated as a failure.
-
-### `foreground-scripts`
-
-- Default: `false` unless when using `npm pack` or `npm publish` where it defaults to `true`
-- Type: Boolean
-
-Run all build scripts (ie, `preinstall`, `install`, and `postinstall`) scripts for installed packages in the foreground process, sharing standard input, output, and error with the main npm process.
-
-Note that this will generally make installs run slower, and be much noisier, but can be useful for debugging.
-
-### `ignore-scripts`
-
-- Default: false
-- Type: Boolean
-
-If true, npm does not run scripts specified in package.json files.
-
-Note that commands explicitly intended to run a particular script, such as `npm start`, `npm stop`, `npm restart`, `npm test`, and `npm run-script` will still run their intended script if `ignore-scripts` is set, but they will *not* run any pre- or post-scripts.
-
-### `audit`
-
-- Default: true
-- Type: Boolean
-
-When "true" submit audit reports alongside the current npm command to the default registry and all registries configured for scopes. See the documentation for [`npm audit`](https://docs.npmjs.com/cli/v10/commands/npm-audit) for details on what is submitted.
-
-### `bin-links`
-
-- Default: true
-- Type: Boolean
-
-Tells npm to create symlinks (or `.cmd` shims on Windows) for package executables.
-
-Set to false to have it not do this. This can be used to work around the fact that some file systems don't support symlinks, even on ostensibly Unix systems.
-
-### `fund`
-
-- Default: true
-- Type: Boolean
-
-When "true" displays the message at the end of each `npm install` acknowledging the number of dependencies looking for funding. See [`npm fund`](https://docs.npmjs.com/cli/v10/commands/npm-fund) for details.
-
-### `dry-run`
-
-- Default: false
-- Type: Boolean
-
-Indicates that you don't want npm to make any changes and that it should only report what it would have done. This can be passed into any of the commands that modify your local installation, eg, `install`, `update`, `dedupe`, `uninstall`, as well as `pack` and `publish`.
-
-Note: This is NOT honored by other network related commands, eg `dist-tags`, `owner`, etc.
-
-### `workspace`
-
-- Default:
-- Type: String (can be set multiple times)
-
-Enable running a command in the context of the configured workspaces of the current project while filtering by running only the workspaces defined by this configuration option.
-
-Valid values for the `workspace` config are either:
-
-- Workspace names
-- Path to a workspace directory
-- Path to a parent workspace directory (will result in selecting all workspaces within that folder)
-
-When set for the `npm init` command, this may be set to the folder of a workspace which does not yet exist, to create the folder and set it up as a brand new workspace within the project.
-
-This value is not exported to the environment for child processes.
-
-### `workspaces`
-
-- Default: null
-- Type: null or Boolean
-
-Set to true to run the command in the context of **all** configured workspaces.
-
-Explicitly setting this to false will cause commands like `install` to ignore workspaces altogether. When not set explicitly:
-
-- Commands that operate on the `node_modules` tree (install, update, etc.) will link workspaces into the `node_modules` folder. - Commands that do other things (test, exec, publish, etc.) will operate on the root project, *unless* one or more workspaces are specified in the `workspace` config.
-
-This value is not exported to the environment for child processes.
-
-### `include-workspace-root`
-
-- Default: false
-- Type: Boolean
-
-Include the workspace root when workspaces are enabled for a command.
-
-When false, specifying individual workspaces via the `workspace` config, or all workspaces via the `workspaces` flag, will cause npm to operate only on the specified workspaces, and not on the root project.
-
-This value is not exported to the environment for child processes.
-
-### `install-links`
-
-- Default: false
-- Type: Boolean
-
-When set file: protocol dependencies will be packed and installed as regular dependencies instead of creating a symlink. This option has no effect on workspaces.
+​	npm 缓存目录的位置。
 
 ## See Also
 
+- [package spec](https://docs.npmjs.com/cli/v10/using-npm/package-spec)
+- [npm folders](https://docs.npmjs.com/cli/v10/configuring-npm/folders)
+- [npm config](https://docs.npmjs.com/cli/v10/commands/npm-config)
+- [npmrc](https://docs.npmjs.com/cli/v10/configuring-npm/npmrc)
 - [npm install](https://docs.npmjs.com/cli/v10/commands/npm-install)
-- [package-lock.json](https://docs.npmjs.com/cli/v10/configuring-npm/package-lock-json)
+- [npm publish](https://docs.npmjs.com/cli/v10/commands/npm-publish)
+- [npm pack](https://docs.npmjs.com/cli/v10/commands/npm-pack)
+- https://npm.im/cacache
+- https://npm.im/pacote
+- https://npm.im/@npmcli/arborist
+- https://npm.im/make-fetch-happen

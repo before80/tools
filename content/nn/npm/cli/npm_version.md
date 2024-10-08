@@ -22,6 +22,7 @@ Version 10.9.0 (Latest)
 
 ```bash
 npm version [<newversion> | major | minor | patch | premajor | preminor | prepatch | prerelease | from-git]
+
 alias: verison
 ```
 
