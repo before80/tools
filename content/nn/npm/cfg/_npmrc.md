@@ -1,5 +1,5 @@
 +++
-title = "_npmrc"
+title = ".npmrc"
 date = 2024-10-06T17:12:51+08:00
 weight = 30
 type = "docs"
