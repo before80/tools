@@ -12,7 +12,7 @@ draft = false
 
 How npm handles the "scripts" field
 
-
+​	npm 如何处理 `"scripts"` 字段
 
 Version 10.9.0 (Latest)
 
@@ -20,11 +20,13 @@ Version 10.9.0 (Latest)
 
 The `"scripts"` property of your `package.json` file supports a number of built-in scripts and their preset life cycle events as well as arbitrary scripts. These all can be executed by running `npm run-script <stage>` or `npm run <stage>` for short. *Pre* and *post* commands with matching names will be run for those as well (e.g. `premyscript`, `myscript`, `postmyscript`). Scripts from dependencies can be run with `npm explore <pkg> -- npm run <stage>`.
 
-## Pre & Post Scripts
+​	`package.json` 文件中的 `"scripts"` 属性支持多种内置脚本及其预设的生命周期事件，同时也支持自定义脚本。所有这些脚本都可以通过 `npm run-script <stage>` 或简写 `npm run <stage>` 来执行。与这些脚本名称匹配的 `pre` 和 `post` 命令也会被执行（例如 `premyscript`、`myscript`、`postmyscript`）。还可以使用 `npm explore <pkg> -- npm run <stage>` 运行依赖包中的脚本。
+
+## 前置 & 后置脚本 Pre & Post Scripts
 
 To create "pre" or "post" scripts for any scripts defined in the `"scripts"` section of the `package.json`, simply create another script *with a matching name* and add "pre" or "post" to the beginning of them.
 
-
+​	要为 `package.json` 的 `"scripts"` 字段中定义的任何脚本创建 "pre" 或 "post" 脚本，只需创建一个具有相同名称的脚本，并在它们的开头加上 "pre" 或 "post" 即可。
 
 ```json
 {
@@ -38,18 +40,26 @@ To create "pre" or "post" scripts for any scripts defined in the `"scripts"` sec
 
 In this example `npm run compress` would execute these scripts as described.
 
-## Life Cycle Scripts
+​	在这个例子中，执行 `npm run compress` 将会按顺序执行这些脚本。
+
+## 生命周期脚本 Life Cycle Scripts
 
 There are some special life cycle scripts that happen only in certain situations. These scripts happen in addition to the `pre<event>`, `post<event>`, and `<event>` scripts.
+
+​	某些特殊的生命周期脚本只在特定情况下运行。这些脚本是在 `pre<event>`、`post<event>` 和 `<event>` 脚本之外运行的。
 
 - `prepare`, `prepublish`, `prepublishOnly`, `prepack`, `postpack`, `dependencies`
 
 **prepare** (since `npm@4.0.0`)
 
 - Runs BEFORE the package is packed, i.e. during `npm publish` and `npm pack`
+- 在包打包之前运行，即在 `npm publish` 和 `npm pack` 时运行。
 - Runs on local `npm install` without any arguments
+- 本地执行 `npm install` 时，无需任何参数就会运行。
 - Runs AFTER `prepublish`, but BEFORE `prepublishOnly`
+- 在 `prepublish` 之后、`prepublishOnly` 之前运行。
 - NOTE: If a package being installed through git contains a `prepare` script, its `dependencies` and `devDependencies` will be installed, and the prepare script will be run, before the package is packaged and installed.
+- 注意：如果通过 git 安装的包包含 `prepare` 脚本，则在该包被打包并安装之前，npm 会安装其 `dependencies` 和 `devDependencies`，然后运行 `prepare` 脚本。
 - As of `npm@7` these scripts run in the background. To see the output, run with: `--foreground-scripts`.
 
 **prepublish** (DEPRECATED)
