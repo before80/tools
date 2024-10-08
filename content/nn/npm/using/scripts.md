@@ -245,7 +245,7 @@ If there is a `server.js` file in the root of your package, then npm will defaul
 - `version`
 - `postversion`
 
-### A Note on a lack of ](https://docs.npmjs.com/cli/v10/using-npm/scripts#a-note-on-a-lack-of-npm-uninstall-scripts)[`npm uninstall` scripts
+### A Note on a lack of `npm uninstall` scripts
 
 While npm v6 had `uninstall` lifecycle scripts, npm v7 does not. Removal of a package can happen for a wide variety of reasons, and there's no clear way to currently give the script enough context to be useful.
 

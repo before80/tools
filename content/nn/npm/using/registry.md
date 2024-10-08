@@ -1,5 +1,5 @@
 +++
-title = "registry"
+title = "注册表 registry"
 date = 2024-10-06T17:20:46+08:00
 weight = 10
 type = "docs"
