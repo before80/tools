@@ -1,5 +1,5 @@
 +++
-title = "writingYourOwnCompletions"
+title = "Writing your own completions"
 date = 2024-10-09T14:01:54+08:00
 weight = 0
 type = "docs"
@@ -7,6 +7,8 @@ description = ""
 isCJKLanguage = true
 draft = false
 +++
+
+> 原文：[https://fishshell.com/docs/current/completions.html](https://fishshell.com/docs/current/completions.html)
 
 # Writing your own completions
 

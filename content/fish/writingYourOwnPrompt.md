@@ -1,5 +1,5 @@
 +++
-title = "writingYourOwnPrompt"
+title = "Writing your own prompt"
 date = 2024-10-09T13:37:26+08:00
 type = "docs"
 weight = 20
@@ -7,6 +7,8 @@ description = ""
 isCJKLanguage = true
 draft = false
 +++
+
+> 原文：[https://fishshell.com/docs/current/prompt.html](https://fishshell.com/docs/current/prompt.html)
 
 # Writing your own prompt
 

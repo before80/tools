@@ -8,6 +8,8 @@ isCJKLanguage = true
 draft = false
 +++
 
+> 原文：[https://fishshell.com/docs/current/design.html](https://fishshell.com/docs/current/design.html)
+
 # Design
 
 This is a description of the design principles that have been used to design fish. The fish design has three high level goals. These are:
