@@ -15,21 +15,21 @@ draft = false
 
 Fish prides itself on being really nice to use interactively. That’s down to a few features we’ll explain in the next few sections.
 
-​	Fish 以其良好的交互体验而著称。接下来的几个部分将介绍一些关键功能。
+​	fish 以其良好的交互体验而著称。接下来的几个部分将介绍一些关键功能。
 
 Fish is used by giving commands in the fish language, see [The Fish Language](https://fishshell.com/docs/current/language.html#language) for information on that.
 
-​	Fish 使用 fish 语言执行命令，有关详细信息，请参阅 [Fish 语言](https://fishshell.com/docs/current/language.html#language)。
+​	fish 使用 fish 语言执行命令，有关详细信息，请参阅 [fish 语言](https://fishshell.com/docs/current/language.html#language)。
 
 ## 帮助 Help
 
 Fish has an extensive help system. Use the [help](https://fishshell.com/docs/current/cmds/help.html) command to obtain help on a specific subject or command. For instance, writing `help syntax` displays the [syntax section](https://fishshell.com/docs/current/language.html#syntax) of this documentation.
 
-​	Fish 提供了广泛的帮助系统。使用 [help](https://fishshell.com/docs/current/cmds/help.html) 命令可以获得有关特定主题或命令的帮助。例如，输入 `help syntax` 会显示此文档的 [语法部分](https://fishshell.com/docs/current/language.html#syntax)。
+​	fish 提供了广泛的帮助系统。使用 [help](https://fishshell.com/docs/current/cmds/help.html) 命令可以获得有关特定主题或命令的帮助。例如，输入 `help syntax` 会显示此文档的 [语法部分](https://fishshell.com/docs/current/language.html#syntax)。
 
 Fish also has man pages for its commands, and translates the help pages to man pages. For example, `man set` will show the documentation for `set` as a man page.
 
-​	Fish 的命令也有手册页，并且帮助页面会翻译成手册页。例如，`man set` 会以手册页形式显示 `set` 命令的文档。
+​	fish 的命令也有手册页，并且帮助页面会翻译成手册页。例如，`man set` 会以手册页形式显示 `set` 命令的文档。
 
 Help on a specific builtin can also be obtained with the `-h` parameter. For instance, to obtain help on the [fg](https://fishshell.com/docs/current/cmds/fg.html) builtin, either type `fg -h` or `help fg`.
 
@@ -45,7 +45,7 @@ The main page can be viewed via `help index` (or just `help`) or `man fish-doc`.
 
 fish suggests commands as you type, based on [command history](https://fishshell.com/docs/current/interactive.html#history-search), completions, and valid file paths. As you type commands, you will see a suggestion offered after the cursor, in a muted gray color (which can be changed with the `fish_color_autosuggestion` variable).
 
-​	Fish 会根据 [命令历史](https://fishshell.com/docs/current/interactive.html#history-search)、完成项和有效文件路径，在你输入时建议命令。输入命令时，你会看到光标后面出现一个灰色的建议（可以通过 `fish_color_autosuggestion` 变量修改颜色）。
+​	fish 会根据 [命令历史](https://fishshell.com/docs/current/interactive.html#history-search)、完成项和有效文件路径，在你输入时建议命令。输入命令时，你会看到光标后面出现一个灰色的建议（可以通过 `fish_color_autosuggestion` 变量修改颜色）。
 
 To accept the autosuggestion (replacing the command line contents), press → or Control+F. To accept the first suggested word, press Alt+→ or Alt+F. If the autosuggestion is not what you want, just ignore it: it won’t execute unless you accept it.
 
@@ -70,7 +70,7 @@ set -g fish_autosuggestion_enabled 0
 
 Tab completion is a time saving feature of any modern shell. When you type Tab, fish tries to guess the rest of the word under the cursor. If it finds just one possibility, it inserts it. If it finds more, it inserts the longest unambiguous part and then opens a menu (the “pager”) that you can navigate to find what you’re looking for.
 
-​	Tab 补全是任何现代 shell 的节省时间功能。当你按下 Tab 键时，Fish 会尝试猜测光标下单词的其余部分。如果只找到一个可能性，它将自动插入。如果找到多个，Fish 会插入最长的不明确部分，然后打开一个菜单（称为“分页器”），你可以导航来找到所需内容。
+​	Tab 补全是任何现代 shell 的节省时间功能。当你按下 Tab 键时，fish 会尝试猜测光标下单词的其余部分。如果只找到一个可能性，它将自动插入。如果找到多个，fish 会插入最长的不明确部分，然后打开一个菜单（称为“分页器”），你可以导航来找到所需内容。
 
 The pager can be navigated with the arrow keys, Page Up / Page Down, Tab or Shift+Tab. Pressing Control+S (the `pager-toggle-search` binding - / in vi-mode) opens up a search menu that you can use to filter the list.
 
@@ -78,7 +78,7 @@ The pager can be navigated with the arrow keys, Page Up / Page Down, Tab or Shif
 
 Fish provides some general purpose completions, like for commands, variable names, usernames or files.
 
-​	Fish 提供了一些通用的补全功能，例如命令、变量名、用户名或文件的补全。
+​	fish 提供了一些通用的补全功能，例如命令、变量名、用户名或文件的补全。
 
 It also provides a large number of program specific scripted completions. Most of these completions are simple options like the `-l` option for `ls`, but a lot are more advanced. For example:
 
@@ -96,7 +96,7 @@ You can also write your own completions or install some you got from someone els
 
 Completion scripts are loaded on demand, just like [functions are](https://fishshell.com/docs/current/language.html#syntax-function-autoloading). The difference is the `$fish_complete_path` [list](https://fishshell.com/docs/current/language.html#variables-lists) is used instead of `$fish_function_path`. Typically you can drop new completions in ~/.config/fish/completions/name-of-command.fish and fish will find them automatically.
 
-​	补全脚本按需加载，就像 [函数](https://fishshell.com/docs/current/language.html#syntax-function-autoloading) 一样。区别在于，使用 `$fish_complete_path` [列表](https://fishshell.com/docs/current/language.html#variables-lists) 而不是 `$fish_function_path`。通常，你可以将新的补全脚本放在 `~/.config/fish/completions/name-of-command.fish`，Fish 会自动找到它们。
+​	补全脚本按需加载，就像 [函数](https://fishshell.com/docs/current/language.html#syntax-function-autoloading) 一样。区别在于，使用 `$fish_complete_path` [列表](https://fishshell.com/docs/current/language.html#variables-lists) 而不是 `$fish_function_path`。通常，你可以将新的补全脚本放在 `~/.config/fish/completions/name-of-command.fish`，fish 会自动找到它们。
 
 
 
@@ -104,7 +104,7 @@ Completion scripts are loaded on demand, just like [functions are](https://fishs
 
 Fish interprets the command line as it is typed and uses syntax highlighting to provide feedback. The most important feedback is the detection of potential errors. By default, errors are marked red.
 
-​	Fish 会在输入时解释命令行，并通过语法高亮提供反馈。最重要的反馈是检测潜在的错误。默认情况下，错误会被标记为红色。
+​	fish 会在输入时解释命令行，并通过语法高亮提供反馈。最重要的反馈是检测潜在的错误。默认情况下，错误会被标记为红色。
 
 Detected errors include:
 
@@ -122,7 +122,7 @@ To customize the syntax highlighting, you can set the environment variables list
 
 Fish also provides pre-made color themes you can pick with [fish_config](https://fishshell.com/docs/current/cmds/fish_config.html). Running just `fish_config` opens a browser interface, or you can use `fish_config theme` in the terminal.
 
-​	Fish 还提供了一些预设的配色主题，你可以使用 [fish_config](https://fishshell.com/docs/current/cmds/fish_config.html) 选择。仅运行 `fish_config` 会打开一个浏览器界面，或者你可以在终端中使用 `fish_config theme`。
+​	fish 还提供了一些预设的配色主题，你可以使用 [fish_config](https://fishshell.com/docs/current/cmds/fish_config.html) 选择。仅运行 `fish_config` 会打开一个浏览器界面，或者你可以在终端中使用 `fish_config theme`。
 
 For example, to disable nearly all coloring:
 
@@ -148,7 +148,7 @@ fish_config theme show
 
 The colors used by fish for syntax highlighting can be configured by changing the values of various variables. The value of these variables can be one of the colors accepted by the [set_color](https://fishshell.com/docs/current/cmds/set_color.html) command. The modifier switches accepted by `set_color` like `--bold`, `--dim`, `--italics`, `--reverse` and `--underline` are also accepted.
 
-​	Fish 用于语法高亮的颜色可以通过更改各种变量的值来配置。这些变量的值可以是 [set_color](https://fishshell.com/docs/current/cmds/set_color.html) 命令接受的颜色。`set_color` 接受的修饰符（如 `--bold`、`--dim`、`--italics`、`--reverse` 和 `--underline`）也同样适用。
+​	fish 用于语法高亮的颜色可以通过更改各种变量的值来配置。这些变量的值可以是 [set_color](https://fishshell.com/docs/current/cmds/set_color.html) 命令接受的颜色。`set_color` 接受的修饰符（如 `--bold`、`--dim`、`--italics`、`--reverse` 和 `--underline`）也同样适用。
 
 Example: to make errors highlighted and red, use:
 
@@ -161,7 +161,7 @@ set fish_color_error red --bold
 
 The following variables are available to change the highlighting colors in fish:
 
-​	以下变量可用于更改 Fish 的高亮颜色：
+​	以下变量可用于更改 fish 的高亮颜色：
 
 | Variable                   | Meaning                                                      |
 | -------------------------- | ------------------------------------------------------------ |
@@ -192,7 +192,7 @@ The following variables are available to change the highlighting colors in fish:
 
 If a variable isn’t set or is empty, fish usually tries `$fish_color_normal`, except for:
 
-​	如果某个变量没有设置或为空，Fish 通常会尝试使用 `$fish_color_normal`，除了：
+​	如果某个变量没有设置或为空，fish 通常会尝试使用 `$fish_color_normal`，除了：
 
 - `$fish_color_keyword`, where it tries `$fish_color_command` first. `$fish_color_keyword`，它首先尝试 `$fish_color_command`。
 
@@ -206,7 +206,7 @@ If a variable isn’t set or is empty, fish usually tries `$fish_color_normal`, 
 
 fish will sometimes present a list of choices in a table, called the pager.
 
-​	Fish 有时会在表格中呈现一个选择列表，称为分页器。
+​	fish 有时会在表格中呈现一个选择列表，称为分页器。
 
 Example: to set the background of each pager row, use:
 
@@ -252,7 +252,7 @@ Variables affecting the pager cors:
 
 When the secondary or selected variables aren’t set or are empty, the normal variables are used, except for `$fish_pager_color_selected_background`, where the background of `$fish_color_search_match` is tried first.
 
-​	当未设置或为空时，Fish 会使用正常变量，除了 `$fish_pager_color_selected_background`，它首先尝试使用 `$fish_color_search_match` 的背景。
+​	当未设置或为空时，fish 会使用正常变量，除了 `$fish_pager_color_selected_background`，它首先尝试使用 `$fish_color_search_match` 的背景。
 
 
 
@@ -301,11 +301,11 @@ Any binding that executes the `expand-abbr` or `execute` [bind function](https:/
 
 When using most virtual terminals, it is possible to set the message displayed in the titlebar of the terminal window. This can be done automatically in fish by defining the [fish_title](https://fishshell.com/docs/current/cmds/fish_title.html) function. The [fish_title](https://fishshell.com/docs/current/cmds/fish_title.html) function is executed before and after a new command is executed or put into the foreground and the output is used as a titlebar message. The [status current-command](https://fishshell.com/docs/current/cmds/status.html) builtin will always return the name of the job to be put into the foreground (or `fish` if control is returning to the shell) when the [fish_prompt](https://fishshell.com/docs/current/cmds/fish_prompt.html) function is called. The first argument to fish_title will contain the most recently executed foreground command as a string.
 
-​	在使用大多数虚拟终端时，可以设置显示在终端窗口标题栏中的消息。可以通过定义 [fish_title](https://fishshell.com/docs/current/cmds/fish_title.html) 函数在 Fish 中自动完成此操作。每当执行一个新命令或将其放入前台时，[fish_title](https://fishshell.com/docs/current/cmds/fish_title.html) 函数会运行，其输出将作为标题栏信息显示。当调用 [fish_prompt](https://fishshell.com/docs/current/cmds/fish_prompt.html) 函数时，内置的 [status current-command](https://fishshell.com/docs/current/cmds/status.html) 始终返回要放入前台的作业名称（如果控制返回到 Shell，则为 `fish`）。`fish_title` 的第一个参数将包含最近执行的前台命令的字符串。
+​	在使用大多数虚拟终端时，可以设置显示在终端窗口标题栏中的消息。可以通过定义 [fish_title](https://fishshell.com/docs/current/cmds/fish_title.html) 函数在 fish 中自动完成此操作。每当执行一个新命令或将其放入前台时，[fish_title](https://fishshell.com/docs/current/cmds/fish_title.html) 函数会运行，其输出将作为标题栏信息显示。当调用 [fish_prompt](https://fishshell.com/docs/current/cmds/fish_prompt.html) 函数时，内置的 [status current-command](https://fishshell.com/docs/current/cmds/status.html) 始终返回要放入前台的作业名称（如果控制返回到 Shell，则为 `fish`）。`fish_title` 的第一个参数将包含最近执行的前台命令的字符串。
 
 The default fish title shows the hostname if connected via ssh, the currently running command (unless it is fish) and the current working directory. All of this is shortened to not make the tab too wide.
 
-​	默认的 Fish 标题在通过 SSH 连接时显示主机名，当前运行的命令（除非是 Fish）以及当前工作目录。这些信息会被缩短，以防止标签过宽。
+​	默认的 fish 标题在通过 SSH 连接时显示主机名，当前运行的命令（除非是 Fish）以及当前工作目录。这些信息会被缩短，以防止标签过宽。
 
 Examples:
 
@@ -331,7 +331,7 @@ end
 
 When it is fish’s turn to ask for input (like after it started or the command ended), it will show a prompt. It does this by running the [fish_prompt](https://fishshell.com/docs/current/cmds/fish_prompt.html) and [fish_right_prompt](https://fishshell.com/docs/current/cmds/fish_right_prompt.html) functions.
 
-​	当 Fish 轮到请求输入时（例如启动后或命令结束后），它将显示提示符。它通过运行 [fish_prompt](https://fishshell.com/docs/current/cmds/fish_prompt.html) 和 [fish_right_prompt](https://fishshell.com/docs/current/cmds/fish_right_prompt.html) 函数来完成此操作。
+​	当 fish 轮到请求输入时（例如启动后或命令结束后），它将显示提示符。它通过运行 [fish_prompt](https://fishshell.com/docs/current/cmds/fish_prompt.html) 和 [fish_right_prompt](https://fishshell.com/docs/current/cmds/fish_right_prompt.html) 函数来完成此操作。
 
 The output of the former is displayed on the left and the latter’s output on the right side of the terminal. The output of [fish_mode_prompt](https://fishshell.com/docs/current/cmds/fish_mode_prompt.html) will be prepended on the left, though the default function only does this when in [vi-mode](https://fishshell.com/docs/current/interactive.html#vi-mode).
 
@@ -343,7 +343,7 @@ The output of the former is displayed on the left and the latter’s output on t
 
 When it is started interactively, fish tries to run the [fish_greeting](https://fishshell.com/docs/current/cmds/fish_greeting.html) function. The default fish_greeting prints a simple greeting. You can change its text by changing the `$fish_greeting` variable, for instance using a [universal variable](https://fishshell.com/docs/current/language.html#variables-universal):
 
-​	当 Fish 以交互方式启动时，它会尝试运行 [fish_greeting](https://fishshell.com/docs/current/cmds/fish_greeting.html) 函数。默认的 `fish_greeting` 打印一个简单的欢迎信息。你可以通过更改 `$fish_greeting` 变量来自定义文本，例如使用 [通用变量](https://fishshell.com/docs/current/language.html#variables-universal)：
+​	当 fish 以交互方式启动时，它会尝试运行 [fish_greeting](https://fishshell.com/docs/current/cmds/fish_greeting.html) 函数。默认的 `fish_greeting` 打印一个简单的欢迎信息。你可以通过更改 `$fish_greeting` 变量来自定义文本，例如使用 [通用变量](https://fishshell.com/docs/current/language.html#variables-universal)：
 
 ```
 set -U fish_greeting
@@ -388,7 +388,7 @@ You can also launch with `fish --private` (or `fish -P` for short). This both hi
 
 You can query the variable `fish_private_mode` (`if test -n "$fish_private_mode" ...`) if you would like to respect the user’s wish for privacy and alter the behavior of your own fish scripts.
 
-​	如果你想尊重用户的隐私意愿并修改你自己的 Fish 脚本行为，可以查询 `fish_private_mode` 变量（`if test -n "$fish_private_mode" ...`）。
+​	如果你想尊重用户的隐私意愿并修改你自己的 fish 脚本行为，可以查询 `fish_private_mode` 变量（`if test -n "$fish_private_mode" ...`）。
 
 
 
@@ -396,11 +396,11 @@ You can query the variable `fish_private_mode` (`if test -n "$fish_private_mode"
 
 The fish editor features copy and paste, a [searchable history](https://fishshell.com/docs/current/interactive.html#history-search) and many editor functions that can be bound to special keyboard shortcuts.
 
-​	Fish 编辑器支持复制和粘贴、[可搜索的历史记录](https://fishshell.com/docs/current/interactive.html#history-search)以及许多可以绑定到特定键盘快捷键的编辑功能。
+​	fish 编辑器支持复制和粘贴、[可搜索的历史记录](https://fishshell.com/docs/current/interactive.html#history-search)以及许多可以绑定到特定键盘快捷键的编辑功能。
 
 Like bash and other shells, fish includes two sets of keyboard shortcuts (or key bindings): one inspired by the Emacs text editor, and one by the Vi text editor. The default editing mode is Emacs. You can switch to Vi mode by running [fish_vi_key_bindings](https://fishshell.com/docs/current/cmds/fish_vi_key_bindings.html) and switch back with [fish_default_key_bindings](https://fishshell.com/docs/current/cmds/fish_default_key_bindings.html). You can also make your own key bindings by creating a function and setting the `fish_key_bindings` variable to its name. For example:
 
-​	与 Bash 和其他 Shell 类似，Fish 提供了两套键盘快捷键（或称为键绑定）：一种基于 Emacs 文本编辑器，另一种基于 Vi 文本编辑器。默认编辑模式是 Emacs 模式。你可以运行 [fish_vi_key_bindings](https://fishshell.com/docs/current/cmds/fish_vi_key_bindings.html) 切换到 Vi 模式，再通过 [fish_default_key_bindings](https://fishshell.com/docs/current/cmds/fish_default_key_bindings.html) 切换回 Emacs 模式。你还可以通过创建一个函数并将 `fish_key_bindings` 变量设置为其名称来自定义键绑定。例如：
+​	与 Bash 和其他 Shell 类似，fish 提供了两套键盘快捷键（或称为键绑定）：一种基于 Emacs 文本编辑器，另一种基于 Vi 文本编辑器。默认编辑模式是 Emacs 模式。你可以运行 [fish_vi_key_bindings](https://fishshell.com/docs/current/cmds/fish_vi_key_bindings.html) 切换到 Vi 模式，再通过 [fish_default_key_bindings](https://fishshell.com/docs/current/cmds/fish_default_key_bindings.html) 切换回 Emacs 模式。你还可以通过创建一个函数并将 `fish_key_bindings` 变量设置为其名称来自定义键绑定。例如：
 
 ```
 function fish_hybrid_key_bindings --description \
@@ -416,7 +416,7 @@ set -g fish_key_bindings fish_hybrid_key_bindings
 
 While the key bindings included with fish include many of the shortcuts popular from the respective text editors, they are not a complete implementation. They include a shortcut to open the current command line in your preferred editor (Alt+E by default) if you need the full power of your editor.
 
-​	Fish 包含的键绑定涵盖了许多流行文本编辑器的快捷键，但并不完全实现所有功能。它还包括一个快捷键，可以用你喜欢的编辑器打开当前命令行（默认是 Alt+E），如果你需要使用编辑器的完整功能。
+​	fish 包含的键绑定涵盖了许多流行文本编辑器的快捷键，但并不完全实现所有功能。它还包括一个快捷键，可以用你喜欢的编辑器打开当前命令行（默认是 Alt+E），如果你需要使用编辑器的完整功能。
 
 
 
@@ -560,7 +560,7 @@ Additionally, `blink` can be added after each of the cursor shape parameters to 
 
 Fish knows the shapes “block”, “line” and “underscore”, other values will be ignored.
 
-​	Fish 识别的光标形状有 “block”（块状）、“line”（线条）和 “underscore”（下划线），其他值会被忽略。
+​	fish 识别的光标形状有 “block”（块状）、“line”（线条）和 “underscore”（下划线），其他值会被忽略。
 
 If the cursor shape does not appear to be changing after setting the above variables, it’s likely your terminal emulator does not support the capabilities necessary to do this. It may also be the case, however, that `fish_vi_cursor` has not detected your terminal’s features correctly (for example, if you are using `tmux`). If this is the case, you can force `fish_vi_cursor` to set the cursor shape by setting `$fish_vi_force_cursor` in `config.fish`. You’ll have to restart fish for any changes to take effect. If cursor shape setting remains broken after this, it’s almost certainly an issue with your terminal emulator, and not fish.
 
@@ -652,7 +652,7 @@ bind --erase \cc
 
 Fish remembers its preset bindings and so it will take effect again. This saves you from having to remember what it was before and add it again yourself.
 
-​	Fish 记住其预设绑定，因此它会再次生效。这可以省去你记住原始绑定并手动添加的麻烦。
+​	fish 记住其预设绑定，因此它会再次生效。这可以省去你记住原始绑定并手动添加的麻烦。
 
 If you use [vi bindings](https://fishshell.com/docs/current/interactive.html#vi-mode), note that `bind` will by default bind keys in [command mode](https://fishshell.com/docs/current/interactive.html#vi-mode-command). To bind something in [insert mode](https://fishshell.com/docs/current/interactive.html#vi-mode-insert):
 
@@ -731,11 +731,11 @@ set -g fish_sequence_key_delay_ms 200
 
 Fish uses an Emacs-style kill ring for copy and paste functionality. For example, use Control+K (kill-line) to cut from the current cursor position to the end of the line. The string that is cut (a.k.a. killed in emacs-ese) is inserted into a list of kills, called the kill ring. To paste the latest value from the kill ring (emacs calls this “yanking”) use Control+Y (the `yank` input function). After pasting, use Alt+Y (`yank-pop`) to rotate to the previous kill.
 
-​	Fish 使用 Emacs 风格的 kill ring 来实现复制和粘贴功能。例如，使用 Control+K（kill-line）从当前光标位置到行尾进行剪切。被剪切的字符串（在 Emacs 术语中称为 "killed"）会插入到一个剪切列表中，称为 kill ring。要从 kill ring 中粘贴最新的值（在 Emacs 中称为 "yanking"），使用 Control+Y（`yank` 输入功能）。粘贴后，使用 Alt+Y（`yank-pop`）循环到之前的剪切内容。
+​	fish 使用 Emacs 风格的 kill ring 来实现复制和粘贴功能。例如，使用 Control+K（kill-line）从当前光标位置到行尾进行剪切。被剪切的字符串（在 Emacs 术语中称为 "killed"）会插入到一个剪切列表中，称为 kill ring。要从 kill ring 中粘贴最新的值（在 Emacs 中称为 "yanking"），使用 Control+Y（`yank` 输入功能）。粘贴后，使用 Alt+Y（`yank-pop`）循环到之前的剪切内容。
 
 Copy and paste from outside are also supported, both via the Control+X / Control+V bindings (the `fish_clipboard_copy` and `fish_clipboard_paste` functions [[2\]](https://fishshell.com/docs/current/interactive.html#id8)) and via the terminal’s paste function, for which fish enables “Bracketed Paste Mode”, so it can tell a paste from manually entered text. In addition, when pasting inside single quotes, pasted single quotes and backslashes are automatically escaped so that the result can be used as a single token simply by closing the quote after. Kill ring entries are stored in `fish_killring` variable.
 
-​	Fish 也支持从外部进行复制和粘贴，可以通过 Control+X / Control+V 绑定（`fish_clipboard_copy` 和 `fish_clipboard_paste` 函数 [[2\]](https://fishshell.com/docs/current/interactive.html#id8)）或通过终端的粘贴功能。Fish 启用了“括号粘贴模式”，以便区分粘贴内容与手动输入的文本。此外，当在单引号内粘贴时，粘贴的单引号和反斜杠会自动转义，以便粘贴结果作为一个单独的标记，只需关闭引号即可使用。kill ring 条目存储在 `fish_killring` 变量中。
+​	fish 也支持从外部进行复制和粘贴，可以通过 Control+X / Control+V 绑定（`fish_clipboard_copy` 和 `fish_clipboard_paste` 函数 [[2\]](https://fishshell.com/docs/current/interactive.html#id8)）或通过终端的粘贴功能。fish 启用了“括号粘贴模式”，以便区分粘贴内容与手动输入的文本。此外，当在单引号内粘贴时，粘贴的单引号和反斜杠会自动转义，以便粘贴结果作为一个单独的标记，只需关闭引号即可使用。kill ring 条目存储在 `fish_killring` 变量中。
 
 The commands `begin-selection` and `end-selection` (unbound by default; used for selection in vi visual mode) control text selection together with cursor movement commands that extend the current selection. The variable [`fish_cursor_selection_mode`](https://fishshell.com/docs/current/language.html#envvar-fish_cursor_selection_mode) can be used to configure if that selection should include the character under the cursor (`inclusive`) or not (`exclusive`). The default is `exclusive`, which works well with any cursor shape. For vi mode, and particularly for the `block` or `underscore` cursor shapes you may prefer `inclusive`.
 
@@ -753,7 +753,7 @@ These rely on external tools. Currently xsel, xclip, wl-copy/wl-paste and pbcopy
 
 The fish commandline editor can be used to work on commands that are several lines long. There are three ways to make a command span more than a single line:
 
-​	Fish 命令行编辑器可以处理多行命令。有三种方法可以让命令跨越多行：
+​	fish 命令行编辑器可以处理多行命令。有三种方法可以让命令跨越多行：
 
 - Pressing the Enter key while a block of commands is unclosed, such as when one or more block commands such as `for`, `begin` or `if` do not have a corresponding [end](https://fishshell.com/docs/current/cmds/end.html) command. 当命令块未闭合时按 Enter 键，例如一个或多个 `for`、`begin` 或 `if` 块没有对应的 [end](https://fishshell.com/docs/current/cmds/end.html) 命令。
 
@@ -762,7 +762,7 @@ The fish commandline editor can be used to work on commands that are several lin
 
 The fish commandline editor works exactly the same in single line mode and in multiline mode. To move between lines use the left and right arrow keys and other such keyboard shortcuts.
 
-​	Fish 命令行编辑器在单行模式和多行模式下的工作方式完全相同。要在行间移动，请使用左右箭头键以及其他快捷键。
+​	fish 命令行编辑器在单行模式和多行模式下的工作方式完全相同。要在行间移动，请使用左右箭头键以及其他快捷键。
 
 
 
@@ -834,7 +834,7 @@ The current working directory can be displayed with the [pwd](https://fishshell.
 
 Fish automatically keeps a trail of the recent visited directories with [cd](https://fishshell.com/docs/current/cmds/cd.html) by storing this history in the `dirprev` and `dirnext` variables.
 
-​	Fish 会自动跟踪使用 [cd](https://fishshell.com/docs/current/cmds/cd.html) 访问的最近目录，将该历史存储在 `dirprev` 和 `dirnext` 变量中。
+​	fish 会自动跟踪使用 [cd](https://fishshell.com/docs/current/cmds/cd.html) 访问的最近目录，将该历史存储在 `dirprev` 和 `dirnext` 变量中。
 
 Several commands are provided to interact with this directory history:
 

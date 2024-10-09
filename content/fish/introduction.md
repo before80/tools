@@ -42,11 +42,11 @@ If this is your first time using fish, see the [tutorial](https://fishshell.com/
 
 If you are already familiar with other shells like bash and want to see the scripting differences, see [Fish For Bash Users](https://fishshell.com/docs/current/fish_for_bash_users.html#fish-for-bash-users).
 
-​	如果你已经熟悉其他 Shell（如 bash），并希望了解脚本语法的不同之处，请查看 [Bash 用户的 Fish 指南](https://fishshell.com/docs/current/fish_for_bash_users.html#fish-for-bash-users)。
+​	如果你已经熟悉其他 Shell（如 bash），并希望了解脚本语法的不同之处，请查看 [Bash 用户的 fish 指南](https://fishshell.com/docs/current/fish_for_bash_users.html#fish-for-bash-users)。
 
 For a comprehensive overview of fish’s scripting language, see [The Fish Language](https://fishshell.com/docs/current/language.html#language).
 
-​	如果你需要 fish 脚本语言的综合概述，请参阅 [Fish 语言](https://fishshell.com/docs/current/language.html#language)。
+​	如果你需要 fish 脚本语言的综合概述，请参阅 [fish 语言](https://fishshell.com/docs/current/language.html#language)。
 
 For information on using fish interactively, see [Interactive use](https://fishshell.com/docs/current/interactive.html#interactive).
 

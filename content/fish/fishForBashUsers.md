@@ -1,5 +1,5 @@
 +++
-title = "针对 bash 用户的 Fish 入门指南"
+title = "针对 bash 用户的 fish 入门指南"
 date = 2024-10-09T13:37:26+08:00
 type = "docs"
 weight = 20
@@ -11,11 +11,11 @@ draft = false
 
 > 原文：[https://fishshell.com/docs/current/fish_for_bash_users.html](https://fishshell.com/docs/current/fish_for_bash_users.html)
 
-# Fish for bash users 针对 bash 用户的 Fish 入门指南
+# Fish for bash users 针对 bash 用户的 fish 入门指南
 
 This is to give you a quick overview if you come from bash (or to a lesser extent other shells like zsh or ksh) and want to know how fish differs. Fish is intentionally not POSIX-compatible and as such some of the things you are used to work differently.
 
-​	如果你来自 bash（或者稍微了解 zsh 或 ksh），并想知道 fish 有哪些不同之处，这篇指南能快速为你提供概览。Fish 刻意没有遵循 POSIX 标准，因此你习惯的一些操作方式在 fish 中会有所不同。
+​	如果你来自 bash（或者稍微了解 zsh 或 ksh），并想知道 fish 有哪些不同之处，这篇指南能快速为你提供概览。fish 刻意没有遵循 POSIX 标准，因此你习惯的一些操作方式在 fish 中会有所不同。
 
 Many things are similar - they both fundamentally expand commandlines to execute commands, have pipes, redirections, variables, globs, use command output in various ways. This document is there to quickly show you the differences.
 
@@ -27,7 +27,7 @@ Many things are similar - they both fundamentally expand commandlines to execute
 
 Fish spells command substitutions as `$(command)` or `(command)`, but not ``command``.
 
-​	Fish 的命令替换使用 `$(command)` 或 `(command)`，而不是使用反引号 `command`。
+​	fish 的命令替换使用 `$(command)` 或 `(command)`，而不是使用反引号 `command`。
 
 In addition, it only splits them on newlines instead of $IFS. If you want to split on something else, use [string split](https://fishshell.com/docs/current/cmds/string-split.html), [string split0](https://fishshell.com/docs/current/cmds/string-split.html) or [string collect](https://fishshell.com/docs/current/cmds/string-collect.html). If those are used as the last command in a command substitution the splits they create are carried over. So:
 
@@ -46,7 +46,7 @@ will correctly handle all possible filenames.
 
 Fish sets and erases variables with [set](https://fishshell.com/docs/current/cmds/set.html) instead of `VAR=VAL` and a variety of separate builtins like `declare` and `unset` and `export`. `set` takes options to determine the scope and exportedness of a variable:
 
-​	Fish 使用 [set](https://fishshell.com/docs/current/cmds/set.html) 来设置和删除变量，而不是 `VAR=VAL` 和像 `declare`、`unset` 和 `export` 这样独立的内置命令。`set` 可以通过选项确定变量的作用域和是否导出：
+​	fish 使用 [set](https://fishshell.com/docs/current/cmds/set.html) 来设置和删除变量，而不是 `VAR=VAL` 和像 `declare`、`unset` 和 `export` 这样独立的内置命令。`set` 可以通过选项确定变量的作用域和是否导出：
 
 ```
 # Define $PAGER global and exported,
@@ -81,7 +81,7 @@ PAGER=cat git log
 
 Fish does not perform word splitting. Once a variable has been set to a value, that value stays as it is, so double-quoting variable expansions isn’t the necessity it is in bash. [[1\]](https://fishshell.com/docs/current/fish_for_bash_users.html#id3)
 
-​	Fish 不会进行单词拆分。一旦变量被设置为某个值，这个值将保持不变，因此在 fish 中双引号扩展变量并不是像 bash 那样必须的。
+​	fish 不会进行单词拆分。一旦变量被设置为某个值，这个值将保持不变，因此在 fish 中双引号扩展变量并不是像 bash 那样必须的。
 
 For instance, here’s ba
 
@@ -182,7 +182,7 @@ zsh also does not perform word splitting by default (the SH_WORD_SPLIT option co
 
 Fish only supports the `*` and `**` glob (and the deprecated `?` glob) as syntax. If a glob doesn’t match it fails the command (like with bash’s `failglob`) unless the command is `for`, `set` or `count` or the glob is used with an environment override (`VAR=* command`), in which case it expands to nothing (like with bash’s `nullglob` option).
 
-​	Fish 仅支持 `*` 和 `**` 通配符（以及已弃用的 `?` 通配符）。如果通配符没有匹配到文件，它会使命令失败（类似 bash 的 `failglob`），除非该命令是 `for`、`set` 或 `count`，或者通配符用于环境变量覆盖（`VAR=* command`），此时它会扩展为空（类似 bash 的 `nullglob` 选项）。
+​	fish 仅支持 `*` 和 `**` 通配符（以及已弃用的 `?` 通配符）。如果通配符没有匹配到文件，它会使命令失败（类似 bash 的 `failglob`），除非该命令是 `for`、`set` 或 `count`，或者通配符用于环境变量覆盖（`VAR=* command`），此时它会扩展为空（类似 bash 的 `nullglob` 选项）。
 
 Globbing doesn’t happen on expanded variables, so:
 
@@ -210,7 +210,7 @@ See [Wildcards](https://fishshell.com/docs/current/language.html#expand-wildcard
 
 Fish has two quoting styles: `""` and `''`. Variables are expanded in double-quotes, nothing is expanded in single-quotes.
 
-​	Fish 有两种引号风格：`""` 和 `''`。变量会在双引号中展开，而在单引号中则不会展开。
+​	fish 有两种引号风格：`""` 和 `''`。变量会在双引号中展开，而在单引号中则不会展开。
 
 There is no `$''`, instead the sequences that would transform are transformed *when unquoted*:
 
@@ -231,7 +231,7 @@ See [Quotes](https://fishshell.com/docs/current/language.html#quotes) for more.
 
 Fish does not have `${foo%bar}`, `${foo#bar}` and `${foo/bar/baz}`. Instead string manipulation is done by the [string](https://fishshell.com/docs/current/cmds/string.html) builtin.
 
-​	Fish 没有 `${foo%bar}`、`${foo#bar}` 和 `${foo/bar/baz}`。取而代之的是使用 [string](https://fishshell.com/docs/current/cmds/string.html) 内置命令来进行字符串操作。
+​	fish 没有 `${foo%bar}`、`${foo#bar}` 和 `${foo/bar/baz}`。取而代之的是使用 [string](https://fishshell.com/docs/current/cmds/string.html) 内置命令来进行字符串操作。
 
 For example, to replace “bar” with “baz”:
 
@@ -289,7 +289,7 @@ FOO
 
 repeat strings, trim strings, escape strings or print a string’s length or width (in terminal cells).
 
-​	Fish 还可以重复字符串、修剪字符串、转义字符串，或输出字符串的长度或宽度（以终端单元格计）。
+​	fish 还可以重复字符串、修剪字符串、转义字符串，或输出字符串的长度或宽度（以终端单元格计）。
 
 ## 特殊变量 Special variables
 
@@ -310,7 +310,7 @@ Some bash variables and their closest fish equivalent:
 
 Instead of `<(command)` fish uses `(command | psub)`. There is no equivalent to `>(command)`.
 
-​	Fish 使用 `(command | psub)` 来替代 bash 中的 `<(command)`。没有对应 `>(command)` 的等价替代。
+​	fish 使用 `(command | psub)` 来替代 bash 中的 `<(command)`。没有对应 `>(command)` 的等价替代。
 
 Note that both of these are bashisms, and most things can easily be expressed without. E.g. instead of:
 
@@ -338,7 +338,7 @@ as fish’s [source](https://fishshell.com/docs/current/cmds/source.html) can re
 
 Fish does not have `<<EOF` “heredocs”. Instead of
 
-​	Fish 没有 `<<EOF` 形式的 heredocs。可以使用以下方式代替：
+​	fish 没有 `<<EOF` 形式的 heredocs。可以使用以下方式代替：
 
 ```
 cat <<EOF
@@ -451,7 +451,7 @@ For example, the “EOF” is just a convention, the terminator can be an arbitr
 
 Fish has a POSIX-compatible `test` or `[` builtin. There is no `[[` and `test` does not accept `==` as a synonym for `=`. It can compare floating point numbers, however.
 
-​	Fish 提供了一个 POSIX 兼容的 `test` 或 `[` 内置命令。Fish 不支持 `[[`，且 `test` 中不能使用 `==` 作为 `=` 的同义词。不过，Fish 可以比较浮点数。
+​	fish 提供了一个 POSIX 兼容的 `test` 或 `[` 内置命令。fish 不支持 `[[`，且 `test` 中不能使用 `==` 作为 `=` 的同义词。不过，fish 可以比较浮点数。
 
 `set -q` can be used to determine if a variable exists or has a certain number of elements (`set -q foo[2]`).
 
@@ -461,7 +461,7 @@ Fish has a POSIX-compatible `test` or `[` builtin. There is no `[[` and `test` d
 
 Fish does not have `$((i+1))` arithmetic expansion, computation is handled by [math](https://fishshell.com/docs/current/cmds/math.html):
 
-​	Fish 没有 `$((i+1))` 这样的算术扩展，取而代之的是使用 [math](https://fishshell.com/docs/current/cmds/math.html) 进行计算：
+​	fish 没有 `$((i+1))` 这样的算术扩展，取而代之的是使用 [math](https://fishshell.com/docs/current/cmds/math.html) 进行计算：
 
 ```
 math $i + 1
@@ -480,7 +480,7 @@ Unlike bash’s arithmetic, it can handle floating point numbers:
 
 And also has some functions, like for trigonometry:
 
-​	Fish 还提供一些数学函数，如三角函数：
+​	fish 还提供一些数学函数，如三角函数：
 
 ```
 > math cos 2 x pi
@@ -505,7 +505,7 @@ Both `*` and `x` are valid ways to spell multiplication, but `*` needs to be quo
 
 Fish does not use the `$PS1`, `$PS2` and so on variables. Instead the prompt is the output of the [fish_prompt](https://fishshell.com/docs/current/cmds/fish_prompt.html) function, plus the [fish_mode_prompt](https://fishshell.com/docs/current/cmds/fish_mode_prompt.html) function if vi-mode is enabled and the [fish_right_prompt](https://fishshell.com/docs/current/cmds/fish_right_prompt.html) function for the right prompt.
 
-​	Fish 不使用 `$PS1`、`$PS2` 等变量。提示符的显示是通过 [fish_prompt](https://fishshell.com/docs/current/cmds/fish_prompt.html) 函数的输出，此外，如果启用了 vi 模式，fish 还会运行 [fish_mode_prompt](https://fishshell.com/docs/current/cmds/fish_mode_prompt.html)，并通过 [fish_right_prompt](https://fishshell.com/docs/current/cmds/fish_right_prompt.html) 显示右侧提示符。
+​	fish 不使用 `$PS1`、`$PS2` 等变量。提示符的显示是通过 [fish_prompt](https://fishshell.com/docs/current/cmds/fish_prompt.html) 函数的输出，此外，如果启用了 vi 模式，fish 还会运行 [fish_mode_prompt](https://fishshell.com/docs/current/cmds/fish_mode_prompt.html)，并通过 [fish_right_prompt](https://fishshell.com/docs/current/cmds/fish_right_prompt.html) 显示右侧提示符。
 
 As an example, here’s a relatively simple bash prompt:
 
@@ -537,24 +537,24 @@ This shows a few differences:
 
 ​	可以看到几个不同点：
 
-- Fish provides [set_color](https://fishshell.com/docs/current/cmds/set_color.html) to color text. It can use the 16 named colors and also RGB sequences (so you could also use `set_color 5555FF`) Fish 提供了 [set_color](https://fishshell.com/docs/current/cmds/set_color.html) 来设置颜色。它可以使用 16 种命名颜色，还可以使用 RGB 序列（例如 `set_color 5555FF`）。
+- Fish provides [set_color](https://fishshell.com/docs/current/cmds/set_color.html) to color text. It can use the 16 named colors and also RGB sequences (so you could also use `set_color 5555FF`) fish 提供了 [set_color](https://fishshell.com/docs/current/cmds/set_color.html) 来设置颜色。它可以使用 16 种命名颜色，还可以使用 RGB 序列（例如 `set_color 5555FF`）。
 
-- Instead of introducing specific escapes like `\h` for the hostname, the prompt is simply a function. To achieve the effect of `\h`, fish provides helper functions like [prompt_hostname](https://fishshell.com/docs/current/cmds/prompt_hostname.html), which prints a shortened version of the hostname. Fish 使用函数来生成提示符，取代了特定的转义字符。要实现类似 `\h` 这样的主机名输出，fish 提供了 [prompt_hostname](https://fishshell.com/docs/current/cmds/prompt_hostname.html) 这样的帮助函数。
-- Fish offers other helper functions for adding things to the prompt, like [fish_vcs_prompt](https://fishshell.com/docs/current/cmds/fish_vcs_prompt.html) for adding a display for common version control systems (git, mercurial, svn), and [prompt_pwd](https://fishshell.com/docs/current/cmds/prompt_pwd.html) for showing a shortened `$PWD` (the user’s home directory becomes `~` and any path component is shortened). Fish 提供了其他生成提示符的帮助函数，例如 [fish_vcs_prompt](https://fishshell.com/docs/current/cmds/fish_vcs_prompt.html) 用于显示常见版本控制系统的状态（git、mercurial、svn），[prompt_pwd](https://fishshell.com/docs/current/cmds/prompt_pwd.html) 用于显示缩短后的 `$PWD`（用户的主目录变为 `~`，路径的其余部分会缩短）。
+- Instead of introducing specific escapes like `\h` for the hostname, the prompt is simply a function. To achieve the effect of `\h`, fish provides helper functions like [prompt_hostname](https://fishshell.com/docs/current/cmds/prompt_hostname.html), which prints a shortened version of the hostname. fish 使用函数来生成提示符，取代了特定的转义字符。要实现类似 `\h` 这样的主机名输出，fish 提供了 [prompt_hostname](https://fishshell.com/docs/current/cmds/prompt_hostname.html) 这样的帮助函数。
+- Fish offers other helper functions for adding things to the prompt, like [fish_vcs_prompt](https://fishshell.com/docs/current/cmds/fish_vcs_prompt.html) for adding a display for common version control systems (git, mercurial, svn), and [prompt_pwd](https://fishshell.com/docs/current/cmds/prompt_pwd.html) for showing a shortened `$PWD` (the user’s home directory becomes `~` and any path component is shortened). fish 提供了其他生成提示符的帮助函数，例如 [fish_vcs_prompt](https://fishshell.com/docs/current/cmds/fish_vcs_prompt.html) 用于显示常见版本控制系统的状态（git、mercurial、svn），[prompt_pwd](https://fishshell.com/docs/current/cmds/prompt_pwd.html) 用于显示缩短后的 `$PWD`（用户的主目录变为 `~`，路径的其余部分会缩短）。
 
 The default prompt is reasonably full-featured and its code can be read via `type fish_prompt`.
 
-​	Fish 的默认提示符功能强大，可以通过运行 `type fish_prompt` 查看它的代码。
+​	fish 的默认提示符功能强大，可以通过运行 `type fish_prompt` 查看它的代码。
 
 Fish does not have `$PS2` for continuation lines, instead it leaves the lines indented to show that the commandline isn’t complete yet.
 
-​	Fish 没有 `$PS2` 来显示续行提示符，而是通过缩进来显示命令行还未完成。
+​	fish 没有 `$PS2` 来显示续行提示符，而是通过缩进来显示命令行还未完成。
 
 ## 块与循环 Blocks and loops
 
 Fish’s blocking constructs look a little different. They all start with a word, end in `end` and don’t have a second starting word:
 
-​	Fish 的块结构看起来有些不同。所有块以一个关键字开始，以 `end` 结束，并且没有第二个起始关键字：
+​	fish 的块结构看起来有些不同。所有块以一个关键字开始，以 `end` 结束，并且没有第二个起始关键字：
 
 ```
 for i in 1 2 3; do
@@ -618,7 +618,7 @@ end
 
 Fish does not have an `until`. Use `while not` or `while !`.
 
-​	Fish 没有 `until` 语法。你可以使用 `while not` 或 `while !`。
+​	fish 没有 `until` 语法。你可以使用 `while not` 或 `while !`。
 
 ## 子 Shell Subshells
 

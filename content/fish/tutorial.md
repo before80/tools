@@ -17,7 +17,7 @@ draft = false
 
 Fish is a fully-equipped command line shell (like bash or zsh) that is smart and user-friendly. Fish supports powerful features like syntax highlighting, autosuggestions, and tab completions that just work, with nothing to learn or configure.
 
-​	Fish 是一个功能齐全的命令行 shell（如 bash 或 zsh），它智能且用户友好。Fish 支持强大的功能，例如语法高亮、自动建议和 Tab 补全，开箱即用，无需学习或配置。
+​	fish 是一个功能齐全的命令行 shell（如 bash 或 zsh），它智能且用户友好。fish 支持强大的功能，例如语法高亮、自动建议和 Tab 补全，开箱即用，无需学习或配置。
 
 If you want to make your command line more productive, more useful, and more fun, without learning a bunch of arcane syntax and configuration options, then fish might be just what you’re looking for!
 
@@ -75,7 +75,7 @@ For a comprehensive description of fish’s scripting language, see [The Fish La
 
 Fish runs commands like other shells: you type a command, followed by its arguments. Spaces are separators:
 
-​	Fish 与其他 shell 类似：你输入命令，后跟其参数。空格用作分隔符：
+​	fish 与其他 shell 类似：你输入命令，后跟其参数。空格用作分隔符：
 
 ```
 > echo hello world
@@ -118,7 +118,7 @@ To open this section, use `help getting-help`.
 
 Fish works by running commands, which are often also installed on your computer. Usually these commands also provide help in the man system, so you can get help for them there. Try `man ls` to get help on your computer’s `ls` command.
 
-​	Fish 通过运行命令来工作，而这些命令通常也已安装在你的计算机上。通常这些命令也在手册系统中提供帮助，因此你可以在那找到帮助。尝试 `man ls` 以获取有关你计算机上的 `ls` 命令的帮助。
+​	fish 通过运行命令来工作，而这些命令通常也已安装在你的计算机上。通常这些命令也在手册系统中提供帮助，因此你可以在那找到帮助。尝试 `man ls` 以获取有关你计算机上的 `ls` 命令的帮助。
 
 ## 语法高亮 Syntax Highlighting
 
@@ -181,7 +181,7 @@ Just running `fish_config` will open up a browser interface that allows you to p
 
 Fish supports the familiar wildcard `*`. To list all JPEG files:
 
-​	Fish 支持常见的通配符 `*`。列出所有 JPEG 文件：
+​	fish 支持常见的通配符 `*`。列出所有 JPEG 文件：
 
 ```
 > ls *.jpg
@@ -1015,7 +1015,7 @@ Or you can modify $fish_user_paths yourself, but you should be careful *not* to 
 
 Fish starts by executing commands in `~/.config/fish/config.fish`. You can create it if it does not exist.
 
-​	Fish 启动时会执行 `~/.config/fish/config.fish` 中的命令。如果该文件不存在，你可以创建它。
+​	fish 启动时会执行 `~/.config/fish/config.fish` 中的命令。如果该文件不存在，你可以创建它。
 
 It is possible to directly create functions and variables in `config.fish` file, using the commands shown above. For example:
 

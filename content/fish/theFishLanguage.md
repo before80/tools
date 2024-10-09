@@ -328,7 +328,7 @@ It is an error to redirect a builtin, function, or block to a file descriptor ab
 
 Previous versions of fish also allowed specifying this as `^DESTINATION`, but that made another character special so it was deprecated and removed. See [feature flags](https://fishshell.com/docs/current/language.html#featureflags).
 
-​	Fish 的早期版本允许通过 `^DESTINATION` 指定重定向，但这导致了另一个字符变得特殊，因此此功能被弃用并移除。请参阅 [功能标志](https://fishshell.com/docs/current/language.html#featureflags) 了解更多信息。
+​	fish 的早期版本允许通过 `^DESTINATION` 指定重定向，但这导致了另一个字符变得特殊，因此此功能被弃用并移除。请参阅 [功能标志](https://fishshell.com/docs/current/language.html#featureflags) 了解更多信息。
 
 ## 管道 Piping
 
@@ -484,7 +484,7 @@ This is a kind of function known as an [alias](https://fishshell.com/docs/curren
 
 Fish’s prompt is also defined in a function, called [fish_prompt](https://fishshell.com/docs/current/cmds/fish_prompt.html). It is run when the prompt is about to be displayed and its output forms the prompt:
 
-​	Fish 的提示符也通过一个名为 [fish_prompt](https://fishshell.com/docs/current/cmds/fish_prompt.html) 的函数定义。当要显示提示符时，它会运行该函数，其输出将作为提示符的一部分：
+​	fish 的提示符也通过一个名为 [fish_prompt](https://fishshell.com/docs/current/cmds/fish_prompt.html) 的函数定义。当要显示提示符时，它会运行该函数，其输出将作为提示符的一部分：
 
 ```
 function fish_prompt
@@ -585,7 +585,7 @@ By default `$fish_function_path` contains the following:
 - Directories for other software to put their own functions. These are in the directories under `$__fish_user_data_dir` (usually `~/.local/share/fish`, controlled by the `XDG_DATA_HOME` environment variable) and in the `XDG_DATA_DIRS` environment variable, in a subdirectory called `fish/vendor_functions.d`. The default value for `XDG_DATA_DIRS` is usually `/usr/share/fish/vendor_functions.d` and `/usr/local/share/fish/vendor_functions.d`.
 - 其他软件可以放置函数的目录。这些目录位于 `$__fish_user_data_dir`（通常为 `~/.local/share/fish`，由 `XDG_DATA_HOME` 环境变量控制）下的子目录以及 `XDG_DATA_DIRS` 环境变量中，通常为 `/usr/share/fish/vendor_functions.d` 和 `/usr/local/share/fish/vendor_functions.d`。
 - The functions shipped with fish, usually installed in `/usr/share/fish/functions` (really `$__fish_data_dir/functions`).
-- Fish 自带的函数，通常安装在 `/usr/share/fish/functions`（实际上是 `$__fish_data_dir/functions`）。
+- fish 自带的函数，通常安装在 `/usr/share/fish/functions`（实际上是 `$__fish_data_dir/functions`）。
 
 If you are unsure, your functions probably belong in `~/.config/fish/functions`.
 
@@ -838,7 +838,7 @@ end
 
 Like most programming language, fish also has the familiar [while](https://fishshell.com/docs/current/cmds/while.html) and [for](https://fishshell.com/docs/current/cmds/for.html) loops.
 
-​	Fish 提供了 [while](https://fishshell.com/docs/current/cmds/while.html) 和 [for](https://fishshell.com/docs/current/cmds/for.html) 循环，类似于大多数编程语言。
+​	fish 提供了 [while](https://fishshell.com/docs/current/cmds/while.html) 和 [for](https://fishshell.com/docs/current/cmds/for.html) 循环，类似于大多数编程语言。
 
 `while` works like a repeated [if](https://fishshell.com/docs/current/cmds/if.html):
 
@@ -998,7 +998,7 @@ apt install "ncurses-*"
 
 One of the most important expansions in fish is the “variable expansion”. This is the replacing of a dollar sign (`$`) followed by a variable name with the _value_ of that variable.
 
-​	Fish 中最重要的扩展之一是“变量扩展”。变量扩展将美元符号（`$`）加上变量名替换为变量的*值*。
+​	fish 中最重要的扩展之一是“变量扩展”。变量扩展将美元符号（`$`）加上变量名替换为变量的*值*。
 
 In the simplest case, this is just something like:
 
@@ -1015,7 +1015,7 @@ which will replace `$HOME` with the home directory of the current user, and pass
 
 Some variables like `$HOME` are already set because fish sets them by default or because fish’s parent process passed them to fish when it started it. You can define your own variables by setting them with [set](https://fishshell.com/docs/current/cmds/set.html):
 
-​	某些变量如 `$HOME` 已经设置好，因为它们是 Fish 默认设置的，或是由Fish的父进程在启动时传递给Fish的。你可以通过 [set](https://fishshell.com/docs/current/cmds/set.html) 命令定义自己的变量：
+​	某些变量如 `$HOME` 已经设置好，因为它们是 fish 默认设置的，或是由Fish的父进程在启动时传递给Fish的。你可以通过 [set](https://fishshell.com/docs/current/cmds/set.html) 命令定义自己的变量：
 
 ```
 set my_directory /home/cooluser/mystuff
@@ -1054,7 +1054,7 @@ echo The plural of $WORD is {$WORD}s
 
 Without the quotes or braces, fish will try to expand a variable called `$WORDs`, which may not exist.
 
-​	如果不使用引号或花括号，Fish 会尝试扩展一个名为 `$WORDs` 的变量，这可能并不存在。
+​	如果不使用引号或花括号，fish 会尝试扩展一个名为 `$WORDs` 的变量，这可能并不存在。
 
 The latter syntax `{$WORD}` is a special case of [brace expansion](https://fishshell.com/docs/current/language.html#expand-brace).
 
@@ -1084,7 +1084,7 @@ If a variable expands to nothing, it will cancel out any other strings attached 
 
 Unlike other shells, fish doesn’t do what is known as “Word Splitting”. Once a variable is set to a particular set of elements, those elements expand as themselves. They aren’t split on spaces or newlines or anything:
 
-​	与其他Shell不同，Fish 不会进行“单词分割”。一旦变量设置为某个元素集，这些元素将按原样扩展，它们不会按空格或换行符分割。例如：
+​	与其他Shell不同，fish 不会进行“单词分割”。一旦变量设置为某个元素集，这些元素将按原样扩展，它们不会按空格或换行符分割。例如：
 
 ```
 > set foo one\nthing
@@ -1235,7 +1235,7 @@ This creates a temporary file, stores the output of the command in that file and
 
 Fish has a default limit of 100 MiB on the data it will read in a command sustitution. If that limit is reached the command (all of it, not just the command substitution - the outer command won’t be executed at all) fails and `$status` is set to 122. This is so command substitutions can’t cause the system to go out of memory, because typically your operating system has a much lower limit, so reading more than that would be useless and harmful. This limit can be adjusted with the `fish_read_limit` variable (0 meaning no limit). This limit also affects the [read](https://fishshell.com/docs/current/cmds/read.html) command.
 
-​	Fish 对命令替换读取的数据设置了 100 MiB 的默认限制。如果达到此限制，命令（包括整个命令，而不仅仅是命令替换——外部命令将完全不会执行）会失败，`$status` 被设置为 122。这是为了防止命令替换导致系统内存不足，因为操作系统的限制通常更低，读取超过此限制的数据可能既无用又有害。这个限制可以通过 `fish_read_limit` 变量调整（0 表示无限制）。此限制也会影响 [read](https://fishshell.com/docs/current/cmds/read.html) 命令。
+​	fish 对命令替换读取的数据设置了 100 MiB 的默认限制。如果达到此限制，命令（包括整个命令，而不仅仅是命令替换——外部命令将完全不会执行）会失败，`$status` 被设置为 122。这是为了防止命令替换导致系统内存不足，因为操作系统的限制通常更低，读取超过此限制的数据可能既无用又有害。这个限制可以通过 `fish_read_limit` 变量调整（0 表示无限制）。此限制也会影响 [read](https://fishshell.com/docs/current/cmds/read.html) 命令。
 
 [[4](https://fishshell.com/docs/current/language.html#id9)] 
 
@@ -1273,7 +1273,7 @@ hotdog cooldog cutedog good dog
 
 If there is no “,” or variable expansion between the curly braces, they will not be expanded:
 
-​	如果花括号中没有逗号或变量扩展，Fish 不会进行扩展：
+​	如果花括号中没有逗号或变量扩展，fish 不会进行扩展：
 
 ```
 # This {} isn't special
@@ -1300,7 +1300,7 @@ If after expansion there is nothing between the braces, the argument will be rem
 
 If there is nothing between a brace and a comma or two commas, it’s interpreted as an empty element:
 
-​	如果在花括号和逗号之间没有内容或有两个逗号，Fish 会将其解释为一个空元素：
+​	如果在花括号和逗号之间没有内容或有两个逗号，fish 会将其解释为一个空元素：
 
 ```
 > echo {,,/usr}/bin
@@ -1414,7 +1414,7 @@ Because [`PATH`](https://fishshell.com/docs/current/language.html#envvar-PATH) i
 
 Sometimes it’s necessary to access only some of the elements of a [list](https://fishshell.com/docs/current/language.html#variables-lists) (all fish variables are lists), or some of the lines a [command substitution](https://fishshell.com/docs/current/language.html#expand-command-substitution) outputs. Both are possible in fish by writing a set of indices in brackets, like:
 
-​	有时你只需要访问一个列表的部分元素（Fish 中的所有变量都是列表），或者你只想要[命令替换](https://fishshell.com/docs/current/language.html#expand-command-substitution)输出的某些行。在 Fish 中，可以通过在方括号中指定一组索引来实现：
+​	有时你只需要访问一个列表的部分元素（fish 中的所有变量都是列表），或者你只想要[命令替换](https://fishshell.com/docs/current/language.html#expand-command-substitution)输出的某些行。在 fish 中，可以通过在方括号中指定一组索引来实现：
 
 ```
 # Make $var a list of four elements
@@ -1434,7 +1434,7 @@ echo $var[1..3]
 
 In index brackets, fish understands ranges written like `a..b` (‘a’ and ‘b’ being indices). They are expanded into a sequence of indices from a to b (so `a a+1 a+2 ... b`), going up if b is larger and going down if a is larger. Negative indices can also be used - they are taken from the end of the list, so `-1` is the last element, and `-2` the one before it. If an index doesn’t exist the range is clamped to the next possible index.
 
-​	在索引括号中，Fish 支持写作 `a..b` 的范围（`a` 和 `b` 是索引）。这些范围会扩展为从 `a` 到 `b` 的索引序列（例如 `a a+1 a+2 ... b`），如果 `b` 大于 `a`，则范围递增，反之递减。负索引可以用于从列表的末尾开始取值，例如 `-1` 表示列表的最后一个元素，`-2` 表示倒数第二个元素。如果索引超出范围，Fish 会将其限制到最近的有效索引。
+​	在索引括号中，fish 支持写作 `a..b` 的范围（`a` 和 `b` 是索引）。这些范围会扩展为从 `a` 到 `b` 的索引序列（例如 `a a+1 a+2 ... b`），如果 `b` 大于 `a`，则范围递增，反之递减。负索引可以用于从列表的末尾开始取值，例如 `-1` 表示列表的最后一个元素，`-2` 表示倒数第二个元素。如果索引超出范围，Fish 会将其限制到最近的有效索引。
 
 If a list has 5 elements the indices go from 1 to 5, so a range of `2..16` will only go from element 2 to element 5.
 

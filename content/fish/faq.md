@@ -28,7 +28,7 @@ set -e key
 
 Since fish 3.1 you can set an environment variable for just one command using the `key=value some command` syntax, like in other shells. The two lines below behave identically - unlike other shells, fish will output `value` both times:
 
-​	自 Fish 3.1 版本起，你可以像其他 shell 一样使用 `key=value some command` 语法仅为某个命令设置环境变量。下面两行命令的行为相同——与其他 shell 不同的是，Fish 两次都会输出 `value`：
+​	自 fish 3.1 版本起，你可以像其他 shell 一样使用 `key=value some command` 语法仅为某个命令设置环境变量。下面两行命令的行为相同——与其他 shell 不同的是，fish 两次都会输出 `value`：
 
 ```
 key=value echo $key
@@ -93,7 +93,7 @@ A global variable of the same name already exists.
 
 Environment variables such as `EDITOR` or `TZ` can be set universally using `set -Ux`. However, if there is an environment variable already set before fish starts (such as by login scripts or system administrators), it is imported into fish as a global variable. The [variable scopes](https://fishshell.com/docs/current/language.html#variables-scope) are searched from the “inside out”, which means that local variables are checked first, followed by global variables, and finally universal variables.
 
-​	像 `EDITOR` 或 `TZ` 这样的环境变量可以通过 `set -Ux` 设置为通用变量。但是，如果在 Fish 启动前（比如通过登录脚本或系统管理员）已有环境变量被设置，它会被 Fish 作为全局变量引入。[变量作用域](https://fishshell.com/docs/current/language.html#variables-scope) 是从“内部到外部”搜索的，这意味着首先检查局部变量，然后是全局变量，最后是通用变量。
+​	像 `EDITOR` 或 `TZ` 这样的环境变量可以通过 `set -Ux` 设置为通用变量。但是，如果在 fish 启动前（比如通过登录脚本或系统管理员）已有环境变量被设置，它会被 fish 作为全局变量引入。[变量作用域](https://fishshell.com/docs/current/language.html#variables-scope) 是从“内部到外部”搜索的，这意味着首先检查局部变量，然后是全局变量，最后是通用变量。
 
 This means that the global value takes precedence over the universal value.
 
@@ -101,7 +101,7 @@ This means that the global value takes precedence over the universal value.
 
 To avoid this problem, consider changing the setting which fish inherits. If this is not possible, add a statement to your [configuration file](https://fishshell.com/docs/current/language.html#configuration) (usually `~/.config/fish/config.fish`):
 
-​	要避免此问题，可以尝试更改 Fish 继承的设置。如果这不可能，请在 [配置文件](https://fishshell.com/docs/current/language.html#configuration)（通常是 `~/.config/fish/config.fish`）中添加一条语句：
+​	要避免此问题，可以尝试更改 fish 继承的设置。如果这不可能，请在 [配置文件](https://fishshell.com/docs/current/language.html#configuration)（通常是 `~/.config/fish/config.fish`）中添加一条语句：
 
 ```
 set -gx EDITOR vim
@@ -258,7 +258,7 @@ Additional default key bindings include Control+P (up) and Control+N (down). See
 
 Because history substitution is an awkward interface that was invented before interactive line editing was even possible. Instead of adding this pseudo-syntax, fish opts for nice history searching and recall features. Switching requires a small change of habits: if you want to modify an old line/word, first recall it, then edit.
 
-​	因为历史替换是一种尴尬的交互方式，发明它的时候还没有交互式行编辑功能。与其引入这种伪语法，Fish 更倾向于提供良好的历史记录搜索和回调功能。切换到 Fish 需要稍微改变一下习惯：如果你想修改旧行或单词，先回调它，然后再进行编辑。
+​	因为历史替换是一种尴尬的交互方式，发明它的时候还没有交互式行编辑功能。与其引入这种伪语法，fish 更倾向于提供良好的历史记录搜索和回调功能。切换到 fish 需要稍微改变一下习惯：如果你想修改旧行或单词，先回调它，然后再进行编辑。
 
 As a special case, most of the time history substitution is used as `sudo !!`. In that case just press Alt+S, and it will recall your last commandline with `sudo` prefixed (or toggle a `sudo` prefix on the current commandline if there is anything).
 
@@ -527,7 +527,7 @@ Sometimes, there is disagreement on the width. There are numerous causes and fix
 - It is possible the character is simply too new for your system to know - in this case you need to refrain from using it.
 - 可能是因为该字符对于你的系统来说太新了——在这种情况下，你需要避免使用它。
 - Fish or your terminal might not know about the character or handle it wrong - in this case fish or your terminal needs to be fixed, or you need to update to a fixed version.
-- Fish 或你的终端可能不知道该字符的宽度或处理不当——在这种情况下，你需要修复 fish 或终端，或者升级到修复后的版本。
+- fish 或你的终端可能不知道该字符的宽度或处理不当——在这种情况下，你需要修复 fish 或终端，或者升级到修复后的版本。
 - The character has an “ambiguous” width and fish thinks that means a width of X while your terminal thinks it’s Y. In this case you either need to change your terminal’s configuration or set $fish_ambiguous_width to the correct value.
 - 该字符具有“模糊”宽度，而 fish 认为它的宽度是 X，而你的终端认为是 Y。在这种情况下，你需要更改终端的配置，或者将 `$fish_ambiguous_width` 变量设置为正确的值。
 - The character is an emoji and the host system only supports Unicode 8, while you are running the terminal on a system that uses Unicode >= 9. In this case set $fish_emoji_width to 2.
