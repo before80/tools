@@ -74,7 +74,7 @@ To get a cheat sheet for a UNIX/Linux command from a command line, query the ser
 
 ​	要在命令行中获取 UNIX/Linux 命令的速查表，可以使用 `curl` 或其他 HTTP/HTTPS 客户端来查询服务，并指定所需命令的名称：
 
-```
+```bash
     curl cheat.sh/tar
     curl cht.sh/curl
     curl https://cheat.sh/rsync
@@ -107,7 +107,7 @@ The programming language cheat sheets are located in special namespaces dedicate
 
 ​	编程语言的速查表位于它们的专属命名空间中，例如：
 
-```
+```bash
     curl cht.sh/go/Pointers
     curl cht.sh/scala/Functions
     curl cht.sh/python/lambda
@@ -137,7 +137,7 @@ Try these (and your own) queries to get the impression of that, what the answers
 
 ​	尝试以下（以及你自己的）查询，以了解答案的呈现方式：
 
-```
+```bash
     curl cht.sh/go/reverse+a+list
     curl cht.sh/python/random+list+elements
     curl cht.sh/js/parse+json
@@ -151,7 +151,7 @@ If you don't like an answer for your queries, you can pick another one. For that
 
 ​	如果你对查询的答案不满意，可以选择其他答案。这样做，需要在查询中添加额外的参数 `/1`、`/2` 等：
 
-```
+```bash
     curl cht.sh/python/random+string
     curl cht.sh/python/random+string/1
     curl cht.sh/python/random+string/2
@@ -163,7 +163,7 @@ Cheat sheets are formatted as code of the queried programming language (at least
 
 ​	速查表按查询的编程语言格式化（至少我们尽力而为），因此可以直接粘贴到该语言的程序中。如果有文本注释，会按照语言的语法进行格式化。
 
-```
+```bash
     $ curl cht.sh/lua/table+keys
     -- lua: retrieve list of keys in a table
 
@@ -189,7 +189,7 @@ If you don't need text comments in the answer, you can eliminate them using a sp
 
 ​	如果你不需要答案中的文本注释，可以使用特殊选项 `\?Q` 删除它们：
 
-```
+```bash
     $ curl cht.sh/lua/table+keys\?Q
     local keyset={}
     local n=0
@@ -206,7 +206,7 @@ And if you don't need syntax highlighting, switch it off using `\?T`. You can co
 
 ​	如果你不需要语法高亮，可以使用 `\?T` 关闭。你可以组合这些选项：
 
-```
+```bash
     curl cht.sh/go/reverse+a+list\?Q
     curl cht.sh/python/random+list+elements\?Q
     curl cht.sh/js/parse+json\?Q
@@ -260,7 +260,7 @@ To install the client:
 
 ​	安装客户端的步骤如下：
 
-```
+```bash
 PATH_DIR="$HOME/bin"  # or another directory on your $PATH
 mkdir -p "$PATH_DIR"
 curl https://cht.sh/:cht.sh > "$PATH_DIR/cht.sh"
@@ -291,7 +291,7 @@ Now, you can use `cht.sh` instead of `curl`, and write your queries in more natu
 
 ​	现在，您可以使用 `cht.sh` 代替 `curl`，并以更自然的方式编写查询，使用空格而不是 `+`：
 
-```
+```bash
     $ cht.sh go reverse a list
     $ cht.sh python random list elements
     $ cht.sh js parse json
@@ -303,7 +303,7 @@ It is even more convenient to start the client in a special shell mode:
 
 ​	在特殊的 shell 模式下启动客户端更为方便：
 
-```
+```bash
     $ cht.sh --shell
     cht.sh> go reverse a list
 ```
@@ -314,7 +314,7 @@ If all your queries are about the same language, you can change the context and 
 
 ​	如果您的所有查询都与同一种语言相关，您可以更改上下文，并省去重复编程语言名称：
 
-```
+```bash
     $ cht.sh --shell
     cht.sh> cd go
     cht.sh/go> reverse a list
@@ -326,7 +326,7 @@ or even start the client in this context:
 
 ​	甚至可以在此上下文中启动客户端：
 
-```
+```bash
     $ cht.sh --shell go
     cht.sh/go> reverse a list
     ...
@@ -340,7 +340,7 @@ If you want to change the context, you can do it with the `cd` command, or if yo
 
 ​	如果您想更改上下文，可以使用 `cd` 命令，或者如果您想为某个其他语言做单个查询，只需在其前面加上 `/`：
 
-```
+```bash
     $ cht.sh --shell go
     ...
     cht.sh/go> /python dictionary comprehension
@@ -353,7 +353,7 @@ If you want to copy the last answer into the clipboard, you can use the `c` (`co
 
 ​	如果您想将最后的答案复制到剪贴板，您可以使用 `c`（copy）命令，或 `C`（ccopy，无注释）。
 
-```
+```bash
     cht.sh/python> append file
     #  python - How do you append to a file?
 
@@ -369,7 +369,7 @@ Type `help` for other internal `cht.sh` commands.
 
 ​	输入 `help` 获取其他内部 `cht.sh` 命令。
 
-```
+```bash
 	cht.sh> help
 	help    - show this help
 	hush    - do not show the 'help' string at start anymore
@@ -437,7 +437,7 @@ To activate tab completion support for `cht.sh`, add the `:bash_completion` scri
 
 ​	要为 `cht.sh` 激活标签补全支持，请将 `:bash_completion` 脚本添加到您的 `~/.bashrc`：
 
-```
+```bash
     curl https://cheat.sh/:bash_completion > ~/.bash.d/cht.sh
     . ~/.bash.d/cht.sh
     # and add . ~/.bash.d/cht.sh to ~/.bashrc 并将 . ~/.bash.d/cht.sh 添加到 ~/.bashrc
@@ -453,7 +453,7 @@ To activate tab completion support for `cht.sh`, add the `:zsh` script to the *f
 
 ​	要为 `cht.sh` 激活 ZSH 标签补全支持，请将 `:zsh` 脚本添加到您的 `~/.zshrc` 中的 *fpath*：
 
-```
+```bash
     curl https://cheat.sh/:zsh > ~/.zsh.d/_cht
     echo 'fpath=(~/.zsh.d/ $fpath)' >> ~/.zshrc
     # Open a new shell to load the plugin
@@ -571,7 +571,7 @@ You can also use [`scoop`](https://github.com/lukesampson/scoop) command-line in
 
 ​	你还可以使用 [`scoop`](https://github.com/lukesampson/scoop) 命令行安装器来安装它：
 
-```
+```bash
 scoop install cht
 ```
 
@@ -591,7 +591,7 @@ Currently, the easiest way to get a self-hosted instance running is by using the
 
 ​	目前，使用 `docker-compose.yml` 文件是启动自托管实例最简单的方法。
 
-```
+```bash
 docker-compose up
 ```
 
