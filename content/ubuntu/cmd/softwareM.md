@@ -79,11 +79,11 @@ draft = false
 
 ​	查看所有软件包
 
-### sudo apt list --installed
+### `sudo apt list --installed`
 
 ​	查看已安装的软件包
 
-### sudo apt list --upgradable
+### `sudo apt list --upgradable`
 
 ​	查看已安装的软件包中可升级的软件包
 
@@ -160,7 +160,7 @@ draft = false
 ## apt-cache命令
 
 - 在当前的软件源中查找一个软件包：
-   
+  
    ```sh
    apt-cache search pkg_name
    ```
