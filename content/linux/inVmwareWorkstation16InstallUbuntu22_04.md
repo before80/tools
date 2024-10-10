@@ -24,151 +24,151 @@ draft = false
 
 ## 前期设置
 
-![image-20231007141202129](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007141202129.png)
+![image-20231007141202129](inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007141202129.png)
 
 
 
 
 
-![image-20231007141237390](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007141237390.png)
+![image-20231007141237390](inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007141237390.png)
 
 
 
-![image-20231007141257224](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007141257224.png)
+![image-20231007141257224](inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007141257224.png)
 
 
 
-![image-20231007141334182](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007141334182.png)
+![image-20231007141334182](inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007141334182.png)
 
 
 
-![image-20231007141527379](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007141527379.png)
+![image-20231007141527379](inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007141527379.png)
 
 
 
-![image-20231007141602434](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007141602434.png)
+![image-20231007141602434](inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007141602434.png)
 
 
 
-![image-20231007141620688](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007141620688.png)
+![image-20231007141620688](inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007141620688.png)
 
 
 
-![image-20231007141641117](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007141641117.png)
+![image-20231007141641117](inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007141641117.png)
 
 
 
-![image-20231007141653954](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007141653954.png)
+![image-20231007141653954](inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007141653954.png)
 
 
 
-![image-20231007141704637](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007141704637.png)
+![image-20231007141704637](inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007141704637.png)
 
 
 
-![image-20231007141723750](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007141723750.png)
+![image-20231007141723750](inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007141723750.png)
 
 
 
-![image-20231007141802297](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007141802297.png)
+![image-20231007141802297](inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007141802297.png)
 
 
 
-![image-20231007141820052](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007141820052.png)
+![image-20231007141820052](inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007141820052.png)
 
 
 
-![image-20231007141847245](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007141847245.png)
+![image-20231007141847245](inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007141847245.png)
 
 
 
-![image-20231007141857784](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007141857784.png)
+![image-20231007141857784](inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007141857784.png)
 
 
 
-![image-20231007142124479](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007142124479.png)
+![image-20231007142124479](inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007142124479.png)
 
 
 
 
 
-![image-20231007142143375](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007142143375.png)
+![image-20231007142143375](inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007142143375.png)
 
 ## 开始安装
 
-![image-20231007142216035](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007142216035.png)
+![image-20231007142216035](inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007142216035.png)
 
 
 
-![image-20231007142312595](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007142312595.png)
-
-
-
-
-
-
-
-![image-20231007142526280](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007142526280.png)
+![image-20231007142312595](inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007142312595.png)
 
 
 
 
 
-![image-20231007142709299](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007142709299.png)
-
-![image-20231007142752825](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007142752825.png)
 
 
-
-![image-20231007143236605](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007143236605.png)
+![image-20231007142526280](inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007142526280.png)
 
 
 
 
 
-![image-20231007143349905](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007143349905.png)
+![image-20231007142709299](inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007142709299.png)
+
+![image-20231007142752825](inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007142752825.png)
 
 
 
-![image-20231007143426876](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007143426876.png)
-
-
-
-![image-20231007143624029](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007143624029.png)
-
-
-
-![image-20231007143656693](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007143656693.png)
-
-
-
-![image-20231007145509189](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007145509189.png)
-
-
-
-![image-20231007150628022](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007150628022.png)
-
-
-
-![image-20231007150844450](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007150844450.png)
-
-
-
-![image-20231007151323619](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007151323619.png)
+![image-20231007143236605](inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007143236605.png)
 
 
 
 
 
-![image-20231007151346400](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007151346400.png)
+![image-20231007143349905](inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007143349905.png)
 
 
 
-![image-20231007151409722](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007151409722.png)
+![image-20231007143426876](inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007143426876.png)
+
+
+
+![image-20231007143624029](inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007143624029.png)
+
+
+
+![image-20231007143656693](inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007143656693.png)
+
+
+
+![image-20231007145509189](inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007145509189.png)
+
+
+
+![image-20231007150628022](inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007150628022.png)
+
+
+
+![image-20231007150844450](inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007150844450.png)
+
+
+
+![image-20231007151323619](inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007151323619.png)
+
+
+
+
+
+![image-20231007151346400](inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007151346400.png)
+
+
+
+![image-20231007151409722](inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007151409722.png)
 
 ## 设置关屏时间为Never
 
-![image-20231007154321322](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007154321322.png)
+![image-20231007154321322](inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007154321322.png)
 
 
 
@@ -200,19 +200,19 @@ apt upgrade -y
 apt -f install
 ```
 
-![image-20231007153707345](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007153707345.png)
+![image-20231007153707345](inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007153707345.png)
 
 
 
-![image-20231007153514179](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007153514179.png)
+![image-20231007153514179](inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007153514179.png)
 
 ## 安装 language support
 
-![image-20231009085057528](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20231009085057528.png)
+![image-20231009085057528](inVmwareWorkstation16InstallUbuntu22_04_img/image-20231009085057528.png)
 
-![image-20231009085146436](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20231009085146436.png)
+![image-20231009085146436](inVmwareWorkstation16InstallUbuntu22_04_img/image-20231009085146436.png)
 
-![image-20231009085203536](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20231009085203536.png)
+![image-20231009085203536](inVmwareWorkstation16InstallUbuntu22_04_img/image-20231009085203536.png)
 
 ## 安装 vmware-tools
 
@@ -222,13 +222,13 @@ sudo su - root
 apt install open-vm-tools open-vm-tools-desktop
 ```
 
-![image-20231007153830819](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007153830819.png)
+![image-20231007153830819](inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007153830819.png)
 
-![image-20231007153939283](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007153939283.png)
+![image-20231007153939283](inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007153939283.png)
 
 重启Ubuntu
 
-![image-20231007154056448](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007154056448.png)
+![image-20231007154056448](inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007154056448.png)
 
 
 
@@ -291,29 +291,29 @@ reboot
 
 设置 Keyboard input method system为 Fcitx 4
 
-![image-20231009092713154](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20231009092713154.png)
+![image-20231009092713154](inVmwareWorkstation16InstallUbuntu22_04_img/image-20231009092713154.png)
 
 选择x86_64
 
-![image-20231009091838095](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20231009091838095.png)
+![image-20231009091838095](inVmwareWorkstation16InstallUbuntu22_04_img/image-20231009091838095.png)
 
-![image-20231009091927308](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20231009091927308.png)
+![image-20231009091927308](inVmwareWorkstation16InstallUbuntu22_04_img/image-20231009091927308.png)
 
 
 
 未重新启动Ubuntu的情况下
 
-![image-20231009092625749](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20231009092625749.png)
+![image-20231009092625749](inVmwareWorkstation16InstallUbuntu22_04_img/image-20231009092625749.png)
 
 重新启动Ubuntu的情况下
 
-![image-20231009092924646](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20231009092924646.png)
+![image-20231009092924646](inVmwareWorkstation16InstallUbuntu22_04_img/image-20231009092924646.png)
 
-![image-20231009093527171](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20231009093527171.png)
+![image-20231009093527171](inVmwareWorkstation16InstallUbuntu22_04_img/image-20231009093527171.png)
 
 最终重启Ubuntu后
 
-![image-20231009094410145](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20231009094410145.png)
+![image-20231009094410145](inVmwareWorkstation16InstallUbuntu22_04_img/image-20231009094410145.png)
 
 ## 防火墙设置
 
@@ -480,19 +480,19 @@ sudo snap refresh snap-store
 
 ## 克隆 <- 重要
 
-![image-20231009094729624](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20231009094729624.png)
+![image-20231009094729624](inVmwareWorkstation16InstallUbuntu22_04_img/image-20231009094729624.png)
 
-![image-20231009094757269](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20231009094757269.png)
+![image-20231009094757269](inVmwareWorkstation16InstallUbuntu22_04_img/image-20231009094757269.png)
 
-![image-20231009094822253](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20231009094822253.png)
+![image-20231009094822253](inVmwareWorkstation16InstallUbuntu22_04_img/image-20231009094822253.png)
 
-![image-20231009094845832](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20231009094845832.png)
+![image-20231009094845832](inVmwareWorkstation16InstallUbuntu22_04_img/image-20231009094845832.png)
 
-![image-20231009094941304](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20231009094941304.png)
+![image-20231009094941304](inVmwareWorkstation16InstallUbuntu22_04_img/image-20231009094941304.png)
 
 
 
-![image-20231009095004254](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20231009095004254.png)
+![image-20231009095004254](inVmwareWorkstation16InstallUbuntu22_04_img/image-20231009095004254.png)
 
 
 
@@ -555,15 +555,15 @@ docker version
 
 ```
 
-![image-20240407154011225](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20240407154011225.png)
+![image-20240407154011225](inVmwareWorkstation16InstallUbuntu22_04_img/image-20240407154011225.png)
 
-![image-20240407154715802](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20240407154715802.png)
+![image-20240407154715802](inVmwareWorkstation16InstallUbuntu22_04_img/image-20240407154715802.png)
 
-![image-20240407154757119](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20240407154757119.png)
+![image-20240407154757119](inVmwareWorkstation16InstallUbuntu22_04_img/image-20240407154757119.png)
 
-![image-20240407154845770](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20240407154845770.png)
+![image-20240407154845770](inVmwareWorkstation16InstallUbuntu22_04_img/image-20240407154845770.png)
 
-![image-20240407154930563](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20240407154930563.png)
+![image-20240407154930563](inVmwareWorkstation16InstallUbuntu22_04_img/image-20240407154930563.png)
 
 ## 安装 docker desktop
 
@@ -604,45 +604,45 @@ pass init <your_generated_gpg-id_public_key>
 # 若需要 在docker desktop 上登入账号，一定记得先配置代理
 ```
 
-![image-20240407160811709](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20240407160811709.png)
+![image-20240407160811709](inVmwareWorkstation16InstallUbuntu22_04_img/image-20240407160811709.png)
 
-![image-20240407161301492](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20240407161301492.png)
+![image-20240407161301492](inVmwareWorkstation16InstallUbuntu22_04_img/image-20240407161301492.png)
 
 打开docker desktop可能会遇到：Virtualisation support
 
-![image-20240407162033257](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20240407162033257.png)
+![image-20240407162033257](inVmwareWorkstation16InstallUbuntu22_04_img/image-20240407162033257.png)
 
 你需要在虚拟机中开启以下设置：
 
-![image-20240407164000600](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20240407164000600.png)
+![image-20240407164000600](inVmwareWorkstation16InstallUbuntu22_04_img/image-20240407164000600.png)
 
 
 
-![image-20240407161336049](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20240407161336049.png)
+![image-20240407161336049](inVmwareWorkstation16InstallUbuntu22_04_img/image-20240407161336049.png)
 
 使用`IMPORT`导入Clash托管配置链接
 
-![image-20240407161536129](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20240407161536129.png)
+![image-20240407161536129](inVmwareWorkstation16InstallUbuntu22_04_img/image-20240407161536129.png)
 
 打开`System Proxy`
 
-![image-20240407164552080](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20240407164552080.png)
+![image-20240407164552080](inVmwareWorkstation16InstallUbuntu22_04_img/image-20240407164552080.png)
 
-![image-20240407161717926](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20240407161717926.png)
+![image-20240407161717926](inVmwareWorkstation16InstallUbuntu22_04_img/image-20240407161717926.png)
 
 选择 `Proxies`中的`Rule`下的Proxy中的任意一个节点
 
-![image-20240407161805307](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20240407161805307.png)
+![image-20240407161805307](inVmwareWorkstation16InstallUbuntu22_04_img/image-20240407161805307.png)
 
 打开docker desktop，设置 `Proxies`
 
-![image-20240407170203621](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20240407170203621.png)
+![image-20240407170203621](inVmwareWorkstation16InstallUbuntu22_04_img/image-20240407170203621.png)
 
-![image-20240407173005950](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20240407173005950.png)
+![image-20240407173005950](inVmwareWorkstation16InstallUbuntu22_04_img/image-20240407173005950.png)
 
-![image-20240407173319104](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20240407173319104.png)
+![image-20240407173319104](inVmwareWorkstation16InstallUbuntu22_04_img/image-20240407173319104.png)
 
-![image-20240407175001734](./inVmwareWorkstation16InstallUbuntu22_04_img/image-20240407175001734.png)
+![image-20240407175001734](inVmwareWorkstation16InstallUbuntu22_04_img/image-20240407175001734.png)
 
 ## 卸载 docker
 

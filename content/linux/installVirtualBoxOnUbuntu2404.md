@@ -36,7 +36,7 @@ sudo apt install virtualbox
 
 ​	弹出以下内容
 
-![image-20240925163635117](./installVirtualBoxOnUbuntu2404_img/image-20240925163635117.png)
+![image-20240925163635117](installVirtualBoxOnUbuntu2404_img/image-20240925163635117.png)
 
 > Your system has UEFI Secure Boot enable.
 >
@@ -62,17 +62,17 @@ sudo apt install virtualbox
 
 ​	接着弹出：
 
-![image-20240925164119098](./installVirtualBoxOnUbuntu2404_img/image-20240925164119098.png)
+![image-20240925164119098](installVirtualBoxOnUbuntu2404_img/image-20240925164119098.png)
 
 ​	输入一个密码：`zlx920`
 
-![image-20240925164231822](./installVirtualBoxOnUbuntu2404_img/image-20240925164231822.png)
+![image-20240925164231822](installVirtualBoxOnUbuntu2404_img/image-20240925164231822.png)
 
 ​	接着输入相同的密码：`zlx920`
 
 ​	提示密码必须有8到16个字符：
 
-![image-20240925164321001](./installVirtualBoxOnUbuntu2404_img/image-20240925164321001.png)
+![image-20240925164321001](installVirtualBoxOnUbuntu2404_img/image-20240925164321001.png)
 
 ​	接着输入新的密码：`zlx920@@`，按`Enter`键进入。
 

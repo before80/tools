@@ -27,185 +27,185 @@ draft = false
 
 
 
-![image-20231007113859558](./inVmwareWorkstation16InstallCentos7_9_img/image-20231007113859558.png)
+![image-20231007113859558](inVmwareWorkstation16InstallCentos7_9_img/image-20231007113859558.png)
 
 
 
-![image-20231007114042140](./inVmwareWorkstation16InstallCentos7_9_img/image-20231007114042140.png)
-
-
-
-
-
-![image-20231007114112812](./inVmwareWorkstation16InstallCentos7_9_img/image-20231007114112812.png)
+![image-20231007114042140](inVmwareWorkstation16InstallCentos7_9_img/image-20231007114042140.png)
 
 
 
 
 
-![image-20231007114204183](./inVmwareWorkstation16InstallCentos7_9_img/image-20231007114204183.png)
-
-
-
-![image-20231007114523191](./inVmwareWorkstation16InstallCentos7_9_img/image-20231007114523191.png)
-
-
-
-![image-20231007114607334](./inVmwareWorkstation16InstallCentos7_9_img/image-20231007114607334.png)
+![image-20231007114112812](inVmwareWorkstation16InstallCentos7_9_img/image-20231007114112812.png)
 
 
 
 
 
-![image-20231007114633954](./inVmwareWorkstation16InstallCentos7_9_img/image-20231007114633954.png)
+![image-20231007114204183](inVmwareWorkstation16InstallCentos7_9_img/image-20231007114204183.png)
+
+
+
+![image-20231007114523191](inVmwareWorkstation16InstallCentos7_9_img/image-20231007114523191.png)
+
+
+
+![image-20231007114607334](inVmwareWorkstation16InstallCentos7_9_img/image-20231007114607334.png)
 
 
 
 
 
-![image-20231007114657899](./inVmwareWorkstation16InstallCentos7_9_img/image-20231007114657899.png)
-
-
-
-![image-20231007114724171](./inVmwareWorkstation16InstallCentos7_9_img/image-20231007114724171.png)
-
-
-
-![image-20231007114747006](./inVmwareWorkstation16InstallCentos7_9_img/image-20231007114747006.png)
-
-
-
-![image-20231007114809692](./inVmwareWorkstation16InstallCentos7_9_img/image-20231007114809692.png)
-
-
-
-![image-20231007114858374](./inVmwareWorkstation16InstallCentos7_9_img/image-20231007114858374.png)
-
-
-
-![image-20231007115108239](./inVmwareWorkstation16InstallCentos7_9_img/image-20231007115108239.png)
-
-
-
-![image-20231007115142957](./inVmwareWorkstation16InstallCentos7_9_img/image-20231007115142957.png)
-
-
-
-![image-20231007115201743](./inVmwareWorkstation16InstallCentos7_9_img/image-20231007115201743.png)
+![image-20231007114633954](inVmwareWorkstation16InstallCentos7_9_img/image-20231007114633954.png)
 
 
 
 
 
-![image-20231007134658504](./inVmwareWorkstation16InstallCentos7_9_img/image-20231007134658504.png)
+![image-20231007114657899](inVmwareWorkstation16InstallCentos7_9_img/image-20231007114657899.png)
+
+
+
+![image-20231007114724171](inVmwareWorkstation16InstallCentos7_9_img/image-20231007114724171.png)
+
+
+
+![image-20231007114747006](inVmwareWorkstation16InstallCentos7_9_img/image-20231007114747006.png)
+
+
+
+![image-20231007114809692](inVmwareWorkstation16InstallCentos7_9_img/image-20231007114809692.png)
+
+
+
+![image-20231007114858374](inVmwareWorkstation16InstallCentos7_9_img/image-20231007114858374.png)
+
+
+
+![image-20231007115108239](inVmwareWorkstation16InstallCentos7_9_img/image-20231007115108239.png)
+
+
+
+![image-20231007115142957](inVmwareWorkstation16InstallCentos7_9_img/image-20231007115142957.png)
+
+
+
+![image-20231007115201743](inVmwareWorkstation16InstallCentos7_9_img/image-20231007115201743.png)
 
 
 
 
 
-![image-20231007134731322](./inVmwareWorkstation16InstallCentos7_9_img/image-20231007134731322.png)
+![image-20231007134658504](inVmwareWorkstation16InstallCentos7_9_img/image-20231007134658504.png)
+
+
+
+
+
+![image-20231007134731322](inVmwareWorkstation16InstallCentos7_9_img/image-20231007134731322.png)
 
 
 
 ## 开始安装
 
-![image-20231007134751098](./inVmwareWorkstation16InstallCentos7_9_img/image-20231007134751098.png)
+![image-20231007134751098](inVmwareWorkstation16InstallCentos7_9_img/image-20231007134751098.png)
 
 
 
-![image-20231007134817643](./inVmwareWorkstation16InstallCentos7_9_img/image-20231007134817643.png)
+![image-20231007134817643](inVmwareWorkstation16InstallCentos7_9_img/image-20231007134817643.png)
 
 
 
 
 
-![image-20231007134830142](./inVmwareWorkstation16InstallCentos7_9_img/image-20231007134830142.png)
+![image-20231007134830142](inVmwareWorkstation16InstallCentos7_9_img/image-20231007134830142.png)
 
 
 
-![image-20231007134951789](./inVmwareWorkstation16InstallCentos7_9_img/image-20231007134951789.png)
+![image-20231007134951789](inVmwareWorkstation16InstallCentos7_9_img/image-20231007134951789.png)
 
 
 
-![image-20231007135056383](./inVmwareWorkstation16InstallCentos7_9_img/image-20231007135056383.png)
+![image-20231007135056383](inVmwareWorkstation16InstallCentos7_9_img/image-20231007135056383.png)
 
 
 
-![image-20231007135322871](./inVmwareWorkstation16InstallCentos7_9_img/image-20231007135322871.png)
+![image-20231007135322871](inVmwareWorkstation16InstallCentos7_9_img/image-20231007135322871.png)
 
 
 
-![image-20231007135248954](./inVmwareWorkstation16InstallCentos7_9_img/image-20231007135248954.png)
+![image-20231007135248954](inVmwareWorkstation16InstallCentos7_9_img/image-20231007135248954.png)
 
 
 
-![image-20231007135536033](./inVmwareWorkstation16InstallCentos7_9_img/image-20231007135536033.png)
+![image-20231007135536033](inVmwareWorkstation16InstallCentos7_9_img/image-20231007135536033.png)
 
 
 
-![image-20231007135719549](./inVmwareWorkstation16InstallCentos7_9_img/image-20231007135719549.png)
+![image-20231007135719549](inVmwareWorkstation16InstallCentos7_9_img/image-20231007135719549.png)
 
 
 
-![image-20231007135409600](./inVmwareWorkstation16InstallCentos7_9_img/image-20231007135409600.png)
+![image-20231007135409600](inVmwareWorkstation16InstallCentos7_9_img/image-20231007135409600.png)
 
 
 
-![image-20231007135502848](./inVmwareWorkstation16InstallCentos7_9_img/image-20231007135502848.png)
+![image-20231007135502848](inVmwareWorkstation16InstallCentos7_9_img/image-20231007135502848.png)
 
 
 
-![image-20231007135758782](./inVmwareWorkstation16InstallCentos7_9_img/image-20231007135758782.png)
+![image-20231007135758782](inVmwareWorkstation16InstallCentos7_9_img/image-20231007135758782.png)
 
 
 
-![image-20231007140238095](./inVmwareWorkstation16InstallCentos7_9_img/image-20231007140238095.png)
+![image-20231007140238095](inVmwareWorkstation16InstallCentos7_9_img/image-20231007140238095.png)
 
 
 
-![image-20231007140310908](./inVmwareWorkstation16InstallCentos7_9_img/image-20231007140310908.png)
+![image-20231007140310908](inVmwareWorkstation16InstallCentos7_9_img/image-20231007140310908.png)
 
 
 
-![image-20231007140404889](./inVmwareWorkstation16InstallCentos7_9_img/image-20231007140404889.png)
+![image-20231007140404889](inVmwareWorkstation16InstallCentos7_9_img/image-20231007140404889.png)
 
 
 
-![image-20231007140501422](./inVmwareWorkstation16InstallCentos7_9_img/image-20231007140501422.png)
+![image-20231007140501422](inVmwareWorkstation16InstallCentos7_9_img/image-20231007140501422.png)
 
 
 
-![image-20231007140522984](./inVmwareWorkstation16InstallCentos7_9_img/image-20231007140522984.png)
+![image-20231007140522984](inVmwareWorkstation16InstallCentos7_9_img/image-20231007140522984.png)
 
 
 
-![image-20231007142401488](./inVmwareWorkstation16InstallCentos7_9_img/image-20231007142401488.png)
+![image-20231007142401488](inVmwareWorkstation16InstallCentos7_9_img/image-20231007142401488.png)
 
 
 
-![image-20231007142825735](./inVmwareWorkstation16InstallCentos7_9_img/image-20231007142825735.png)
+![image-20231007142825735](inVmwareWorkstation16InstallCentos7_9_img/image-20231007142825735.png)
 
 
 
-![image-20231007142850667](./inVmwareWorkstation16InstallCentos7_9_img/image-20231007142850667.png)
+![image-20231007142850667](inVmwareWorkstation16InstallCentos7_9_img/image-20231007142850667.png)
 
-![image-20231007203137778](./inVmwareWorkstation16InstallCentos7_9_img/image-20231007203137778.png)
+![image-20231007203137778](inVmwareWorkstation16InstallCentos7_9_img/image-20231007203137778.png)
 
 
 
-![image-20231007203154645](./inVmwareWorkstation16InstallCentos7_9_img/image-20231007203154645.png)
+![image-20231007203154645](inVmwareWorkstation16InstallCentos7_9_img/image-20231007203154645.png)
 
 
 
-![image-20231007143044289](./inVmwareWorkstation16InstallCentos7_9_img/image-20231007143044289.png)
+![image-20231007143044289](inVmwareWorkstation16InstallCentos7_9_img/image-20231007143044289.png)
 
 
 
-![image-20231007143101657](./inVmwareWorkstation16InstallCentos7_9_img/image-20231007143101657.png)
+![image-20231007143101657](inVmwareWorkstation16InstallCentos7_9_img/image-20231007143101657.png)
 
 
 
-![image-20231007143848071](./inVmwareWorkstation16InstallCentos7_9_img/image-20231007143848071.png)
+![image-20231007143848071](inVmwareWorkstation16InstallCentos7_9_img/image-20231007143848071.png)
 
 ## 更新yum源和升级
 
@@ -225,31 +225,31 @@ yum clean all
 yum -y update
 ```
 
-![image-20231007144608643](./inVmwareWorkstation16InstallCentos7_9_img/image-20231007144608643.png)
+![image-20231007144608643](inVmwareWorkstation16InstallCentos7_9_img/image-20231007144608643.png)
 
 
 
-![image-20231007145712691](./inVmwareWorkstation16InstallCentos7_9_img/image-20231007145712691.png)
+![image-20231007145712691](inVmwareWorkstation16InstallCentos7_9_img/image-20231007145712691.png)
 
 
 
-![image-20231007150445179](./inVmwareWorkstation16InstallCentos7_9_img/image-20231007150445179.png)
+![image-20231007150445179](inVmwareWorkstation16InstallCentos7_9_img/image-20231007150445179.png)
 
 
 
-![image-20231007150544366](./inVmwareWorkstation16InstallCentos7_9_img/image-20231007150544366.png)
+![image-20231007150544366](inVmwareWorkstation16InstallCentos7_9_img/image-20231007150544366.png)
 
 
 
 
 
-![image-20231007154727579](./inVmwareWorkstation16InstallCentos7_9_img/image-20231007154727579.png)
+![image-20231007154727579](inVmwareWorkstation16InstallCentos7_9_img/image-20231007154727579.png)
 
 
 
 ## 安装 vmware-tools
 
-![image-20231007160625007](./inVmwareWorkstation16InstallCentos7_9_img/image-20231007160625007.png)
+![image-20231007160625007](inVmwareWorkstation16InstallCentos7_9_img/image-20231007160625007.png)
 
 
 
@@ -276,7 +276,7 @@ cd /tmp/vmware-tools-distrib/
 
 
 
-![image-20231007162018749](./inVmwareWorkstation16InstallCentos7_9_img/image-20231007162018749.png)
+![image-20231007162018749](inVmwareWorkstation16InstallCentos7_9_img/image-20231007162018749.png)
 
 ## 安装和更新epel源
 
@@ -299,17 +299,17 @@ wget -O epel.repo https://mirrors.aliyun.com/repo/epel-7.repo
 
 ```
 
-![image-20231007221054360](./inVmwareWorkstation16InstallCentos7_9_img/image-20231007221054360.png)
+![image-20231007221054360](inVmwareWorkstation16InstallCentos7_9_img/image-20231007221054360.png)
 
-![image-20231007223440601](./inVmwareWorkstation16InstallCentos7_9_img/image-20231007223440601.png)
+![image-20231007223440601](inVmwareWorkstation16InstallCentos7_9_img/image-20231007223440601.png)
 
 ## 设置关屏时间为Never
 
-![image-20231008184927061](./inVmwareWorkstation16InstallCentos7_9_img/image-20231008184927061.png)
+![image-20231008184927061](inVmwareWorkstation16InstallCentos7_9_img/image-20231008184927061.png)
 
 
 
-![image-20231008184951363](./inVmwareWorkstation16InstallCentos7_9_img/image-20231008184951363.png)
+![image-20231008184951363](inVmwareWorkstation16InstallCentos7_9_img/image-20231008184951363.png)
 
 ## 设置中文输入法
 
@@ -317,27 +317,27 @@ wget -O epel.repo https://mirrors.aliyun.com/repo/epel-7.repo
 
 
 
-![image-20231008164358232](./inVmwareWorkstation16InstallCentos7_9_img/image-20231008164358232.png)
+![image-20231008164358232](inVmwareWorkstation16InstallCentos7_9_img/image-20231008164358232.png)
 
-![image-20231008164514309](./inVmwareWorkstation16InstallCentos7_9_img/image-20231008164514309.png)
+![image-20231008164514309](inVmwareWorkstation16InstallCentos7_9_img/image-20231008164514309.png)
 
-![image-20231008164537123](./inVmwareWorkstation16InstallCentos7_9_img/image-20231008164537123.png)
-
-
+![image-20231008164537123](inVmwareWorkstation16InstallCentos7_9_img/image-20231008164537123.png)
 
 
 
-![image-20231008164617351](./inVmwareWorkstation16InstallCentos7_9_img/image-20231008164617351.png)
+
+
+![image-20231008164617351](inVmwareWorkstation16InstallCentos7_9_img/image-20231008164617351.png)
 
 <img src="inVmwareWorkstation16InstallCentos7_9_img/image-20231008164652003.png" alt="image-20231008164652003" style="zoom:50%;" />
 
-![image-20231008164708728](./inVmwareWorkstation16InstallCentos7_9_img/image-20231008164708728.png)
+![image-20231008164708728](inVmwareWorkstation16InstallCentos7_9_img/image-20231008164708728.png)
 
-![image-20231008164746664](./inVmwareWorkstation16InstallCentos7_9_img/image-20231008164746664.png)
+![image-20231008164746664](inVmwareWorkstation16InstallCentos7_9_img/image-20231008164746664.png)
 
-![image-20231008164806585](./inVmwareWorkstation16InstallCentos7_9_img/image-20231008164806585.png)
+![image-20231008164806585](inVmwareWorkstation16InstallCentos7_9_img/image-20231008164806585.png)
 
-![image-20231008164830903](./inVmwareWorkstation16InstallCentos7_9_img/image-20231008164830903.png)
+![image-20231008164830903](inVmwareWorkstation16InstallCentos7_9_img/image-20231008164830903.png)
 
 ## 防火墙设置
 
@@ -465,25 +465,25 @@ sudo firewall-cmd --zone=public --remove-port=8080/tcp --permanent
 
 ## 克隆 <- 重要
 
-![image-20231007215544862](./inVmwareWorkstation16InstallCentos7_9_img/image-20231007215544862.png)
+![image-20231007215544862](inVmwareWorkstation16InstallCentos7_9_img/image-20231007215544862.png)
 
 
 
-![image-20231007215604455](./inVmwareWorkstation16InstallCentos7_9_img/image-20231007215604455.png)
+![image-20231007215604455](inVmwareWorkstation16InstallCentos7_9_img/image-20231007215604455.png)
 
 
 
-![image-20231007215624158](./inVmwareWorkstation16InstallCentos7_9_img/image-20231007215624158.png)
+![image-20231007215624158](inVmwareWorkstation16InstallCentos7_9_img/image-20231007215624158.png)
 
 
 
-![image-20231007215642573](./inVmwareWorkstation16InstallCentos7_9_img/image-20231007215642573.png)
+![image-20231007215642573](inVmwareWorkstation16InstallCentos7_9_img/image-20231007215642573.png)
 
 
 
-![image-20231007215715250](./inVmwareWorkstation16InstallCentos7_9_img/image-20231007215715250.png)
+![image-20231007215715250](inVmwareWorkstation16InstallCentos7_9_img/image-20231007215715250.png)
 
-![image-20231007215434932](./inVmwareWorkstation16InstallCentos7_9_img/image-20231007215434932.png)
+![image-20231007215434932](inVmwareWorkstation16InstallCentos7_9_img/image-20231007215434932.png)
 
 
 
