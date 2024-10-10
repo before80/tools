@@ -1024,7 +1024,15 @@ Instead of creating yet another mediocre cheat sheet repository, we are concentr
 
 ​	*cheat.sh* 使用由全世界数千名用户、开发者和作者维护的精选社区驱动速查表库和信息源（*Users* 列显示了贡献者的数量/星级）：
 
-
+| Cheat sheets            | Repository                                                   | C/U*                                                         | Stars | Creation Date |
+| ----------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ----- | ------------- |
+| UNIX/Linux, programming | [cheat.sheets](https://github.com/chubin/cheat.sheets)       | [78](https://camo.githubusercontent.com/e55a23c625b9eca360410778f4926fc0179a52f5fd7d5e4401683c90afc47a61/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f636f6e7472696275746f72732d616e6f6e2f63687562696e2f63686561742e7368656574733f6c6162656c3d254630253946253931254135266c6162656c436f6c6f723d7768697465) | 595   | May 1, 2017   |
+| UNIX/Linux commands     | [tldr-pages/tldr](https://github.com/tldr-pages/tldr)        | [2.8k](https://camo.githubusercontent.com/80897257282d1ac090b367c779b1d3e053a39c00f3c69f818760acd69b08a836/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f636f6e7472696275746f72732d616e6f6e2f746c64722d70616765732f746c64723f6c6162656c3d254630253946253931254135266c6162656c436f6c6f723d7768697465) | 51k   | Dec 8, 2013   |
+| UNIX/Linux commands     | [chrisallenlane/cheat](https://github.com/chrisallenlane/cheat) | [173](https://camo.githubusercontent.com/645badc06b9ebde5f487b6d8f25a23a94963d129210b539326ba74aa6bd94234/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f636f6e7472696275746f72732d616e6f6e2f6368726973616c6c656e6c616e652f63686561743f6c6162656c3d254630253946253931254135266c6162656c436f6c6f723d7768697465) | 73    | Jul 28, 2013  |
+| Programming languages   | [adambard/learnxinyminutes-docs](https://github.com/adambard/learnxinyminutes-docs) | 2.1k                                                         | 11k   | Jun 23, 2013  |
+| Go                      | [a8m/go-lang-cheat-sheet](https://github.com/a8m/go-lang-cheat-sheet) | 34                                                           | 8.3k  | Feb 9, 2014   |
+| Perl                    | [pkrumnis/perl1line.txt](https://github.com/pkrumins/perl1line.txt) | 7                                                            | 246   | Nov 4, 2011   |
+| Programming languages   | [StackOverflow](https://stackoverflow.com/)                  | [14M](https://stackexchange.com/leagues/1/alltime/stackoverflow) | N/A   | Sep 15, 2008  |
 
 (*) C/U — contributors for GitHub repositories, Users for Stackoverflow - GitHub 仓库的贡献者，StackOverflow 的用户
 
