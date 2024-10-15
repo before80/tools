@@ -25,15 +25,22 @@ exec fish
 
 或者重新启动一个fish终端，以生效刚配置的fish变量，这样一来你就可以在fish终端中找到node的命令了。
 
-## 如何清空fish_user_paths变量中的某一个配置项？
+## 如何清除fish_user_paths变量中的某一配置项？
 
-​	例如，你可以这样删除`/home/lx/xx`
+​	例如，你可以这样清除`/home/lx/xx`
 
 ```sh
 set -U fish_user_paths (string match -v "/home/lx/xx" $fish_user_paths)
 ```
 
-​	当然，如果fish_user_paths中的配置项，比较少，你完全可以重新配置，例如：
+​	当然，如果fish_user_paths中的配置项比较少，你完全可以重新配置，例如：
+
+> 说明：
+> 	查看当前fish_user_paths变量的配置值：
+>
+> ```sh
+> echo $fish_user_paths
+> ```
 
 ```sh
 set -U fish_user_paths /home/lx/.nvm/versions/node/v20.17.0/bin
