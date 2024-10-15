@@ -23,7 +23,7 @@ set -U fish_user_paths /home/lx/.nvm/versions/node/v20.17.0/bin $fish_user_paths
 exec fish
 ```
 
-或者重新启动一个fish终端，已生效已配置fish变量，这样以来你就可以在fish终端中找到node的命令了。
+或者重新启动一个fish终端，以生效刚配置的fish变量，这样一来你就可以在fish终端中找到node的命令了。
 
 ## 如何清空fish_user_paths变量中的某一个配置项？
 
