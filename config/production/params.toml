@@ -1,7 +1,0 @@
-MyDefLastUrlEle = "/tools"
-# Enable Algolia DocSearch
-# algolia_docsearch = true
-[search.algolia]
-appId = ""
-apiKey = ""
-indexName = "tools-"
