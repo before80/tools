@@ -17,6 +17,8 @@ Unified access to the best community driven cheat sheets repositories of the wor
 
 ​	统一访问世界上最优秀的社区驱动速查表库。
 
+
+
 Let's imagine for a moment that there is such a thing as an ideal cheat sheet. What should it look like? What features should it have?
 
 ​	让我们设想一下理想的速查表应该是什么样子的？它应该具备哪些特征？
