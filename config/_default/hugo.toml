@@ -154,6 +154,9 @@ prism_syntax_highlighting = false
 [params.markmap]
 enable = true
 
+[params.mermaid]
+enable = true
+src = "https://unpkg.com/mermaid@latest/dist/mermaid.esm.min.mjs"  # 使用 unpkg CDN
 
 
 # 启用 tocbot来处理页面滚动定位toc项
