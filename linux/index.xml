@@ -1,1 +1,256 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Linux on tools</title><link>https://before80.github.io/tools/linux/</link><description>Recent content in Linux on tools</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sat, 07 Oct 2023 11:25:33 +0800</lastBuildDate><atom:link href="https://before80.github.io/tools/linux/index.xml" rel="self" type="application/rss+xml"/><item><title>相关参考资源</title><link>https://before80.github.io/tools/linux/refs/</link><pubDate>Mon, 09 Oct 2023 10:14:24 +0800</pubDate><guid>https://before80.github.io/tools/linux/refs/</guid><description>相关参考资源 cyberciti.biz https://www.cyberciti.biz/ ​ 通过在该站点内搜索，可以获得各种Linux命令的使用方法、如何在各个Linux发行版或Mac OS上安装软件等等。 ​ 但该站点</description></item><item><title>在Ubuntu24.04上安装VirtualBox</title><link>https://before80.github.io/tools/linux/installVirtualBoxOnUbuntu2404/</link><pubDate>Wed, 25 Sep 2024 16:03:33 +0800</pubDate><guid>https://before80.github.io/tools/linux/installVirtualBoxOnUbuntu2404/</guid><description>1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 # wget -O- https://www.virtualbox.org/download/oracle_vbox_2016.asc | sudo gpg --yes --output /usr/share/keyrings/oracle-virtualbox-2016.gpg --dearmor echo &amp;#34;deb [arch=amd64 signed-by=/usr/share/keyrings/oracle-virtualbox-2016.gpg] http://download.virtualbox.org/virtualbox/debian $(. /etc/os-release &amp;amp;&amp;amp; echo &amp;#34;$VERSION_CODENAME&amp;#34;) contrib&amp;#34; | sudo tee /etc/apt/sources.list.d/virtualbox.list # 更新软件包列表 sudo apt update # 搜索最新版本的Virtu</description></item><item><title>在Ubuntu24.04上安装wine</title><link>https://before80.github.io/tools/linux/installWineOnUbuntu2404/</link><pubDate>Wed, 25 Sep 2024 11:37:55 +0800</pubDate><guid>https://before80.github.io/tools/linux/installWineOnUbuntu2404/</guid><description>安装步骤 1 2 3 4 5 6 7 8 9 10 11 12 sudo dpkg --add-architecture i386 sudo mkdir -pm755 /etc/apt/keyrings sudo wget -O /etc/apt/keyrings/winehq-archive.key https://dl.winehq.org/wine-builds/winehq.key sudo add-apt-repository &amp;#39;deb https://dl.winehq.org/wine-builds/ubuntu/ lunar main&amp;#39; sudo apt install --install-recommends winehq-stable # 若遇到下载中断，可使用以下命令继续下载 sudo apt install --fix-missing --install-recommends winehq-stable 参见：h</description></item><item><title>在VMware Workstation 16 上安装 Ubuntu 22.04</title><link>https://before80.github.io/tools/linux/inVmwareWorkstation16InstallUbuntu22_04/</link><pubDate>Sat, 07 Oct 2023 11:27:40 +0800</pubDate><guid>https://before80.github.io/tools/linux/inVmwareWorkstation16InstallUbuntu22_04/</guid><description>在VMware Workstation 16 上安装 Ubuntu 22.04 Ubuntu 22.04安装包 https://mirrors.aliyun.com/ubuntu-releases/22.04.3/ 阿里镜像 https://mirrors.ustc.edu.cn/ubuntu-releases/22.04.3/ 中科大源 https://img.cs.montana.edu/linux/ubuntu/22.04.2/ 相关资源 https://installati.one/ubuntu/22.04/ 相关软件的安装说明 前期设置 开始安装 设置关屏时间为Never 更新</description></item><item><title>在VMware Workstation 16 上安装 Centos7.9</title><link>https://before80.github.io/tools/linux/inVmwareWorkstation16InstallCentos7_9/</link><pubDate>Sat, 07 Oct 2023 11:27:22 +0800</pubDate><guid>https://before80.github.io/tools/linux/inVmwareWorkstation16InstallCentos7_9/</guid><description>在VMware Workstation 16 上安装 Centos7.9 CentOS7.9 安装包 https://mirrors.aliyun.com/centos/7.9.2009/isos/x86_64/ 阿里镜像 https://mirrors.tuna.tsinghua.edu.cn/centos/7.9.2009/isos/x86_64/ 清华源 https://mirrors.ustc.edu.cn/centos/7.9.2009/isos/x86_64/ 中科大源 https://img.cs.montana.edu/linux/centos/7.9.2009/isos/x86_64/ https://mirrors.tripadvisor.com/centos/7.9.2009/isos/x86_64/ 相关资源 https://installati.one/centos/7/ 相关软件的安装说明 前期设置 开始安装 更新yum源和升级 1 2 3 4 5 6</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Linux on tools</title><link>https://before80.github.io/tools/linux/</link><description>Recent content in Linux on tools</description><generator>Hugo</generator><language>zh-cn</language><lastBuildDate>Wed, 02 Apr 2025 23:02:37 +0800</lastBuildDate><atom:link href="https://before80.github.io/tools/linux/index.xml" rel="self" type="application/rss+xml"/><item><title>相关参考资源</title><link>https://before80.github.io/tools/linux/refs/</link><pubDate>Mon, 09 Oct 2023 10:14:24 +0800</pubDate><guid>https://before80.github.io/tools/linux/refs/</guid><description>&lt;h1 id="相关参考资源">相关参考资源&lt;a class="td-heading-self-link" href="#%e7%9b%b8%e5%85%b3%e5%8f%82%e8%80%83%e8%b5%84%e6%ba%90" aria-label="Heading self-link">&lt;/a>&lt;/h1>
+&lt;h2 id="cybercitibiz">cyberciti.biz&lt;a class="td-heading-self-link" href="#cybercitibiz" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;p>&lt;a href="https://www.cyberciti.biz/">https://www.cyberciti.biz/&lt;/a>&lt;/p>
+&lt;p>​	通过在该站点内搜索，可以获得各种Linux命令的使用方法、如何在各个Linux发行版或Mac OS上安装软件等等。&lt;/p>
+&lt;p>​	但&lt;strong>该站点的站内搜索使用的是Google搜索&lt;/strong>。&lt;/p></description></item><item><title>在Ubuntu24.04上安装VirtualBox</title><link>https://before80.github.io/tools/linux/installVirtualBoxOnUbuntu2404/</link><pubDate>Wed, 25 Sep 2024 16:03:33 +0800</pubDate><guid>https://before80.github.io/tools/linux/installVirtualBoxOnUbuntu2404/</guid><description>&lt;div class="highlight">&lt;div style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
+&lt;pre tabindex="0" style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f"> 1
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f"> 2
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f"> 3
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f"> 4
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f"> 5
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f"> 6
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f"> 7
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f"> 8
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f"> 9
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f">10
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f">11
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f">12
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f">13
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f">14
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f">15
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f">16
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f">17
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f">18
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f">19
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f">20
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+&lt;pre tabindex="0" style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8a93a5;font-style:italic"># &lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget -O- https://www.virtualbox.org/download/oracle_vbox_2016.asc &lt;span style="color:#abb2bf">|&lt;/span> sudo gpg --yes --output /usr/share/keyrings/oracle-virtualbox-2016.gpg --dearmor
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e5c07b">echo&lt;/span> &lt;span style="color:#63c381">&amp;#34;deb [arch=amd64 signed-by=/usr/share/keyrings/oracle-virtualbox-2016.gpg] http://download.virtualbox.org/virtualbox/debian &lt;/span>&lt;span style="color:#76a9f9">$(&lt;/span>. /etc/os-release &lt;span style="color:#54b1c7">&amp;amp;&amp;amp;&lt;/span> &lt;span style="color:#e5c07b">echo&lt;/span> &lt;span style="color:#63c381">&amp;#34;&lt;/span>&lt;span style="color:#dcaeea">$VERSION_CODENAME&lt;/span>&lt;span style="color:#63c381">&amp;#34;&lt;/span>&lt;span style="color:#76a9f9">)&lt;/span>&lt;span style="color:#63c381"> contrib&amp;#34;&lt;/span> &lt;span style="color:#abb2bf">|&lt;/span> sudo tee /etc/apt/sources.list.d/virtualbox.list
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8a93a5;font-style:italic"># 更新软件包列表&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo apt update
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8a93a5;font-style:italic"># 搜索最新版本的VirtualBox&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo apt-cache search virtualbox
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8a93a5;font-style:italic"># 好像目前没法安装&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8a93a5;font-style:italic"># sudo apt install virtualbox-7.1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8a93a5;font-style:italic"># 遇到错误时，接着运行以下&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8a93a5;font-style:italic"># sudo apt --fix-broken install&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8a93a5;font-style:italic"># 算了，直接使用以下命令安装&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo apt install virtualbox
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>​	弹出以下内容&lt;/p></description></item><item><title>在Ubuntu24.04上安装wine</title><link>https://before80.github.io/tools/linux/installWineOnUbuntu2404/</link><pubDate>Wed, 25 Sep 2024 11:37:55 +0800</pubDate><guid>https://before80.github.io/tools/linux/installWineOnUbuntu2404/</guid><description>&lt;h2 id="安装步骤">安装步骤&lt;a class="td-heading-self-link" href="#%e5%ae%89%e8%a3%85%e6%ad%a5%e9%aa%a4" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;div class="highlight">&lt;div style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
+&lt;pre tabindex="0" style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f"> 1
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f"> 2
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f"> 3
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f"> 4
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f"> 5
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f"> 6
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f"> 7
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f"> 8
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f"> 9
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f">10
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f">11
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+&lt;pre tabindex="0" style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>sudo dpkg --add-architecture i386
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo mkdir -pm755 /etc/apt/keyrings
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo wget -O /etc/apt/keyrings/winehq-archive.key https://dl.winehq.org/wine-builds/winehq.key
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo add-apt-repository &lt;span style="color:#98c379">&amp;#39;deb https://dl.winehq.org/wine-builds/ubuntu/ lunar main&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo apt install --install-recommends winehq-stable
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8a93a5;font-style:italic"># 若遇到下载中断，可使用以下命令继续下载&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo apt install --fix-missing --install-recommends winehq-stable
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>参见：&lt;a href="https://gitlab.winehq.org/wine/wine/-/wikis/Debian-Ubuntu">https://gitlab.winehq.org/wine/wine/-/wikis/Debian-Ubuntu&lt;/a>&lt;/p></description></item><item><title>在VMware Workstation 16 上安装 Ubuntu 22.04</title><link>https://before80.github.io/tools/linux/inVmwareWorkstation16InstallUbuntu22_04/</link><pubDate>Sat, 07 Oct 2023 11:27:40 +0800</pubDate><guid>https://before80.github.io/tools/linux/inVmwareWorkstation16InstallUbuntu22_04/</guid><description>&lt;h1 id="在vmware-workstation-16-上安装-ubuntu-2204">在VMware Workstation 16 上安装 Ubuntu 22.04&lt;a class="td-heading-self-link" href="#%e5%9c%a8vmware-workstation-16-%e4%b8%8a%e5%ae%89%e8%a3%85-ubuntu-2204" aria-label="Heading self-link">&lt;/a>&lt;/h1>
+&lt;h2 id="ubuntu-2204安装包">Ubuntu 22.04安装包&lt;a class="td-heading-self-link" href="#ubuntu-2204%e5%ae%89%e8%a3%85%e5%8c%85" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="https://mirrors.aliyun.com/ubuntu-releases/22.04.3/">https://mirrors.aliyun.com/ubuntu-releases/22.04.3/&lt;/a> 阿里镜像&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="https://mirrors.ustc.edu.cn/ubuntu-releases/22.04.3/">https://mirrors.ustc.edu.cn/ubuntu-releases/22.04.3/&lt;/a> 中科大源&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="https://img.cs.montana.edu/linux/ubuntu/22.04.2/">https://img.cs.montana.edu/linux/ubuntu/22.04.2/&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="相关资源">相关资源&lt;a class="td-heading-self-link" href="#%e7%9b%b8%e5%85%b3%e8%b5%84%e6%ba%90" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://installati.one/ubuntu/22.04/">https://installati.one/ubuntu/22.04/&lt;/a> 相关软件的安装说明&lt;/li>
+&lt;/ul>
+&lt;h2 id="前期设置">前期设置&lt;a class="td-heading-self-link" href="#%e5%89%8d%e6%9c%9f%e8%ae%be%e7%bd%ae" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/linux/inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007141202129.png"
+ alt="image-20231007141202129" data-cur-dir="linux" data-rg="/inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007141202129.png" data-rg1="inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007141202129.png" data-rel="/tools/inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007141202129.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/linux/inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007141237390.png"
+ alt="image-20231007141237390" data-cur-dir="linux" data-rg="/inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007141237390.png" data-rg1="inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007141237390.png" data-rel="/tools/inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007141237390.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/linux/inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007141257224.png"
+ alt="image-20231007141257224" data-cur-dir="linux" data-rg="/inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007141257224.png" data-rg1="inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007141257224.png" data-rel="/tools/inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007141257224.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/linux/inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007141334182.png"
+ alt="image-20231007141334182" data-cur-dir="linux" data-rg="/inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007141334182.png" data-rg1="inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007141334182.png" data-rel="/tools/inVmwareWorkstation16InstallUbuntu22_04_img/image-20231007141334182.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p></description></item><item><title>在VMware Workstation 16 上安装 Centos7.9</title><link>https://before80.github.io/tools/linux/inVmwareWorkstation16InstallCentos7_9/</link><pubDate>Sat, 07 Oct 2023 11:27:22 +0800</pubDate><guid>https://before80.github.io/tools/linux/inVmwareWorkstation16InstallCentos7_9/</guid><description>&lt;h1 id="在vmware-workstation-16-上安装-centos79">在VMware Workstation 16 上安装 Centos7.9&lt;a class="td-heading-self-link" href="#%e5%9c%a8vmware-workstation-16-%e4%b8%8a%e5%ae%89%e8%a3%85-centos79" aria-label="Heading self-link">&lt;/a>&lt;/h1>
+&lt;h2 id="centos79-安装包">CentOS7.9 安装包&lt;a class="td-heading-self-link" href="#centos79-%e5%ae%89%e8%a3%85%e5%8c%85" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://mirrors.aliyun.com/centos/7.9.2009/isos/x86_64/">https://mirrors.aliyun.com/centos/7.9.2009/isos/x86_64/&lt;/a> 阿里镜像&lt;/li>
+&lt;li>&lt;a href="https://mirrors.tuna.tsinghua.edu.cn/centos/7.9.2009/isos/x86_64/">https://mirrors.tuna.tsinghua.edu.cn/centos/7.9.2009/isos/x86_64/&lt;/a> 清华源&lt;/li>
+&lt;li>&lt;a href="https://mirrors.ustc.edu.cn/centos/7.9.2009/isos/x86_64/">https://mirrors.ustc.edu.cn/centos/7.9.2009/isos/x86_64/&lt;/a> 中科大源&lt;/li>
+&lt;li>&lt;a href="https://img.cs.montana.edu/linux/centos/7.9.2009/isos/x86_64/">https://img.cs.montana.edu/linux/centos/7.9.2009/isos/x86_64/&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://mirrors.tripadvisor.com/centos/7.9.2009/isos/x86_64/">https://mirrors.tripadvisor.com/centos/7.9.2009/isos/x86_64/&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="相关资源">相关资源&lt;a class="td-heading-self-link" href="#%e7%9b%b8%e5%85%b3%e8%b5%84%e6%ba%90" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://installati.one/centos/7/">https://installati.one/centos/7/&lt;/a> 相关软件的安装说明&lt;/li>
+&lt;/ul>
+&lt;h2 id="前期设置">前期设置&lt;a class="td-heading-self-link" href="#%e5%89%8d%e6%9c%9f%e8%ae%be%e7%bd%ae" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/linux/inVmwareWorkstation16InstallCentos7_9_img/image-20231007113859558.png"
+ alt="image-20231007113859558" data-cur-dir="linux" data-rg="/inVmwareWorkstation16InstallCentos7_9_img/image-20231007113859558.png" data-rg1="inVmwareWorkstation16InstallCentos7_9_img/image-20231007113859558.png" data-rel="/tools/inVmwareWorkstation16InstallCentos7_9_img/image-20231007113859558.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/linux/inVmwareWorkstation16InstallCentos7_9_img/image-20231007114042140.png"
+ alt="image-20231007114042140" data-cur-dir="linux" data-rg="/inVmwareWorkstation16InstallCentos7_9_img/image-20231007114042140.png" data-rg1="inVmwareWorkstation16InstallCentos7_9_img/image-20231007114042140.png" data-rel="/tools/inVmwareWorkstation16InstallCentos7_9_img/image-20231007114042140.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/linux/inVmwareWorkstation16InstallCentos7_9_img/image-20231007114112812.png"
+ alt="image-20231007114112812" data-cur-dir="linux" data-rg="/inVmwareWorkstation16InstallCentos7_9_img/image-20231007114112812.png" data-rg1="inVmwareWorkstation16InstallCentos7_9_img/image-20231007114112812.png" data-rel="/tools/inVmwareWorkstation16InstallCentos7_9_img/image-20231007114112812.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/linux/inVmwareWorkstation16InstallCentos7_9_img/image-20231007114204183.png"
+ alt="image-20231007114204183" data-cur-dir="linux" data-rg="/inVmwareWorkstation16InstallCentos7_9_img/image-20231007114204183.png" data-rg1="inVmwareWorkstation16InstallCentos7_9_img/image-20231007114204183.png" data-rel="/tools/inVmwareWorkstation16InstallCentos7_9_img/image-20231007114204183.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p></description></item></channel></rss>

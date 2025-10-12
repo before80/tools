@@ -1,1 +1,158 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>工具软件 on tools</title><link>https://before80.github.io/tools/ubuntu/tools/</link><description>Recent content in 工具软件 on tools</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sun, 06 Oct 2024 10:38:19 +0800</lastBuildDate><atom:link href="https://before80.github.io/tools/ubuntu/tools/index.xml" rel="self" type="application/rss+xml"/><item><title>Deepin Terminal</title><link>https://before80.github.io/tools/ubuntu/tools/deepin_terminal/</link><pubDate>Mon, 07 Oct 2024 11:14:03 +0800</pubDate><guid>https://before80.github.io/tools/ubuntu/tools/deepin_terminal/</guid><description>安装 1 sudo apt install deepin-terminal 设置为默认终端 1 2 3 4 5 6 sudo apt install dconf-cli gsettings set org.gnome.desktop.default-applications.terminal exec &amp;#39;deepin-terminal&amp;#39; gsettings set org.gnome.desktop.default-applications.terminal exec-arg &amp;#39;-x&amp;#39; 修改回之前系统的默认终端 1 2 3 4 5 6 7 # 列出当前的默认终端设置 gsettings get org.gnome.desktop.default-applications.terminal exec #</description></item><item><title>VMware Workstation Pro for Personal Use (For Linux) 17.6</title><link>https://before80.github.io/tools/ubuntu/tools/vmware/</link><pubDate>Sun, 06 Oct 2024 19:59:13 +0800</pubDate><guid>https://before80.github.io/tools/ubuntu/tools/vmware/</guid><description>下载地址 https://support.broadcom.com/group/ecx/productfiles?subFamily=VMware%20Workstation%20Pro&amp;amp;displayGroup=VMware%20Workstation%20Pro%2017.0%20for%20Personal%20Use%20(Linux)&amp;amp;release=17.6&amp;amp;os=&amp;amp;servicePk=522392&amp;amp;language=EN 授予 .bundle 文件执行权限 1 2 cd /path/to/your/file # 替换为你的 .bundle 文件所在的路径 sudo chmod +x filename.bundle 运行 .bundle 安装文件 sudo ./filename.bundle 卸载 1 2 3 4 5 lx@lxm:~/Hugos/tools$ sudo vmware-installer --uninstall-product vmware-workstation [sudo] lx 的密码： All configuration information is about to be</description></item><item><title>ClamAV</title><link>https://before80.github.io/tools/ubuntu/tools/clamav/</link><pubDate>Sun, 06 Oct 2024 10:57:58 +0800</pubDate><guid>https://before80.github.io/tools/ubuntu/tools/clamav/</guid><description>安装ClamAV 1 2 sudo apt update sudo apt install clamav clamav-daemon 手动扫描文件夹 1 sudo clamscan -r /path/to/directory 更新病毒库 1 sudo freshclam 启动实时扫描守护进程 1 sudo systemctl start clamav-daemon 关闭 ClamAV 守护进程 1 sudo systemctl stop clamav-daemon 禁用Cla</description></item><item><title>Nemo</title><link>https://before80.github.io/tools/ubuntu/tools/nemo/</link><pubDate>Sun, 06 Oct 2024 10:38:29 +0800</pubDate><guid>https://before80.github.io/tools/ubuntu/tools/nemo/</guid><description>安装 Nemo 1 sudo apt install nemo 设置 Nemo 为默认文件管理器（可选） 1 xdg-mime default nemo.desktop inode/directory application/x-gnome-saved-search 已设置Nemo为默认文件管理器后，如何打开之前系统默认的文件管理器Nautilus</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>工具软件 on tools</title><link>https://before80.github.io/tools/ubuntu/tools/</link><description>Recent content in 工具软件 on tools</description><generator>Hugo</generator><language>zh-cn</language><lastBuildDate>Wed, 02 Apr 2025 23:02:37 +0800</lastBuildDate><atom:link href="https://before80.github.io/tools/ubuntu/tools/index.xml" rel="self" type="application/rss+xml"/><item><title>Deepin Terminal</title><link>https://before80.github.io/tools/ubuntu/tools/deepin_terminal/</link><pubDate>Mon, 07 Oct 2024 11:14:03 +0800</pubDate><guid>https://before80.github.io/tools/ubuntu/tools/deepin_terminal/</guid><description>&lt;h2 id="安装">安装&lt;a class="td-heading-self-link" href="#%e5%ae%89%e8%a3%85" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;div class="highlight">&lt;div style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
+&lt;pre tabindex="0" style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+&lt;pre tabindex="0" style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>sudo apt install deepin-terminal
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="设置为默认终端">设置为默认终端&lt;a class="td-heading-self-link" href="#%e8%ae%be%e7%bd%ae%e4%b8%ba%e9%bb%98%e8%ae%a4%e7%bb%88%e7%ab%af" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;div class="highlight">&lt;div style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
+&lt;pre tabindex="0" style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f">1
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f">2
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f">3
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f">4
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f">5
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+&lt;pre tabindex="0" style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>sudo apt install dconf-cli
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gsettings &lt;span style="color:#e5c07b">set&lt;/span> org.gnome.desktop.default-applications.terminal &lt;span style="color:#e5c07b">exec&lt;/span> &lt;span style="color:#98c379">&amp;#39;deepin-terminal&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gsettings &lt;span style="color:#e5c07b">set&lt;/span> org.gnome.desktop.default-applications.terminal exec-arg &lt;span style="color:#98c379">&amp;#39;-x&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="修改回之前系统的默认终端">修改回之前系统的默认终端&lt;a class="td-heading-self-link" href="#%e4%bf%ae%e6%94%b9%e5%9b%9e%e4%b9%8b%e5%89%8d%e7%b3%bb%e7%bb%9f%e7%9a%84%e9%bb%98%e8%ae%a4%e7%bb%88%e7%ab%af" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;div class="highlight">&lt;div style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
+&lt;pre tabindex="0" style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f">1
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f">2
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f">3
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f">4
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f">5
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f">6
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+&lt;pre tabindex="0" style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8a93a5;font-style:italic"># 列出当前的默认终端设置&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gsettings get org.gnome.desktop.default-applications.terminal &lt;span style="color:#e5c07b">exec&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8a93a5;font-style:italic"># 假如之前的默认终端是 gnome-terminal，可以使用以下命令恢复&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gsettings &lt;span style="color:#e5c07b">set&lt;/span> org.gnome.desktop.default-applications.terminal &lt;span style="color:#e5c07b">exec&lt;/span> &lt;span style="color:#98c379">&amp;#39;gnome-terminal&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gsettings &lt;span style="color:#e5c07b">set&lt;/span> org.gnome.desktop.default-applications.terminal exec-arg &lt;span style="color:#98c379">&amp;#39;-x&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item><item><title>VMware Workstation Pro for Personal Use (For Linux) 17.6</title><link>https://before80.github.io/tools/ubuntu/tools/vmware/</link><pubDate>Sun, 06 Oct 2024 19:59:13 +0800</pubDate><guid>https://before80.github.io/tools/ubuntu/tools/vmware/</guid><description>&lt;h2 id="下载地址">下载地址&lt;a class="td-heading-self-link" href="#%e4%b8%8b%e8%bd%bd%e5%9c%b0%e5%9d%80" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;p>&lt;a href="https://support.broadcom.com/group/ecx/productfiles?subFamily=VMware%20Workstation%20Pro&amp;amp;displayGroup=VMware%20Workstation%20Pro%2017.0%20for%20Personal%20Use%20(Linux)&amp;amp;release=17.6&amp;amp;os=&amp;amp;servicePk=522392&amp;amp;language=EN">https://support.broadcom.com/group/ecx/productfiles?subFamily=VMware%20Workstation%20Pro&amp;amp;displayGroup=VMware%20Workstation%20Pro%2017.0%20for%20Personal%20Use%20(Linux)&amp;amp;release=17.6&amp;amp;os=&amp;amp;servicePk=522392&amp;amp;language=EN&lt;/a>&lt;/p>
+&lt;h2 id="授予-bundle-文件执行权限">授予 &lt;code>.bundle&lt;/code> 文件执行权限&lt;a class="td-heading-self-link" href="#%e6%8e%88%e4%ba%88-bundle-%e6%96%87%e4%bb%b6%e6%89%a7%e8%a1%8c%e6%9d%83%e9%99%90" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;div class="highlight">&lt;div style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
+&lt;pre tabindex="0" style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f">1
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+&lt;pre tabindex="0" style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e5c07b">cd&lt;/span> /path/to/your/file &lt;span style="color:#8a93a5;font-style:italic"># 替换为你的 .bundle 文件所在的路径&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo chmod +x filename.bundle
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="运行-bundle-安装文件">运行 &lt;code>.bundle&lt;/code> 安装文件&lt;a class="td-heading-self-link" href="#%e8%bf%90%e8%a1%8c-bundle-%e5%ae%89%e8%a3%85%e6%96%87%e4%bb%b6" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;pre tabindex="0">&lt;code>sudo ./filename.bundle
+&lt;/code>&lt;/pre>&lt;h2 id="卸载">卸载&lt;a class="td-heading-self-link" href="#%e5%8d%b8%e8%bd%bd" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;div class="highlight">&lt;div style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
+&lt;pre tabindex="0" style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f">1
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f">2
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f">3
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f">4
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+&lt;pre tabindex="0" style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>lx@lxm:~/Hugos/tools$ sudo vmware-installer --uninstall-product vmware-workstation
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#54b1c7">[&lt;/span>sudo&lt;span style="color:#54b1c7">]&lt;/span> lx 的密码： 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>All configuration information is about to be removed. Do you wish to
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>keep your configuration files? You can also input &lt;span style="color:#98c379">&amp;#39;quit&amp;#39;&lt;/span> or &lt;span style="color:#98c379">&amp;#39;q&amp;#39;&lt;/span> to
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cancel uninstallation. &lt;span style="color:#54b1c7">[&lt;/span>yes&lt;span style="color:#54b1c7">]&lt;/span>: yes
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item><item><title>ClamAV</title><link>https://before80.github.io/tools/ubuntu/tools/clamav/</link><pubDate>Sun, 06 Oct 2024 10:57:58 +0800</pubDate><guid>https://before80.github.io/tools/ubuntu/tools/clamav/</guid><description>&lt;h2 id="安装clamav">安装ClamAV&lt;a class="td-heading-self-link" href="#%e5%ae%89%e8%a3%85clamav" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;div class="highlight">&lt;div style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
+&lt;pre tabindex="0" style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f">1
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+&lt;pre tabindex="0" style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>sudo apt update
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo apt install clamav clamav-daemon
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="手动扫描文件夹">手动扫描文件夹&lt;a class="td-heading-self-link" href="#%e6%89%8b%e5%8a%a8%e6%89%ab%e6%8f%8f%e6%96%87%e4%bb%b6%e5%a4%b9" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;div class="highlight">&lt;div style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
+&lt;pre tabindex="0" style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+&lt;pre tabindex="0" style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>sudo clamscan -r /path/to/directory
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="更新病毒库">更新病毒库&lt;a class="td-heading-self-link" href="#%e6%9b%b4%e6%96%b0%e7%97%85%e6%af%92%e5%ba%93" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;div class="highlight">&lt;div style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
+&lt;pre tabindex="0" style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+&lt;pre tabindex="0" style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>sudo freshclam
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="启动实时扫描守护进程">启动实时扫描守护进程&lt;a class="td-heading-self-link" href="#%e5%90%af%e5%8a%a8%e5%ae%9e%e6%97%b6%e6%89%ab%e6%8f%8f%e5%ae%88%e6%8a%a4%e8%bf%9b%e7%a8%8b" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;div class="highlight">&lt;div style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
+&lt;pre tabindex="0" style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+&lt;pre tabindex="0" style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>sudo systemctl start clamav-daemon
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="关闭-clamav-守护进程">关闭 ClamAV 守护进程&lt;a class="td-heading-self-link" href="#%e5%85%b3%e9%97%ad-clamav-%e5%ae%88%e6%8a%a4%e8%bf%9b%e7%a8%8b" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;div class="highlight">&lt;div style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
+&lt;pre tabindex="0" style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+&lt;pre tabindex="0" style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>sudo systemctl stop clamav-daemon
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="禁用clamav自动启动">禁用ClamAV自动启动&lt;a class="td-heading-self-link" href="#%e7%a6%81%e7%94%a8clamav%e8%87%aa%e5%8a%a8%e5%90%af%e5%8a%a8" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;div class="highlight">&lt;div style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
+&lt;pre tabindex="0" style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+&lt;pre tabindex="0" style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>sudo systemctl disable clamav-daemon
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item><item><title>Nemo</title><link>https://before80.github.io/tools/ubuntu/tools/nemo/</link><pubDate>Sun, 06 Oct 2024 10:38:29 +0800</pubDate><guid>https://before80.github.io/tools/ubuntu/tools/nemo/</guid><description>&lt;h2 id="安装-nemo">安装 Nemo&lt;a class="td-heading-self-link" href="#%e5%ae%89%e8%a3%85-nemo" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;div class="highlight">&lt;div style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
+&lt;pre tabindex="0" style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+&lt;pre tabindex="0" style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>sudo apt install nemo
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="设置-nemo-为默认文件管理器可选">设置 Nemo 为默认文件管理器（可选）&lt;a class="td-heading-self-link" href="#%e8%ae%be%e7%bd%ae-nemo-%e4%b8%ba%e9%bb%98%e8%ae%a4%e6%96%87%e4%bb%b6%e7%ae%a1%e7%90%86%e5%99%a8%e5%8f%af%e9%80%89" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;div class="highlight">&lt;div style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
+&lt;pre tabindex="0" style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+&lt;pre tabindex="0" style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>xdg-mime default nemo.desktop inode/directory application/x-gnome-saved-search
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="已设置nemo为默认文件管理器后如何打开之前系统默认的文件管理器nautilus">已设置Nemo为默认文件管理器后，如何打开之前系统默认的文件管理器&lt;code>Nautilus&lt;/code>&lt;a class="td-heading-self-link" href="#%e5%b7%b2%e8%ae%be%e7%bd%aenemo%e4%b8%ba%e9%bb%98%e8%ae%a4%e6%96%87%e4%bb%b6%e7%ae%a1%e7%90%86%e5%99%a8%e5%90%8e%e5%a6%82%e4%bd%95%e6%89%93%e5%bc%80%e4%b9%8b%e5%89%8d%e7%b3%bb%e7%bb%9f%e9%bb%98%e8%ae%a4%e7%9a%84%e6%96%87%e4%bb%b6%e7%ae%a1%e7%90%86%e5%99%a8nautilus" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;p>​	方法1：在终端输入：nautilus&lt;/p>
+&lt;p>​	方法2：在应用菜单中搜索：nautilus&lt;/p></description></item></channel></rss>

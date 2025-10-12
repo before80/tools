@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>PS简介 on tools</title><link>https://before80.github.io/tools/ps/instro/</link><description>Recent content in PS简介 on tools</description><generator>Hugo</generator><language>zh-cn</language><lastBuildDate>Sun, 12 Oct 2025 11:24:07 +0800</lastBuildDate><atom:link href="https://before80.github.io/tools/ps/instro/index.xml" rel="self" type="application/rss+xml"/><item><title>填充</title><link>https://before80.github.io/tools/ps/instro/fill/</link><pubDate>Tue, 07 Oct 2025 17:12:49 +0800</pubDate><guid>https://before80.github.io/tools/ps/instro/fill/</guid><description>&lt;h2 id="理解拾色器和色板">理解拾色器和色板&lt;a class="td-heading-self-link" href="#%e7%90%86%e8%a7%a3%e6%8b%be%e8%89%b2%e5%99%a8%e5%92%8c%e8%89%b2%e6%9d%bf" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/ps/instro/fill_img/image-20251007172046966.png"
+ alt="image-20251007172046966" data-cur-dir="ps/instro" data-rg="/fill_img/image-20251007172046966.png" data-rg1="fill_img/image-20251007172046966.png" data-rel="/tools/fill_img/image-20251007172046966.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/ps/instro/fill_img/image-20251007172144538.png"
+ alt="image-20251007172144538" data-cur-dir="ps/instro" data-rg="/fill_img/image-20251007172144538.png" data-rg1="fill_img/image-20251007172144538.png" data-rel="/tools/fill_img/image-20251007172144538.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/ps/instro/fill_img/image-20251007172528156.png"
+ alt="image-20251007172528156" data-cur-dir="ps/instro" data-rg="/fill_img/image-20251007172528156.png" data-rg1="fill_img/image-20251007172528156.png" data-rel="/tools/fill_img/image-20251007172528156.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;code>X键&lt;/code>：切换前景色和背景色&lt;/p>
+&lt;p>&lt;code>D键&lt;/code>：重置前景色和背景色&lt;/p>&lt;/blockquote>
+&lt;h3 id="色相h">色相（H）&lt;a class="td-heading-self-link" href="#%e8%89%b2%e7%9b%b8h" aria-label="Heading self-link">&lt;/a>&lt;/h3>
+&lt;p>颜色的相貌&lt;/p>
+&lt;h3 id="饱和度s">饱和度（S）&lt;a class="td-heading-self-link" href="#%e9%a5%b1%e5%92%8c%e5%ba%a6s" aria-label="Heading self-link">&lt;/a>&lt;/h3>
+&lt;p>颜色的鲜艳程度&lt;/p>
+&lt;h3 id="明度b">明度（B）&lt;a class="td-heading-self-link" href="#%e6%98%8e%e5%ba%a6b" aria-label="Heading self-link">&lt;/a>&lt;/h3>
+&lt;p>色彩的明暗程度&lt;/p>
+&lt;h2 id="如何给画布填充颜色">如何给画布填充颜色&lt;a class="td-heading-self-link" href="#%e5%a6%82%e4%bd%95%e7%bb%99%e7%94%bb%e5%b8%83%e5%a1%ab%e5%85%85%e9%a2%9c%e8%89%b2" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>用菜单的方式：编辑&amp;ndash;&amp;gt;填充&amp;mdash;&amp;gt;内容&lt;/p></description></item></channel></rss>

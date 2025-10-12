@@ -1,1 +1,49 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>开发 on tools</title><link>https://before80.github.io/tools/ng/development/</link><description>Recent content in 开发 on tools</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Mon, 14 Aug 2023 16:38:52 +0800</lastBuildDate><atom:link href="https://before80.github.io/tools/ng/development/index.xml" rel="self" type="application/rss+xml"/><item><title>开发指南</title><link>https://before80.github.io/tools/ng/development/developmentGuide/</link><pubDate>Mon, 14 Aug 2023 17:01:19 +0800</pubDate><guid>https://before80.github.io/tools/ng/development/developmentGuide/</guid><description>Development guide - 开发指南 https://nginx.org/en/docs/dev/development_guide.html 简介 Introduction 代码布局 Code layout auto — Build scripts auto — 构建脚本 src core — Basic types and functions — string, array, log, pool, etc. core — 基本类型和函数 — 字符串、数组、日志、池等。 event — Event core event — 事</description></item><item><title>contributingChanges</title><link>https://before80.github.io/tools/ng/development/contributingChanges/</link><pubDate>Mon, 14 Aug 2023 17:01:06 +0800</pubDate><guid>https://before80.github.io/tools/ng/development/contributingChanges/</guid><description>Contributing Changes https://nginx.org/en/docs/contributing_changes.html Getting Sources Mercurial is used to store source code. The repository can be cloned with the following command: hg clone http://hg.nginx.org/nginx Formatting Changes Changes should be formatted according to the code style used by nginx. Sometimes, there is no clear rule; in such cases examine how existing nginx sources are formatted and mimic this style. Changes will more likely be accepted if style corresponds to the surrounding</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>开发 on tools</title><link>https://before80.github.io/tools/ng/development/</link><description>Recent content in 开发 on tools</description><generator>Hugo</generator><language>zh-cn</language><lastBuildDate>Wed, 02 Apr 2025 23:02:37 +0800</lastBuildDate><atom:link href="https://before80.github.io/tools/ng/development/index.xml" rel="self" type="application/rss+xml"/><item><title>开发指南</title><link>https://before80.github.io/tools/ng/development/developmentGuide/</link><pubDate>Mon, 14 Aug 2023 17:01:19 +0800</pubDate><guid>https://before80.github.io/tools/ng/development/developmentGuide/</guid><description>&lt;h1 id="development-guide---开发指南">Development guide - 开发指南&lt;a class="td-heading-self-link" href="#development-guide---%e5%bc%80%e5%8f%91%e6%8c%87%e5%8d%97" aria-label="Heading self-link">&lt;/a>&lt;/h1>
+&lt;p>&lt;a href="https://nginx.org/en/docs/dev/development_guide.html">https://nginx.org/en/docs/dev/development_guide.html&lt;/a>&lt;/p>
+&lt;h2 id="简介-introduction">简介 Introduction&lt;a class="td-heading-self-link" href="#%e7%ae%80%e4%bb%8b-introduction" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;h3 id="代码布局-code-layout">代码布局 Code layout&lt;a class="td-heading-self-link" href="#%e4%bb%a3%e7%a0%81%e5%b8%83%e5%b1%80-code-layout" aria-label="Heading self-link">&lt;/a>&lt;/h3>
+&lt;ul>
+&lt;li>&lt;code>auto&lt;/code> — Build scripts&lt;/li>
+&lt;li>&lt;code>auto&lt;/code> — 构建脚本&lt;/li>
+&lt;li>&lt;code>src&lt;/code>
+&lt;ul>
+&lt;li>&lt;code>core&lt;/code> — Basic types and functions — string, array, log, pool, etc.&lt;/li>
+&lt;li>&lt;code>core&lt;/code> — 基本类型和函数 — 字符串、数组、日志、池等。&lt;/li>
+&lt;li>&lt;code>event&lt;/code> — Event core&lt;/li>
+&lt;li>&lt;code>event&lt;/code> — 事件核心
+&lt;ul>
+&lt;li>&lt;code>modules&lt;/code> — Event notification modules: &lt;code>epoll&lt;/code>, &lt;code>kqueue&lt;/code>, &lt;code>select&lt;/code> etc.&lt;/li>
+&lt;li>&lt;code>modules&lt;/code> — 事件通知模块：&lt;code>epoll&lt;/code>、&lt;code>kqueue&lt;/code>、&lt;code>select&lt;/code> 等。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;code>http&lt;/code> — Core HTTP module and common code&lt;/li>
+&lt;li>&lt;code>http&lt;/code> — 核心 HTTP 模块和通用代码
+&lt;ul>
+&lt;li>&lt;code>modules&lt;/code> — Other HTTP modules&lt;/li>
+&lt;li>&lt;code>modules&lt;/code> — 其他 HTTP 模块&lt;/li>
+&lt;li>&lt;code>v2&lt;/code> — HTTP/2&lt;/li>
+&lt;li>&lt;code>v2&lt;/code> — HTTP/2&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;code>mail&lt;/code> — Mail modules&lt;/li>
+&lt;li>&lt;code>mail&lt;/code> — 邮件模块&lt;/li>
+&lt;li>&lt;code>os&lt;/code> — Platform-specific code&lt;/li>
+&lt;li>&lt;code>os&lt;/code> — 平台特定代码
+&lt;ul>
+&lt;li>&lt;code>unix&lt;/code>&lt;/li>
+&lt;li>&lt;code>win32&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;code>stream&lt;/code> — Stream modules&lt;/li>
+&lt;li>&lt;code>stream&lt;/code> — 流模块&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="包含文件-include-files">包含文件 Include files&lt;a class="td-heading-self-link" href="#%e5%8c%85%e5%90%ab%e6%96%87%e4%bb%b6-include-files" aria-label="Heading self-link">&lt;/a>&lt;/h3>
+&lt;p>The following two &lt;code>#include&lt;/code> statements must appear at the beginning of every nginx file:&lt;/p></description></item><item><title>contributingChanges</title><link>https://before80.github.io/tools/ng/development/contributingChanges/</link><pubDate>Mon, 14 Aug 2023 17:01:06 +0800</pubDate><guid>https://before80.github.io/tools/ng/development/contributingChanges/</guid><description>&lt;h1 id="contributing-changes">Contributing Changes&lt;a class="td-heading-self-link" href="#contributing-changes" aria-label="Heading self-link">&lt;/a>&lt;/h1>
+&lt;p>&lt;a href="https://nginx.org/en/docs/contributing_changes.html">https://nginx.org/en/docs/contributing_changes.html&lt;/a>&lt;/p>
+&lt;h2 id="getting-sources">Getting Sources&lt;a class="td-heading-self-link" href="#getting-sources" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;p>&lt;a href="https://www.mercurial-scm.org/">Mercurial&lt;/a> is used to store source code. The &lt;a href="http://hg.nginx.org/nginx">repository&lt;/a> can be cloned with the following command:&lt;/p>
+&lt;pre tabindex="0">&lt;code>hg clone http://hg.nginx.org/nginx
+&lt;/code>&lt;/pre>&lt;h2 id="formatting-changes">Formatting Changes&lt;a class="td-heading-self-link" href="#formatting-changes" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;p>Changes should be formatted according to the &lt;a href="https://nginx.org/en/docs/dev/development_guide.html#code_style">code style&lt;/a> used by nginx. Sometimes, there is no clear rule; in such cases examine how existing nginx sources are formatted and mimic this style. Changes will more likely be accepted if style corresponds to the surrounding code.&lt;/p></description></item></channel></rss>

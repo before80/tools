@@ -1,1 +1,67 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>命令 on tools</title><link>https://before80.github.io/tools/ubuntu/cmd/</link><description>Recent content in 命令 on tools</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Thu, 26 Sep 2024 08:37:48 +0800</lastBuildDate><atom:link href="https://before80.github.io/tools/ubuntu/cmd/index.xml" rel="self" type="application/rss+xml"/><item><title>操作帮助</title><link>https://before80.github.io/tools/ubuntu/cmd/help/</link><pubDate>Thu, 26 Sep 2024 10:51:19 +0800</pubDate><guid>https://before80.github.io/tools/ubuntu/cmd/help/</guid><description>--help命令选项 ​ 大多数命令提供了 --help 选项来显示简明的帮助信息。这通常比 man 页面短且更直观。 ​ 使用方法： 1 &amp;lt;命令名&amp;gt; --help 例如: 1 ls</description></item><item><title>系统和网络安全</title><link>https://before80.github.io/tools/ubuntu/cmd/systemSecurityM/</link><pubDate>Thu, 26 Sep 2024 08:41:30 +0800</pubDate><guid>https://before80.github.io/tools/ubuntu/cmd/systemSecurityM/</guid><description>systemctl openssl apparmor_status aa-complain aa-enforce aa-genprof</description></item><item><title>网络服务管理</title><link>https://before80.github.io/tools/ubuntu/cmd/netServiceM/</link><pubDate>Thu, 26 Sep 2024 08:40:32 +0800</pubDate><guid>https://before80.github.io/tools/ubuntu/cmd/netServiceM/</guid><description/></item><item><title>网络管理</title><link>https://before80.github.io/tools/ubuntu/cmd/netM/</link><pubDate>Thu, 26 Sep 2024 08:40:12 +0800</pubDate><guid>https://before80.github.io/tools/ubuntu/cmd/netM/</guid><description/></item><item><title>服务和进程管理</title><link>https://before80.github.io/tools/ubuntu/cmd/serviceM/</link><pubDate>Thu, 26 Sep 2024 08:40:06 +0800</pubDate><guid>https://before80.github.io/tools/ubuntu/cmd/serviceM/</guid><description/></item><item><title>文件和目录管理</title><link>https://before80.github.io/tools/ubuntu/cmd/fileM/</link><pubDate>Thu, 26 Sep 2024 08:39:26 +0800</pubDate><guid>https://before80.github.io/tools/ubuntu/cmd/fileM/</guid><description>cd 更改当前工作目录。 更多信息：https://manned.org/cd. 转到指定目录： cd path/to/directory 转到当前目录的父目录： cd .. 转到当前用户的主（ho</description></item><item><title>磁盘和文件系统管理</title><link>https://before80.github.io/tools/ubuntu/cmd/diskM/</link><pubDate>Thu, 26 Sep 2024 08:39:11 +0800</pubDate><guid>https://before80.github.io/tools/ubuntu/cmd/diskM/</guid><description/></item><item><title>用户和权限管理</title><link>https://before80.github.io/tools/ubuntu/cmd/userM/</link><pubDate>Thu, 26 Sep 2024 08:39:05 +0800</pubDate><guid>https://before80.github.io/tools/ubuntu/cmd/userM/</guid><description>useradd Create a new user. See also: users, userdel, usermod. More information: https://manned.org/useradd.创建新用户。 参见: users ， userdel ， usermod 。 更多信息:https://man</description></item><item><title>软件包管理</title><link>https://before80.github.io/tools/ubuntu/cmd/softwareM/</link><pubDate>Thu, 26 Sep 2024 08:38:57 +0800</pubDate><guid>https://before80.github.io/tools/ubuntu/cmd/softwareM/</guid><description>apt命令 ​ apt 是较新的推荐工具，简化了以前的 apt-get 和 apt-cache 操作，主要用于管理软件包。 sudo apt update ​ 从软件源获取最新的软件包信息，更新软件包列表。 工作原理 ​</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>命令 on tools</title><link>https://before80.github.io/tools/ubuntu/cmd/</link><description>Recent content in 命令 on tools</description><generator>Hugo</generator><language>zh-cn</language><lastBuildDate>Wed, 02 Apr 2025 23:02:37 +0800</lastBuildDate><atom:link href="https://before80.github.io/tools/ubuntu/cmd/index.xml" rel="self" type="application/rss+xml"/><item><title>操作帮助</title><link>https://before80.github.io/tools/ubuntu/cmd/help/</link><pubDate>Thu, 26 Sep 2024 10:51:19 +0800</pubDate><guid>https://before80.github.io/tools/ubuntu/cmd/help/</guid><description>&lt;h2 id="--help命令选项">&lt;code>--help&lt;/code>命令选项&lt;a class="td-heading-self-link" href="#--help%e5%91%bd%e4%bb%a4%e9%80%89%e9%a1%b9" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;p>​	大多数命令提供了 &lt;code>--help&lt;/code> 选项来显示简明的帮助信息。这通常比 &lt;code>man&lt;/code> 页面短且更直观。&lt;/p>
+&lt;p>​	使用方法：&lt;/p>
+&lt;div class="highlight">&lt;div style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
+&lt;pre tabindex="0" style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+&lt;pre tabindex="0" style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>&amp;lt;命令名&amp;gt; --help
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>例如:&lt;/p>
+&lt;div class="highlight">&lt;div style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
+&lt;pre tabindex="0" style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+&lt;pre tabindex="0" style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>ls --help
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="man命令">man命令&lt;a class="td-heading-self-link" href="#man%e5%91%bd%e4%bb%a4" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;h3 id="man-cmd_name">man cmd_name&lt;a class="td-heading-self-link" href="#man-cmd_name" aria-label="Heading self-link">&lt;/a>&lt;/h3>
+&lt;p>​	&lt;code>man&lt;/code> 命令用于查看命令的手册页，它提供了关于某个命令的详细文档，包括用途、选项和用法示例。&lt;/p></description></item><item><title>系统和网络安全</title><link>https://before80.github.io/tools/ubuntu/cmd/systemSecurityM/</link><pubDate>Thu, 26 Sep 2024 08:41:30 +0800</pubDate><guid>https://before80.github.io/tools/ubuntu/cmd/systemSecurityM/</guid><description>&lt;h2 id="systemctl">systemctl&lt;a class="td-heading-self-link" href="#systemctl" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;h2 id="openssl">openssl&lt;a class="td-heading-self-link" href="#openssl" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;h2 id="apparmor_status">apparmor_status&lt;a class="td-heading-self-link" href="#apparmor_status" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;h2 id="aa-complain">aa-complain&lt;a class="td-heading-self-link" href="#aa-complain" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;h2 id="aa-enforce">aa-enforce&lt;a class="td-heading-self-link" href="#aa-enforce" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;h2 id="aa-genprof">aa-genprof&lt;a class="td-heading-self-link" href="#aa-genprof" aria-label="Heading self-link">&lt;/a>&lt;/h2></description></item><item><title>网络服务管理</title><link>https://before80.github.io/tools/ubuntu/cmd/netServiceM/</link><pubDate>Thu, 26 Sep 2024 08:40:32 +0800</pubDate><guid>https://before80.github.io/tools/ubuntu/cmd/netServiceM/</guid><description/></item><item><title>网络管理</title><link>https://before80.github.io/tools/ubuntu/cmd/netM/</link><pubDate>Thu, 26 Sep 2024 08:40:12 +0800</pubDate><guid>https://before80.github.io/tools/ubuntu/cmd/netM/</guid><description/></item><item><title>服务和进程管理</title><link>https://before80.github.io/tools/ubuntu/cmd/serviceM/</link><pubDate>Thu, 26 Sep 2024 08:40:06 +0800</pubDate><guid>https://before80.github.io/tools/ubuntu/cmd/serviceM/</guid><description/></item><item><title>文件和目录管理</title><link>https://before80.github.io/tools/ubuntu/cmd/fileM/</link><pubDate>Thu, 26 Sep 2024 08:39:26 +0800</pubDate><guid>https://before80.github.io/tools/ubuntu/cmd/fileM/</guid><description>&lt;h2 id="cd">cd&lt;a class="td-heading-self-link" href="#cd" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;p>更改当前工作目录。
+更多信息：https://manned.org/cd.&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>转到指定目录：
+cd path/to/directory&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>转到当前目录的父目录：
+cd ..&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>转到当前用户的主（home）目录：
+cd&lt;/p></description></item><item><title>磁盘和文件系统管理</title><link>https://before80.github.io/tools/ubuntu/cmd/diskM/</link><pubDate>Thu, 26 Sep 2024 08:39:11 +0800</pubDate><guid>https://before80.github.io/tools/ubuntu/cmd/diskM/</guid><description/></item><item><title>用户和权限管理</title><link>https://before80.github.io/tools/ubuntu/cmd/userM/</link><pubDate>Thu, 26 Sep 2024 08:39:05 +0800</pubDate><guid>https://before80.github.io/tools/ubuntu/cmd/userM/</guid><description>&lt;h2 id="useradd">useradd&lt;a class="td-heading-self-link" href="#useradd" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;blockquote>
+&lt;p>Create a new user. See also: &lt;code>users&lt;/code>, &lt;code>userdel&lt;/code>, &lt;code>usermod&lt;/code>. More information: &lt;a href="https://manned.org/useradd">https://manned.org/useradd&lt;/a>.创建新用户。 参见: &lt;code>users&lt;/code> ， &lt;code>userdel&lt;/code> ， &lt;code>usermod&lt;/code> 。 更多信息:https://manned.org/useradd。&lt;/p>&lt;/blockquote>
+&lt;ul>
+&lt;li>
+&lt;p>Create a new user:&lt;/p>
+&lt;p>创建新用户:&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
+&lt;pre tabindex="0" style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+&lt;pre tabindex="0" style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>sudo useradd username
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ul>
+&lt;li>
+&lt;p>Create a new user with the specified user ID:&lt;/p></description></item><item><title>软件包管理</title><link>https://before80.github.io/tools/ubuntu/cmd/softwareM/</link><pubDate>Thu, 26 Sep 2024 08:38:57 +0800</pubDate><guid>https://before80.github.io/tools/ubuntu/cmd/softwareM/</guid><description>&lt;h2 id="apt命令">apt命令&lt;a class="td-heading-self-link" href="#apt%e5%91%bd%e4%bb%a4" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;p>​	&lt;code>apt&lt;/code> 是较新的推荐工具，简化了以前的 &lt;code>apt-get&lt;/code> 和 &lt;code>apt-cache&lt;/code> 操作，主要用于管理软件包。&lt;/p>
+&lt;h3 id="sudo-apt-update">sudo apt update&lt;a class="td-heading-self-link" href="#sudo-apt-update" aria-label="Heading self-link">&lt;/a>&lt;/h3>
+&lt;p>​	从软件源获取最新的软件包信息，更新软件包列表。&lt;/p>
+&lt;blockquote>
+&lt;p>工作原理&lt;/p>
+&lt;p>​	当运行 &lt;code>sudo apt update&lt;/code> 时，APT 包管理器会从配置的包源（通常在 &lt;code>/etc/apt/sources.list&lt;/code> 和 &lt;code>/etc/apt/sources.list.d/&lt;/code> 中定义）下载最新的软件包列表。这些列表包含了每个包的名称、版本号、依赖关系等信息。这些列表信息随后被存储到本地，以便在使用 &lt;code>apt install&lt;/code> 或 &lt;code>apt upgrade&lt;/code> 等命令时知道从哪里获取最新的软件包。&lt;/p></description></item></channel></rss>

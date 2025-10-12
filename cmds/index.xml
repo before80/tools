@@ -1,1 +1,46 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>cmds on tools</title><link>https://before80.github.io/tools/cmds/</link><description>Recent content in cmds on tools</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Thu, 10 Oct 2024 08:11:12 +0800</lastBuildDate><atom:link href="https://before80.github.io/tools/cmds/index.xml" rel="self" type="application/rss+xml"/><item><title>wget</title><link>https://before80.github.io/tools/cmds/wget/</link><pubDate>Thu, 10 Oct 2024 08:11:46 +0800</pubDate><guid>https://before80.github.io/tools/cmds/wget/</guid><description>wget(1) - The non-interactive network downloader wget [option]&amp;hellip; [URL]&amp;hellip; Basic Startup Options -V &amp;ndash;version Display the version of Wget. -h &amp;ndash;help Print a help message describing all of Wget&amp;rsquo;s command-line options. -b &amp;ndash;background Go to background immediately after startup. If no output file is specified via the -o, output is redirected to wget-log. -e command &amp;ndash;execute command Execute command as if it were a part of .wgetrc. A command thus</description></item><item><title>tar</title><link>https://before80.github.io/tools/cmds/tar/</link><pubDate>Thu, 10 Oct 2024 08:11:42 +0800</pubDate><guid>https://before80.github.io/tools/cmds/tar/</guid><description/></item><item><title>curl</title><link>https://before80.github.io/tools/cmds/curl/</link><pubDate>Thu, 10 Oct 2024 08:11:37 +0800</pubDate><guid>https://before80.github.io/tools/cmds/curl/</guid><description/></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>cmds on tools</title><link>https://before80.github.io/tools/cmds/</link><description>Recent content in cmds on tools</description><generator>Hugo</generator><language>zh-cn</language><lastBuildDate>Wed, 02 Apr 2025 23:02:37 +0800</lastBuildDate><atom:link href="https://before80.github.io/tools/cmds/index.xml" rel="self" type="application/rss+xml"/><item><title>wget</title><link>https://before80.github.io/tools/cmds/wget/</link><pubDate>Thu, 10 Oct 2024 08:11:46 +0800</pubDate><guid>https://before80.github.io/tools/cmds/wget/</guid><description>&lt;p>wget(1) - The non-interactive network downloader
+wget [option]&amp;hellip; [URL]&amp;hellip;
+Basic Startup Options
+-V
+&amp;ndash;version
+Display the version of Wget.
+-h
+&amp;ndash;help
+Print a help message describing all of Wget&amp;rsquo;s command-line options.
+-b
+&amp;ndash;background
+Go to background immediately after startup. If no output file is specified via the -o, output is
+redirected to wget-log.
+-e command
+&amp;ndash;execute command
+Execute command as if it were a part of .wgetrc. A command thus invoked will be executed after the
+commands in .wgetrc, thus taking precedence over them. If you need to specify more than one wgetrc
+command, use multiple instances of -e.
+Logging and Input File Options
+-o logfile
+&amp;ndash;output-file=logfile
+Log all messages to logfile. The messages are normally reported to standard error.
+-a logfile
+&amp;ndash;append-output=logfile
+Append to logfile. This is the same as -o, only it appends to logfile instead of overwriting the old
+log file. If logfile does not exist, a new file is created.
+-d
+&amp;ndash;debug
+Turn on debug output, meaning various information important to the developers of Wget if it does not
+work properly. Your system administrator may have chosen to compile Wget without debug support, in
+which case -d will not work. Please note that compiling with debug support is always safe&amp;mdash;Wget
+compiled with the debug support will not print any debug info unless requested with -d.
+-q
+&amp;ndash;quiet
+Turn off Wget&amp;rsquo;s output.
+-v
+&amp;ndash;verbose
+Turn on verbose output, with all the available data. The default output is verbose.
+-nv
+&amp;ndash;no-verbose
+Turn off verbose without being completely quiet (use -q for that), which means that error messages
+and basic information still get printed.
+-i file
+&amp;ndash;input-file=file
+Read URLs from a local or external file. If - is specified as file, URLs are read from the standard
+input. (Use ./- to read from a file literally named -.)&lt;/p></description></item><item><title>tar</title><link>https://before80.github.io/tools/cmds/tar/</link><pubDate>Thu, 10 Oct 2024 08:11:42 +0800</pubDate><guid>https://before80.github.io/tools/cmds/tar/</guid><description/></item><item><title>curl</title><link>https://before80.github.io/tools/cmds/curl/</link><pubDate>Thu, 10 Oct 2024 08:11:37 +0800</pubDate><guid>https://before80.github.io/tools/cmds/curl/</guid><description/></item></channel></rss>

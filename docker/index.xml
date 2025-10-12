@@ -1,1 +1,43 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Docker on tools</title><link>https://before80.github.io/tools/docker/</link><description>Recent content in Docker on tools</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Mon, 08 Apr 2024 14:39:33 +0800</lastBuildDate><atom:link href="https://before80.github.io/tools/docker/index.xml" rel="self" type="application/rss+xml"/><item><title>基础</title><link>https://before80.github.io/tools/docker/basic/</link><pubDate>Mon, 08 Apr 2024 14:41:07 +0800</pubDate><guid>https://before80.github.io/tools/docker/basic/</guid><description>镜像 搜索镜像 1 docker search [OPTIONS] TERM 示例 1 docker search nginx --limit 5 --no-trunc 拉取镜像 Tips: ​ docker pull 命令是 docker image pull 的别名。 1 docker pull [OPTIONS] NAME[:TAG|@DIGEST] 示例 # 拉取最新的版本的 Nginx 镜像 docker pull nginx:latest # 拉取带有的5.7.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Docker on tools</title><link>https://before80.github.io/tools/docker/</link><description>Recent content in Docker on tools</description><generator>Hugo</generator><language>zh-cn</language><lastBuildDate>Wed, 02 Apr 2025 23:02:37 +0800</lastBuildDate><atom:link href="https://before80.github.io/tools/docker/index.xml" rel="self" type="application/rss+xml"/><item><title>基础</title><link>https://before80.github.io/tools/docker/basic/</link><pubDate>Mon, 08 Apr 2024 14:41:07 +0800</pubDate><guid>https://before80.github.io/tools/docker/basic/</guid><description>&lt;h2 id="镜像">镜像&lt;a class="td-heading-self-link" href="#%e9%95%9c%e5%83%8f" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;h3 id="搜索镜像">搜索镜像&lt;a class="td-heading-self-link" href="#%e6%90%9c%e7%b4%a2%e9%95%9c%e5%83%8f" aria-label="Heading self-link">&lt;/a>&lt;/h3>
+&lt;div class="highlight">&lt;div style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
+&lt;pre tabindex="0" style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+&lt;pre tabindex="0" style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cmd" data-lang="cmd">&lt;span style="display:flex;">&lt;span>docker search [OPTIONS] TERM
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>示例&lt;/p>
+&lt;div class="highlight">&lt;div style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
+&lt;pre tabindex="0" style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+&lt;pre tabindex="0" style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cmd" data-lang="cmd">&lt;span style="display:flex;">&lt;span>docker search nginx --limit 5 --no-trunc
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="拉取镜像">拉取镜像&lt;a class="td-heading-self-link" href="#%e6%8b%89%e5%8f%96%e9%95%9c%e5%83%8f" aria-label="Heading self-link">&lt;/a>&lt;/h3>
+&lt;blockquote>
+&lt;p>Tips:&lt;/p>
+&lt;p>​	&lt;code>docker pull&lt;/code> 命令是 &lt;code>docker image pull&lt;/code> 的别名。&lt;/p>&lt;/blockquote>
+&lt;div class="highlight">&lt;div style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
+&lt;pre tabindex="0" style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+&lt;pre tabindex="0" style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cmd" data-lang="cmd">&lt;span style="display:flex;">&lt;span>docker pull [OPTIONS] NAME[:TAG&lt;span style="color:#abb2bf">|@&lt;/span>DIGEST]
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>示例&lt;/p>
+&lt;pre tabindex="0">&lt;code># 拉取最新的版本的 Nginx 镜像
+docker pull nginx:latest
+
+# 拉取带有的5.7.44标签的 MySQL 镜像
+docker pull mysql:5.7.44
+
+# 拉取带有的1.22.2-alpine标签的 golang 镜像
+docker pull golang:1.22.2-alpine
+&lt;/code>&lt;/pre>&lt;h3 id="删除镜像">删除镜像&lt;a class="td-heading-self-link" href="#%e5%88%a0%e9%99%a4%e9%95%9c%e5%83%8f" aria-label="Heading self-link">&lt;/a>&lt;/h3>
+&lt;blockquote>
+&lt;p>Tips:&lt;/p></description></item></channel></rss>
