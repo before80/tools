@@ -4716,7 +4716,223 @@ server {
 &lt;p>The &lt;code>ngx_stream_zone_sync_module&lt;/code> module (1.13.8) provides the necessary support for synchronizing contents of &lt;a href="https://nginx.org/en/docs/stream/ngx_stream_upstream_module.html#zone">shared memory zones&lt;/a> between nodes of a cluster. To enable synchronization for a particular zone, a corresponding module must support this feature. Currently, it is possible to synchronize HTTP &lt;a href="https://before80.github.io/tools/ng/mod_ref/ngx_http_upstream_module/#sticky">sticky&lt;/a> sessions, information about &lt;a href="https://nginx.org/en/docs/http/ngx_http_limit_req_module.html">excessive HTTP requests&lt;/a>, and key-value pairs both in &lt;a href="https://nginx.org/en/docs/http/ngx_http_keyval_module.html">http&lt;/a> and &lt;a href="https://nginx.org/en/docs/stream/ngx_stream_keyval_module.html">stream&lt;/a>.&lt;/p>
 &lt;p>This module is available as part of our &lt;a href="http://nginx.com/products/">commercial subscription&lt;/a>.&lt;/p>
 &lt;h2 id="example-configuration">Example Configuration&lt;a class="td-heading-self-link" href="#example-configuration" aria-label="Heading self-link">&lt;/a>&lt;/h2>
-&lt;p>Minimal configuration:&lt;/p></description></item><item><title>填充</title><link>https://before80.github.io/tools/ps/instro/fill/</link><pubDate>Tue, 07 Oct 2025 17:12:49 +0800</pubDate><guid>https://before80.github.io/tools/ps/instro/fill/</guid><description>&lt;h2 id="理解拾色器和色板">理解拾色器和色板&lt;a class="td-heading-self-link" href="#%e7%90%86%e8%a7%a3%e6%8b%be%e8%89%b2%e5%99%a8%e5%92%8c%e8%89%b2%e6%9d%bf" aria-label="Heading self-link">&lt;/a>&lt;/h2>
+&lt;p>Minimal configuration:&lt;/p></description></item><item><title>安装</title><link>https://before80.github.io/tools/docs/vmware/install/</link><pubDate>Sat, 28 Feb 2026 09:53:35 +0800</pubDate><guid>https://before80.github.io/tools/docs/vmware/install/</guid><description>&lt;p>&lt;a href="https://support.broadcom.com/group/ecx/productfiles?subFamily=VMware%20Workstation%20Pro&amp;amp;displayGroup=VMware%20Workstation%20Pro%2017.0%20for%20Windows&amp;amp;release=17.6.4&amp;amp;os=&amp;amp;servicePk=533272&amp;amp;language=EN&amp;amp;freeDownloads=true">https://support.broadcom.com/group/ecx/productfiles?subFamily=VMware%20Workstation%20Pro&amp;amp;displayGroup=VMware%20Workstation%20Pro%2017.0%20for%20Windows&amp;amp;release=17.6.4&amp;amp;os=&amp;amp;servicePk=533272&amp;amp;language=EN&amp;amp;freeDownloads=true&lt;/a>&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/vmware/install_img/image-20260228095604567.png"
+ alt="image-20260228095604567" data-cur-dir="docs/vmware" data-rg="/install_img/image-20260228095604567.png" data-rg1="install_img/image-20260228095604567.png" data-rel="/tools/install_img/image-20260228095604567.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/vmware/install_img/image-20260228095416842.png"
+ alt="image-20260228095416842" data-cur-dir="docs/vmware" data-rg="/install_img/image-20260228095416842.png" data-rg1="install_img/image-20260228095416842.png" data-rel="/tools/install_img/image-20260228095416842.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/vmware/install_img/image-20260228095708317.png"
+ alt="image-20260228095708317" data-cur-dir="docs/vmware" data-rg="/install_img/image-20260228095708317.png" data-rg1="install_img/image-20260228095708317.png" data-rel="/tools/install_img/image-20260228095708317.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/vmware/install_img/image-20260228095725905.png"
+ alt="image-20260228095725905" data-cur-dir="docs/vmware" data-rg="/install_img/image-20260228095725905.png" data-rg1="install_img/image-20260228095725905.png" data-rel="/tools/install_img/image-20260228095725905.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/vmware/install_img/image-20260228095904311.png"
+ alt="image-20260228095904311" data-cur-dir="docs/vmware" data-rg="/install_img/image-20260228095904311.png" data-rg1="install_img/image-20260228095904311.png" data-rel="/tools/install_img/image-20260228095904311.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/vmware/install_img/image-20260228095923400.png"
+ alt="image-20260228095923400" data-cur-dir="docs/vmware" data-rg="/install_img/image-20260228095923400.png" data-rg1="install_img/image-20260228095923400.png" data-rel="/tools/install_img/image-20260228095923400.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/vmware/install_img/image-20260228100009293.png"
+ alt="image-20260228100009293" data-cur-dir="docs/vmware" data-rg="/install_img/image-20260228100009293.png" data-rg1="install_img/image-20260228100009293.png" data-rel="/tools/install_img/image-20260228100009293.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/vmware/install_img/image-20260228100023906.png"
+ alt="image-20260228100023906" data-cur-dir="docs/vmware" data-rg="/install_img/image-20260228100023906.png" data-rg1="install_img/image-20260228100023906.png" data-rel="/tools/install_img/image-20260228100023906.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/vmware/install_img/image-20260228100030851.png"
+ alt="image-20260228100030851" data-cur-dir="docs/vmware" data-rg="/install_img/image-20260228100030851.png" data-rg1="install_img/image-20260228100030851.png" data-rel="/tools/install_img/image-20260228100030851.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/vmware/install_img/image-20260228100039071.png"
+ alt="image-20260228100039071" data-cur-dir="docs/vmware" data-rg="/install_img/image-20260228100039071.png" data-rg1="install_img/image-20260228100039071.png" data-rel="/tools/install_img/image-20260228100039071.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/vmware/install_img/image-20260228100045050.png"
+ alt="image-20260228100045050" data-cur-dir="docs/vmware" data-rg="/install_img/image-20260228100045050.png" data-rg1="install_img/image-20260228100045050.png" data-rel="/tools/install_img/image-20260228100045050.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/vmware/install_img/image-20260228100050319.png"
+ alt="image-20260228100050319" data-cur-dir="docs/vmware" data-rg="/install_img/image-20260228100050319.png" data-rg1="install_img/image-20260228100050319.png" data-rel="/tools/install_img/image-20260228100050319.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p></description></item><item><title>填充</title><link>https://before80.github.io/tools/ps/instro/fill/</link><pubDate>Tue, 07 Oct 2025 17:12:49 +0800</pubDate><guid>https://before80.github.io/tools/ps/instro/fill/</guid><description>&lt;h2 id="理解拾色器和色板">理解拾色器和色板&lt;a class="td-heading-self-link" href="#%e7%90%86%e8%a7%a3%e6%8b%be%e8%89%b2%e5%99%a8%e5%92%8c%e8%89%b2%e6%9d%bf" aria-label="Heading self-link">&lt;/a>&lt;/h2>
 &lt;p>
  
  
