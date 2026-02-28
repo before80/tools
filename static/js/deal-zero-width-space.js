@@ -19,19 +19,17 @@
             const viewportHeight = window.innerHeight;
             const tdTocHeight = tdToc.scrollHeight;
             console.log("tdTocHeight=",tdTocHeight)
-            let tocH = tdTocHeight + 156 + 12 + 24 + 1
-            if ((tocH + 64) < viewportHeight ) {
-                toc.style.maxHeight = tocH + 'px';
-            } else {
-                toc.style.maxHeight = viewportHeight + 'px';
-            }
+            // 156为.td-toc元素上面一些元素的高度，12是padding-top的高度，24是padding-bottom的高度
+            let tocH = tdTocHeight + 156 + 12 + 24 + 1;
 
-            // // 如果主内容不高，就减少 TOC 高度
-            // if ((mainHeight - 64) < viewportHeight * 0.8) {
-            //     toc.style.maxHeight = (mainHeight - 200) + 'px';
-            // } else {
-            //     toc.style.maxHeight = 'calc(100vh - 6rem)';
-            // }
+            // 150为footer元素的高度,64是头部菜单的高度
+            if (tocH  < viewportHeight - 150 - 64 ) {
+                toc.style.maxHeight = tocH + 'px';
+                toc.style.overflowY = "hidden"
+            } else {
+                toc.style.maxHeight = tocH + 10 + 'px';
+                toc.style.overflowY = "auto"
+            }
         }
     }
 
