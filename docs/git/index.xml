@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>git on tools</title><link>https://before80.github.io/tools/docs/git/</link><description>Recent content in git on tools</description><generator>Hugo</generator><language>zh-cn</language><lastBuildDate>Sun, 01 Mar 2026 13:17:15 +0800</lastBuildDate><atom:link href="https://before80.github.io/tools/docs/git/index.xml" rel="self" type="application/rss+xml"/><item><title>安装git 2.53.0</title><link>https://before80.github.io/tools/docs/git/install_2_53_0/</link><pubDate>Sat, 28 Feb 2026 20:25:41 +0800</pubDate><guid>https://before80.github.io/tools/docs/git/install_2_53_0/</guid><description>&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/git/install_2_53_0_img/image-20260228202622518.png"
+ alt="image-20260228202622518" data-cur-dir="docs/git" data-rg="/install_2_53_0_img/image-20260228202622518.png" data-rg1="install_2_53_0_img/image-20260228202622518.png" data-rel="/tools/install_2_53_0_img/image-20260228202622518.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/git/install_2_53_0_img/image-20260228202702793.png"
+ alt="image-20260228202702793" data-cur-dir="docs/git" data-rg="/install_2_53_0_img/image-20260228202702793.png" data-rg1="install_2_53_0_img/image-20260228202702793.png" data-rel="/tools/install_2_53_0_img/image-20260228202702793.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/git/install_2_53_0_img/image-20260228202713621.png"
+ alt="image-20260228202713621" data-cur-dir="docs/git" data-rg="/install_2_53_0_img/image-20260228202713621.png" data-rg1="install_2_53_0_img/image-20260228202713621.png" data-rel="/tools/install_2_53_0_img/image-20260228202713621.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/git/install_2_53_0_img/image-20260228202726650.png"
+ alt="image-20260228202726650" data-cur-dir="docs/git" data-rg="/install_2_53_0_img/image-20260228202726650.png" data-rg1="install_2_53_0_img/image-20260228202726650.png" data-rel="/tools/install_2_53_0_img/image-20260228202726650.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/git/install_2_53_0_img/image-20260228202743244.png"
+ alt="image-20260228202743244" data-cur-dir="docs/git" data-rg="/install_2_53_0_img/image-20260228202743244.png" data-rg1="install_2_53_0_img/image-20260228202743244.png" data-rel="/tools/install_2_53_0_img/image-20260228202743244.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/git/install_2_53_0_img/image-20260228202753779.png"
+ alt="image-20260228202753779" data-cur-dir="docs/git" data-rg="/install_2_53_0_img/image-20260228202753779.png" data-rg1="install_2_53_0_img/image-20260228202753779.png" data-rel="/tools/install_2_53_0_img/image-20260228202753779.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/git/install_2_53_0_img/image-20260228202801661.png"
+ alt="image-20260228202801661" data-cur-dir="docs/git" data-rg="/install_2_53_0_img/image-20260228202801661.png" data-rg1="install_2_53_0_img/image-20260228202801661.png" data-rel="/tools/install_2_53_0_img/image-20260228202801661.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/git/install_2_53_0_img/image-20260228202809903.png"
+ alt="image-20260228202809903" data-cur-dir="docs/git" data-rg="/install_2_53_0_img/image-20260228202809903.png" data-rg1="install_2_53_0_img/image-20260228202809903.png" data-rel="/tools/install_2_53_0_img/image-20260228202809903.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/git/install_2_53_0_img/image-20260228202820091.png"
+ alt="image-20260228202820091" data-cur-dir="docs/git" data-rg="/install_2_53_0_img/image-20260228202820091.png" data-rg1="install_2_53_0_img/image-20260228202820091.png" data-rel="/tools/install_2_53_0_img/image-20260228202820091.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/git/install_2_53_0_img/image-20260228202829032.png"
+ alt="image-20260228202829032" data-cur-dir="docs/git" data-rg="/install_2_53_0_img/image-20260228202829032.png" data-rg1="install_2_53_0_img/image-20260228202829032.png" data-rel="/tools/install_2_53_0_img/image-20260228202829032.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/git/install_2_53_0_img/image-20260228202838708.png"
+ alt="image-20260228202838708" data-cur-dir="docs/git" data-rg="/install_2_53_0_img/image-20260228202838708.png" data-rg1="install_2_53_0_img/image-20260228202838708.png" data-rel="/tools/install_2_53_0_img/image-20260228202838708.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/git/install_2_53_0_img/image-20260228202849068.png"
+ alt="image-20260228202849068" data-cur-dir="docs/git" data-rg="/install_2_53_0_img/image-20260228202849068.png" data-rg1="install_2_53_0_img/image-20260228202849068.png" data-rel="/tools/install_2_53_0_img/image-20260228202849068.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p></description></item></channel></rss>

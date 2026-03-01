@@ -4716,7 +4716,940 @@ server {
 &lt;p>The &lt;code>ngx_stream_zone_sync_module&lt;/code> module (1.13.8) provides the necessary support for synchronizing contents of &lt;a href="https://nginx.org/en/docs/stream/ngx_stream_upstream_module.html#zone">shared memory zones&lt;/a> between nodes of a cluster. To enable synchronization for a particular zone, a corresponding module must support this feature. Currently, it is possible to synchronize HTTP &lt;a href="https://before80.github.io/tools/ng/mod_ref/ngx_http_upstream_module/#sticky">sticky&lt;/a> sessions, information about &lt;a href="https://nginx.org/en/docs/http/ngx_http_limit_req_module.html">excessive HTTP requests&lt;/a>, and key-value pairs both in &lt;a href="https://nginx.org/en/docs/http/ngx_http_keyval_module.html">http&lt;/a> and &lt;a href="https://nginx.org/en/docs/stream/ngx_stream_keyval_module.html">stream&lt;/a>.&lt;/p>
 &lt;p>This module is available as part of our &lt;a href="http://nginx.com/products/">commercial subscription&lt;/a>.&lt;/p>
 &lt;h2 id="example-configuration">Example Configuration&lt;a class="td-heading-self-link" href="#example-configuration" aria-label="Heading self-link">&lt;/a>&lt;/h2>
-&lt;p>Minimal configuration:&lt;/p></description></item><item><title>安装</title><link>https://before80.github.io/tools/docs/vmware/install/</link><pubDate>Sat, 28 Feb 2026 09:53:35 +0800</pubDate><guid>https://before80.github.io/tools/docs/vmware/install/</guid><description>&lt;p>&lt;a href="https://support.broadcom.com/group/ecx/productfiles?subFamily=VMware%20Workstation%20Pro&amp;amp;displayGroup=VMware%20Workstation%20Pro%2017.0%20for%20Windows&amp;amp;release=17.6.4&amp;amp;os=&amp;amp;servicePk=533272&amp;amp;language=EN&amp;amp;freeDownloads=true">https://support.broadcom.com/group/ecx/productfiles?subFamily=VMware%20Workstation%20Pro&amp;amp;displayGroup=VMware%20Workstation%20Pro%2017.0%20for%20Windows&amp;amp;release=17.6.4&amp;amp;os=&amp;amp;servicePk=533272&amp;amp;language=EN&amp;amp;freeDownloads=true&lt;/a>&lt;/p>
+&lt;p>Minimal configuration:&lt;/p></description></item><item><title>install_7_5_4</title><link>https://before80.github.io/tools/docs/powershell/install_7_5_4/</link><pubDate>Sun, 01 Mar 2026 13:01:15 +0800</pubDate><guid>https://before80.github.io/tools/docs/powershell/install_7_5_4/</guid><description>&lt;p>&lt;a href="https://github.com/PowerShell/PowerShell/releases">https://github.com/PowerShell/PowerShell/releases&lt;/a>&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/powershell/install_7_5_4_img/image-20260301130225553.png"
+ alt="image-20260301130225553" data-cur-dir="docs/powershell" data-rg="/install_7_5_4_img/image-20260301130225553.png" data-rg1="install_7_5_4_img/image-20260301130225553.png" data-rel="/tools/install_7_5_4_img/image-20260301130225553.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/powershell/install_7_5_4_img/image-20260301130305539.png"
+ alt="image-20260301130305539" data-cur-dir="docs/powershell" data-rg="/install_7_5_4_img/image-20260301130305539.png" data-rg1="install_7_5_4_img/image-20260301130305539.png" data-rel="/tools/install_7_5_4_img/image-20260301130305539.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/powershell/install_7_5_4_img/image-20260301130323401.png"
+ alt="image-20260301130323401" data-cur-dir="docs/powershell" data-rg="/install_7_5_4_img/image-20260301130323401.png" data-rg1="install_7_5_4_img/image-20260301130323401.png" data-rel="/tools/install_7_5_4_img/image-20260301130323401.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/powershell/install_7_5_4_img/image-20260301130344774.png"
+ alt="image-20260301130344774" data-cur-dir="docs/powershell" data-rg="/install_7_5_4_img/image-20260301130344774.png" data-rg1="install_7_5_4_img/image-20260301130344774.png" data-rel="/tools/install_7_5_4_img/image-20260301130344774.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/powershell/install_7_5_4_img/image-20260301130432208.png"
+ alt="image-20260301130432208" data-cur-dir="docs/powershell" data-rg="/install_7_5_4_img/image-20260301130432208.png" data-rg1="install_7_5_4_img/image-20260301130432208.png" data-rel="/tools/install_7_5_4_img/image-20260301130432208.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/powershell/install_7_5_4_img/image-20260301130506831.png"
+ alt="image-20260301130506831" data-cur-dir="docs/powershell" data-rg="/install_7_5_4_img/image-20260301130506831.png" data-rg1="install_7_5_4_img/image-20260301130506831.png" data-rel="/tools/install_7_5_4_img/image-20260301130506831.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/powershell/install_7_5_4_img/image-20260301130516668.png"
+ alt="image-20260301130516668" data-cur-dir="docs/powershell" data-rg="/install_7_5_4_img/image-20260301130516668.png" data-rg1="install_7_5_4_img/image-20260301130516668.png" data-rel="/tools/install_7_5_4_img/image-20260301130516668.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/powershell/install_7_5_4_img/image-20260301130525444.png"
+ alt="image-20260301130525444" data-cur-dir="docs/powershell" data-rg="/install_7_5_4_img/image-20260301130525444.png" data-rg1="install_7_5_4_img/image-20260301130525444.png" data-rel="/tools/install_7_5_4_img/image-20260301130525444.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/powershell/install_7_5_4_img/image-20260301130816116.png"
+ alt="image-20260301130816116" data-cur-dir="docs/powershell" data-rg="/install_7_5_4_img/image-20260301130816116.png" data-rg1="install_7_5_4_img/image-20260301130816116.png" data-rel="/tools/install_7_5_4_img/image-20260301130816116.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>选择&lt;code>是&lt;/code>&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/powershell/install_7_5_4_img/image-20260301130825682.png"
+ alt="image-20260301130825682" data-cur-dir="docs/powershell" data-rg="/install_7_5_4_img/image-20260301130825682.png" data-rg1="install_7_5_4_img/image-20260301130825682.png" data-rel="/tools/install_7_5_4_img/image-20260301130825682.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/powershell/install_7_5_4_img/image-20260301130846132.png"
+ alt="image-20260301130846132" data-cur-dir="docs/powershell" data-rg="/install_7_5_4_img/image-20260301130846132.png" data-rg1="install_7_5_4_img/image-20260301130846132.png" data-rel="/tools/install_7_5_4_img/image-20260301130846132.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p></description></item><item><title>安装1.2.2版本</title><link>https://before80.github.io/tools/docs/nvmwindows/install_1_2_2/</link><pubDate>Sun, 01 Mar 2026 12:37:06 +0800</pubDate><guid>https://before80.github.io/tools/docs/nvmwindows/install_1_2_2/</guid><description>&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/nvmwindows/install_1_2_2_img/image-20260301124200892.png"
+ alt="image-20260301124200892" data-cur-dir="docs/nvmwindows" data-rg="/install_1_2_2_img/image-20260301124200892.png" data-rg1="install_1_2_2_img/image-20260301124200892.png" data-rel="/tools/install_1_2_2_img/image-20260301124200892.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/nvmwindows/install_1_2_2_img/image-20260301124219527.png"
+ alt="image-20260301124219527" data-cur-dir="docs/nvmwindows" data-rg="/install_1_2_2_img/image-20260301124219527.png" data-rg1="install_1_2_2_img/image-20260301124219527.png" data-rel="/tools/install_1_2_2_img/image-20260301124219527.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/nvmwindows/install_1_2_2_img/image-20260301124246835.png"
+ alt="image-20260301124246835" data-cur-dir="docs/nvmwindows" data-rg="/install_1_2_2_img/image-20260301124246835.png" data-rg1="install_1_2_2_img/image-20260301124246835.png" data-rel="/tools/install_1_2_2_img/image-20260301124246835.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/nvmwindows/install_1_2_2_img/image-20260301124257046.png"
+ alt="image-20260301124257046" data-cur-dir="docs/nvmwindows" data-rg="/install_1_2_2_img/image-20260301124257046.png" data-rg1="install_1_2_2_img/image-20260301124257046.png" data-rel="/tools/install_1_2_2_img/image-20260301124257046.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/nvmwindows/install_1_2_2_img/image-20260301124320281.png"
+ alt="image-20260301124320281" data-cur-dir="docs/nvmwindows" data-rg="/install_1_2_2_img/image-20260301124320281.png" data-rg1="install_1_2_2_img/image-20260301124320281.png" data-rel="/tools/install_1_2_2_img/image-20260301124320281.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/nvmwindows/install_1_2_2_img/image-20260301124350539.png"
+ alt="image-20260301124350539" data-cur-dir="docs/nvmwindows" data-rg="/install_1_2_2_img/image-20260301124350539.png" data-rg1="install_1_2_2_img/image-20260301124350539.png" data-rel="/tools/install_1_2_2_img/image-20260301124350539.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/nvmwindows/install_1_2_2_img/image-20260301124400883.png"
+ alt="image-20260301124400883" data-cur-dir="docs/nvmwindows" data-rg="/install_1_2_2_img/image-20260301124400883.png" data-rg1="install_1_2_2_img/image-20260301124400883.png" data-rel="/tools/install_1_2_2_img/image-20260301124400883.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/nvmwindows/install_1_2_2_img/image-20260301124412338.png"
+ alt="image-20260301124412338" data-cur-dir="docs/nvmwindows" data-rg="/install_1_2_2_img/image-20260301124412338.png" data-rg1="install_1_2_2_img/image-20260301124412338.png" data-rel="/tools/install_1_2_2_img/image-20260301124412338.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;div class="highlight">&lt;div style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
+&lt;pre tabindex="0" style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+&lt;pre tabindex="0" style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>nvm list available
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/nvmwindows/install_1_2_2_img/image-20260301131445403.png"
+ alt="image-20260301131445403" data-cur-dir="docs/nvmwindows" data-rg="/install_1_2_2_img/image-20260301131445403.png" data-rg1="install_1_2_2_img/image-20260301131445403.png" data-rel="/tools/install_1_2_2_img/image-20260301131445403.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;div class="highlight">&lt;div style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
+&lt;pre tabindex="0" style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#58626f">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+&lt;pre tabindex="0" style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>nvm install 24.14.0
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/nvmwindows/install_1_2_2_img/image-20260301131542487.png"
+ alt="image-20260301131542487" data-cur-dir="docs/nvmwindows" data-rg="/install_1_2_2_img/image-20260301131542487.png" data-rg1="install_1_2_2_img/image-20260301131542487.png" data-rel="/tools/install_1_2_2_img/image-20260301131542487.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p></description></item><item><title>安装git 2.53.0</title><link>https://before80.github.io/tools/docs/git/install_2_53_0/</link><pubDate>Sat, 28 Feb 2026 20:25:41 +0800</pubDate><guid>https://before80.github.io/tools/docs/git/install_2_53_0/</guid><description>&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/git/install_2_53_0_img/image-20260228202622518.png"
+ alt="image-20260228202622518" data-cur-dir="docs/git" data-rg="/install_2_53_0_img/image-20260228202622518.png" data-rg1="install_2_53_0_img/image-20260228202622518.png" data-rel="/tools/install_2_53_0_img/image-20260228202622518.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/git/install_2_53_0_img/image-20260228202702793.png"
+ alt="image-20260228202702793" data-cur-dir="docs/git" data-rg="/install_2_53_0_img/image-20260228202702793.png" data-rg1="install_2_53_0_img/image-20260228202702793.png" data-rel="/tools/install_2_53_0_img/image-20260228202702793.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/git/install_2_53_0_img/image-20260228202713621.png"
+ alt="image-20260228202713621" data-cur-dir="docs/git" data-rg="/install_2_53_0_img/image-20260228202713621.png" data-rg1="install_2_53_0_img/image-20260228202713621.png" data-rel="/tools/install_2_53_0_img/image-20260228202713621.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/git/install_2_53_0_img/image-20260228202726650.png"
+ alt="image-20260228202726650" data-cur-dir="docs/git" data-rg="/install_2_53_0_img/image-20260228202726650.png" data-rg1="install_2_53_0_img/image-20260228202726650.png" data-rel="/tools/install_2_53_0_img/image-20260228202726650.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/git/install_2_53_0_img/image-20260228202743244.png"
+ alt="image-20260228202743244" data-cur-dir="docs/git" data-rg="/install_2_53_0_img/image-20260228202743244.png" data-rg1="install_2_53_0_img/image-20260228202743244.png" data-rel="/tools/install_2_53_0_img/image-20260228202743244.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/git/install_2_53_0_img/image-20260228202753779.png"
+ alt="image-20260228202753779" data-cur-dir="docs/git" data-rg="/install_2_53_0_img/image-20260228202753779.png" data-rg1="install_2_53_0_img/image-20260228202753779.png" data-rel="/tools/install_2_53_0_img/image-20260228202753779.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/git/install_2_53_0_img/image-20260228202801661.png"
+ alt="image-20260228202801661" data-cur-dir="docs/git" data-rg="/install_2_53_0_img/image-20260228202801661.png" data-rg1="install_2_53_0_img/image-20260228202801661.png" data-rel="/tools/install_2_53_0_img/image-20260228202801661.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/git/install_2_53_0_img/image-20260228202809903.png"
+ alt="image-20260228202809903" data-cur-dir="docs/git" data-rg="/install_2_53_0_img/image-20260228202809903.png" data-rg1="install_2_53_0_img/image-20260228202809903.png" data-rel="/tools/install_2_53_0_img/image-20260228202809903.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/git/install_2_53_0_img/image-20260228202820091.png"
+ alt="image-20260228202820091" data-cur-dir="docs/git" data-rg="/install_2_53_0_img/image-20260228202820091.png" data-rg1="install_2_53_0_img/image-20260228202820091.png" data-rel="/tools/install_2_53_0_img/image-20260228202820091.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/git/install_2_53_0_img/image-20260228202829032.png"
+ alt="image-20260228202829032" data-cur-dir="docs/git" data-rg="/install_2_53_0_img/image-20260228202829032.png" data-rg1="install_2_53_0_img/image-20260228202829032.png" data-rel="/tools/install_2_53_0_img/image-20260228202829032.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/git/install_2_53_0_img/image-20260228202838708.png"
+ alt="image-20260228202838708" data-cur-dir="docs/git" data-rg="/install_2_53_0_img/image-20260228202838708.png" data-rg1="install_2_53_0_img/image-20260228202838708.png" data-rel="/tools/install_2_53_0_img/image-20260228202838708.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/git/install_2_53_0_img/image-20260228202849068.png"
+ alt="image-20260228202849068" data-cur-dir="docs/git" data-rg="/install_2_53_0_img/image-20260228202849068.png" data-rg1="install_2_53_0_img/image-20260228202849068.png" data-rel="/tools/install_2_53_0_img/image-20260228202849068.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p></description></item><item><title>installWindows10</title><link>https://before80.github.io/tools/docs/vmware/installWindows10/</link><pubDate>Sat, 28 Feb 2026 11:13:52 +0800</pubDate><guid>https://before80.github.io/tools/docs/vmware/installWindows10/</guid><description>&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/vmware/installWindows10_img/image-20260228111419412.png"
+ alt="image-20260228111419412" data-cur-dir="docs/vmware" data-rg="/installWindows10_img/image-20260228111419412.png" data-rg1="installWindows10_img/image-20260228111419412.png" data-rel="/tools/installWindows10_img/image-20260228111419412.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/vmware/installWindows10_img/image-20260228111429228.png"
+ alt="image-20260228111429228" data-cur-dir="docs/vmware" data-rg="/installWindows10_img/image-20260228111429228.png" data-rg1="installWindows10_img/image-20260228111429228.png" data-rel="/tools/installWindows10_img/image-20260228111429228.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/vmware/installWindows10_img/image-20260228111444338.png"
+ alt="image-20260228111444338" data-cur-dir="docs/vmware" data-rg="/installWindows10_img/image-20260228111444338.png" data-rg1="installWindows10_img/image-20260228111444338.png" data-rel="/tools/installWindows10_img/image-20260228111444338.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/vmware/installWindows10_img/image-20260228111502419.png"
+ alt="image-20260228111502419" data-cur-dir="docs/vmware" data-rg="/installWindows10_img/image-20260228111502419.png" data-rg1="installWindows10_img/image-20260228111502419.png" data-rel="/tools/installWindows10_img/image-20260228111502419.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/vmware/installWindows10_img/image-20260228111553627.png"
+ alt="image-20260228111553627" data-cur-dir="docs/vmware" data-rg="/installWindows10_img/image-20260228111553627.png" data-rg1="installWindows10_img/image-20260228111553627.png" data-rel="/tools/installWindows10_img/image-20260228111553627.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/vmware/installWindows10_img/image-20260228111559776.png"
+ alt="image-20260228111559776" data-cur-dir="docs/vmware" data-rg="/installWindows10_img/image-20260228111559776.png" data-rg1="installWindows10_img/image-20260228111559776.png" data-rel="/tools/installWindows10_img/image-20260228111559776.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/vmware/installWindows10_img/image-20260228111608304.png"
+ alt="image-20260228111608304" data-cur-dir="docs/vmware" data-rg="/installWindows10_img/image-20260228111608304.png" data-rg1="installWindows10_img/image-20260228111608304.png" data-rel="/tools/installWindows10_img/image-20260228111608304.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/vmware/installWindows10_img/image-20260228111631990.png"
+ alt="image-20260228111631990" data-cur-dir="docs/vmware" data-rg="/installWindows10_img/image-20260228111631990.png" data-rg1="installWindows10_img/image-20260228111631990.png" data-rel="/tools/installWindows10_img/image-20260228111631990.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/vmware/installWindows10_img/image-20260228111639079.png"
+ alt="image-20260228111639079" data-cur-dir="docs/vmware" data-rg="/installWindows10_img/image-20260228111639079.png" data-rg1="installWindows10_img/image-20260228111639079.png" data-rel="/tools/installWindows10_img/image-20260228111639079.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/vmware/installWindows10_img/image-20260228111649723.png"
+ alt="image-20260228111649723" data-cur-dir="docs/vmware" data-rg="/installWindows10_img/image-20260228111649723.png" data-rg1="installWindows10_img/image-20260228111649723.png" data-rel="/tools/installWindows10_img/image-20260228111649723.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/vmware/installWindows10_img/image-20260228111656680.png"
+ alt="image-20260228111656680" data-cur-dir="docs/vmware" data-rg="/installWindows10_img/image-20260228111656680.png" data-rg1="installWindows10_img/image-20260228111656680.png" data-rel="/tools/installWindows10_img/image-20260228111656680.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/vmware/installWindows10_img/image-20260228111704187.png"
+ alt="image-20260228111704187" data-cur-dir="docs/vmware" data-rg="/installWindows10_img/image-20260228111704187.png" data-rg1="installWindows10_img/image-20260228111704187.png" data-rel="/tools/installWindows10_img/image-20260228111704187.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p></description></item><item><title>installWindows11</title><link>https://before80.github.io/tools/docs/vmware/installWindows11/</link><pubDate>Sat, 28 Feb 2026 10:27:08 +0800</pubDate><guid>https://before80.github.io/tools/docs/vmware/installWindows11/</guid><description>&lt;p>若是刚安装完vmware workstation建议先重启下电脑!&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/vmware/installWindows11_img/image-20260228102723113.png"
+ alt="image-20260228102723113" data-cur-dir="docs/vmware" data-rg="/installWindows11_img/image-20260228102723113.png" data-rg1="installWindows11_img/image-20260228102723113.png" data-rel="/tools/installWindows11_img/image-20260228102723113.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/vmware/installWindows11_img/image-20260228102731805.png"
+ alt="image-20260228102731805" data-cur-dir="docs/vmware" data-rg="/installWindows11_img/image-20260228102731805.png" data-rg1="installWindows11_img/image-20260228102731805.png" data-rel="/tools/installWindows11_img/image-20260228102731805.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/vmware/installWindows11_img/image-20260228102742664.png"
+ alt="image-20260228102742664" data-cur-dir="docs/vmware" data-rg="/installWindows11_img/image-20260228102742664.png" data-rg1="installWindows11_img/image-20260228102742664.png" data-rel="/tools/installWindows11_img/image-20260228102742664.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/vmware/installWindows11_img/image-20260228102802371.png"
+ alt="image-20260228102802371" data-cur-dir="docs/vmware" data-rg="/installWindows11_img/image-20260228102802371.png" data-rg1="installWindows11_img/image-20260228102802371.png" data-rel="/tools/installWindows11_img/image-20260228102802371.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/vmware/installWindows11_img/image-20260228102825938.png"
+ alt="image-20260228102825938" data-cur-dir="docs/vmware" data-rg="/installWindows11_img/image-20260228102825938.png" data-rg1="installWindows11_img/image-20260228102825938.png" data-rel="/tools/installWindows11_img/image-20260228102825938.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &lt;img src="https://before80.github.io/tools/docs/vmware/installWindows11_img/image-20260228103036651.png"
+ alt="image-20260228103036651" data-cur-dir="docs/vmware" data-rg="/installWindows11_img/image-20260228103036651.png" data-rg1="installWindows11_img/image-20260228103036651.png" data-rel="/tools/installWindows11_img/image-20260228103036651.png" data-c4my="/tools"
+ 
+ />
+ 
+ 
+&lt;/p>
+&lt;p>密码: zlx920&lt;/p></description></item><item><title>安装</title><link>https://before80.github.io/tools/docs/vmware/install/</link><pubDate>Sat, 28 Feb 2026 09:53:35 +0800</pubDate><guid>https://before80.github.io/tools/docs/vmware/install/</guid><description>&lt;p>&lt;a href="https://support.broadcom.com/group/ecx/productfiles?subFamily=VMware%20Workstation%20Pro&amp;amp;displayGroup=VMware%20Workstation%20Pro%2017.0%20for%20Windows&amp;amp;release=17.6.4&amp;amp;os=&amp;amp;servicePk=533272&amp;amp;language=EN&amp;amp;freeDownloads=true">https://support.broadcom.com/group/ecx/productfiles?subFamily=VMware%20Workstation%20Pro&amp;amp;displayGroup=VMware%20Workstation%20Pro%2017.0%20for%20Windows&amp;amp;release=17.6.4&amp;amp;os=&amp;amp;servicePk=533272&amp;amp;language=EN&amp;amp;freeDownloads=true&lt;/a>&lt;/p>
 &lt;p>
  
  
